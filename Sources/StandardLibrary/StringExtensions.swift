@@ -1,6 +1,6 @@
 //
 //  StringExtensions.swift
-//  YYKitBase
+//  YYSwift
 //
 //  Created by Phoenix on 2017/12/4.
 //  Copyright © 2017年 Phoenix. All rights reserved.
@@ -153,9 +153,6 @@ public extension String {
         return folding(options: .diacriticInsensitive, locale: Locale.current)
     }
     
-    public var length: Int {
-        return count
-    }
     
     public var trimmed: String {
         return trimmingCharacters(in: .whitespacesAndNewlines)
@@ -407,7 +404,7 @@ public extension String {
             return nil
         }
         guard i.advanced(by: length) <= count else {
-            return slicing(at: i)
+            return self[i..<count]
         }
         guard length > 0 else {
             return ""
@@ -416,39 +413,28 @@ public extension String {
     }
     
     public mutating func slice(from i: Int, length: Int) {
-        if let str = slicing(from: i, length: length) {
-            self = str
+        
+        if let str = self.slicing(from: i, length: length) {
+            self = String(str)
         }
     }
     
-    public func slicing(from start: Int, to end: Int) -> String? {
-        guard end >= start else {
-            return nil
-        }
-        return self[start..<end]
-    }
     
     public mutating func slice(from start: Int, to end: Int) {
-        if let str = slicing(from: start, to: end) {
+        guard end >= start else { return }
+        
+        if let str = self[start..<end] {
             self = str
         }
     }
     
-    public func slicing(at i: Int) -> String? {
-        guard i < count else {
-            return nil
-        }
-        return self[i..<count]
-    }
     
     public mutating func slice(at i: Int) {
-        if let str = slicing(at: i) {
+        guard i < count else { return }
+        
+        if let str = self[i..<count] {
             self = str
         }
-    }
-    
-    public func splitted(by separator: Character) -> [String] {
-        return split { $0 == separator }.map(String.init)
     }
     
     public func date(withFormat format: String) -> Date? {
@@ -516,8 +502,6 @@ public extension String {
     public static func uuid() -> String {
         return UUID().uuidString
     }
-    
-    
 }
 
 

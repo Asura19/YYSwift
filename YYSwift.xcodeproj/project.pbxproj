@@ -71,6 +71,10 @@
 		D0A2DD7A1FDA685500AB456C /* OptionalExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DCE01FD9406D00AB456C /* OptionalExtensions.swift */; };
 		D0A2DD7B1FDA685500AB456C /* DictonaryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DCE11FD9406D00AB456C /* DictonaryExtensions.swift */; };
 		D0A2DD7C1FDA685500AB456C /* CollectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DCE21FD9406D00AB456C /* CollectionExtensions.swift */; };
+		D0A2DD7F1FDA870A00AB456C /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DD7E1FDA870A00AB456C /* DateExtensions.swift */; };
+		D0A2DD801FDA870A00AB456C /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DD7E1FDA870A00AB456C /* DateExtensions.swift */; };
+		D0A2DD811FDA870A00AB456C /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DD7E1FDA870A00AB456C /* DateExtensions.swift */; };
+		D0A2DD821FDA870A00AB456C /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DD7E1FDA870A00AB456C /* DateExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +129,7 @@
 		D0A2DD441FDA609200AB456C /* YYSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YYSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0A2DD501FDA60FA00AB456C /* YYSwiftTests-tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "YYSwiftTests-tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0A2DD5F1FDA661100AB456C /* Tests-tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tests-tvOS.swift"; sourceTree = "<group>"; };
+		D0A2DD7E1FDA870A00AB456C /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				D0A2DCD41FD9406C00AB456C /* DataExtensions.swift */,
+				D0A2DD7E1FDA870A00AB456C /* DateExtensions.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -237,19 +243,19 @@
 		D0A2DCD51FD9406D00AB456C /* StandardLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				D0A2DCD61FD9406D00AB456C /* SignedIntegerExtensions.swift */,
 				D0A2DCD71FD9406D00AB456C /* ArrayExtensions.swift */,
-				D0A2DCD81FD9406D00AB456C /* FloatExtensions.swift */,
-				D0A2DCD91FD9406D00AB456C /* SignedNumericExtensions.swift */,
-				D0A2DCDA1FD9406D00AB456C /* StringExtensions.swift */,
-				D0A2DCDB1FD9406D00AB456C /* DoubleExtensions.swift */,
-				D0A2DCDC1FD9406D00AB456C /* CharacterExtensions.swift */,
 				D0A2DCDD1FD9406D00AB456C /* BoolExtension.swift */,
+				D0A2DCDC1FD9406D00AB456C /* CharacterExtensions.swift */,
+				D0A2DCE21FD9406D00AB456C /* CollectionExtensions.swift */,
+				D0A2DCE11FD9406D00AB456C /* DictonaryExtensions.swift */,
+				D0A2DCDB1FD9406D00AB456C /* DoubleExtensions.swift */,
+				D0A2DCD81FD9406D00AB456C /* FloatExtensions.swift */,
 				D0A2DCDE1FD9406D00AB456C /* FloatingPointExtensions.swift */,
 				D0A2DCDF1FD9406D00AB456C /* IntExtensions.swift */,
 				D0A2DCE01FD9406D00AB456C /* OptionalExtensions.swift */,
-				D0A2DCE11FD9406D00AB456C /* DictonaryExtensions.swift */,
-				D0A2DCE21FD9406D00AB456C /* CollectionExtensions.swift */,
+				D0A2DCD61FD9406D00AB456C /* SignedIntegerExtensions.swift */,
+				D0A2DCD91FD9406D00AB456C /* SignedNumericExtensions.swift */,
+				D0A2DCDA1FD9406D00AB456C /* StringExtensions.swift */,
 			);
 			path = StandardLibrary;
 			sourceTree = "<group>";
@@ -559,6 +565,7 @@
 				D0A2DCEA1FD9406D00AB456C /* DoubleExtensions.swift in Sources */,
 				D0A2DCED1FD9406D00AB456C /* FloatingPointExtensions.swift in Sources */,
 				D0A2DCEC1FD9406D00AB456C /* BoolExtension.swift in Sources */,
+				D0A2DD7F1FDA870A00AB456C /* DateExtensions.swift in Sources */,
 				D0A2DCE71FD9406D00AB456C /* FloatExtensions.swift in Sources */,
 				D0A2DCF01FD9406D00AB456C /* DictonaryExtensions.swift in Sources */,
 				D0A2DCE41FD9406D00AB456C /* DataExtensions.swift in Sources */,
@@ -588,6 +595,7 @@
 				D0A2DD1B1FDA5A3800AB456C /* BoolExtension.swift in Sources */,
 				D0A2DD1C1FDA5A3800AB456C /* FloatingPointExtensions.swift in Sources */,
 				D0A2DD1D1FDA5A3800AB456C /* IntExtensions.swift in Sources */,
+				D0A2DD801FDA870A00AB456C /* DateExtensions.swift in Sources */,
 				D0A2DD1E1FDA5A3800AB456C /* OptionalExtensions.swift in Sources */,
 				D0A2DD1F1FDA5A3800AB456C /* DictonaryExtensions.swift in Sources */,
 				D0A2DD201FDA5A3800AB456C /* CollectionExtensions.swift in Sources */,
@@ -617,6 +625,7 @@
 				D0A2DD691FDA664F00AB456C /* BoolExtension.swift in Sources */,
 				D0A2DD6A1FDA664F00AB456C /* FloatingPointExtensions.swift in Sources */,
 				D0A2DD6B1FDA664F00AB456C /* IntExtensions.swift in Sources */,
+				D0A2DD811FDA870A00AB456C /* DateExtensions.swift in Sources */,
 				D0A2DD6C1FDA664F00AB456C /* OptionalExtensions.swift in Sources */,
 				D0A2DD6D1FDA664F00AB456C /* DictonaryExtensions.swift in Sources */,
 				D0A2DD6E1FDA664F00AB456C /* CollectionExtensions.swift in Sources */,
@@ -638,6 +647,7 @@
 				D0A2DD771FDA685500AB456C /* BoolExtension.swift in Sources */,
 				D0A2DD781FDA685500AB456C /* FloatingPointExtensions.swift in Sources */,
 				D0A2DD791FDA685500AB456C /* IntExtensions.swift in Sources */,
+				D0A2DD821FDA870A00AB456C /* DateExtensions.swift in Sources */,
 				D0A2DD7A1FDA685500AB456C /* OptionalExtensions.swift in Sources */,
 				D0A2DD7B1FDA685500AB456C /* DictonaryExtensions.swift in Sources */,
 				D0A2DD7C1FDA685500AB456C /* CollectionExtensions.swift in Sources */,
