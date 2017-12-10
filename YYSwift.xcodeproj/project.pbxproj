@@ -7,6 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D06DAEA11FDBC08E004AB12C /* NSPredicateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEA01FDBC08E004AB12C /* NSPredicateExtensions.swift */; };
+		D06DAEA21FDBC08E004AB12C /* NSPredicateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEA01FDBC08E004AB12C /* NSPredicateExtensions.swift */; };
+		D06DAEA31FDBC08E004AB12C /* NSPredicateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEA01FDBC08E004AB12C /* NSPredicateExtensions.swift */; };
+		D06DAEA41FDBC08E004AB12C /* NSPredicateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEA01FDBC08E004AB12C /* NSPredicateExtensions.swift */; };
+		D06DAEA61FDBC137004AB12C /* URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEA51FDBC137004AB12C /* URLExtensions.swift */; };
+		D06DAEA71FDBC137004AB12C /* URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEA51FDBC137004AB12C /* URLExtensions.swift */; };
+		D06DAEA81FDBC137004AB12C /* URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEA51FDBC137004AB12C /* URLExtensions.swift */; };
+		D06DAEA91FDBC137004AB12C /* URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEA51FDBC137004AB12C /* URLExtensions.swift */; };
+		D06DAEAB1FDBC2AC004AB12C /* URLRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEAA1FDBC2AC004AB12C /* URLRequestExtensions.swift */; };
+		D06DAEAC1FDBC2AC004AB12C /* URLRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEAA1FDBC2AC004AB12C /* URLRequestExtensions.swift */; };
+		D06DAEAD1FDBC2AC004AB12C /* URLRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEAA1FDBC2AC004AB12C /* URLRequestExtensions.swift */; };
+		D06DAEAE1FDBC2AC004AB12C /* URLRequestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEAA1FDBC2AC004AB12C /* URLRequestExtensions.swift */; };
+		D06DAEB01FDBC2E9004AB12C /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEAF1FDBC2E9004AB12C /* UserDefaultsExtensions.swift */; };
+		D06DAEB11FDBC2E9004AB12C /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEAF1FDBC2E9004AB12C /* UserDefaultsExtensions.swift */; };
+		D06DAEB21FDBC2E9004AB12C /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEAF1FDBC2E9004AB12C /* UserDefaultsExtensions.swift */; };
+		D06DAEB31FDBC2E9004AB12C /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEAF1FDBC2E9004AB12C /* UserDefaultsExtensions.swift */; };
+		D06DAEB51FDBC990004AB12C /* NotificationCenterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEB41FDBC990004AB12C /* NotificationCenterExtensions.swift */; };
+		D06DAEB61FDBC990004AB12C /* NotificationCenterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEB41FDBC990004AB12C /* NotificationCenterExtensions.swift */; };
+		D06DAEB71FDBC990004AB12C /* NotificationCenterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEB41FDBC990004AB12C /* NotificationCenterExtensions.swift */; };
+		D06DAEB81FDBC990004AB12C /* NotificationCenterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEB41FDBC990004AB12C /* NotificationCenterExtensions.swift */; };
+		D06DAEDA1FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAED91FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift */; };
+		D06DAEDB1FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAED91FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift */; };
+		D06DAEDC1FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAED91FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift */; };
+		D06DAEDD1FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAED91FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift */; };
+		D06DAEE61FDD7BF2004AB12C /* BundleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEE51FDD7BF2004AB12C /* BundleExtensions.swift */; };
 		D0A2DCCF1FD93FD100AB456C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0A2DCCE1FD93FD000AB456C /* Info.plist */; };
 		D0A2DCE31FD9406D00AB456C /* include.h in Headers */ = {isa = PBXBuildFile; fileRef = D0A2DCD11FD9406C00AB456C /* include.h */; };
 		D0A2DCE41FD9406D00AB456C /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DCD41FD9406C00AB456C /* DataExtensions.swift */; };
@@ -102,6 +127,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D06DAEA01FDBC08E004AB12C /* NSPredicateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPredicateExtensions.swift; sourceTree = "<group>"; };
+		D06DAEA51FDBC137004AB12C /* URLExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtensions.swift; sourceTree = "<group>"; };
+		D06DAEAA1FDBC2AC004AB12C /* URLRequestExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestExtensions.swift; sourceTree = "<group>"; };
+		D06DAEAF1FDBC2E9004AB12C /* UserDefaultsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtensions.swift; sourceTree = "<group>"; };
+		D06DAEB41FDBC990004AB12C /* NotificationCenterExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterExtensions.swift; sourceTree = "<group>"; };
+		D06DAED91FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSKeyedUnarchiverExtensions.swift; sourceTree = "<group>"; };
+		D06DAEE51FDD7BF2004AB12C /* BundleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtensions.swift; sourceTree = "<group>"; };
 		D0A2DCC21FD93F2900AB456C /* YYSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YYSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0A2DCCE1FD93FD000AB456C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0A2DCD11FD9406C00AB456C /* include.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = include.h; sourceTree = "<group>"; };
@@ -236,6 +268,13 @@
 			children = (
 				D0A2DCD41FD9406C00AB456C /* DataExtensions.swift */,
 				D0A2DD7E1FDA870A00AB456C /* DateExtensions.swift */,
+				D06DAEA01FDBC08E004AB12C /* NSPredicateExtensions.swift */,
+				D06DAEA51FDBC137004AB12C /* URLExtensions.swift */,
+				D06DAEAA1FDBC2AC004AB12C /* URLRequestExtensions.swift */,
+				D06DAEAF1FDBC2E9004AB12C /* UserDefaultsExtensions.swift */,
+				D06DAEB41FDBC990004AB12C /* NotificationCenterExtensions.swift */,
+				D06DAED91FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift */,
+				D06DAEE51FDD7BF2004AB12C /* BundleExtensions.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -557,16 +596,23 @@
 				D0A2DCE91FD9406D00AB456C /* StringExtensions.swift in Sources */,
 				D0A2DCF11FD9406D00AB456C /* CollectionExtensions.swift in Sources */,
 				D0A2DCEF1FD9406D00AB456C /* OptionalExtensions.swift in Sources */,
+				D06DAEE61FDD7BF2004AB12C /* BundleExtensions.swift in Sources */,
 				D0A2DCEB1FD9406D00AB456C /* CharacterExtensions.swift in Sources */,
 				D0A2DCE51FD9406D00AB456C /* SignedIntegerExtensions.swift in Sources */,
+				D06DAEDA1FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift in Sources */,
 				D0A2DCE61FD9406D00AB456C /* ArrayExtensions.swift in Sources */,
 				D0A2DCEE1FD9406D00AB456C /* IntExtensions.swift in Sources */,
 				D0A2DCE81FD9406D00AB456C /* SignedNumericExtensions.swift in Sources */,
+				D06DAEA11FDBC08E004AB12C /* NSPredicateExtensions.swift in Sources */,
 				D0A2DCEA1FD9406D00AB456C /* DoubleExtensions.swift in Sources */,
 				D0A2DCED1FD9406D00AB456C /* FloatingPointExtensions.swift in Sources */,
+				D06DAEA61FDBC137004AB12C /* URLExtensions.swift in Sources */,
 				D0A2DCEC1FD9406D00AB456C /* BoolExtension.swift in Sources */,
+				D06DAEAB1FDBC2AC004AB12C /* URLRequestExtensions.swift in Sources */,
 				D0A2DD7F1FDA870A00AB456C /* DateExtensions.swift in Sources */,
+				D06DAEB01FDBC2E9004AB12C /* UserDefaultsExtensions.swift in Sources */,
 				D0A2DCE71FD9406D00AB456C /* FloatExtensions.swift in Sources */,
+				D06DAEB51FDBC990004AB12C /* NotificationCenterExtensions.swift in Sources */,
 				D0A2DCF01FD9406D00AB456C /* DictonaryExtensions.swift in Sources */,
 				D0A2DCE41FD9406D00AB456C /* DataExtensions.swift in Sources */,
 			);
@@ -589,14 +635,20 @@
 				D0A2DD151FDA5A3800AB456C /* ArrayExtensions.swift in Sources */,
 				D0A2DD161FDA5A3800AB456C /* FloatExtensions.swift in Sources */,
 				D0A2DD171FDA5A3800AB456C /* SignedNumericExtensions.swift in Sources */,
+				D06DAEDB1FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift in Sources */,
 				D0A2DD181FDA5A3800AB456C /* StringExtensions.swift in Sources */,
 				D0A2DD191FDA5A3800AB456C /* DoubleExtensions.swift in Sources */,
 				D0A2DD1A1FDA5A3800AB456C /* CharacterExtensions.swift in Sources */,
+				D06DAEA21FDBC08E004AB12C /* NSPredicateExtensions.swift in Sources */,
 				D0A2DD1B1FDA5A3800AB456C /* BoolExtension.swift in Sources */,
 				D0A2DD1C1FDA5A3800AB456C /* FloatingPointExtensions.swift in Sources */,
+				D06DAEA71FDBC137004AB12C /* URLExtensions.swift in Sources */,
 				D0A2DD1D1FDA5A3800AB456C /* IntExtensions.swift in Sources */,
+				D06DAEAC1FDBC2AC004AB12C /* URLRequestExtensions.swift in Sources */,
 				D0A2DD801FDA870A00AB456C /* DateExtensions.swift in Sources */,
+				D06DAEB11FDBC2E9004AB12C /* UserDefaultsExtensions.swift in Sources */,
 				D0A2DD1E1FDA5A3800AB456C /* OptionalExtensions.swift in Sources */,
+				D06DAEB61FDBC990004AB12C /* NotificationCenterExtensions.swift in Sources */,
 				D0A2DD1F1FDA5A3800AB456C /* DictonaryExtensions.swift in Sources */,
 				D0A2DD201FDA5A3800AB456C /* CollectionExtensions.swift in Sources */,
 			);
@@ -619,14 +671,20 @@
 				D0A2DD631FDA664F00AB456C /* ArrayExtensions.swift in Sources */,
 				D0A2DD641FDA664F00AB456C /* FloatExtensions.swift in Sources */,
 				D0A2DD651FDA664F00AB456C /* SignedNumericExtensions.swift in Sources */,
+				D06DAEDC1FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift in Sources */,
 				D0A2DD661FDA664F00AB456C /* StringExtensions.swift in Sources */,
 				D0A2DD671FDA664F00AB456C /* DoubleExtensions.swift in Sources */,
 				D0A2DD681FDA664F00AB456C /* CharacterExtensions.swift in Sources */,
+				D06DAEA31FDBC08E004AB12C /* NSPredicateExtensions.swift in Sources */,
 				D0A2DD691FDA664F00AB456C /* BoolExtension.swift in Sources */,
 				D0A2DD6A1FDA664F00AB456C /* FloatingPointExtensions.swift in Sources */,
+				D06DAEA81FDBC137004AB12C /* URLExtensions.swift in Sources */,
 				D0A2DD6B1FDA664F00AB456C /* IntExtensions.swift in Sources */,
+				D06DAEAD1FDBC2AC004AB12C /* URLRequestExtensions.swift in Sources */,
 				D0A2DD811FDA870A00AB456C /* DateExtensions.swift in Sources */,
+				D06DAEB21FDBC2E9004AB12C /* UserDefaultsExtensions.swift in Sources */,
 				D0A2DD6C1FDA664F00AB456C /* OptionalExtensions.swift in Sources */,
+				D06DAEB71FDBC990004AB12C /* NotificationCenterExtensions.swift in Sources */,
 				D0A2DD6D1FDA664F00AB456C /* DictonaryExtensions.swift in Sources */,
 				D0A2DD6E1FDA664F00AB456C /* CollectionExtensions.swift in Sources */,
 			);
@@ -641,14 +699,20 @@
 				D0A2DD711FDA685500AB456C /* ArrayExtensions.swift in Sources */,
 				D0A2DD721FDA685500AB456C /* FloatExtensions.swift in Sources */,
 				D0A2DD731FDA685500AB456C /* SignedNumericExtensions.swift in Sources */,
+				D06DAEDD1FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift in Sources */,
 				D0A2DD741FDA685500AB456C /* StringExtensions.swift in Sources */,
 				D0A2DD751FDA685500AB456C /* DoubleExtensions.swift in Sources */,
 				D0A2DD761FDA685500AB456C /* CharacterExtensions.swift in Sources */,
+				D06DAEA41FDBC08E004AB12C /* NSPredicateExtensions.swift in Sources */,
 				D0A2DD771FDA685500AB456C /* BoolExtension.swift in Sources */,
 				D0A2DD781FDA685500AB456C /* FloatingPointExtensions.swift in Sources */,
+				D06DAEA91FDBC137004AB12C /* URLExtensions.swift in Sources */,
 				D0A2DD791FDA685500AB456C /* IntExtensions.swift in Sources */,
+				D06DAEAE1FDBC2AC004AB12C /* URLRequestExtensions.swift in Sources */,
 				D0A2DD821FDA870A00AB456C /* DateExtensions.swift in Sources */,
+				D06DAEB31FDBC2E9004AB12C /* UserDefaultsExtensions.swift in Sources */,
 				D0A2DD7A1FDA685500AB456C /* OptionalExtensions.swift in Sources */,
+				D06DAEB81FDBC990004AB12C /* NotificationCenterExtensions.swift in Sources */,
 				D0A2DD7B1FDA685500AB456C /* DictonaryExtensions.swift in Sources */,
 				D0A2DD7C1FDA685500AB456C /* CollectionExtensions.swift in Sources */,
 			);

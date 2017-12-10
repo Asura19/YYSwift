@@ -251,6 +251,10 @@ public extension Date {
     public var timeZone: TimeZone {
         return Calendar.current.timeZone
     }
+    
+    public func numberOfDaysInMonth(for date: Date) -> Int {
+        return Calendar.current.range(of: .day, in: .month, for: date)?.count ?? 0
+    }
 }
 
 // MARK: - Methods

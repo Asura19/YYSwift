@@ -11,6 +11,10 @@ import CoreGraphics
 
 public extension Int {
     
+    public var bool: Bool {
+        return self != 0
+    }
+    
     public var countableRange: CountableRange<Int> {
         return 0..<self
     }
