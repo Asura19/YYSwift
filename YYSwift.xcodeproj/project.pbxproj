@@ -100,6 +100,10 @@
 		D0A2DD801FDA870A00AB456C /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DD7E1FDA870A00AB456C /* DateExtensions.swift */; };
 		D0A2DD811FDA870A00AB456C /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DD7E1FDA870A00AB456C /* DateExtensions.swift */; };
 		D0A2DD821FDA870A00AB456C /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DD7E1FDA870A00AB456C /* DateExtensions.swift */; };
+		D0D688431FDE794900CB0AAD /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D688421FDE794900CB0AAD /* ColorExtensions.swift */; };
+		D0D688441FDE794900CB0AAD /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D688421FDE794900CB0AAD /* ColorExtensions.swift */; };
+		D0D688451FDE794900CB0AAD /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D688421FDE794900CB0AAD /* ColorExtensions.swift */; };
+		D0D688461FDE794900CB0AAD /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D688421FDE794900CB0AAD /* ColorExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,6 +166,7 @@
 		D0A2DD501FDA60FA00AB456C /* YYSwiftTests-tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "YYSwiftTests-tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0A2DD5F1FDA661100AB456C /* Tests-tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tests-tvOS.swift"; sourceTree = "<group>"; };
 		D0A2DD7E1FDA870A00AB456C /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
+		D0D688421FDE794900CB0AAD /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +251,7 @@
 		D0A2DCCD1FD93FD000AB456C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				D0D688411FDE792C00CB0AAD /* Shared */,
 				D0A2DCD01FD9406C00AB456C /* ModuleMap */,
 				D0A2DCD31FD9406C00AB456C /* Foundation */,
 				D0A2DCD51FD9406D00AB456C /* StandardLibrary */,
@@ -307,6 +313,14 @@
 				D0A2DD5F1FDA661100AB456C /* Tests-tvOS.swift */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		D0D688411FDE792C00CB0AAD /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				D0D688421FDE794900CB0AAD /* ColorExtensions.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -606,6 +620,7 @@
 				D06DAEA11FDBC08E004AB12C /* NSPredicateExtensions.swift in Sources */,
 				D0A2DCEA1FD9406D00AB456C /* DoubleExtensions.swift in Sources */,
 				D0A2DCED1FD9406D00AB456C /* FloatingPointExtensions.swift in Sources */,
+				D0D688431FDE794900CB0AAD /* ColorExtensions.swift in Sources */,
 				D06DAEA61FDBC137004AB12C /* URLExtensions.swift in Sources */,
 				D0A2DCEC1FD9406D00AB456C /* BoolExtension.swift in Sources */,
 				D06DAEAB1FDBC2AC004AB12C /* URLRequestExtensions.swift in Sources */,
@@ -641,6 +656,7 @@
 				D0A2DD1A1FDA5A3800AB456C /* CharacterExtensions.swift in Sources */,
 				D06DAEA21FDBC08E004AB12C /* NSPredicateExtensions.swift in Sources */,
 				D0A2DD1B1FDA5A3800AB456C /* BoolExtension.swift in Sources */,
+				D0D688441FDE794900CB0AAD /* ColorExtensions.swift in Sources */,
 				D0A2DD1C1FDA5A3800AB456C /* FloatingPointExtensions.swift in Sources */,
 				D06DAEA71FDBC137004AB12C /* URLExtensions.swift in Sources */,
 				D0A2DD1D1FDA5A3800AB456C /* IntExtensions.swift in Sources */,
@@ -677,6 +693,7 @@
 				D0A2DD681FDA664F00AB456C /* CharacterExtensions.swift in Sources */,
 				D06DAEA31FDBC08E004AB12C /* NSPredicateExtensions.swift in Sources */,
 				D0A2DD691FDA664F00AB456C /* BoolExtension.swift in Sources */,
+				D0D688451FDE794900CB0AAD /* ColorExtensions.swift in Sources */,
 				D0A2DD6A1FDA664F00AB456C /* FloatingPointExtensions.swift in Sources */,
 				D06DAEA81FDBC137004AB12C /* URLExtensions.swift in Sources */,
 				D0A2DD6B1FDA664F00AB456C /* IntExtensions.swift in Sources */,
@@ -705,6 +722,7 @@
 				D0A2DD761FDA685500AB456C /* CharacterExtensions.swift in Sources */,
 				D06DAEA41FDBC08E004AB12C /* NSPredicateExtensions.swift in Sources */,
 				D0A2DD771FDA685500AB456C /* BoolExtension.swift in Sources */,
+				D0D688461FDE794900CB0AAD /* ColorExtensions.swift in Sources */,
 				D0A2DD781FDA685500AB456C /* FloatingPointExtensions.swift in Sources */,
 				D06DAEA91FDBC137004AB12C /* URLExtensions.swift in Sources */,
 				D0A2DD791FDA685500AB456C /* IntExtensions.swift in Sources */,
