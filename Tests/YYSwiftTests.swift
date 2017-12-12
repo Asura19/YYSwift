@@ -19,5 +19,8 @@ class YYSwiftTests: XCTestCase {
     func testSum() {
         XCTAssertEqual([1, 2, 3, 4, 5].sum(), 15)
         XCTAssertEqual([1.2, 2.3, 3.4, 4.5, 5.6].sum(), 17)
+
+        var h, s, l: CGFloat
+        UIColor.yy.RGB2HSL(0.5, 0.2, 0.4, &h, &s, &l)
     }
 }

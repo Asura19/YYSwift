@@ -199,6 +199,50 @@ public extension Color {
     }
 }
 
+extension Color: NamespaceWrappable {}
+public extension TypeWrapperProtocol where WrappedType == Color {
+    
+    public static func RGB2HSL(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ h: inout CGFloat, _ s: inout CGFloat, _ l: inout CGFloat) {
+        var r = r
+        var g = g
+        var b = b
+        Color.clampColorValue(&r)
+        Color.clampColorValue(&g)
+        Color.clampColorValue(&b)
+        var max, min, delta, sum: CGFloat
+        max = fmax(r, fmax(g, b))
+        min = fmin(r, fmin(g, b))
+        delta = max - min
+        sum = max + min
+        l = sum / 2         // Lightness
+        if delta == 0 {     // No Saturation, so Hue is undefined (achromatic)
+            h = 0
+            s = 0
+            return
+        }
+        s = delta / (sum < 1 ? sum : 2 - sum)        // Saturation
+        if (r == max) {
+            h = (g - b) / delta / 6                  // color between y & m
+        }
+        else if (g == max) {
+            h = (2 + (b - r) / delta) / 6            // color between c & y
+        }
+        else {
+            h = (4 + (r - g) / delta) / 6            // color between m & y
+        }
+        if (h < 0) {
+            h += 1
+        }
+    }
+}
+
+public extension Color {
+    
+    fileprivate static func clampColorValue(_ value: inout CGFloat) {
+        value = value < 0 ? 0 : (value > 1 ? 1 : value)
+    }
+}
+
 public extension Color {
     
     public convenience init?(red: Int, green: Int, blue: Int, transparency: CGFloat = 1) {
@@ -209,7 +253,7 @@ public extension Color {
         var trans = transparency
         if trans < 0 { trans = 0 }
         if trans > 1 { trans = 1 }
-        
+
         self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: trans)
     }
     

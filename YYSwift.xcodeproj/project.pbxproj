@@ -100,6 +100,10 @@
 		D0A2DD801FDA870A00AB456C /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DD7E1FDA870A00AB456C /* DateExtensions.swift */; };
 		D0A2DD811FDA870A00AB456C /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DD7E1FDA870A00AB456C /* DateExtensions.swift */; };
 		D0A2DD821FDA870A00AB456C /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DD7E1FDA870A00AB456C /* DateExtensions.swift */; };
+		D0BF342D1FDFEBEA0008B900 /* Namespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF342C1FDFEBEA0008B900 /* Namespace.swift */; };
+		D0BF342E1FDFEBEA0008B900 /* Namespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF342C1FDFEBEA0008B900 /* Namespace.swift */; };
+		D0BF342F1FDFEBEA0008B900 /* Namespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF342C1FDFEBEA0008B900 /* Namespace.swift */; };
+		D0BF34301FDFEBEA0008B900 /* Namespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF342C1FDFEBEA0008B900 /* Namespace.swift */; };
 		D0D688431FDE794900CB0AAD /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D688421FDE794900CB0AAD /* ColorExtensions.swift */; };
 		D0D688441FDE794900CB0AAD /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D688421FDE794900CB0AAD /* ColorExtensions.swift */; };
 		D0D688451FDE794900CB0AAD /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D688421FDE794900CB0AAD /* ColorExtensions.swift */; };
@@ -166,6 +170,7 @@
 		D0A2DD501FDA60FA00AB456C /* YYSwiftTests-tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "YYSwiftTests-tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0A2DD5F1FDA661100AB456C /* Tests-tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tests-tvOS.swift"; sourceTree = "<group>"; };
 		D0A2DD7E1FDA870A00AB456C /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
+		D0BF342C1FDFEBEA0008B900 /* Namespace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Namespace.swift; sourceTree = "<group>"; };
 		D0D688421FDE794900CB0AAD /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -255,6 +260,7 @@
 				D0A2DCD01FD9406C00AB456C /* ModuleMap */,
 				D0A2DCD31FD9406C00AB456C /* Foundation */,
 				D0A2DCD51FD9406D00AB456C /* StandardLibrary */,
+				D0BF342C1FDFEBEA0008B900 /* Namespace.swift */,
 				D0A2DCCE1FD93FD000AB456C /* Info.plist */,
 			);
 			path = Sources;
@@ -614,6 +620,7 @@
 				D0A2DCEB1FD9406D00AB456C /* CharacterExtensions.swift in Sources */,
 				D0A2DCE51FD9406D00AB456C /* SignedIntegerExtensions.swift in Sources */,
 				D06DAEDA1FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift in Sources */,
+				D0BF342D1FDFEBEA0008B900 /* Namespace.swift in Sources */,
 				D0A2DCE61FD9406D00AB456C /* ArrayExtensions.swift in Sources */,
 				D0A2DCEE1FD9406D00AB456C /* IntExtensions.swift in Sources */,
 				D0A2DCE81FD9406D00AB456C /* SignedNumericExtensions.swift in Sources */,
@@ -662,6 +669,7 @@
 				D0A2DD1D1FDA5A3800AB456C /* IntExtensions.swift in Sources */,
 				D06DAEAC1FDBC2AC004AB12C /* URLRequestExtensions.swift in Sources */,
 				D0A2DD801FDA870A00AB456C /* DateExtensions.swift in Sources */,
+				D0BF342E1FDFEBEA0008B900 /* Namespace.swift in Sources */,
 				D06DAEB11FDBC2E9004AB12C /* UserDefaultsExtensions.swift in Sources */,
 				D0A2DD1E1FDA5A3800AB456C /* OptionalExtensions.swift in Sources */,
 				D06DAEB61FDBC990004AB12C /* NotificationCenterExtensions.swift in Sources */,
@@ -699,6 +707,7 @@
 				D0A2DD6B1FDA664F00AB456C /* IntExtensions.swift in Sources */,
 				D06DAEAD1FDBC2AC004AB12C /* URLRequestExtensions.swift in Sources */,
 				D0A2DD811FDA870A00AB456C /* DateExtensions.swift in Sources */,
+				D0BF342F1FDFEBEA0008B900 /* Namespace.swift in Sources */,
 				D06DAEB21FDBC2E9004AB12C /* UserDefaultsExtensions.swift in Sources */,
 				D0A2DD6C1FDA664F00AB456C /* OptionalExtensions.swift in Sources */,
 				D06DAEB71FDBC990004AB12C /* NotificationCenterExtensions.swift in Sources */,
@@ -728,6 +737,7 @@
 				D0A2DD791FDA685500AB456C /* IntExtensions.swift in Sources */,
 				D06DAEAE1FDBC2AC004AB12C /* URLRequestExtensions.swift in Sources */,
 				D0A2DD821FDA870A00AB456C /* DateExtensions.swift in Sources */,
+				D0BF34301FDFEBEA0008B900 /* Namespace.swift in Sources */,
 				D06DAEB31FDBC2E9004AB12C /* UserDefaultsExtensions.swift in Sources */,
 				D0A2DD7A1FDA685500AB456C /* OptionalExtensions.swift in Sources */,
 				D06DAEB81FDBC990004AB12C /* NotificationCenterExtensions.swift in Sources */,
