@@ -228,10 +228,202 @@ public extension TypeWrapperProtocol where WrappedType == Color {
             h = (2 + (b - r) / delta) / 6            // color between c & y
         }
         else {
-            h = (4 + (r - g) / delta) / 6            // color between m & y
+            h = (4 + (r - g) / delta) / 6            // color between m & c
         }
         if (h < 0) {
             h += 1
+        }
+    }
+    
+    public static func HSL2RGB(_ h: CGFloat, _ s: CGFloat, _ l: CGFloat, _ r: inout CGFloat, _ g: inout CGFloat, _ b: inout CGFloat) {
+        var h = h
+        var s = s
+        var l = l
+        Color.clampColorValue(&h)
+        Color.clampColorValue(&s)
+        Color.clampColorValue(&l)
+        if s == 0 {
+            r = l
+            g = l
+            b = l
+            return
+        }
+        
+        var q: CGFloat
+        q = (l <= 0.5) ? (l * (1 + s)) : (l + s - (l * s))
+        if q <= 0 {
+            r = 0
+            g = 0
+            b = 0
+        }
+        else {
+            r = 0
+            g = 0
+            b = 0
+            var sextant: Int
+            var m, sv, fract, vsf, mid1, mid2: CGFloat
+            m = l + l - q
+            sv = (q - m) / q
+            if (h == 1) { h = 0 }
+            h *= 6.0
+            sextant = h.int
+            fract = (h.int - sextant).cgFloat
+            vsf = q * sv * fract
+            mid1 = m + vsf
+            mid2 = q - vsf
+            switch (sextant) {
+            case 0: r = q; g = mid1; b = m;
+            case 1: r = mid2; g = q; b = m;
+            case 2: r = m; g = q; b = mid1;
+            case 3: r = m; g = mid2; b = q;
+            case 4: r = mid1; g = m; b = q;
+            case 5: r = q; g = m; b = mid2;
+            default: r = 0; g = 0; b = 0;
+            }
+        }
+    }
+    
+    public static func RGB2HSB(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ h: inout CGFloat, _ s: inout CGFloat, _ v: inout CGFloat) {
+        var r = r
+        var g = g
+        var b = b
+        Color.clampColorValue(&r)
+        Color.clampColorValue(&g)
+        Color.clampColorValue(&b)
+        var max, min, delta: CGFloat
+        max = fmax(r, fmax(g, b))
+        min = fmin(r, fmin(g, b))
+        delta = max - min
+        
+        v = max          // Brightness
+        if delta == 0 {  // No Saturation, so Hue is undefined (achromatic)
+            h = 0
+            s = 0
+            return
+        }
+        
+        s = delta / max
+        if (r == max) {
+            h = (g - b) / delta / 6                  // color between y & m
+        }
+        else if (g == max) {
+            h = (2 + (b - r) / delta) / 6            // color between c & y
+        }
+        else {
+            h = (4 + (r - g) / delta) / 6            // color between m & c
+        }
+        if (h < 0) {
+            h += 1
+        }
+    }
+    
+    public static func HSB2RGB(_ h: CGFloat, _ s: CGFloat, _ v: CGFloat, _ r: inout CGFloat, _ g: inout CGFloat, _ b: inout CGFloat) {
+        var h = h
+        var s = s
+        var v = v
+        Color.clampColorValue(&h)
+        Color.clampColorValue(&s)
+        Color.clampColorValue(&v)
+        if s == 0 {
+            r = v
+            g = v
+            b = v
+        }
+        else {
+            var sextant: Int
+            var f, p, q, t: CGFloat
+            if h == 1 { h = 0 }
+            h *= 6
+            sextant = floor(h.double).int
+            f = (h.int - sextant).cgFloat
+            p = v * (1 - s)
+            q = v * (1 - s * f)
+            t = v * (1 - s * (1 - f))
+            switch (sextant) {
+            case 0: r = v; g = t; b = p;
+            case 1: r = q; g = v; b = p;
+            case 2: r = p; g = v; b = t;
+            case 3: r = p; g = q; b = v;
+            case 4: r = t; g = p; b = v;
+            case 5: r = v; g = p; b = q;
+            default: r = 0; g = 0; b = 0;
+            }
+        }
+    }
+    
+    public static func RGB2CMYK(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ c: inout CGFloat, _ m: inout CGFloat, _ y: inout CGFloat, _ k: inout CGFloat) {
+        var r = r
+        var g = g
+        var b = b
+        Color.clampColorValue(&r)
+        Color.clampColorValue(&g)
+        Color.clampColorValue(&b)
+        c = 1 - r
+        m = 1 - g
+        y = 1 - b
+        k = fmin(c, fmin(m, y))
+        
+        if (k == 1) {
+            c = 0
+            m = 0
+            y = 0
+        }
+        else {
+            c = (c - k) / (1 - k)
+            m = (m - k) / (1 - k)
+            y = (y - k) / (1 - k)
+        }
+    }
+    
+    public static func CMYK2RGB(_ c: CGFloat, _ m: CGFloat, _ y: CGFloat, _ k: CGFloat, _ r: inout CGFloat, _ g: inout CGFloat, _ b: inout CGFloat) {
+        var c = c
+        var m = m
+        var y = y
+        var k = k
+        Color.clampColorValue(&c)
+        Color.clampColorValue(&m)
+        Color.clampColorValue(&y)
+        Color.clampColorValue(&k)
+        
+        r = (1 - c) * (1 - k)
+        g = (1 - m) * (1 - k)
+        b = (1 - y) * (1 - k)
+    }
+    
+    public static func HSB2HSL(_ h: CGFloat, _ s: CGFloat, _ b: CGFloat, _ hh: inout CGFloat, _ ss: inout CGFloat, _ ll: inout CGFloat) {
+        var h = h
+        var s = s
+        var b = b
+        Color.clampColorValue(&h)
+        Color.clampColorValue(&s)
+        Color.clampColorValue(&b)
+        
+        hh = h
+        ll = (2 - s) * b / 2
+        if ll <= 0.5 {
+            ss = s / (2 - s)
+        }
+        else {
+            ss = (s * b) / (2 - (2 - s) * b)
+        }
+    }
+    
+    public static func HSL2HSB(_ h: CGFloat, _ s: CGFloat, _ l: CGFloat, _ hh: inout CGFloat, _ ss: inout CGFloat, _ bb: inout CGFloat) {
+        var h = h
+        var s = s
+        var l = l
+        Color.clampColorValue(&h)
+        Color.clampColorValue(&s)
+        Color.clampColorValue(&l)
+        
+        hh = h
+        if l <= 0.5 {
+            bb = (s + 1) * l
+            ss = (2 * s) / (s + 1)
+        }
+        else {
+            bb = l + s * (1 - l)
+            ss = (2 * s * (1 - l)) / bb
         }
     }
 }

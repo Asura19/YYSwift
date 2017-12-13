@@ -32,6 +32,10 @@
 		D06DAEDC1FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAED91FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift */; };
 		D06DAEDD1FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAED91FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift */; };
 		D06DAEE61FDD7BF2004AB12C /* BundleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEE51FDD7BF2004AB12C /* BundleExtensions.swift */; };
+		D06FEAC71FE13628006D7915 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06FEAC61FE13628006D7915 /* CGFloatExtensions.swift */; };
+		D06FEAC81FE13630006D7915 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06FEAC61FE13628006D7915 /* CGFloatExtensions.swift */; };
+		D06FEAC91FE13630006D7915 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06FEAC61FE13628006D7915 /* CGFloatExtensions.swift */; };
+		D06FEACA1FE13631006D7915 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06FEAC61FE13628006D7915 /* CGFloatExtensions.swift */; };
 		D0A2DCCF1FD93FD100AB456C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0A2DCCE1FD93FD000AB456C /* Info.plist */; };
 		D0A2DCE31FD9406D00AB456C /* include.h in Headers */ = {isa = PBXBuildFile; fileRef = D0A2DCD11FD9406C00AB456C /* include.h */; };
 		D0A2DCE41FD9406D00AB456C /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DCD41FD9406C00AB456C /* DataExtensions.swift */; };
@@ -142,6 +146,7 @@
 		D06DAEB41FDBC990004AB12C /* NotificationCenterExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterExtensions.swift; sourceTree = "<group>"; };
 		D06DAED91FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSKeyedUnarchiverExtensions.swift; sourceTree = "<group>"; };
 		D06DAEE51FDD7BF2004AB12C /* BundleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtensions.swift; sourceTree = "<group>"; };
+		D06FEAC61FE13628006D7915 /* CGFloatExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtensions.swift; sourceTree = "<group>"; };
 		D0A2DCC21FD93F2900AB456C /* YYSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YYSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0A2DCCE1FD93FD000AB456C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0A2DCD11FD9406C00AB456C /* include.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = include.h; sourceTree = "<group>"; };
@@ -230,6 +235,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D06FEAC51FE13611006D7915 /* CoreGraphics */ = {
+			isa = PBXGroup;
+			children = (
+				D06FEAC61FE13628006D7915 /* CGFloatExtensions.swift */,
+			);
+			path = CoreGraphics;
+			sourceTree = "<group>";
+		};
 		D0A2DCB81FD93F2900AB456C = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +269,7 @@
 		D0A2DCCD1FD93FD000AB456C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				D06FEAC51FE13611006D7915 /* CoreGraphics */,
 				D0D688411FDE792C00CB0AAD /* Shared */,
 				D0A2DCD01FD9406C00AB456C /* ModuleMap */,
 				D0A2DCD31FD9406C00AB456C /* Foundation */,
@@ -617,6 +631,7 @@
 				D0A2DCF11FD9406D00AB456C /* CollectionExtensions.swift in Sources */,
 				D0A2DCEF1FD9406D00AB456C /* OptionalExtensions.swift in Sources */,
 				D06DAEE61FDD7BF2004AB12C /* BundleExtensions.swift in Sources */,
+				D06FEAC71FE13628006D7915 /* CGFloatExtensions.swift in Sources */,
 				D0A2DCEB1FD9406D00AB456C /* CharacterExtensions.swift in Sources */,
 				D0A2DCE51FD9406D00AB456C /* SignedIntegerExtensions.swift in Sources */,
 				D06DAEDA1FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift in Sources */,
@@ -654,6 +669,7 @@
 			files = (
 				D0A2DD131FDA5A3800AB456C /* DataExtensions.swift in Sources */,
 				D0A2DD141FDA5A3800AB456C /* SignedIntegerExtensions.swift in Sources */,
+				D06FEAC81FE13630006D7915 /* CGFloatExtensions.swift in Sources */,
 				D0A2DD151FDA5A3800AB456C /* ArrayExtensions.swift in Sources */,
 				D0A2DD161FDA5A3800AB456C /* FloatExtensions.swift in Sources */,
 				D0A2DD171FDA5A3800AB456C /* SignedNumericExtensions.swift in Sources */,
@@ -692,6 +708,7 @@
 			files = (
 				D0A2DD611FDA664F00AB456C /* DataExtensions.swift in Sources */,
 				D0A2DD621FDA664F00AB456C /* SignedIntegerExtensions.swift in Sources */,
+				D06FEAC91FE13630006D7915 /* CGFloatExtensions.swift in Sources */,
 				D0A2DD631FDA664F00AB456C /* ArrayExtensions.swift in Sources */,
 				D0A2DD641FDA664F00AB456C /* FloatExtensions.swift in Sources */,
 				D0A2DD651FDA664F00AB456C /* SignedNumericExtensions.swift in Sources */,
@@ -722,6 +739,7 @@
 			files = (
 				D0A2DD6F1FDA685500AB456C /* DataExtensions.swift in Sources */,
 				D0A2DD701FDA685500AB456C /* SignedIntegerExtensions.swift in Sources */,
+				D06FEACA1FE13631006D7915 /* CGFloatExtensions.swift in Sources */,
 				D0A2DD711FDA685500AB456C /* ArrayExtensions.swift in Sources */,
 				D0A2DD721FDA685500AB456C /* FloatExtensions.swift in Sources */,
 				D0A2DD731FDA685500AB456C /* SignedNumericExtensions.swift in Sources */,
