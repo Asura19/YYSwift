@@ -202,6 +202,14 @@ public extension Color {
 extension Color: NamespaceWrappable {}
 public extension TypeWrapperProtocol where WrappedType == Color {
     
+    public static func rgb2hsl(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat) -> (hue: CGFloat, sarutaion: CGFloat, lightness: CGFloat) {
+        var h: CGFloat = 0
+        var s: CGFloat = 0
+        var l: CGFloat = 0
+        Color.yy.RGB2HSL(r, g, b, &h, &s, &l)
+        return (h, s, l)
+    }
+    
     public static func RGB2HSL(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ h: inout CGFloat, _ s: inout CGFloat, _ l: inout CGFloat) {
         var r = r
         var g = g
@@ -233,6 +241,14 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         if (h < 0) {
             h += 1
         }
+    }
+    
+    public static func hsl2rgb(_ h: CGFloat, _ s: CGFloat, _ l: CGFloat) -> (red: CGFloat, green: CGFloat, blue: CGFloat) {
+        var r: CGFloat = 0
+        var g: CGFloat = 0
+        var b: CGFloat = 0
+        Color.yy.HSL2RGB(h, s, l, &r, &g, &b)
+        return (r, g, b)
     }
     
     public static func HSL2RGB(_ h: CGFloat, _ s: CGFloat, _ l: CGFloat, _ r: inout CGFloat, _ g: inout CGFloat, _ b: inout CGFloat) {
@@ -283,6 +299,14 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         }
     }
     
+    public static func rgb2hsb(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat) -> (hue: CGFloat, sarutaion: CGFloat, brightness: CGFloat) {
+        var h: CGFloat = 0
+        var s: CGFloat = 0
+        var v: CGFloat = 0
+        Color.yy.RGB2HSB(r, g, b, &h, &s, &v)
+        return (h, s, v)
+    }
+    
     public static func RGB2HSB(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ h: inout CGFloat, _ s: inout CGFloat, _ v: inout CGFloat) {
         var r = r
         var g = g
@@ -315,6 +339,14 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         if (h < 0) {
             h += 1
         }
+    }
+    
+    public static func hsb2rgb(_ h: CGFloat, _ s: CGFloat, _ v: CGFloat) -> (red: CGFloat, green: CGFloat, blue: CGFloat) {
+        var r: CGFloat = 0
+        var g: CGFloat = 0
+        var b: CGFloat = 0
+        Color.yy.HSB2RGB(h, s, v, &r, &g, &b)
+        return (r, g, b)
     }
     
     public static func HSB2RGB(_ h: CGFloat, _ s: CGFloat, _ v: CGFloat, _ r: inout CGFloat, _ g: inout CGFloat, _ b: inout CGFloat) {
@@ -351,6 +383,15 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         }
     }
     
+    public static func rgb2cmyk(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat) -> (cyan: CGFloat, magenta: CGFloat, yellow: CGFloat, black: CGFloat) {
+        var c: CGFloat = 0
+        var m: CGFloat = 0
+        var y: CGFloat = 0
+        var k: CGFloat = 0
+        Color.yy.RGB2CMYK(r, g, b, &c, &m, &y, &k)
+        return (c, m, y, k)
+    }
+    
     public static func RGB2CMYK(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ c: inout CGFloat, _ m: inout CGFloat, _ y: inout CGFloat, _ k: inout CGFloat) {
         var r = r
         var g = g
@@ -375,6 +416,14 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         }
     }
     
+    public static func cmyk2rgb(_ c: CGFloat, _ m: CGFloat, _ y: CGFloat, _ k: CGFloat) -> (red: CGFloat, green: CGFloat, blue: CGFloat) {
+        var r: CGFloat = 0
+        var g: CGFloat = 0
+        var b: CGFloat = 0
+        Color.yy.CMYK2RGB(c, m, y, k, &r, &g, &b)
+        return (r, g, b)
+    }
+    
     public static func CMYK2RGB(_ c: CGFloat, _ m: CGFloat, _ y: CGFloat, _ k: CGFloat, _ r: inout CGFloat, _ g: inout CGFloat, _ b: inout CGFloat) {
         var c = c
         var m = m
@@ -388,6 +437,14 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         r = (1 - c) * (1 - k)
         g = (1 - m) * (1 - k)
         b = (1 - y) * (1 - k)
+    }
+    
+    public static func hsb2hsl(_ h: CGFloat, _ s: CGFloat, _ b: CGFloat) -> (hue: CGFloat, sarutaion: CGFloat, lightness: CGFloat) {
+        var hh: CGFloat = 0
+        var ss: CGFloat = 0
+        var ll: CGFloat = 0
+        Color.yy.HSB2HSL(h, s, b, &hh, &ss, &ll)
+        return (hh, ss, ll)
     }
     
     public static func HSB2HSL(_ h: CGFloat, _ s: CGFloat, _ b: CGFloat, _ hh: inout CGFloat, _ ss: inout CGFloat, _ ll: inout CGFloat) {
@@ -406,6 +463,14 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         else {
             ss = (s * b) / (2 - (2 - s) * b)
         }
+    }
+    
+    public static func hsl2hsb(_ h: CGFloat, _ s: CGFloat, _ l: CGFloat) -> (hue: CGFloat, sarutaion: CGFloat, brightness: CGFloat) {
+        var hh: CGFloat = 0
+        var ss: CGFloat = 0
+        var bb: CGFloat = 0
+        Color.yy.HSL2HSB(h, s, l, &hh, &ss, &bb)
+        return (hh, ss, bb)
     }
     
     public static func HSL2HSB(_ h: CGFloat, _ s: CGFloat, _ l: CGFloat, _ hh: inout CGFloat, _ ss: inout CGFloat, _ bb: inout CGFloat) {
