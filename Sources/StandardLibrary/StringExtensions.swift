@@ -247,6 +247,10 @@ public extension String {
         return pattern.stringByReplacingMatches(in: self, options: [], range: NSMakeRange(0, self.count), withTemplate: replacement)
     }
     
+    public func removeAll(_ target: String) -> String {
+        return replacingOccurrences(of: target, with: "")
+    }
+
     public func float(locale: Locale = .current) -> Float? {
         let formatter = NumberFormatter()
         formatter.locale = locale
@@ -428,14 +432,22 @@ public extension String {
         }
     }
     
-    
-    public mutating func slice(at i: Int) {
+    public mutating func slice(from i: Int) {
         guard i < count else { return }
         
         if let str = self[i..<count] {
             self = str
         }
     }
+    
+    public mutating func slice(to i: Int) {
+        guard i > 0 else { return }
+        
+        if let str = self[0..<i] {
+            self = str
+        }
+    }
+
     
     public func date(withFormat format: String) -> Date? {
         let dateFormatter = DateFormatter()

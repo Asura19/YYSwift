@@ -27,7 +27,7 @@ public extension Color {
         return Color(red: r, green: g, blue: b, alpha: 1)
     }
     
-    public var rgbComponents: (red: Int, green: Int, blue: Int) {
+    public var rgbIntComponents: (red: Int, green: Int, blue: Int) {
         var components: [CGFloat] {
             let c = cgColor.components!
             if c.count == 4 {
@@ -41,7 +41,7 @@ public extension Color {
         return (red: Int(r * 255.0), green: Int(g * 255.0), blue: Int(b * 255.0))
     }
     
-    public var cgFloatComponents: (red: CGFloat, green: CGFloat, blue: CGFloat) {
+    public var rgbaComponents: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
         var components: [CGFloat] {
             let c = cgColor.components!
             if c.count == 4 {
@@ -52,7 +52,8 @@ public extension Color {
         let r = components[0]
         let g = components[1]
         let b = components[2]
-        return (red: r, green: g, blue: b)
+        let a = components[3]
+        return (red: r, green: g, blue: b, alpha: a)
     }
     
     public var hsbaComponents: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
@@ -63,6 +64,18 @@ public extension Color {
         
         self.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
         return (hue: h, saturation: s, brightness: b, alpha: a)
+    }
+    
+    public var hslaComponents: (hue: CGFloat, saturation: CGFloat, lightness: CGFloat, alpha: CGFloat) {
+        let rgba = rgbaComponents
+        let hsl = Color.yy.rgb2hsl(rgba.red, rgba.green, rgba.blue)
+        return (hue: hsl.hue, saturation: hsl.saturation, lightness: hsl.lightness , alpha: rgba.alpha)
+    }
+    
+    public var cmykaComponents: (cyan: CGFloat, magenta: CGFloat, yellow: CGFloat, black: CGFloat, alpha: CGFloat) {
+        let rgba = rgbaComponents
+        let cmyk = Color.yy.rgb2cmyk(rgba.red, rgba.green, rgba.blue)
+        return (cyan: cmyk.cyan, magenta: cmyk.magenta, yellow: cmyk.yellow, black: cmyk.black, alpha: rgba.alpha)
     }
     
     public var hexString: String {
@@ -131,9 +144,9 @@ public extension Color {
     }
     
     public var complementary: Color {
-        let red: CGFloat = 1.0 - self.cgFloatComponents.red
-        let green: CGFloat = 1.0 - self.cgFloatComponents.green
-        let blue: CGFloat = 1.0 - self.cgFloatComponents.blue
+        let red: CGFloat = 1.0 - self.rgbaComponents.red
+        let green: CGFloat = 1.0 - self.rgbaComponents.green
+        let blue: CGFloat = 1.0 - self.rgbaComponents.blue
         return Color.init(red: red, green: green, blue: blue, alpha: 1)
     }
     
@@ -202,7 +215,7 @@ public extension Color {
 extension Color: NamespaceWrappable {}
 public extension TypeWrapperProtocol where WrappedType == Color {
     
-    public static func rgb2hsl(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat) -> (hue: CGFloat, sarutaion: CGFloat, lightness: CGFloat) {
+    public static func rgb2hsl(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat) -> (hue: CGFloat, saturation: CGFloat, lightness: CGFloat) {
         var h: CGFloat = 0
         var s: CGFloat = 0
         var l: CGFloat = 0
@@ -299,7 +312,7 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         }
     }
     
-    public static func rgb2hsb(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat) -> (hue: CGFloat, sarutaion: CGFloat, brightness: CGFloat) {
+    public static func rgb2hsb(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat) -> (hue: CGFloat, saturation: CGFloat, brightness: CGFloat) {
         var h: CGFloat = 0
         var s: CGFloat = 0
         var v: CGFloat = 0
@@ -439,7 +452,7 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         b = (1 - y) * (1 - k)
     }
     
-    public static func hsb2hsl(_ h: CGFloat, _ s: CGFloat, _ b: CGFloat) -> (hue: CGFloat, sarutaion: CGFloat, lightness: CGFloat) {
+    public static func hsb2hsl(_ h: CGFloat, _ s: CGFloat, _ b: CGFloat) -> (hue: CGFloat, saturation: CGFloat, lightness: CGFloat) {
         var hh: CGFloat = 0
         var ss: CGFloat = 0
         var ll: CGFloat = 0
@@ -465,7 +478,7 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         }
     }
     
-    public static func hsl2hsb(_ h: CGFloat, _ s: CGFloat, _ l: CGFloat) -> (hue: CGFloat, sarutaion: CGFloat, brightness: CGFloat) {
+    public static func hsl2hsb(_ h: CGFloat, _ s: CGFloat, _ l: CGFloat) -> (hue: CGFloat, saturation: CGFloat, brightness: CGFloat) {
         var hh: CGFloat = 0
         var ss: CGFloat = 0
         var bb: CGFloat = 0
@@ -514,6 +527,30 @@ public extension Color {
         self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: trans)
     }
     
+    public convenience init?(hue: CGFloat, saturation: CGFloat, lightness: CGFloat, alpha: CGFloat = 1) {
+        let rgb = Color.yy.hsl2rgb(hue, saturation, lightness)
+        self.init(red: rgb.red, green: rgb.green, blue: rgb.blue, alpha: alpha)
+    }
+    
+    public convenience init?(cyan: CGFloat, magenta: CGFloat, yellow: CGFloat, black: CGFloat, alpha: CGFloat = 1) {
+        let rgb = Color.yy.cmyk2rgb(cyan, magenta, yellow, black)
+        self.init(red: rgb.red, green: rgb.green, blue: rgb.blue, alpha: alpha)
+    }
+    
+    public convenience init?(rgbValue: UInt, alpha: CGFloat = 1) {
+        self.init(red: CGFloat(((rgbValue & 0xff0000) >> 16) / 255),
+                  green: CGFloat(((rgbValue & 0xff00) >> 8) / 255),
+                  blue: CGFloat((rgbValue & 0xff) / 255),
+                  alpha: alpha)
+    }
+    
+    public convenience init?(rgbaValue: UInt) {
+        self.init(red: CGFloat(((rgbaValue & 0xff000000) >> 24) / 255),
+                  green: CGFloat(((rgbaValue & 0xff0000) >> 16) / 255),
+                  blue: CGFloat((rgbaValue & 0xff00) >> 8 / 255),
+                  alpha: CGFloat((rgbaValue & 0xff) / 255))
+    }
+    
     public convenience init?(hex: Int, transparency: CGFloat = 1) {
         var trans = transparency
         if trans < 0 { trans = 0 }
@@ -526,6 +563,7 @@ public extension Color {
     }
     
     public convenience init?(hexString: String, transparency: CGFloat = 1) {
+        let hexString = hexString.trimmed.removeAll(" ")
         var string = ""
         if hexString.lowercased().hasPrefix("0x") {
             string =  hexString.replacingOccurrences(of: "0x", with: "")
@@ -534,11 +572,16 @@ public extension Color {
         } else {
             string = hexString
         }
+
         
         if string.count == 3 { // convert hex to 6 digit format if in short format
             var str = ""
             string.forEach { str.append(String(repeating: String($0), count: 2)) }
             string = str
+        }
+        
+        guard string.count == 6 else {
+            return nil
         }
         
         guard let hexValue = Int(string, radix: 16) else { return nil }
@@ -555,9 +598,9 @@ public extension Color {
     
     public convenience init?(complementaryFor color: Color) {
         
-        let red: CGFloat = 1.0 - color.cgFloatComponents.red
-        let green: CGFloat = 1.0 - color.cgFloatComponents.green
-        let blue: CGFloat = 1.0 - color.cgFloatComponents.blue
+        let red: CGFloat = 1.0 - color.rgbaComponents.red
+        let green: CGFloat = 1.0 - color.rgbaComponents.green
+        let blue: CGFloat = 1.0 - color.rgbaComponents.blue
         self.init(red: red, green: green, blue: blue, alpha: 1)
     }
 }
