@@ -61,14 +61,7 @@ public extension String {
         return false
     }
     
-    public func isNotBlank() -> Bool {
-        for c in self {
-            if !c.isWhiteSpace && !c.isNewline {
-                return true
-            }
-        }
-        return false
-    }
+
     
     public func contain(characterSet: CharacterSet) -> Bool {
         return rangeOfCharacter(from: characterSet) != nil
@@ -571,13 +564,7 @@ public extension String {
     }
     
     
-    public func width(forFont font: UIFont) -> CGFloat {
-        return size(forFont: font, size: CGSize.init(width: HUGE.cgFloat, height: HUGE.cgFloat), lineBreakMode: .byWordWrapping).width
-    }
-    
-    public func height(forFont font: UIFont, width: CGFloat) -> CGFloat {
-        return size(forFont: font, size: CGSize.init(width: width, height: HUGE.cgFloat), lineBreakMode: .byWordWrapping).height
-    }
+  
     #endif
 }
 
@@ -661,64 +648,4 @@ public extension String {
     
 }
 
-#if os(iOS) || os(macOS)
-// MARK: - Hash
-public extension String {
-    
-    public var md2String: String? {
-        return self.utf8Data?.md2String
-    }
-    
-    public var md4String: String? {
-        return self.utf8Data?.md4String
-    }
-    
-    public var md5String: String? {
-        return self.utf8Data?.md5String
-    }
-    
-    public var sha1String: String? {
-        return self.utf8Data?.sha1String
-    }
-    
-    public var sha224String: String? {
-        return self.utf8Data?.sha224String
-    }
-    
-    public var sha256String: String? {
-        return self.utf8Data?.sha256String
-    }
-    
-    public var sha384String: String? {
-        return self.utf8Data?.sha384String
-    }
-    
-    public var sha512String: String? {
-        return self.utf8Data?.sha512String
-    }
-    
-    public func hmacMD5String(withKey key: String) -> String? {
-        return self.utf8Data?.hmacMD5String(withKey: key)
-    }
-    
-    public func hmacSHA1String(withKey key: String) -> String? {
-        return self.utf8Data?.hmacSHA1String(withKey: key)
-    }
-    
-    public func hmacSHA224String(withKey key: String) -> String? {
-        return self.utf8Data?.hmacSHA224String(withKey: key)
-    }
-    
-    public func hmacSHA256String(withKey key: String) -> String? {
-        return self.utf8Data?.hmacSHA256String(withKey: key)
-    }
-    
-    public func hmacSHA384String(withKey key: String) -> String? {
-        return self.utf8Data?.hmacSHA384String(withKey: key)
-    }
-    
-    public func hmacSHA512String(withKey key: String) -> String? {
-        return self.utf8Data?.hmacSHA512String(withKey: key)
-    }
-}
-#endif
+

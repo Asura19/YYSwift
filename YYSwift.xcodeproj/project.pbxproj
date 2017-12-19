@@ -112,6 +112,9 @@
 		D0CE15D51FE8E1010034E503 /* YYTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE15D31FE8E1010034E503 /* YYTimer.swift */; };
 		D0CE15D61FE8E1010034E503 /* YYTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE15D31FE8E1010034E503 /* YYTimer.swift */; };
 		D0CE15D71FE8E1010034E503 /* YYTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE15D31FE8E1010034E503 /* YYTimer.swift */; };
+		D0CE15DA1FE8E6EC0034E503 /* UIAlertControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE15D91FE8E6EC0034E503 /* UIAlertControllerExtensions.swift */; };
+		D0CE15E21FE929E90034E503 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE15E11FE929E90034E503 /* UIDeviceExtensions.swift */; };
+		D0CE15E41FE929E90034E503 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE15E11FE929E90034E503 /* UIDeviceExtensions.swift */; };
 		D0D688431FDE794900CB0AAD /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D688421FDE794900CB0AAD /* ColorExtensions.swift */; };
 		D0D688441FDE794900CB0AAD /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D688421FDE794900CB0AAD /* ColorExtensions.swift */; };
 		D0D688451FDE794900CB0AAD /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D688421FDE794900CB0AAD /* ColorExtensions.swift */; };
@@ -181,6 +184,8 @@
 		D0A2DD7E1FDA870A00AB456C /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		D0BF342C1FDFEBEA0008B900 /* Namespace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Namespace.swift; sourceTree = "<group>"; };
 		D0CE15D31FE8E1010034E503 /* YYTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YYTimer.swift; sourceTree = "<group>"; };
+		D0CE15D91FE8E6EC0034E503 /* UIAlertControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtensions.swift; sourceTree = "<group>"; };
+		D0CE15E11FE929E90034E503 /* UIDeviceExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDeviceExtensions.swift; sourceTree = "<group>"; };
 		D0D688421FDE794900CB0AAD /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -274,6 +279,7 @@
 		D0A2DCCD1FD93FD000AB456C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				D0CE15D81FE8E6C90034E503 /* UIKit */,
 				D0CE15D21FE8E0E60034E503 /* Utility */,
 				D06FEAC51FE13611006D7915 /* CoreGraphics */,
 				D0D688411FDE792C00CB0AAD /* Shared */,
@@ -347,6 +353,15 @@
 				D0CE15D31FE8E1010034E503 /* YYTimer.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		D0CE15D81FE8E6C90034E503 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				D0CE15D91FE8E6EC0034E503 /* UIAlertControllerExtensions.swift */,
+				D0CE15E11FE929E90034E503 /* UIDeviceExtensions.swift */,
+			);
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 		D0D688411FDE792C00CB0AAD /* Shared */ = {
@@ -645,6 +660,7 @@
 				D0A2DCF11FD9406D00AB456C /* CollectionExtensions.swift in Sources */,
 				D0A2DCEF1FD9406D00AB456C /* OptionalExtensions.swift in Sources */,
 				D06DAEE61FDD7BF2004AB12C /* BundleExtensions.swift in Sources */,
+				D0CE15DA1FE8E6EC0034E503 /* UIAlertControllerExtensions.swift in Sources */,
 				D06FEAC71FE13628006D7915 /* CGFloatExtensions.swift in Sources */,
 				D0A2DCEB1FD9406D00AB456C /* CharacterExtensions.swift in Sources */,
 				D0A2DCE51FD9406D00AB456C /* SignedIntegerExtensions.swift in Sources */,
@@ -653,6 +669,7 @@
 				D0CE15D41FE8E1010034E503 /* YYTimer.swift in Sources */,
 				D0A2DCE61FD9406D00AB456C /* ArrayExtensions.swift in Sources */,
 				D0A2DCEE1FD9406D00AB456C /* IntExtensions.swift in Sources */,
+				D0CE15E21FE929E90034E503 /* UIDeviceExtensions.swift in Sources */,
 				D0A2DCE81FD9406D00AB456C /* SignedNumericExtensions.swift in Sources */,
 				D06DAEA11FDBC08E004AB12C /* NSPredicateExtensions.swift in Sources */,
 				D0A2DCEA1FD9406D00AB456C /* DoubleExtensions.swift in Sources */,
@@ -769,6 +786,7 @@
 				D0A2DD771FDA685500AB456C /* BoolExtension.swift in Sources */,
 				D0D688461FDE794900CB0AAD /* ColorExtensions.swift in Sources */,
 				D0A2DD781FDA685500AB456C /* FloatingPointExtensions.swift in Sources */,
+				D0CE15E41FE929E90034E503 /* UIDeviceExtensions.swift in Sources */,
 				D06DAEA91FDBC137004AB12C /* URLExtensions.swift in Sources */,
 				D0A2DD791FDA685500AB456C /* IntExtensions.swift in Sources */,
 				D06DAEAE1FDBC2AC004AB12C /* URLRequestExtensions.swift in Sources */,
@@ -1013,7 +1031,7 @@
 				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.phoenix.YYSwift;
 				PRODUCT_NAME = YYSwift;
 				SDKROOT = macosx;
@@ -1038,7 +1056,7 @@
 				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.phoenix.YYSwift;
 				PRODUCT_NAME = YYSwift;
 				SDKROOT = macosx;
@@ -1105,7 +1123,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.2;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Debug;
 		};
@@ -1129,7 +1147,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.2;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Release;
 		};
@@ -1152,7 +1170,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 11.2;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Debug;
 		};
@@ -1175,7 +1193,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 11.2;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Release;
 		};
