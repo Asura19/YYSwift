@@ -15,10 +15,17 @@ public extension UIAlertController {
         
         UIApplication.shared.keyWindow?.rootViewController?.present(self, animated: animated, completion: completion)
         if vibrate {
-//            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
-            let generator = UIImpactFeedbackGenerator(style: .light)
-            generator.prepare()
-            generator.impactOccurred()
+            let device = UIDevice.current
+            let initial = device.machineModel?.replace(regex: ",[1-9]", options: [], with: "")
+            let version = (initial?.removeAll("iPhone").int)!
+            if !UIDevice.current.isPad && version > 8 {
+                let generator = UIImpactFeedbackGenerator(style: .light)
+                generator.prepare()
+                generator.impactOccurred()
+            }
+            else {
+                AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+            }
         }
     }
 }
