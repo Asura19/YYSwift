@@ -108,6 +108,10 @@
 		D0BF342E1FDFEBEA0008B900 /* Namespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF342C1FDFEBEA0008B900 /* Namespace.swift */; };
 		D0BF342F1FDFEBEA0008B900 /* Namespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF342C1FDFEBEA0008B900 /* Namespace.swift */; };
 		D0BF34301FDFEBEA0008B900 /* Namespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF342C1FDFEBEA0008B900 /* Namespace.swift */; };
+		D0CE15D41FE8E1010034E503 /* YYTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE15D31FE8E1010034E503 /* YYTimer.swift */; };
+		D0CE15D51FE8E1010034E503 /* YYTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE15D31FE8E1010034E503 /* YYTimer.swift */; };
+		D0CE15D61FE8E1010034E503 /* YYTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE15D31FE8E1010034E503 /* YYTimer.swift */; };
+		D0CE15D71FE8E1010034E503 /* YYTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE15D31FE8E1010034E503 /* YYTimer.swift */; };
 		D0D688431FDE794900CB0AAD /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D688421FDE794900CB0AAD /* ColorExtensions.swift */; };
 		D0D688441FDE794900CB0AAD /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D688421FDE794900CB0AAD /* ColorExtensions.swift */; };
 		D0D688451FDE794900CB0AAD /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D688421FDE794900CB0AAD /* ColorExtensions.swift */; };
@@ -176,6 +180,7 @@
 		D0A2DD5F1FDA661100AB456C /* Tests-tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tests-tvOS.swift"; sourceTree = "<group>"; };
 		D0A2DD7E1FDA870A00AB456C /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		D0BF342C1FDFEBEA0008B900 /* Namespace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Namespace.swift; sourceTree = "<group>"; };
+		D0CE15D31FE8E1010034E503 /* YYTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YYTimer.swift; sourceTree = "<group>"; };
 		D0D688421FDE794900CB0AAD /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -269,6 +274,7 @@
 		D0A2DCCD1FD93FD000AB456C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				D0CE15D21FE8E0E60034E503 /* Utility */,
 				D06FEAC51FE13611006D7915 /* CoreGraphics */,
 				D0D688411FDE792C00CB0AAD /* Shared */,
 				D0A2DCD01FD9406C00AB456C /* ModuleMap */,
@@ -333,6 +339,14 @@
 				D0A2DD5F1FDA661100AB456C /* Tests-tvOS.swift */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		D0CE15D21FE8E0E60034E503 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				D0CE15D31FE8E1010034E503 /* YYTimer.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		D0D688411FDE792C00CB0AAD /* Shared */ = {
@@ -636,6 +650,7 @@
 				D0A2DCE51FD9406D00AB456C /* SignedIntegerExtensions.swift in Sources */,
 				D06DAEDA1FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift in Sources */,
 				D0BF342D1FDFEBEA0008B900 /* Namespace.swift in Sources */,
+				D0CE15D41FE8E1010034E503 /* YYTimer.swift in Sources */,
 				D0A2DCE61FD9406D00AB456C /* ArrayExtensions.swift in Sources */,
 				D0A2DCEE1FD9406D00AB456C /* IntExtensions.swift in Sources */,
 				D0A2DCE81FD9406D00AB456C /* SignedNumericExtensions.swift in Sources */,
@@ -675,6 +690,7 @@
 				D0A2DD171FDA5A3800AB456C /* SignedNumericExtensions.swift in Sources */,
 				D06DAEDB1FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift in Sources */,
 				D0A2DD181FDA5A3800AB456C /* StringExtensions.swift in Sources */,
+				D0CE15D51FE8E1010034E503 /* YYTimer.swift in Sources */,
 				D0A2DD191FDA5A3800AB456C /* DoubleExtensions.swift in Sources */,
 				D0A2DD1A1FDA5A3800AB456C /* CharacterExtensions.swift in Sources */,
 				D06DAEA21FDBC08E004AB12C /* NSPredicateExtensions.swift in Sources */,
@@ -714,6 +730,7 @@
 				D0A2DD651FDA664F00AB456C /* SignedNumericExtensions.swift in Sources */,
 				D06DAEDC1FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift in Sources */,
 				D0A2DD661FDA664F00AB456C /* StringExtensions.swift in Sources */,
+				D0CE15D61FE8E1010034E503 /* YYTimer.swift in Sources */,
 				D0A2DD671FDA664F00AB456C /* DoubleExtensions.swift in Sources */,
 				D0A2DD681FDA664F00AB456C /* CharacterExtensions.swift in Sources */,
 				D06DAEA31FDBC08E004AB12C /* NSPredicateExtensions.swift in Sources */,
@@ -745,6 +762,7 @@
 				D0A2DD731FDA685500AB456C /* SignedNumericExtensions.swift in Sources */,
 				D06DAEDD1FDD4ABE004AB12C /* NSKeyedUnarchiverExtensions.swift in Sources */,
 				D0A2DD741FDA685500AB456C /* StringExtensions.swift in Sources */,
+				D0CE15D71FE8E1010034E503 /* YYTimer.swift in Sources */,
 				D0A2DD751FDA685500AB456C /* DoubleExtensions.swift in Sources */,
 				D0A2DD761FDA685500AB456C /* CharacterExtensions.swift in Sources */,
 				D06DAEA41FDBC08E004AB12C /* NSPredicateExtensions.swift in Sources */,
