@@ -49,8 +49,4 @@ private class YYUIBarButtonItemBlockTarget: NSObject {
     @objc func invoke(with sender: Any) {
         self.block(sender)
     }
-    
-    deinit {
-        print("YYUIBarButtonItemBlockTarget deinit")
-    }
 }
