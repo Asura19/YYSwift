@@ -130,6 +130,7 @@
 		D0CE16051FEA971A0034E503 /* OptionSetExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE16031FEA971A0034E503 /* OptionSetExtensions.swift */; };
 		D0CE16061FEA971A0034E503 /* OptionSetExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE16031FEA971A0034E503 /* OptionSetExtensions.swift */; };
 		D0CE16071FEA971A0034E503 /* OptionSetExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE16031FEA971A0034E503 /* OptionSetExtensions.swift */; };
+		D0CE160D1FEB978F0034E503 /* UISwitchExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE160C1FEB978F0034E503 /* UISwitchExtensions.swift */; };
 		D0D688431FDE794900CB0AAD /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D688421FDE794900CB0AAD /* ColorExtensions.swift */; };
 		D0D688441FDE794900CB0AAD /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D688421FDE794900CB0AAD /* ColorExtensions.swift */; };
 		D0D688451FDE794900CB0AAD /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D688421FDE794900CB0AAD /* ColorExtensions.swift */; };
@@ -207,6 +208,7 @@
 		D0CE15FC1FEA46810034E503 /* UIFontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtensions.swift; sourceTree = "<group>"; };
 		D0CE16001FEA84780034E503 /* UIControlExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIControlExtensions.swift; sourceTree = "<group>"; };
 		D0CE16031FEA971A0034E503 /* OptionSetExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSetExtensions.swift; sourceTree = "<group>"; };
+		D0CE160C1FEB978F0034E503 /* UISwitchExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISwitchExtensions.swift; sourceTree = "<group>"; };
 		D0D688421FDE794900CB0AAD /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -387,6 +389,7 @@
 				D0CE15F91FEA3F240034E503 /* UICollectionViewExtensions.swift */,
 				D0CE15FC1FEA46810034E503 /* UIFontExtensions.swift */,
 				D0CE16001FEA84780034E503 /* UIControlExtensions.swift */,
+				D0CE160C1FEB978F0034E503 /* UISwitchExtensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -709,6 +712,7 @@
 				D0CE15FD1FEA46810034E503 /* UIFontExtensions.swift in Sources */,
 				D0A2DCEC1FD9406D00AB456C /* BoolExtension.swift in Sources */,
 				D06DAEAB1FDBC2AC004AB12C /* URLRequestExtensions.swift in Sources */,
+				D0CE160D1FEB978F0034E503 /* UISwitchExtensions.swift in Sources */,
 				D0A2DD7F1FDA870A00AB456C /* DateExtensions.swift in Sources */,
 				D06DAEB01FDBC2E9004AB12C /* UserDefaultsExtensions.swift in Sources */,
 				D0A2DCE71FD9406D00AB456C /* FloatExtensions.swift in Sources */,
