@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		D05B92711FED044F006C918C /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05B92701FED044F006C918C /* UIImageExtensions.swift */; };
-		D05B92721FED044F006C918C /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05B92701FED044F006C918C /* UIImageExtensions.swift */; };
 		D05B92731FED044F006C918C /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05B92701FED044F006C918C /* UIImageExtensions.swift */; };
+		D05B92771FF22DBA006C918C /* YYCGUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05B92761FF22DBA006C918C /* YYCGUtilities.swift */; };
+		D05B92781FF22DBA006C918C /* YYCGUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05B92761FF22DBA006C918C /* YYCGUtilities.swift */; };
 		D06DAEA11FDBC08E004AB12C /* NSPredicateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEA01FDBC08E004AB12C /* NSPredicateExtensions.swift */; };
 		D06DAEA21FDBC08E004AB12C /* NSPredicateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEA01FDBC08E004AB12C /* NSPredicateExtensions.swift */; };
 		D06DAEA31FDBC08E004AB12C /* NSPredicateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DAEA01FDBC08E004AB12C /* NSPredicateExtensions.swift */; };
@@ -166,6 +167,7 @@
 
 /* Begin PBXFileReference section */
 		D05B92701FED044F006C918C /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
+		D05B92761FF22DBA006C918C /* YYCGUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YYCGUtilities.swift; sourceTree = "<group>"; };
 		D06DAEA01FDBC08E004AB12C /* NSPredicateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPredicateExtensions.swift; sourceTree = "<group>"; };
 		D06DAEA51FDBC137004AB12C /* URLExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtensions.swift; sourceTree = "<group>"; };
 		D06DAEAA1FDBC2AC004AB12C /* URLRequestExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestExtensions.swift; sourceTree = "<group>"; };
@@ -272,6 +274,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D05B92751FF22D81006C918C /* Quartz */ = {
+			isa = PBXGroup;
+			children = (
+				D05B92761FF22DBA006C918C /* YYCGUtilities.swift */,
+			);
+			path = Quartz;
+			sourceTree = "<group>";
+		};
 		D06FEAC51FE13611006D7915 /* CoreGraphics */ = {
 			isa = PBXGroup;
 			children = (
@@ -306,6 +316,7 @@
 		D0A2DCCD1FD93FD000AB456C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				D05B92751FF22D81006C918C /* Quartz */,
 				D0CE15D81FE8E6C90034E503 /* UIKit */,
 				D0CE15D21FE8E0E60034E503 /* Utility */,
 				D06FEAC51FE13611006D7915 /* CoreGraphics */,
@@ -716,6 +727,7 @@
 				D06DAEA61FDBC137004AB12C /* URLExtensions.swift in Sources */,
 				D0CE15FD1FEA46810034E503 /* UIFontExtensions.swift in Sources */,
 				D0A2DCEC1FD9406D00AB456C /* BoolExtension.swift in Sources */,
+				D05B92771FF22DBA006C918C /* YYCGUtilities.swift in Sources */,
 				D06DAEAB1FDBC2AC004AB12C /* URLRequestExtensions.swift in Sources */,
 				D0CE160D1FEB978F0034E503 /* UISwitchExtensions.swift in Sources */,
 				D05B92711FED044F006C918C /* UIImageExtensions.swift in Sources */,
@@ -806,7 +818,6 @@
 				D0A2DD811FDA870A00AB456C /* DateExtensions.swift in Sources */,
 				D0BF342F1FDFEBEA0008B900 /* Namespace.swift in Sources */,
 				D06DAEB21FDBC2E9004AB12C /* UserDefaultsExtensions.swift in Sources */,
-				D05B92721FED044F006C918C /* UIImageExtensions.swift in Sources */,
 				D0A2DD6C1FDA664F00AB456C /* OptionalExtensions.swift in Sources */,
 				D06DAEB71FDBC990004AB12C /* NotificationCenterExtensions.swift in Sources */,
 				D0A2DD6D1FDA664F00AB456C /* DictonaryExtensions.swift in Sources */,
@@ -850,6 +861,7 @@
 				D0A2DD7A1FDA685500AB456C /* OptionalExtensions.swift in Sources */,
 				D06DAEB81FDBC990004AB12C /* NotificationCenterExtensions.swift in Sources */,
 				D0A2DD7B1FDA685500AB456C /* DictonaryExtensions.swift in Sources */,
+				D05B92781FF22DBA006C918C /* YYCGUtilities.swift in Sources */,
 				D0A2DD7C1FDA685500AB456C /* CollectionExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

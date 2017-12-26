@@ -41,6 +41,12 @@ public extension UIImage {
     }
     
     public func cropped(to rect: CGRect) -> UIImage {
+        var rect = rect
+        rect.origin.x *= self.scale
+        rect.origin.y *= self.scale
+        rect.size.width *= self.scale
+        rect.size.height *= self.scale
+        
         guard rect.size.height < size.height && rect.size.width < size.width else {
             return self
         }
@@ -60,7 +66,27 @@ public extension UIImage {
         return newImage
     }
     
-    
+    public func image(byInsetEdge insets: UIEdgeInsets, color: UIColor) -> UIImage? {
+        var size = self.size
+        size.width -= insets.left + insets.right
+        size.height -= insets.top + insets.bottom
+        if size.width <= 0 || size.height <= 0 { return nil }
+        let rect = CGRect.init(x: -insets.left, y: -insets.top, width: self.size.width, height: self.size.height)
+        UIGraphicsBeginImageContextWithOptions(size, false, self.scale)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return nil
+        }
+        context.setFillColor(color.cgColor)
+        let path = CGMutablePath()
+        path.addRect(CGRect.init(x: 0, y: 0, width: size.width, height: size.height))
+        path.addRect(rect)
+        context.addPath(path)
+        context.fillPath()
+        self.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
+    }
 }
 
 public extension UIImage {
@@ -167,7 +193,7 @@ public extension UIImage {
         return image(withPDF: dataOrPath, resize: true, size: size)
     }
     
-    public class func image(withPDF dataOrPath: Any, resize: Bool, size: CGSize) -> UIImage? {
+    private class func image(withPDF dataOrPath: Any, resize: Bool, size: CGSize) -> UIImage? {
         var pdf: CGPDFDocument?
         if dataOrPath is Data {
             let provider = CGDataProvider(data: dataOrPath as! CFData)
@@ -203,6 +229,115 @@ public extension UIImage {
             return nil
         }
         return UIImage.init(cgImage: image, scale: scale, orientation: .up)
+    }
+    
+    public class func image(withEmoji emoji: String, size: CGFloat) -> UIImage? {
+        if emoji.count == 0 || size < 1 {
+            return nil
+        }
+        let scale = UIScreen.main.scale
+        let font = CTFontCreateWithName("AppleColorEmoji" as CFString, size * scale, nil)
+        let str = NSAttributedString(string: emoji, attributes: [kCTFontAttributeName as NSAttributedStringKey: font, kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.white.cgColor])
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let context = CGContext.init(data: nil,
+                                     width: Int(size * scale),
+                                     height: Int(size * scale),
+                                     bitsPerComponent: 8,
+                                     bytesPerRow: 0,
+                                     space: colorSpace,
+                                     bitmapInfo: CGImageByteOrderInfo.orderMask.rawValue | CGImageAlphaInfo.premultipliedFirst.rawValue)
+        if context == nil {
+            return nil
+        }
+        context!.interpolationQuality = .high
+        let line = CTLineCreateWithAttributedString(str as CFAttributedString)
+        let bounds = CTLineGetBoundsWithOptions(line, .useGlyphPathBounds)
+        context!.textPosition = CGPoint(x: 0, y: -bounds.origin.y)
+        CTLineDraw(line, context!)
+        guard let cgImage = context?.makeImage() else {
+            return nil
+        }
+        return UIImage(cgImage: cgImage, scale: scale, orientation: .up)
+    }
+    
+    public class func image(withColor color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) -> UIImage? {
+        if size.width <= 0 || size.height <= 0 {
+            return nil
+        }
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return nil
+        }
+        context.setFillColor(color.cgColor)
+        context.fill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+    
+    public class func image(withSize size: CGSize, drawBlock: (CGContext) -> Void) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return nil
+        }
+        drawBlock(context)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+    
+    public var hasAlphaChannel: Bool {
+        guard let cgImage = self.cgImage else {
+            return false
+        }
+        let alpha = CGImageAlphaInfo.init(rawValue: cgImage.alphaInfo.rawValue & CGBitmapInfo.alphaInfoMask.rawValue)
+        return (alpha == .first ||
+                alpha == .last ||
+                alpha == .premultipliedFirst ||
+                alpha == .premultipliedLast)
+    }
+    
+    public func draw(inRect rect: CGRect, contentMode: UIViewContentMode, clipsToBounds: Bool) {
+        let drawRect = YYCGRectFitWithContentMode(rect: rect, size: self.size, mode: contentMode)
+        if drawRect.size.width == 0 || drawRect.size.height == 0 {
+            return
+        }
+        if clipsToBounds {
+            guard let context = UIGraphicsGetCurrentContext() else {
+                return
+            }
+            context.saveGState()
+            context.addRect(rect)
+            context.clip()
+            self.draw(in: drawRect)
+            context.restoreGState()
+        }
+        else {
+            self.draw(in: drawRect)
+        }
+    }
+    
+    public func resize(to size: CGSize) -> UIImage? {
+        if size.width <= 0 || size.height <= 0 {
+            return nil
+        }
+        UIGraphicsBeginImageContextWithOptions(size, false, self.scale)
+        self.draw(in: CGRect.init(x: 0, y: 0, width: size.width, height: size.height))
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+    
+    public func resize(to size: CGSize, contentMode: UIViewContentMode) -> UIImage? {
+        if size.width <= 0 || size.height <= 0 {
+            return nil
+        }
+        UIGraphicsBeginImageContextWithOptions(size, false, self.scale)
+        self.draw(inRect: CGRect.init(x: 0, y: 0, width: size.width, height: size.height), contentMode: contentMode, clipsToBounds: false)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
 }
 
