@@ -159,6 +159,51 @@ public extension UIImage {
         return true
     }
     
+    public class func image(withPDF dataOrPath: Any) -> UIImage? {
+        return image(withPDF: dataOrPath, resize: false, size: CGSize.zero)
+    }
+    
+    public class func image(withPDF dataOrPath: Any, size: CGSize) -> UIImage? {
+        return image(withPDF: dataOrPath, resize: true, size: size)
+    }
+    
+    public class func image(withPDF dataOrPath: Any, resize: Bool, size: CGSize) -> UIImage? {
+        var pdf: CGPDFDocument?
+        if dataOrPath is Data {
+            let provider = CGDataProvider(data: dataOrPath as! CFData)
+            pdf = CGPDFDocument.init(provider!)
+        }
+        else if dataOrPath is String {
+            pdf = CGPDFDocument.init(URL(fileURLWithPath: dataOrPath as! String) as CFURL)
+        }
+        if pdf == nil {
+            return nil
+        }
+        guard let page = pdf?.page(at: 1) else {
+            return nil
+        }
+        let pdfRect = page.getBoxRect(.cropBox)
+        let pdfSize = resize ? size : pdfRect.size
+        let scale = UIScreen.main.scale
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let context = CGContext.init(data: nil,
+                                     width: Int(pdfSize.width * scale),
+                                     height: Int(pdfSize.height * scale),
+                                     bitsPerComponent: 8,
+                                     bytesPerRow: 0,
+                                     space: colorSpace,
+                                     bitmapInfo: CGImageByteOrderInfo.orderMask.rawValue | CGImageAlphaInfo.premultipliedFirst.rawValue)
+        if context == nil {
+            return nil
+        }
+        context?.scaleBy(x: scale, y: scale)
+        context?.translateBy(x: -pdfRect.origin.x, y: -pdfRect.origin.y)
+        context?.drawPDFPage(page)
+        guard let image = context?.makeImage() else {
+            return nil
+        }
+        return UIImage.init(cgImage: image, scale: scale, orientation: .up)
+    }
 }
 
 fileprivate func uiImage(with cgImage: CGImage, scale: CGFloat, orientation: UIImageOrientation) -> UIImage? {
