@@ -40,7 +40,6 @@
 		D06FEAC81FE13630006D7915 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06FEAC61FE13628006D7915 /* CGFloatExtensions.swift */; };
 		D06FEAC91FE13630006D7915 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06FEAC61FE13628006D7915 /* CGFloatExtensions.swift */; };
 		D06FEACA1FE13631006D7915 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06FEAC61FE13628006D7915 /* CGFloatExtensions.swift */; };
-		D0A2DCCF1FD93FD100AB456C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0A2DCCE1FD93FD000AB456C /* Info.plist */; };
 		D0A2DCE31FD9406D00AB456C /* include.h in Headers */ = {isa = PBXBuildFile; fileRef = D0A2DCD11FD9406C00AB456C /* include.h */; };
 		D0A2DCE41FD9406D00AB456C /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DCD41FD9406C00AB456C /* DataExtensions.swift */; };
 		D0A2DCE51FD9406D00AB456C /* SignedIntegerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DCD61FD9406D00AB456C /* SignedIntegerExtensions.swift */; };
@@ -649,7 +648,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0A2DCCF1FD93FD100AB456C /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

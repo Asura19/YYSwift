@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Accelerate
 
 public extension UIImage {
     
@@ -24,6 +25,58 @@ public extension UIImage {
     
     public var template: UIImage {
         return withRenderingMode(.alwaysTemplate)
+    }
+    
+    public var roatateLeft90: UIImage? {
+        return self.rotate(byRadians: CGFloat(90.0).degreesToRadians, fitSize: true)
+    }
+    
+    public var roatateRight90: UIImage? {
+        return self.rotate(byRadians: CGFloat(-90.0).degreesToRadians, fitSize: true)
+    }
+    
+    public var roatate180: UIImage? {
+        return self.flip(horizontal: true, vertical: true)
+    }
+    
+    public var flipVertical: UIImage? {
+        return self.flip(horizontal: false, vertical: true)
+    }
+    
+    public var flipHorizontal: UIImage? {
+        return self.flip(horizontal: true, vertical: false)
+    }
+    
+    public var grayscale: UIImage? {
+        return self.applyBlur(byRadius: 0, tintColor: nil, tintBlendMode: .normal, saturation: 0, maskImage: nil)
+    }
+    
+    public var blurSoft: UIImage? {
+        return self.applyBlur(byRadius: 60, tintColor: UIColor.init(white: 0.84, alpha: 0.36), tintBlendMode: .normal, saturation: 1.8, maskImage: nil)
+    }
+    
+    public var blurLight: UIImage? {
+        return self.applyBlur(byRadius: 60, tintColor: UIColor.init(white: 1.0, alpha: 0.3), tintBlendMode: .normal, saturation: 1.8, maskImage: nil)
+    }
+    
+    public var blurExtraLight: UIImage? {
+        return self.applyBlur(byRadius: 40, tintColor: UIColor.init(white: 0.97, alpha: 0.82), tintBlendMode: .normal, saturation: 1.8, maskImage: nil)
+    }
+    
+    public var blurDark: UIImage? {
+        return self.applyBlur(byRadius: 40, tintColor: UIColor.init(white: 0.11, alpha: 0.73), tintBlendMode: .normal, saturation: 1.8, maskImage: nil)
+    }
+    
+    
+    public var hasAlphaChannel: Bool {
+        guard let cgImage = self.cgImage else {
+            return false
+        }
+        let alpha = CGImageAlphaInfo.init(rawValue: cgImage.alphaInfo.rawValue & CGBitmapInfo.alphaInfoMask.rawValue)
+        return (alpha == .first ||
+            alpha == .last ||
+            alpha == .premultipliedFirst ||
+            alpha == .premultipliedLast)
     }
 }
 
@@ -66,7 +119,7 @@ public extension UIImage {
         return newImage
     }
     
-    public func image(byInsetEdge insets: UIEdgeInsets, color: UIColor) -> UIImage? {
+    public func setEdge(byInsets insets: UIEdgeInsets, color: UIColor) -> UIImage? {
         var size = self.size
         size.width -= insets.left + insets.right
         size.height -= insets.top + insets.bottom
@@ -86,6 +139,277 @@ public extension UIImage {
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage
+    }
+    
+    public func setRoundCorner(with radius: CGFloat, corners: UIRectCorner = .allCorners, borderWidth: CGFloat = 0, borderColor: UIColor? = nil, borderLineJoin: CGLineJoin = .miter) -> UIImage {
+        var corners = corners
+        if corners != .allCorners && corners.contains(.allCorners) {
+            corners.remove(.allCorners)
+        }
+        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return self
+        }
+        let rect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
+        context.scaleBy(x: 1, y: -1)
+        context.translateBy(x: 0, y: -rect.size.height)
+        
+        let minSize = min(self.size.width, self.size.height)
+        if borderWidth < minSize / 2 {
+            let path = UIBezierPath(roundedRect: rect.insetBy(dx: borderWidth, dy: borderWidth), byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: borderWidth))
+            path.close()
+            context.saveGState()
+            path.addClip()
+            guard let cgImage = self.cgImage else { return self }
+            context.draw(cgImage, in: rect)
+            context.restoreGState()
+        }
+        
+        if borderColor != nil && borderWidth < minSize / 2 && borderWidth > 0 {
+            let strokeInset = (floor(borderWidth * self.scale) + 0.5) / self.scale
+            let strokeRect = rect.insetBy(dx: strokeInset, dy: strokeInset)
+            let strokeRadius = radius > self.scale / 2 ? radius - self.scale / 2 : 0
+            let path = UIBezierPath(roundedRect: strokeRect, byRoundingCorners: corners, cornerRadii: CGSize(width: strokeRadius, height: borderWidth))
+            path.close()
+            path.lineWidth = borderWidth
+            path.lineJoinStyle = borderLineJoin
+            borderColor!.setStroke()
+            path.stroke()
+        }
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        if newImage != nil {
+            return newImage!
+        }
+        else {
+            return self
+        }
+    }
+    
+    public func rotate(byRadians radians: CGFloat, fitSize: Bool) -> UIImage? {
+        guard let cgImage = self.cgImage else { return nil }
+        let width = cgImage.width
+        let height = cgImage.height
+        let newRect = CGRect(x: 0, y: 0, width: width, height: height).applying(fitSize ? CGAffineTransform.init(rotationAngle: radians) : .identity)
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        guard let context = CGContext.init(data: nil,
+                                           width: newRect.size.width.int,
+                                           height: newRect.size.height.int,
+                                           bitsPerComponent: 8,
+                                           bytesPerRow: newRect.size.width.int * 4,
+                                           space: colorSpace,
+                                           bitmapInfo: CGImageByteOrderInfo.orderMask.rawValue | CGImageAlphaInfo.premultipliedFirst.rawValue) else {
+                                            return nil
+        }
+        context.setShouldAntialias(true)
+        context.setAllowsAntialiasing(true)
+        context.interpolationQuality = .high
+        
+        context.translateBy(x: +(newRect.size.width * 0.5), y: +(newRect.size.height * 0.5))
+        context.rotate(by: radians)
+        context.draw(cgImage, in: CGRect(x: -(width.cgFloat * 0.5), y: -(height.cgFloat * 0.5), width: width.cgFloat, height: height.cgFloat))
+        guard let image = context.makeImage() else { return nil }
+        return UIImage(cgImage: image, scale: self.scale, orientation: self.imageOrientation)
+    }
+    
+    private func flip(horizontal: Bool, vertical: Bool) -> UIImage? {
+        guard let cgImage = self.cgImage else { return nil }
+        let width = cgImage.width
+        let height = cgImage.height
+        let bytesPerRow = width * 4
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        guard let context = CGContext.init(data: nil,
+                                           width: width,
+                                           height: height,
+                                           bitsPerComponent: 8,
+                                           bytesPerRow: bytesPerRow,
+                                           space: colorSpace,
+                                           bitmapInfo: CGImageByteOrderInfo.orderMask.rawValue | CGImageAlphaInfo.premultipliedFirst.rawValue) else {
+                                            return nil
+        }
+        context.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+        guard let data = context.data else { return nil }
+        var src = vImage_Buffer(data: data, height: vImagePixelCount(width), width: vImagePixelCount(height), rowBytes: bytesPerRow)
+        var dest = vImage_Buffer(data: data, height: vImagePixelCount(width), width: vImagePixelCount(height), rowBytes: bytesPerRow)
+        if vertical {
+            vImageVerticalReflect_ARGB8888(&src, &dest, vImage_Flags(kvImageBackgroundColorFill))
+        }
+        if horizontal {
+            vImageHorizontalReflect_ARGB8888(&src, &dest, vImage_Flags(kvImageBackgroundColorFill))
+        }
+        guard let image = context.makeImage() else { return nil }
+        return UIImage(cgImage: image, scale: self.scale, orientation: self.imageOrientation)
+    }
+    
+    public func tint(_ color: UIColor) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
+        let rect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
+        color.set()
+        UIRectFill(rect)
+        self.draw(at: CGPoint.zero, blendMode: .destinationIn, alpha: 1)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        if newImage != nil {
+            return newImage!
+        }
+        else {
+            return self
+        }
+    }
+    
+    public func applyBlur(withTintColor tintColor: UIColor) -> UIImage? {
+        let effectColorAlpha: CGFloat = 0.6
+        var effectColor = tintColor
+        let componentCount = tintColor.cgColor.numberOfComponents
+        if componentCount == 2 {
+            var b: CGFloat = 0
+            if tintColor.getWhite(&b, alpha: nil) {
+                effectColor = UIColor(white: b, alpha: effectColorAlpha)
+            }
+        }
+        else {
+            var r: CGFloat = 0
+            var g: CGFloat = 0
+            var b: CGFloat = 0
+            if tintColor.getRed(&r, green: &g, blue: &b, alpha: nil) {
+                effectColor = UIColor(red: r, green: g, blue: b, alpha: effectColorAlpha)
+            }
+        }
+        return self.applyBlur(byRadius: 20, tintColor: effectColor, tintBlendMode: .normal, saturation: -1.0, maskImage: nil)
+    }
+    
+    public func applyBlur(byRadius blurRadius: CGFloat, tintColor: UIColor? = nil, tintBlendMode: CGBlendMode, saturation: CGFloat, maskImage: UIImage? = nil) -> UIImage? {
+        guard  self.size.width > 1,
+               self.size.height > 1,
+               let cgImage = self.cgImage,
+               maskImage != nil else {
+                return nil
+        }
+        let hasBlur = blurRadius > CGFloat.ulpOfOne
+        let hasSaturation = fabs(saturation - 1.0) > CGFloat.ulpOfOne
+        
+        let scale = self.scale
+        let opaque = false
+        
+        if !hasBlur && !hasSaturation {
+            return self.merge(effectCGImage: cgImage, tintColor: tintColor, tintBlendMode: tintBlendMode, maskImage: maskImage, opaque: opaque)
+        }
+        
+        var effect = vImage_Buffer()
+        var scratch = vImage_Buffer()
+        
+        var format = vImage_CGImageFormat(
+            bitsPerComponent: 8,
+            bitsPerPixel: 32,
+            colorSpace: nil,
+            bitmapInfo: CGBitmapInfo.init(rawValue: CGImageByteOrderInfo.order32Little.rawValue | CGImageAlphaInfo.premultipliedFirst.rawValue),
+            version: 0,
+            decode: nil,
+            renderingIntent: .defaultIntent
+        )
+        var error = vImageBuffer_InitWithCGImage(&effect, &format, nil, cgImage, vImage_Flags(kvImagePrintDiagnosticsToConsole))
+        if error != kvImageNoError {
+            return nil
+        }
+        error = vImageBuffer_Init(&scratch, effect.width, effect.height, format.bitsPerPixel, vImage_Flags(kvImageNoFlags))
+        if error != kvImageNoError {
+            return nil
+        }
+        
+        var input = effect
+        var output = scratch
+        
+        if hasBlur {
+            var inputRadius = blurRadius * scale
+            if inputRadius - 2.0 < CGFloat.ulpOfOne {
+                inputRadius = 2.0
+            }
+            let radiusFloat = floor((inputRadius * 3.0 * sqrt(2 * CGFloat.pi) / 4 + 0.5) / 2)
+            let radius = UInt32(radiusFloat) | 1
+            var iterations: Int = 0
+            if blurRadius * scale < 0.5 { iterations = 1 }
+            else if blurRadius * scale < 1.5 { iterations = 2 }
+            else { iterations = 3 }
+            let tempSize = vImageBoxConvolve_ARGB8888(&input, &output, nil, 0, 0, radius, radius, nil, vImage_Flags(kvImageGetTempBufferSize | kvImageEdgeExtend))
+            guard let temp = malloc(tempSize) else { return nil }
+            for _ in 0..<iterations {
+                vImageBoxConvolve_ARGB8888(&input, &output, temp, 0, 0, radius, radius, nil, vImage_Flags(kvImageEdgeExtend))
+                swap(&input, &output)
+            }
+            free(temp)
+        }
+        
+        if hasSaturation {
+            let s = saturation
+            let matrixFloat: [CGFloat] = [
+                0.0722 + 0.9278 * s,  0.0722 - 0.0722 * s,  0.0722 - 0.0722 * s,  0,
+                0.7152 - 0.7152 * s,  0.7152 + 0.2848 * s,  0.7152 - 0.7152 * s,  0,
+                0.2126 - 0.2126 * s,  0.2126 - 0.2126 * s,  0.2126 + 0.7873 * s,  0,
+                0,                    0,                    0,                    1,
+            ]
+            let divisor: Int32 = 256
+            let matrixSize = MemoryLayout.size(ofValue: matrixFloat) / MemoryLayout.size(ofValue: matrixFloat[0])
+            var matrix = [Int16](repeating: 0, count: matrixSize)
+            for i in 0..<matrixSize {
+                matrix[i] = Int16(roundf(Float(matrixFloat[i] * CGFloat(divisor))))
+            }
+            vImageMatrixMultiply_ARGB8888(&input, &output, &matrix, divisor, nil, nil, vImage_Flags(kvImageNoFlags))
+            swap(&input, &output)
+        }
+        
+        var effectCGImage = vImageCreateCGImageFromBuffer(&input, &format, { free($1) }, nil, vImage_Flags(kvImageNoAllocate), nil)
+        
+        if effectCGImage == nil {
+            effectCGImage = vImageCreateCGImageFromBuffer(&input, &format, nil, nil, vImage_Flags(kvImageNoFlags), nil)
+            free(&input.data)
+        }
+        free(&output.data)
+        return self.merge(effectCGImage: effectCGImage!.takeUnretainedValue(), tintColor: tintColor, tintBlendMode: tintBlendMode, maskImage: maskImage, opaque: opaque)
+    }
+    
+    private func merge(effectCGImage: CGImage, tintColor: UIColor? = nil, tintBlendMode: CGBlendMode, maskImage: UIImage? = nil, opaque: Bool) -> UIImage? {
+        guard let cgImage = self.cgImage else { return nil }
+        let hasTint: Bool = tintColor != nil && tintColor!.cgColor.alpha > CGFloat.ulpOfOne
+        let hasMask: Bool = maskImage != nil
+        let size = self.size
+        let rect = CGRect(origin: .zero, size: size)
+        let scale = self.scale
+        
+        if !hasTint && !hasMask {
+            return UIImage(cgImage: effectCGImage)
+        }
+        
+        UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return self
+        }
+        context.scaleBy(x: 1, y: -1)
+        context.translateBy(x: 0, y: -size.height)
+        if hasMask {
+            context.draw(cgImage, in: rect)
+            context.saveGState()
+            context.clip(to: rect, mask: maskImage!.cgImage!)
+        }
+        context.draw(effectCGImage, in: rect)
+        if hasTint {
+            context.saveGState()
+            context.setBlendMode(tintBlendMode)
+            context.setFillColor(tintColor!.cgColor)
+            context.fill(rect)
+            context.restoreGState()
+        }
+        if hasMask {
+            context.restoreGState()
+        }
+        let outputImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        if outputImage != nil {
+            return outputImage!
+        }
+        else {
+            return nil
+        }
     }
 }
 
@@ -285,17 +609,6 @@ public extension UIImage {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image
-    }
-    
-    public var hasAlphaChannel: Bool {
-        guard let cgImage = self.cgImage else {
-            return false
-        }
-        let alpha = CGImageAlphaInfo.init(rawValue: cgImage.alphaInfo.rawValue & CGBitmapInfo.alphaInfoMask.rawValue)
-        return (alpha == .first ||
-                alpha == .last ||
-                alpha == .premultipliedFirst ||
-                alpha == .premultipliedLast)
     }
     
     public func draw(inRect rect: CGRect, contentMode: UIViewContentMode, clipsToBounds: Bool) {
