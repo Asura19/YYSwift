@@ -658,7 +658,7 @@ fileprivate func uiImage(with cgImage: CGImage, scale: CGFloat, orientation: UII
     return UIImage(cgImage: cgImage, scale: scale, orientation: orientation)
 }
 
-fileprivate func convertToDelay(_ pointer:UnsafeRawPointer?) -> Float? {
+fileprivate func convertToDelay(_ pointer: UnsafeRawPointer?) -> Float? {
     if pointer == nil {
         return nil
     }

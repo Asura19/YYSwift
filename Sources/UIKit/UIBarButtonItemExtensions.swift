@@ -27,7 +27,7 @@ public extension UIBarButtonItem {
             return target.block
         }
         set {
-            let target = YYUIBarButtonItemBlockTarget(blcok: newValue)
+            let target = YYUIBarButtonItemBlockTarget(block: newValue)
             objc_setAssociatedObject(self, Key.Associated, target, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             self.target = target
             self.action = #selector(target.invoke(with:))
@@ -42,8 +42,8 @@ private struct Key {
 private class YYUIBarButtonItemBlockTarget: NSObject {
     
     var block: (Any) -> Void
-    init(blcok: @escaping (Any) -> Void) {
-        self.block = blcok
+    init(block: @escaping (Any) -> Void) {
+        self.block = block
     }
     
     @objc func invoke(with sender: Any) {

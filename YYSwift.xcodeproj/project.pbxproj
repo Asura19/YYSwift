@@ -107,6 +107,7 @@
 		D0A2DD801FDA870A00AB456C /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DD7E1FDA870A00AB456C /* DateExtensions.swift */; };
 		D0A2DD811FDA870A00AB456C /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DD7E1FDA870A00AB456C /* DateExtensions.swift */; };
 		D0A2DD821FDA870A00AB456C /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DD7E1FDA870A00AB456C /* DateExtensions.swift */; };
+		D0ACA6B01FFE1A0E0049C58D /* UIGestureRecognizerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ACA6AF1FFE1A0E0049C58D /* UIGestureRecognizerExtensions.swift */; };
 		D0BF342D1FDFEBEA0008B900 /* Namespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF342C1FDFEBEA0008B900 /* Namespace.swift */; };
 		D0BF342E1FDFEBEA0008B900 /* Namespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF342C1FDFEBEA0008B900 /* Namespace.swift */; };
 		D0BF342F1FDFEBEA0008B900 /* Namespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF342C1FDFEBEA0008B900 /* Namespace.swift */; };
@@ -203,6 +204,7 @@
 		D0A2DD501FDA60FA00AB456C /* YYSwiftTests-tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "YYSwiftTests-tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0A2DD5F1FDA661100AB456C /* Tests-tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tests-tvOS.swift"; sourceTree = "<group>"; };
 		D0A2DD7E1FDA870A00AB456C /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
+		D0ACA6AF1FFE1A0E0049C58D /* UIGestureRecognizerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGestureRecognizerExtensions.swift; sourceTree = "<group>"; };
 		D0BF342C1FDFEBEA0008B900 /* Namespace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Namespace.swift; sourceTree = "<group>"; };
 		D0CE15D31FE8E1010034E503 /* YYTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YYTimer.swift; sourceTree = "<group>"; };
 		D0CE15D91FE8E6EC0034E503 /* UIAlertControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtensions.swift; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 				D0CE16001FEA84780034E503 /* UIControlExtensions.swift */,
 				D0CE160C1FEB978F0034E503 /* UISwitchExtensions.swift */,
 				D05B92701FED044F006C918C /* UIImageExtensions.swift */,
+				D0ACA6AF1FFE1A0E0049C58D /* UIGestureRecognizerExtensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -735,6 +738,7 @@
 				D0CE16041FEA971A0034E503 /* OptionSetExtensions.swift in Sources */,
 				D06DAEB51FDBC990004AB12C /* NotificationCenterExtensions.swift in Sources */,
 				D0A2DCF01FD9406D00AB456C /* DictonaryExtensions.swift in Sources */,
+				D0ACA6B01FFE1A0E0049C58D /* UIGestureRecognizerExtensions.swift in Sources */,
 				D0A2DCE41FD9406D00AB456C /* DataExtensions.swift in Sources */,
 				D0CE15E81FEA01E20034E503 /* UIBarButtonItemExtensions.swift in Sources */,
 			);
