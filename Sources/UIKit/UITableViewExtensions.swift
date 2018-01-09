@@ -23,9 +23,6 @@ public extension UITableView {
 
 public extension UITableView {
     
-    /// SwifterSwift: Number of all rows in all sections of tableView.
-    ///
-    /// - Returns: The count of all rows in the tableView.
     public func numberOfRows() -> Int {
         var section = 0
         var rowCount = 0
@@ -35,7 +32,60 @@ public extension UITableView {
         }
         return rowCount
     }
+    
+    public func update(with block: ((UITableView) -> Void)) {
+        beginUpdates()
+        block(self)
+        endUpdates()
+    }
+    
+    public func scrollTo(row: Int, inSection section: Int, at scrollPosition: UITableViewScrollPosition, animated: Bool) {
+        let indexPath = IndexPath(row: row, section: section)
+        scrollToRow(at: indexPath, at: scrollPosition, animated: animated)
+    }
+    
+    public func insertRow(at indexPath: IndexPath, with animation: UITableViewRowAnimation) {
+        insertRows(at: [indexPath], with: animation)
+    }
+    
+    public func insertRow(_ row: Int, inSection section: Int, with animation: UITableViewRowAnimation) {
+        let toInsert = IndexPath(row: row, section: section)
+        self.insertRow(at: toInsert, with: animation)
+    }
+    
+    public func reloadRowAtIndexPath(_ indexPath: IndexPath, with animation: UITableViewRowAnimation) {
+        reloadRows(at: [indexPath], with: animation)
+    }
+    
+    public func reloadRow(_ row: Int, section: Int, with animation: UITableViewRowAnimation) {
+        let toReload = IndexPath(row: row, section: section)
+        self.reloadRowAtIndexPath(toReload, with: animation)
+    }
+    
+    public func deleteRow(at indexPath: IndexPath, with animation: UITableViewRowAnimation) {
+        deleteRows(at: [indexPath], with: animation)
+    }
+    
+    public func deleteRow(_ row: Int, inSection section: Int, with animation: UITableViewRowAnimation) {
+        let toInsert = IndexPath(row: row, section: section)
+        self.deleteRow(at: toInsert, with: animation)
+    }
+    
+    public func insertSection(_ section: Int, with animation: UITableViewRowAnimation) {
+        let sections = IndexSet.init(integer: section)
+        insertSections(sections, with: animation)
+    }
 
+    public func deleteSection(_ section: Int, with animation: UITableViewRowAnimation) {
+        let sections = IndexSet.init(integer: section)
+        deleteSections(sections, with: animation)
+    }
+    
+    public func reloadSection(_ section: Int, with animation: UITableViewRowAnimation) {
+        let sections = IndexSet.init(integer: section)
+        reloadSections(sections, with: animation)
+    }
+    
     public func indexPathForLastRow(inSection section: Int) -> IndexPath? {
         guard section >= 0 else {
             return nil
@@ -52,6 +102,11 @@ public extension UITableView {
         }, completion: { _ in
             completion()
         })
+    }
+    
+    public func clearSelectedRows(animated: Bool) {
+        guard let indexs = indexPathsForSelectedRows else { return }
+        indexs.forEach { deselectRow(at: $0, animated: animated) }
     }
     
     public func removeTableFooterView() {

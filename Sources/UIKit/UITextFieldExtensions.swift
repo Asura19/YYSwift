@@ -116,6 +116,20 @@ public extension UITextField {
         attributedText = NSAttributedString(string: "")
     }
     
+    public func selectAllText() {
+        let range = textRange(from: beginningOfDocument, to: endOfDocument)
+        selectedTextRange = range
+    }
+    
+    public func setSelectedRange(_ range: Range<Int>) {
+        let beginning = beginningOfDocument
+        guard let startPosition = position(from: beginning, offset: range.lowerBound),
+            let endPostion = position(from: beginning, offset: min(range.upperBound, (text?.count)!)) else {
+                return
+        }
+        let selectionRange = textRange(from: startPosition, to: endPostion)
+        selectedTextRange = selectionRange
+    }
 
     public func setPlaceHolderTextColor(_ color: UIColor) {
         guard let holder = placeholder, !holder.isEmpty else {

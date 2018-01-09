@@ -169,6 +169,8 @@
 		D0EC52C020036EE40054B52E /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EC52BE20036EE40054B52E /* UIViewControllerExtensions.swift */; };
 		D0EC52C220036F290054B52E /* UITextFieldExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EC52C120036F290054B52E /* UITextFieldExtensions.swift */; };
 		D0EC52C320036F290054B52E /* UITextFieldExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EC52C120036F290054B52E /* UITextFieldExtensions.swift */; };
+		D0EC52C52004C1C80054B52E /* UIScrollViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EC52C42004C1C80054B52E /* UIScrollViewExtensions.swift */; };
+		D0EC52C62004C1C80054B52E /* UIScrollViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EC52C42004C1C80054B52E /* UIScrollViewExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -263,6 +265,7 @@
 		D0EC52BB20036EAC0054B52E /* UITextViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewExtensions.swift; sourceTree = "<group>"; };
 		D0EC52BE20036EE40054B52E /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		D0EC52C120036F290054B52E /* UITextFieldExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtensions.swift; sourceTree = "<group>"; };
+		D0EC52C42004C1C80054B52E /* UIScrollViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -470,6 +473,7 @@
 				D0EC52BB20036EAC0054B52E /* UITextViewExtensions.swift */,
 				D0EC52BE20036EE40054B52E /* UIViewControllerExtensions.swift */,
 				D0EC52C120036F290054B52E /* UITextFieldExtensions.swift */,
+				D0EC52C42004C1C80054B52E /* UIScrollViewExtensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -768,6 +772,7 @@
 				D0EC529E20035EE60054B52E /* UILableExtensions.swift in Sources */,
 				D0A2DCE91FD9406D00AB456C /* StringExtensions.swift in Sources */,
 				D0A2DCF11FD9406D00AB456C /* CollectionExtensions.swift in Sources */,
+				D0EC52C52004C1C80054B52E /* UIScrollViewExtensions.swift in Sources */,
 				D0EC52C220036F290054B52E /* UITextFieldExtensions.swift in Sources */,
 				D0A2DCEF1FD9406D00AB456C /* OptionalExtensions.swift in Sources */,
 				D0EC52B0200366680054B52E /* UISliderExtensions.swift in Sources */,
@@ -935,6 +940,7 @@
 				D0EC52B720036AB10054B52E /* UITabBarExtensions.swift in Sources */,
 				D0A2DD771FDA685500AB456C /* BoolExtension.swift in Sources */,
 				D0EC52C320036F290054B52E /* UITextFieldExtensions.swift in Sources */,
+				D0EC52C62004C1C80054B52E /* UIScrollViewExtensions.swift in Sources */,
 				D0CE15F41FEA04F40034E503 /* UIButtonExtensions.swift in Sources */,
 				D0D688461FDE794900CB0AAD /* ColorExtensions.swift in Sources */,
 				D0A2DD781FDA685500AB456C /* FloatingPointExtensions.swift in Sources */,
