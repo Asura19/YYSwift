@@ -202,51 +202,51 @@ public extension Data {
         }
     }
     
-    public func hmacMD5String(withKey key: String) -> String? {
+    public func hmacMD5StringWithKey(_ key: String) -> String? {
         return hmac(UsingAlgorithm: .MD5, withKey: key)
     }
     
-    public func hmacMD5Data(withKey key: Data) -> Data? {
+    public func hmacMD5DataWithKey(_ key: Data) -> Data? {
         return hmac(UsingAlgorithm: .MD5, withKey: key)
     }
     
-    public func hmacSHA1String(withKey key: String) -> String? {
+    public func hmacSHA1StringWithKey(_ key: String) -> String? {
         return hmac(UsingAlgorithm: .SHA1, withKey: key)
     }
     
-    public func hmacSHA1Data(withKey key: Data) -> Data? {
+    public func hmacSHA1DataWithKey(_ key: Data) -> Data? {
         return hmac(UsingAlgorithm: .SHA1, withKey: key)
     }
     
-    public func hmacSHA224String(withKey key: String) -> String? {
+    public func hmacSHA224StringWithKey(_ key: String) -> String? {
         return hmac(UsingAlgorithm: .SHA224, withKey: key)
     }
     
-    public func hmacSHA224Data(withKey key: Data) -> Data? {
+    public func hmacSHA224DataWithKey(_ key: Data) -> Data? {
         return hmac(UsingAlgorithm: .SHA224, withKey: key)
     }
     
-    public func hmacSHA256String(withKey key: String) -> String? {
+    public func hmacSHA256StringWithKey(_ key: String) -> String? {
         return hmac(UsingAlgorithm: .SHA256, withKey: key)
     }
     
-    public func hmacSHA256Data(withKey key: Data) -> Data? {
+    public func hmacSHA256DataWithKey(_ key: Data) -> Data? {
         return hmac(UsingAlgorithm: .SHA256, withKey: key)
     }
     
-    public func hmacSHA384String(withKey key: String) -> String? {
+    public func hmacSHA384StringWithKey(_ key: String) -> String? {
         return hmac(UsingAlgorithm: .SHA384, withKey: key)
     }
     
-    public func hmacSHA384Data(withKey key: Data) -> Data? {
+    public func hmacSHA384DataWithKey(_ key: Data) -> Data? {
         return hmac(UsingAlgorithm: .SHA384, withKey: key)
     }
     
-    public func hmacSHA512String(withKey key: String) -> String? {
+    public func hmacSHA512StringWithKey(_ key: String) -> String? {
         return hmac(UsingAlgorithm: .SHA384, withKey: key)
     }
     
-    public func hmacSHA512Data(withKey key: Data) -> Data? {
+    public func hmacSHA512DataWithKey(_ key: Data) -> Data? {
         return hmac(UsingAlgorithm: .SHA384, withKey: key)
     }
     
@@ -261,7 +261,7 @@ public extension Data  {
     //        }
     //    }
     
-    public func aes256Encrypt(withKey key: Data, iv: Data) -> Data? {
+    public func aes256EncryptWithKey(_ key: Data, iv: Data) -> Data? {
         guard key.count == 16 || key.count == 24 || key.count == 32 else {
             return nil
         }
@@ -304,7 +304,7 @@ public extension Data  {
         }
     }
     
-    public func aes256Decrypt(withKey key: Data, iv: Data) -> Data? {
+    public func aes256DecryptWithKey(_ key: Data, iv: Data) -> Data? {
         guard key.count == 16 || key.count == 24 || key.count == 32 else {
             return nil
         }
@@ -347,7 +347,7 @@ public extension Data  {
         }
     }
     /*
-        public func aes256Encrypt(withKey key: Data, iv: Data) -> Data? {
+        public func aes256EncryptWithKey(_ key: Data, iv: Data) -> Data? {
             let cryptor: CCCryptorRef?
             var status: CCCryptorStatus = CCCryptorStatus(kCCSuccess)
             var buffer = Data()

@@ -15,6 +15,62 @@ import Foundation
 
 public extension String {
     
+    public var md2String: String? {
+        return self.utf8Data?.md2String
+    }
+    
+    public var md4String: String? {
+        return self.utf8Data?.md4String
+    }
+    
+    public var md5String: String? {
+        return self.utf8Data?.md5String
+    }
+    
+    public var sha1String: String? {
+        return self.utf8Data?.sha1String
+    }
+    
+    public var sha224String: String? {
+        return self.utf8Data?.sha224String
+    }
+    
+    public var sha256String: String? {
+        return self.utf8Data?.sha256String
+    }
+    
+    public var sha384String: String? {
+        return self.utf8Data?.sha384String
+    }
+    
+    public var sha512String: String? {
+        return self.utf8Data?.sha384String
+    }
+    
+    public func hmacMD5StringWithKey(_ key: String) -> String? {
+        return self.utf8Data?.hmacMD5StringWithKey(key)
+    }
+    
+    public func hmacSHA1StringWithKey(_ key: String) -> String? {
+        return self.utf8Data?.hmacSHA1StringWithKey(key)
+    }
+    
+    public func hmacSHA224StringWithKey(_ key: String) -> String? {
+        return self.utf8Data?.hmacSHA224StringWithKey(key)
+    }
+    
+    public func hmacSHA256StringWithKey(_ key: String) -> String? {
+        return self.utf8Data?.hmacSHA256StringWithKey(key)
+    }
+
+    public func hmacSHA384StringWithKey(_ key: String) -> String? {
+        return self.utf8Data?.hmacSHA384StringWithKey(key)
+    }
+    
+    public func hmacSHA512StringWithKey(_ key: String) -> String? {
+        return self.utf8Data?.hmacSHA512StringWithKey(key)
+    }
+   
     public var utf8Data: Data? {
         return self.data(using: .utf8)
     }
