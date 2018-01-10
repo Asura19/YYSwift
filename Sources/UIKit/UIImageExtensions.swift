@@ -73,10 +73,10 @@ public extension UIImage {
             return false
         }
         let alpha = CGImageAlphaInfo.init(rawValue: cgImage.alphaInfo.rawValue & CGBitmapInfo.alphaInfoMask.rawValue)
-        return (alpha == .first ||
-            alpha == .last ||
-            alpha == .premultipliedFirst ||
-            alpha == .premultipliedLast)
+        return (alpha == .first
+            || alpha == .last
+            || alpha == .premultipliedFirst
+            || alpha == .premultipliedLast)
     }
 }
 
@@ -160,7 +160,9 @@ public extension UIImage {
             path.close()
             context.saveGState()
             path.addClip()
-            guard let cgImage = self.cgImage else { return self }
+            guard let cgImage = self.cgImage else {
+                return self
+            }
             context.draw(cgImage, in: rect)
             context.restoreGState()
         }
@@ -188,7 +190,9 @@ public extension UIImage {
     }
     
     public func rotate(byRadians radians: CGFloat, fitSize: Bool) -> UIImage? {
-        guard let cgImage = self.cgImage else { return nil }
+        guard let cgImage = self.cgImage else {
+            return nil
+        }
         let width = cgImage.width
         let height = cgImage.height
         let newRect = CGRect(x: 0, y: 0, width: width, height: height).applying(fitSize ? CGAffineTransform.init(rotationAngle: radians) : .identity)
@@ -209,12 +213,16 @@ public extension UIImage {
         context.translateBy(x: +(newRect.size.width * 0.5), y: +(newRect.size.height * 0.5))
         context.rotate(by: radians)
         context.draw(cgImage, in: CGRect(x: -(width.cgFloat * 0.5), y: -(height.cgFloat * 0.5), width: width.cgFloat, height: height.cgFloat))
-        guard let image = context.makeImage() else { return nil }
+        guard let image = context.makeImage() else {
+            return nil
+        }
         return UIImage(cgImage: image, scale: self.scale, orientation: self.imageOrientation)
     }
     
     private func flip(horizontal: Bool, vertical: Bool) -> UIImage? {
-        guard let cgImage = self.cgImage else { return nil }
+        guard let cgImage = self.cgImage else {
+            return nil
+        }
         let width = cgImage.width
         let height = cgImage.height
         let bytesPerRow = width * 4
@@ -229,7 +237,9 @@ public extension UIImage {
                                             return nil
         }
         context.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
-        guard let data = context.data else { return nil }
+        guard let data = context.data else {
+            return nil
+        }
         var src = vImage_Buffer(data: data, height: vImagePixelCount(width), width: vImagePixelCount(height), rowBytes: bytesPerRow)
         var dest = vImage_Buffer(data: data, height: vImagePixelCount(width), width: vImagePixelCount(height), rowBytes: bytesPerRow)
         if vertical {
@@ -238,7 +248,9 @@ public extension UIImage {
         if horizontal {
             vImageHorizontalReflect_ARGB8888(&src, &dest, vImage_Flags(kvImageBackgroundColorFill))
         }
-        guard let image = context.makeImage() else { return nil }
+        guard let image = context.makeImage() else {
+            return nil
+        }
         return UIImage(cgImage: image, scale: self.scale, orientation: self.imageOrientation)
     }
     
@@ -332,7 +344,9 @@ public extension UIImage {
             else if blurRadius * scale < 1.5 { iterations = 2 }
             else { iterations = 3 }
             let tempSize = vImageBoxConvolve_ARGB8888(&input, &output, nil, 0, 0, radius, radius, nil, vImage_Flags(kvImageGetTempBufferSize | kvImageEdgeExtend))
-            guard let temp = malloc(tempSize) else { return nil }
+            guard let temp = malloc(tempSize) else {
+                return nil
+            }
             for _ in 0..<iterations {
                 vImageBoxConvolve_ARGB8888(&input, &output, temp, 0, 0, radius, radius, nil, vImage_Flags(kvImageEdgeExtend))
                 swap(&input, &output)
@@ -369,7 +383,9 @@ public extension UIImage {
     }
     
     private func merge(effectCGImage: CGImage, tintColor: UIColor? = nil, tintBlendMode: CGBlendMode, maskImage: UIImage? = nil, opaque: Bool) -> UIImage? {
-        guard let cgImage = self.cgImage else { return nil }
+        guard let cgImage = self.cgImage else {
+            return nil
+        }
         let hasTint: Bool = tintColor != nil && tintColor!.cgColor.alpha > CGFloat.ulpOfOne
         let hasMask: Bool = maskImage != nil
         let size = self.size
@@ -458,7 +474,7 @@ public extension UIImage {
                 }
             }
         }
-        var array = [UIImage]()
+        var array: [UIImage] = []
         for i in 0..<count {
             guard let cgImage = CGImageSourceCreateImageAtIndex(source, i, nil) else {
                 return nil
@@ -470,10 +486,10 @@ public extension UIImage {
             }
             let alphaInfo = cgImage.alphaInfo
             var hasAlpha = false
-            if alphaInfo == .premultipliedLast ||
-                alphaInfo == .premultipliedFirst ||
-                alphaInfo == .last ||
-                alphaInfo == .first {
+            if alphaInfo == .premultipliedLast
+                || alphaInfo == .premultipliedFirst
+                || alphaInfo == .last
+                || alphaInfo == .first {
                 hasAlpha = true
             }
             var bitmapInfo = CGBitmapInfo.byteOrder32Little

@@ -511,7 +511,7 @@ public extension UIView {
         
         translatesAutoresizingMaskIntoConstraints = false
         
-        var anchors = [NSLayoutConstraint]()
+        var anchors: [NSLayoutConstraint] = []
         
         if let top = top {
             anchors.append(topAnchor.constraint(equalTo: top, constant: topConstant))

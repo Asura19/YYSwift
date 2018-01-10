@@ -105,7 +105,9 @@ public extension UITableView {
     }
     
     public func clearSelectedRows(animated: Bool) {
-        guard let indexs = indexPathsForSelectedRows else { return }
+        guard let indexs = indexPathsForSelectedRows else {
+            return
+        }
         indexs.forEach { deselectRow(at: $0, animated: animated) }
     }
     

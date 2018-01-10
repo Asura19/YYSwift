@@ -37,7 +37,9 @@ public extension Date {
             return Calendar.current.component(.year, from: self)
         }
         set {
-            guard newValue > 0 else { return }
+            guard newValue > 0 else {
+                return
+            }
             let currentYear = Calendar.current.component(.year, from: self)
             let yearsToAdd = newValue - currentYear
             if let date = Calendar.current.date(byAdding: .year, value: yearsToAdd, to: self) {
@@ -59,7 +61,9 @@ public extension Date {
         }
         set {
             let allowedRange = Calendar.current.range(of: .month, in: .year, for: self)!
-            guard allowedRange.contains(newValue) else { return }
+            guard allowedRange.contains(newValue) else {
+                return
+            }
             
             let currentMonth = Calendar.current.component(.month, from: self)
             let monthsToAdd = newValue - currentMonth
@@ -75,7 +79,9 @@ public extension Date {
         }
         set {
             let allowedRange = Calendar.current.range(of: .day, in: .month, for: self)!
-            guard allowedRange.contains(newValue) else { return }
+            guard allowedRange.contains(newValue) else {
+                return
+            }
             
             let currentDay = Calendar.current.component(.day, from: self)
             let daysToAdd = newValue - currentDay
@@ -91,7 +97,9 @@ public extension Date {
         }
         set {
             let allowedRange = Calendar.current.range(of: .hour, in: .day, for: self)!
-            guard allowedRange.contains(newValue) else { return }
+            guard allowedRange.contains(newValue) else {
+                return
+            }
             
             let currentHour = Calendar.current.component(.hour, from: self)
             let hoursToAdd = newValue - currentHour
@@ -107,7 +115,9 @@ public extension Date {
         }
         set {
             let allowedRange = Calendar.current.range(of: .minute, in: .hour, for: self)!
-            guard allowedRange.contains(newValue) else { return }
+            guard allowedRange.contains(newValue) else {
+                return
+            }
             
             let currentMinutes = Calendar.current.component(.minute, from: self)
             let minutesToAdd = newValue - currentMinutes
@@ -123,7 +133,9 @@ public extension Date {
         }
         set {
             let allowedRange = Calendar.current.range(of: .second, in: .minute, for: self)!
-            guard allowedRange.contains(newValue) else { return }
+            guard allowedRange.contains(newValue) else {
+                return
+            }
             
             let currentSeconds = Calendar.current.component(.second, from: self)
             let secondsToAdd = newValue - currentSeconds
@@ -139,7 +151,9 @@ public extension Date {
         }
         set {
             let allowedRange = Calendar.current.range(of: .nanosecond, in: .second, for: self)!
-            guard allowedRange.contains(newValue) else { return }
+            guard allowedRange.contains(newValue) else {
+                return
+            }
             
             let currentNanoseconds = Calendar.current.component(.nanosecond, from: self)
             let nanosecondsToAdd = newValue - currentNanoseconds
@@ -157,7 +171,9 @@ public extension Date {
         set {
             let ns = newValue * 1000000
             let allowedRange = Calendar.current.range(of: .nanosecond, in: .second, for: self)!
-            guard allowedRange.contains(ns) else { return }
+            guard allowedRange.contains(ns) else {
+                return
+            }
             
             if let date = Calendar.current.date(bySetting: .nanosecond, value: ns, of: self) {
                 self = date
@@ -274,48 +290,62 @@ public extension Date {
         switch component {
         case .nanosecond:
             let allowedRange = Calendar.current.range(of: .nanosecond, in: .second, for: self)!
-            guard allowedRange.contains(value) else { return nil }
+            guard allowedRange.contains(value) else {
+                return nil
+            }
             let currentNanoseconds = Calendar.current.component(.nanosecond, from: self)
             let nanosecondsToAdd = value - currentNanoseconds
             return Calendar.current.date(byAdding: .nanosecond, value: nanosecondsToAdd, to: self)
             
         case .second:
             let allowedRange = Calendar.current.range(of: .second, in: .minute, for: self)!
-            guard allowedRange.contains(value) else { return nil }
+            guard allowedRange.contains(value) else {
+                return nil
+            }
             let currentSeconds = Calendar.current.component(.second, from: self)
             let secondsToAdd = value - currentSeconds
             return Calendar.current.date(byAdding: .second, value: secondsToAdd, to: self)
             
         case .minute:
             let allowedRange = Calendar.current.range(of: .minute, in: .hour, for: self)!
-            guard allowedRange.contains(value) else { return nil }
+            guard allowedRange.contains(value) else {
+                return nil
+            }
             let currentMinutes = Calendar.current.component(.minute, from: self)
             let minutesToAdd = value - currentMinutes
             return Calendar.current.date(byAdding: .minute, value: minutesToAdd, to: self)
             
         case .hour:
             let allowedRange = Calendar.current.range(of: .hour, in: .day, for: self)!
-            guard allowedRange.contains(value) else { return nil }
+            guard allowedRange.contains(value) else {
+                return nil
+            }
             let currentHour = Calendar.current.component(.hour, from: self)
             let hoursToAdd = value - currentHour
             return Calendar.current.date(byAdding: .hour, value: hoursToAdd, to: self)
             
         case .day:
             let allowedRange = Calendar.current.range(of: .day, in: .month, for: self)!
-            guard allowedRange.contains(value) else { return nil }
+            guard allowedRange.contains(value) else {
+                return nil
+            }
             let currentDay = Calendar.current.component(.day, from: self)
             let daysToAdd = value - currentDay
             return Calendar.current.date(byAdding: .day, value: daysToAdd, to: self)
             
         case .month:
             let allowedRange = Calendar.current.range(of: .month, in: .year, for: self)!
-            guard allowedRange.contains(value) else { return nil }
+            guard allowedRange.contains(value) else {
+                return nil
+            }
             let currentMonth = Calendar.current.component(.month, from: self)
             let monthsToAdd = value - currentMonth
             return Calendar.current.date(byAdding: .month, value: monthsToAdd, to: self)
             
         case .year:
-            guard value > 0 else { return nil }
+            guard value > 0 else {
+                return nil
+            }
             let currentYear = Calendar.current.component(.year, from: self)
             let yearsToAdd = value - currentYear
             return Calendar.current.date(byAdding: .year, value: yearsToAdd, to: self)
@@ -356,7 +386,9 @@ public extension Date {
             }
         }
         
-        guard !components.isEmpty else { return nil }
+        guard !components.isEmpty else {
+            return nil
+        }
         return Calendar.current.date(from: Calendar.current.dateComponents(components, from: self))
     }
     

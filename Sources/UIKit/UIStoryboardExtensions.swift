@@ -12,7 +12,9 @@ public extension UIStoryboard {
     
     public static var mainStoryboard: UIStoryboard? {
         let bundle = Bundle.main
-        guard let name = bundle.object(forInfoDictionaryKey: "UIMainStoryboardFile") as? String else { return nil }
+        guard let name = bundle.object(forInfoDictionaryKey: "UIMainStoryboardFile") as? String else {
+            return nil
+        }
         return UIStoryboard(name: name, bundle: bundle)
     }
     

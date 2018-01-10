@@ -262,8 +262,12 @@ public extension Data  {
     //    }
     
     public func aes256Encrypt(withKey key: Data, iv: Data) -> Data? {
-        guard key.count == 16 || key.count == 24 || key.count == 32 else { return nil }
-        guard iv.count == 16 || iv.count == 0 else { return nil }
+        guard key.count == 16 || key.count == 24 || key.count == 32 else {
+            return nil
+        }
+        guard iv.count == 16 || iv.count == 0 else {
+            return nil
+        }
         
         let cryptLength  = Int(self.count + kCCBlockSizeAES128)
         var result = Data(count:cryptLength)
@@ -301,8 +305,12 @@ public extension Data  {
     }
     
     public func aes256Decrypt(withKey key: Data, iv: Data) -> Data? {
-        guard key.count == 16 || key.count == 24 || key.count == 32 else { return nil }
-        guard iv.count == 16 || iv.count == 0 else { return nil }
+        guard key.count == 16 || key.count == 24 || key.count == 32 else {
+            return nil
+        }
+        guard iv.count == 16 || iv.count == 0 else {
+            return nil
+        }
         
         let cryptLength  = Int(self.count + kCCBlockSizeAES128)
         var result = Data(count:cryptLength)
@@ -407,7 +415,9 @@ public extension Data {
             var num = UInt8(byteString!, radix: 16)!
             self.append(&num, count: 1)
         }
-        guard self.count > 0 else { return nil }
+        guard self.count > 0 else {
+            return nil
+        }
         return
     }
     

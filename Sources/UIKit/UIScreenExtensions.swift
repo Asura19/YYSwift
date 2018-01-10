@@ -39,26 +39,28 @@ public extension UIScreen {
         var size = CGSize.zero
         
         if UIScreen.main.isEqual(self) {
-            guard let model = UIDevice.current.machineModel else { return size }
+            guard let model = UIDevice.current.machineModel else {
+                return size
+            }
             if model.hasPrefix("iPhone") {
-                if model == "iPhone7,1" ||
-                    model == "iPhone8,2" ||
-                    model == "iPhone9,2" ||
-                    model == "iPhone9,4" ||
-                    model == "iPhone10,2" ||
-                    model == "iPhone10,5" {
+                if model == "iPhone7,1"
+                    || model == "iPhone8,2"
+                    || model == "iPhone9,2"
+                    || model == "iPhone9,4"
+                    || model == "iPhone10,2"
+                    || model == "iPhone10,5" {
                     return CGSize(width: 1080, height: 1920)
                 }
             }
             if model.hasPrefix("iPad") {
-                if model == "iPad6,7" ||
-                    model == "iPad6,8" ||
-                    model == "iPad7,1" ||
-                    model == "iPad7,2" {
+                if model == "iPad6,7"
+                    || model == "iPad6,8"
+                    || model == "iPad7,1"
+                    || model == "iPad7,2" {
                     return CGSize(width: 2048, height: 2732)
                 }
-                else if model == "iPad7,3" ||
-                    model == "iPad7,4" {
+                else if model == "iPad7,3"
+                    || model == "iPad7,4" {
                     return CGSize(width: 1668, height: 2224)
                 }
             }
@@ -75,7 +77,7 @@ public extension UIScreen {
             return 326
         }
         
-        let dict: Dictionary<String, CGFloat> = [
+        let dict: [String: CGFloat] = [
             "iPod1,1" : 163, //"iPod touch 1",
             "iPod2,1" : 163, //"iPod touch 2",
             "iPod3,1" : 163, //"iPod touch 3",
@@ -150,7 +152,9 @@ public extension UIScreen {
             "iPad7,3" : 264, //"iPad Pro (10.5 inch)",
             "iPad7,4" : 264, //"iPad Pro (10.5 inch)",
         ]
-        guard let model = UIDevice.current.machineModel else { return 326 }
+        guard let model = UIDevice.current.machineModel else {
+            return 326
+        }
         return dict[model] ?? 326
     }
 }

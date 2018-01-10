@@ -10,13 +10,13 @@ import Foundation
 
 public extension Dictionary where Key: Comparable {
     
-    public func allKeySorted() -> Array<Key> {
+    public func allKeySorted() -> [Key] {
         return keys.sorted()
     }
     
-    public func allValuesSortedByKeys() -> Array<Value> {
+    public func allValuesSortedByKeys() -> [Value] {
         let sortedKeys = allKeySorted()
-        var array = [Value]()
+        var array: [Value] = []
         for key in sortedKeys {
             array.append(self[key]!)
         }
@@ -31,7 +31,7 @@ public extension Dictionary {
     }
     
     public func entriesFor(keys: [Key]) -> [Key: Value] {
-        var dic = [Key: Value]()
+        var dic: [Key: Value] = [:]
         for key in keys {
             if let value = self[key] {
                 dic[key] = value

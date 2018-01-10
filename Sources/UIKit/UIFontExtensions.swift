@@ -59,7 +59,9 @@ public extension UIFont {
 public extension UIFont {
     
     public convenience init?(cgFont: CGFont, size: CGFloat) {
-        guard let name = cgFont.postScriptName else { return nil }
+        guard let name = cgFont.postScriptName else {
+            return nil
+        }
         self.init(name: name as String, size: size)
     }
     
@@ -79,7 +81,9 @@ public extension UIFont {
         guard CTFontManagerRegisterGraphicsFont(cgFont, nil) else {
             return nil
         }
-        guard let name = cgFont.postScriptName else { return nil }
+        guard let name = cgFont.postScriptName else {
+            return nil
+        }
         self.init(name: name as String, size: UIFont.systemFontSize)
     }
     #endif
@@ -95,7 +99,9 @@ public extension UIFont {
         guard CTFontManagerRegisterGraphicsFont(cgFont, nil) else {
             return nil
         }
-        guard let name = cgFont.postScriptName else { return nil }
+        guard let name = cgFont.postScriptName else {
+            return nil
+        }
         self.init(name: name as String, size: size)
     }
     #endif

@@ -71,8 +71,12 @@ public extension UIDevice {
         var address : String?
         
         var ifaddr : UnsafeMutablePointer<ifaddrs>?
-        guard getifaddrs(&ifaddr) == 0 else { return nil }
-        guard let firstAddr = ifaddr else { return nil }
+        guard getifaddrs(&ifaddr) == 0 else {
+            return nil
+        }
+        guard let firstAddr = ifaddr else {
+            return nil
+        }
         
         for ifptr in sequence(first: firstAddr, next: { $0.pointee.ifa_next }) {
             let interface = ifptr.pointee
@@ -115,7 +119,9 @@ public extension UIDevice {
     }
     
     public var machineModelName: String? {
-        guard let model = self.machineModel else { return nil }
+        guard let model = self.machineModel else {
+            return nil
+        }
         let dic = [
             "Watch1,1" : "Apple Watch 38mm",
             "Watch1,2" : "Apple Watch 42mm",
@@ -263,7 +269,9 @@ public extension UIDevice {
     
     public var memoryTotal: Int64 {
         let mem = ProcessInfo.processInfo.physicalMemory
-        guard mem > 0 else { return -1 }
+        guard mem > 0 else {
+            return -1
+        }
         return Int64(mem)
     }
     
@@ -392,7 +400,7 @@ public extension UIDevice {
     }
     
     private class func threadBasicInfos() -> [thread_basic_info]  {
-        var result = [thread_basic_info]()
+        var result: [thread_basic_info] = []
         
         var thinfo : thread_info_t = thread_info_t.allocate(capacity: Int(THREAD_INFO_MAX))
         let thread_info_count = UnsafeMutablePointer<mach_msg_type_number_t>.allocate(capacity: 128)
@@ -418,7 +426,7 @@ public extension UIDevice {
     }
     
     private class func threadActPointers() -> [thread_act_t] {
-        var threads_act = [thread_act_t]()
+        var threads_act: [thread_act_t] = []
         
         var threads_array: thread_act_array_t? = nil
         var count = mach_msg_type_number_t()

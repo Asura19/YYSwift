@@ -79,7 +79,9 @@ public extension Array {
     public mutating func safeSwap(from index: Int, to otherIndex: Int) {
         guard index != otherIndex,
             startIndex..<endIndex ~= index,
-            startIndex..<endIndex ~= otherIndex else { return }
+            startIndex..<endIndex ~= otherIndex else {
+                return
+            }
         swapAt(index, otherIndex)
     }
     
@@ -149,7 +151,9 @@ public extension Array {
     }
     
     public func group(by stepSize: Int) -> [[Element]]? {
-        guard stepSize > 0, !isEmpty else { return nil }
+        guard stepSize > 0, !isEmpty else {
+            return nil
+        }
         var dealtCount = 0
         var slices: [[Element]] = []
         while dealtCount < count {
@@ -160,7 +164,7 @@ public extension Array {
     }
     
     public func groupByKey<Key: Hashable>(keyForValue: (_ element: Element) throws -> Key) rethrows -> [Key: [Element]] {
-        var group = [Key: [Element]]()
+        var group: [Key: [Element]] = [:]
         for value in self {
             let key = try keyForValue(value)
             group[key] = (group[key] ?? []) + [value]
@@ -187,7 +191,9 @@ public extension Array where Element: FloatingPoint {
 public extension Array where Element: Equatable {
     
     public mutating func shuffle() {
-        guard count > 1 else { return }
+        guard count > 1 else {
+            return
+        }
         for index in startIndex..<endIndex - 1 {
             let randomIndex = Int(arc4random_uniform(UInt32(endIndex - index))) + index
             if index != randomIndex { swapAt(index, randomIndex) }
@@ -201,7 +207,9 @@ public extension Array where Element: Equatable {
     }
     
     public func contains(_ elements: [Element]) -> Bool {
-        guard !elements.isEmpty else { return true }
+        guard !elements.isEmpty else {
+            return true
+        }
         var found = true
         for element in elements {
             if !contains(element) {
@@ -224,16 +232,13 @@ public extension Array where Element: Equatable {
     }
     
     public mutating func removeAll(_ items: [Element]) {
-        guard !items.isEmpty else { return }
+        guard !items.isEmpty else {
+            return
+        }
         self = filter { !items.contains($0) }
     }
     
     public mutating func removeDuplicates() {
-//        self = reduce(into: [Element]()) { result, item in
-//            if !result.contains(item) {
-//                result.append(item)
-//            }
-//        }
         self = reduce(into: [Element]()) {
             if !$0.contains($1) {
                 $0.append($1)

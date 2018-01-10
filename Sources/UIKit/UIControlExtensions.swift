@@ -55,7 +55,9 @@ public extension UIControl {
     public func setTarget(_ target: Any, action: Selector, forControlEvents controlEvents: UIControlEvents) {
         let targets = self.allTargets
         for currentTarget in targets {
-            guard let actions = self.actions(forTarget: currentTarget, forControlEvent: controlEvents) else { return }
+            guard let actions = self.actions(forTarget: currentTarget, forControlEvent: controlEvents) else {
+                return
+            }
             for currentAction in actions {
                 self.removeTarget(currentTarget, action: NSSelectorFromString(currentAction), for: controlEvents)
             }
@@ -63,10 +65,10 @@ public extension UIControl {
         self.addTarget(target, action: action, for: controlEvents)
     }
     
-    private var allTargetsBlock: Array<YYUIControlBlockTarget> {
+    private var allTargetsBlock: [YYUIControlBlockTarget] {
         get {
             guard let targets = objc_getAssociatedObject(self, Key.Associated) as? [YYUIControlBlockTarget] else {
-                let newTargets = [YYUIControlBlockTarget]()
+                let newTargets: [YYUIControlBlockTarget] = []
                 objc_setAssociatedObject(self, Key.Associated, newTargets, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
                 return newTargets
             }

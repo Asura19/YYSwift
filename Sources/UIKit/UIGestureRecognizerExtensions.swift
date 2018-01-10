@@ -35,10 +35,10 @@ public extension UIGestureRecognizer {
         allTargetsBlock = targets
     }
     
-    private var allTargetsBlock: Array<YYUIGestureRecognizerBlockTarget> {
+    private var allTargetsBlock: [YYUIGestureRecognizerBlockTarget] {
         get {
             guard let targets = objc_getAssociatedObject(self, Key.Associated) as? [YYUIGestureRecognizerBlockTarget] else {
-                let newTargets = [YYUIGestureRecognizerBlockTarget]()
+                let newTargets: [YYUIGestureRecognizerBlockTarget] = []
                 objc_setAssociatedObject(self, Key.Associated, newTargets, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
                 return newTargets
             }

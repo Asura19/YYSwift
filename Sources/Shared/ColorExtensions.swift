@@ -90,7 +90,9 @@ public extension Color {
     public var shortHexString: String? {
         let string = hexString.replacingOccurrences(of: "#", with: "")
         let chrs = Array(string)
-        guard chrs[0] == chrs[1], chrs[2] == chrs[3], chrs[4] == chrs[5] else { return nil }
+        guard chrs[0] == chrs[1], chrs[2] == chrs[3], chrs[4] == chrs[5] else {
+            return nil
+        }
         return "#\(chrs[0])\(chrs[2])\(chrs[4])"
     }
     
@@ -103,7 +105,9 @@ public extension Color {
         let hexString = String(format: "#%02X%02X%02X", components[0], components[1], components[2])
         let string = hexString.replacingOccurrences(of: "#", with: "")
         let chrs = Array(string)
-        guard chrs[0] == chrs[1], chrs[2] == chrs[3], chrs[4] == chrs[5] else { return hexString }
+        guard chrs[0] == chrs[1], chrs[2] == chrs[3], chrs[4] == chrs[5] else {
+            return hexString
+        }
         return "#\(chrs[0])\(chrs[2])\(chrs[4])"
     }
     
@@ -156,8 +160,12 @@ public extension Color {
         let ratio1 = intensity1 / total
         let ratio2 = intensity2 / total
         
-        guard ratio1 > 0 else { return color2 }
-        guard ratio2 > 0 else { return color1 }
+        guard ratio1 > 0 else {
+            return color2
+        }
+        guard ratio2 > 0 else {
+            return color1
+        }
         
         let components1: [CGFloat] = {
             let c = color1.cgColor.components!
@@ -516,9 +524,15 @@ public extension Color {
 public extension Color {
     
     public convenience init?(red: Int, green: Int, blue: Int, transparency: CGFloat = 1) {
-        guard red >= 0 && red <= 255 else { return nil }
-        guard green >= 0 && green <= 255 else { return nil }
-        guard blue >= 0 && blue <= 255 else { return nil }
+        guard red >= 0 && red <= 255 else {
+            return nil
+        }
+        guard green >= 0 && green <= 255 else {
+            return nil
+        }
+        guard blue >= 0 && blue <= 255 else {
+            return nil
+        }
         
         var trans = transparency
         if trans < 0 { trans = 0 }
@@ -584,7 +598,9 @@ public extension Color {
             return nil
         }
         
-        guard let hexValue = Int(string, radix: 16) else { return nil }
+        guard let hexValue = Int(string, radix: 16) else {
+            return nil
+        }
         
         var trans = transparency
         if trans < 0 { trans = 0 }

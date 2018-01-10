@@ -153,14 +153,14 @@ public extension String {
     
     public var bool: Bool? {
         let selfLowercased = trimmed.lowercased()
-        if selfLowercased == "true" ||
-           selfLowercased == "1" ||
-           selfLowercased == "yes" {
+        if selfLowercased == "true"
+            || selfLowercased == "1"
+            || selfLowercased == "yes" {
             return true
         }
-        else if selfLowercased == "false" ||
-            selfLowercased == "0" ||
-            selfLowercased == "no" {
+        else if selfLowercased == "false"
+            || selfLowercased == "0"
+            || selfLowercased == "no" {
             return false
         }
         return nil
@@ -266,7 +266,7 @@ public extension String {
     }
     
     public func lines() -> [String] {
-        var result = [String]()
+        var result: [String] = []
         enumerateLines { line, _ in
             result.append(line)
         }
@@ -278,7 +278,9 @@ public extension String {
             let count = $0[$1] ?? 0
             $0[$1] = count + 1
         }.max { $0.1 < $1.1 }?.0
-        guard let character = mostCommon else { return "" }
+        guard let character = mostCommon else {
+            return ""
+        }
         return String(character)
     }
     
@@ -341,7 +343,9 @@ public extension String {
     }
     
     public func hasUniqueCharacters() -> Bool {
-        guard self.count > 0 else { return false }
+        guard self.count > 0 else {
+            return false
+        }
         var uniqueChars = Set<String>()
         for char in self {
             if uniqueChars.contains(String(char)) {
@@ -385,7 +389,9 @@ public extension String {
     }
     
     public static func random(ofLength length: Int) -> String {
-        guard length > 0 else { return "" }
+        guard length > 0 else {
+            return ""
+        }
         let base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         var randomString = ""
         for _ in 1...length {
@@ -418,7 +424,9 @@ public extension String {
     
     
     public mutating func slice(from start: Int, to end: Int) {
-        guard end >= start else { return }
+        guard end >= start else {
+            return
+        }
         
         if let str = self[start..<end] {
             self = str
@@ -426,7 +434,9 @@ public extension String {
     }
     
     public mutating func slice(from i: Int) {
-        guard i < count else { return }
+        guard i < count else {
+            return
+        }
         
         if let str = self[i..<count] {
             self = str
@@ -434,7 +444,9 @@ public extension String {
     }
     
     public mutating func slice(to i: Int) {
-        guard i > 0 else { return }
+        guard i > 0 else {
+            return
+        }
         
         if let str = self[0..<i] {
             self = str
@@ -462,7 +474,9 @@ public extension String {
     }
     
     public func truncated(toLength length: Int, trailing: String? = "...") -> String {
-        guard 1..<count ~= length else { return self }
+        guard 1..<count ~= length else {
+            return self
+        }
         return self[startIndex..<index(startIndex, offsetBy: length)] + (trailing ?? "")
     }
     
@@ -551,7 +565,7 @@ public extension String {
     #if os(iOS) || os(tvOS) || os(watchOS)
     public func size(forFont font: UIFont, size: CGSize, lineBreakMode: NSLineBreakMode) -> CGSize {
         var result: CGSize
-        var attr = Dictionary<NSAttributedStringKey, Any>()
+        var attr: [NSAttributedStringKey: Any] = [:]
         attr[.font] = font
         if lineBreakMode != .byWordWrapping {
             let paragraphStyle = NSMutableParagraphStyle()
@@ -604,9 +618,9 @@ public extension String {
     }
     
     public func appending(nameScale scale: CGFloat) -> String {
-        if fabs(scale - 1) <= CGFloat.ulpOfOne ||
-            self.count == 0 ||
-            self.hasSuffix("/") {
+        if fabs(scale - 1) <= CGFloat.ulpOfOne
+            || self.count == 0
+            || self.hasSuffix("/") {
             return self
         }
         return self.appendingFormat("@%@x", String(describing: scale))

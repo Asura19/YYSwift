@@ -21,7 +21,9 @@ public extension Optional {
     }
     
     public static func ??= (lhs: inout Optional, rhs: Optional) {
-        guard let rhs = rhs else { return }
+        guard let rhs = rhs else {
+            return
+        }
         lhs = rhs
     }
 }
