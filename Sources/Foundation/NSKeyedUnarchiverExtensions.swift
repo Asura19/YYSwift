@@ -15,7 +15,15 @@ public extension NSKeyedUnarchiver {
             let data = try Data(contentsOf: URL(fileURLWithPath: file))
             var object: Any?
             do {
+                #if os(macOS)
+                if #available(OSX 10.11, *) {
+                    object = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)
+                } else {
+                    // Fallback on earlier versions
+                }
+                #else
                 object = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)
+                #endif
             } catch let error {
                 throw error
             }
@@ -28,7 +36,15 @@ public extension NSKeyedUnarchiver {
     public class func unarchiveObject(withFileData data: Data) throws -> Any {
         var object: Any?
         do {
-            object = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)
+            #if os(macOS)
+                if #available(OSX 10.11, *) {
+                    object = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)
+                } else {
+                    // Fallback on earlier versions
+                }
+            #else
+                object = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)
+            #endif
         }
         catch let error {
             throw error

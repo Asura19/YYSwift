@@ -8,6 +8,55 @@
 
 import UIKit
 
+public func YYCAGravityToUIViewContentMode(gravity: String) -> UIViewContentMode {
+    let dict: [String: UIViewContentMode] = [
+        kCAGravityCenter: .center,
+        kCAGravityTop: .top,
+        kCAGravityBottom: .bottom,
+        kCAGravityLeft: .left,
+        kCAGravityRight: .right,
+        kCAGravityTopLeft: .topLeft,
+        kCAGravityTopRight: .topRight,
+        kCAGravityBottomLeft: .bottomLeft,
+        kCAGravityBottomRight: .bottomRight,
+        kCAGravityResize: .scaleToFill,
+        kCAGravityResizeAspect: .scaleAspectFit,
+        kCAGravityResizeAspectFill: .scaleAspectFill
+    ]
+    return dict[gravity] ?? .scaleToFill
+}
+
+public func YYUIViewContentModeToCAGravity(contentMode: UIViewContentMode) -> String {
+    switch contentMode {
+    case .scaleToFill:
+        return kCAGravityResize
+    case .scaleAspectFit:
+        return kCAGravityResizeAspect
+    case .scaleAspectFill:
+        return kCAGravityResizeAspectFill
+    case .redraw:
+        return kCAGravityResize
+    case .center:
+        return kCAGravityCenter
+    case .top:
+        return kCAGravityTop
+    case .bottom:
+        return kCAGravityBottom
+    case .left:
+        return kCAGravityLeft
+    case .right:
+        return kCAGravityRight
+    case .topLeft:
+        return kCAGravityTopLeft
+    case .topRight:
+        return kCAGravityTopRight
+    case .bottomLeft:
+        return kCAGravityBottomLeft
+    case .bottomRight:
+        return kCAGravityBottomRight
+    }
+}
+
 public func YYCGRectFitWithContentMode(rect: CGRect, size: CGSize, mode: UIViewContentMode) -> CGRect {
     var rect = rect.standardized
     var size = size
