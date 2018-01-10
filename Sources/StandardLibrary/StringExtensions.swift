@@ -15,6 +15,7 @@ import Foundation
 
 public extension String {
     
+    #if os(macOS) || os(iOS)
     public var md2String: String? {
         return self.utf8Data?.md2String
     }
@@ -70,7 +71,8 @@ public extension String {
     public func hmacSHA512StringWithKey(_ key: String) -> String? {
         return self.utf8Data?.hmacSHA512StringWithKey(key)
     }
-   
+    #endif
+    
     public var utf8Data: Data? {
         return self.data(using: .utf8)
     }
