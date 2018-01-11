@@ -55,7 +55,7 @@
 		D0A2DCEF1FD9406D00AB456C /* OptionalExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DCE01FD9406D00AB456C /* OptionalExtensions.swift */; };
 		D0A2DCF01FD9406D00AB456C /* DictonaryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DCE11FD9406D00AB456C /* DictonaryExtensions.swift */; };
 		D0A2DCF11FD9406D00AB456C /* CollectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DCE21FD9406D00AB456C /* CollectionExtensions.swift */; };
-		D0A2DCFE1FDA4A5B00AB456C /* YYSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DCFD1FDA4A5B00AB456C /* YYSwiftTests.swift */; };
+		D0A2DCFE1FDA4A5B00AB456C /* Tests-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DCFD1FDA4A5B00AB456C /* Tests-iOS.swift */; };
 		D0A2DD001FDA4A5B00AB456C /* YYSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0A2DCC21FD93F2900AB456C /* YYSwift.framework */; };
 		D0A2DD131FDA5A3800AB456C /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DCD41FD9406C00AB456C /* DataExtensions.swift */; };
 		D0A2DD141FDA5A3800AB456C /* SignedIntegerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DCD61FD9406D00AB456C /* SignedIntegerExtensions.swift */; };
@@ -239,7 +239,7 @@
 		D0A2DCE11FD9406D00AB456C /* DictonaryExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictonaryExtensions.swift; sourceTree = "<group>"; };
 		D0A2DCE21FD9406D00AB456C /* CollectionExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtensions.swift; sourceTree = "<group>"; };
 		D0A2DCFB1FDA4A5B00AB456C /* YYSwiftTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "YYSwiftTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0A2DCFD1FDA4A5B00AB456C /* YYSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YYSwiftTests.swift; sourceTree = "<group>"; };
+		D0A2DCFD1FDA4A5B00AB456C /* Tests-iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tests-iOS.swift"; sourceTree = "<group>"; };
 		D0A2DD0B1FDA572200AB456C /* YYSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YYSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0A2DD251FDA5CD500AB456C /* YYSwiftTests-macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "YYSwiftTests-macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0A2DD301FDA5DA500AB456C /* Tests-macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tests-macOS.swift"; sourceTree = "<group>"; };
@@ -452,7 +452,7 @@
 		D0A2DD7D1FDA7D5500AB456C /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				D0A2DCFD1FDA4A5B00AB456C /* YYSwiftTests.swift */,
+				D0A2DCFD1FDA4A5B00AB456C /* Tests-iOS.swift */,
 				D0A2DD301FDA5DA500AB456C /* Tests-macOS.swift */,
 				D0A2DD5F1FDA661100AB456C /* Tests-tvOS.swift */,
 			);
@@ -864,7 +864,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0A2DCFE1FDA4A5B00AB456C /* YYSwiftTests.swift in Sources */,
+				D0A2DCFE1FDA4A5B00AB456C /* Tests-iOS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
