@@ -8,16 +8,27 @@
 
 import UIKit
 
+// MARK: - Initializers
 public extension UIGestureRecognizer {
     
+    /// YYSwift: Initializes an allocated gesture-recognizer object with a action block.
+    ///
+    /// - Parameter actionBlock: An action block that to handle the gesture
+    ///                          recognized by the receiver. nil is invalid.
+    ///                          It is retained by the gesture.
     public convenience init(actionBlock: @escaping (Any) -> Void) {
         self.init()
         self.addActionBlock(actionBlock)
     }
 }
 
+// MARK: - Methods
 public extension UIGestureRecognizer {
     
+    /// YYSwift: Adds an action block to a gesture-recognizer object. It is retained by the
+    /// gesture.
+    ///
+    /// - Parameter block: A block invoked by the action message.
     public func addActionBlock(_ block: @escaping (Any) -> Void) {
         let target = YYUIGestureRecognizerBlockTarget(block: block)
         self.addTarget(target, action: #selector(target.invoke(with:)))
@@ -26,6 +37,7 @@ public extension UIGestureRecognizer {
         allTargetsBlock = targets
     }
     
+    /// YYSwift: Remove all action blocks.
     public func removeAllActionBlocks() {
         var targets = allTargetsBlock
         for target in targets {

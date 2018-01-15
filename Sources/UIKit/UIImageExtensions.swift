@@ -9,65 +9,85 @@
 import UIKit
 import Accelerate
 
+// MARK: - Properties
 public extension UIImage {
     
+    /// YYSwift: Size in bytes of UIImage
     public var bytesSize: Int {
         return UIImageJPEGRepresentation(self, 1)?.count ?? 0
     }
     
+    /// YYSwift: Size in kilo bytes of UIImage
     public var kilobytesSize: Int {
         return bytesSize / 1024
     }
     
+    /// YYSwift: UIImage with .alwaysOriginal rendering mode.
     public var original: UIImage {
         return withRenderingMode(.alwaysOriginal)
     }
     
+    /// YYSwift: UIImage with .alwaysTemplate rendering mode.
     public var template: UIImage {
         return withRenderingMode(.alwaysTemplate)
     }
     
+    /// YYSwift: A new image rotated counterclockwise by a quarter‑turn (90°). ⤺
+    /// The width and height will be exchanged.
     public var roatateLeft90: UIImage? {
         return self.rotate(byRadians: CGFloat(90.0).degreesToRadians, fitSize: true)
     }
     
+    /// YYSwift: A new image rotated clockwise by a quarter‑turn (90°). ⤼
+    /// The width and height will be exchanged.
     public var roatateRight90: UIImage? {
         return self.rotate(byRadians: CGFloat(-90.0).degreesToRadians, fitSize: true)
     }
     
+    /// YYSwift: A new image rotated 180° . ↻
     public var roatate180: UIImage? {
         return self.flip(horizontal: true, vertical: true)
     }
     
+    /// YYSwift: A vertically flipped image. ⥯
     public var flipVertical: UIImage? {
         return self.flip(horizontal: false, vertical: true)
     }
     
+    /// YYSwift: A horizontally flipped image. ⇋
     public var flipHorizontal: UIImage? {
         return self.flip(horizontal: true, vertical: false)
     }
     
+    /// YYSwift: A grayscaled image.
     public var grayscale: UIImage? {
-        return self.applyBlur(byRadius: 0, tintColor: nil, tintBlendMode: .normal, saturation: 0, maskImage: nil)
+        return self.appliedBlur(radius: 0, tintColor: nil, tintBlendMode: .normal, saturation: 0, maskImage: nil)
     }
     
+    /// YYSwift: Applies a blur effect to this image. Suitable for blur any content.
     public var blurSoft: UIImage? {
-        return self.applyBlur(byRadius: 60, tintColor: UIColor.init(white: 0.84, alpha: 0.36), tintBlendMode: .normal, saturation: 1.8, maskImage: nil)
+        return self.appliedBlur(radius: 60, tintColor: UIColor.init(white: 0.84, alpha: 0.36), tintBlendMode: .normal, saturation: 1.8, maskImage: nil)
     }
     
+    /// YYSwift: Applies a blur effect to this image. Suitable for blur any content except pure white.
+    /// (same as iOS Control Panel)
     public var blurLight: UIImage? {
-        return self.applyBlur(byRadius: 60, tintColor: UIColor.init(white: 1.0, alpha: 0.3), tintBlendMode: .normal, saturation: 1.8, maskImage: nil)
+        return self.appliedBlur(radius: 60, tintColor: UIColor.init(white: 1.0, alpha: 0.3), tintBlendMode: .normal, saturation: 1.8, maskImage: nil)
     }
     
+    /// YYSwift: Applies a blur effect to this image. Suitable for displaying black text.
+    /// (same as iOS Navigation Bar White)
     public var blurExtraLight: UIImage? {
-        return self.applyBlur(byRadius: 40, tintColor: UIColor.init(white: 0.97, alpha: 0.82), tintBlendMode: .normal, saturation: 1.8, maskImage: nil)
+        return self.appliedBlur(radius: 40, tintColor: UIColor.init(white: 0.97, alpha: 0.82), tintBlendMode: .normal, saturation: 1.8, maskImage: nil)
     }
     
+    /// YYSwift: Applies a blur effect to this image. Suitable for displaying white text.
+    /// (same as iOS Notification Center)
     public var blurDark: UIImage? {
-        return self.applyBlur(byRadius: 40, tintColor: UIColor.init(white: 0.11, alpha: 0.73), tintBlendMode: .normal, saturation: 1.8, maskImage: nil)
+        return self.appliedBlur(radius: 40, tintColor: UIColor.init(white: 0.11, alpha: 0.73), tintBlendMode: .normal, saturation: 1.8, maskImage: nil)
     }
     
-    
+    /// YYSwift: Whether this image has alpha channel.
     public var hasAlphaChannel: Bool {
         guard let cgImage = self.cgImage else {
             return false
@@ -80,8 +100,13 @@ public extension UIImage {
     }
 }
 
+// MARK: - Methods
 public extension UIImage {
     
+    /// YYSwift: Compressed UIImage from original UIImage.
+    ///
+    /// - Parameter quality: The quality of the resulting JPEG image, expressed as a value from 0.0 to 1.0. The value 0.0 represents the maximum compression (or lowest quality) while the value 1.0 represents the least compression (or best quality), (default is 0.5).
+    /// - Returns: optional UIImage (if applicable).
     public func compressed(quality: CGFloat = 0.5) -> UIImage? {
         guard let data = compressedData(quality: quality) else {
             return nil
@@ -89,10 +114,18 @@ public extension UIImage {
         return UIImage(data: data)
     }
     
+    /// YYSwift: Compressed UIImage data from original UIImage.
+    ///
+    /// - Parameter quality: The quality of the resulting JPEG image, expressed as a value from 0.0 to 1.0. The value 0.0 represents the maximum compression (or lowest quality) while the value 1.0 represents the least compression (or best quality), (default is 0.5).
+    /// - Returns: optional Data (if applicable).
     public func compressedData(quality: CGFloat = 0.5) -> Data? {
         return UIImageJPEGRepresentation(self, quality)
     }
     
+    /// YYSwift: UIImage Cropped to CGRect.
+    ///
+    /// - Parameter rect: CGRect to crop UIImage to.
+    /// - Returns: cropped UIImage
     public func cropped(to rect: CGRect) -> UIImage {
         var rect = rect
         rect.origin.x *= self.scale
@@ -109,6 +142,12 @@ public extension UIImage {
         return UIImage(cgImage: image)
     }
     
+    /// YYSwift: UIImage scaled to height with respect to aspect ratio.
+    ///
+    /// - Parameters:
+    ///   - toHeight: new height.
+    ///   - orientation: optional UIImage orientation (default is nil).
+    /// - Returns: optional scaled UIImage (if applicable).
     public func scaled(toHeight: CGFloat, with orientation: UIImageOrientation? = nil) -> UIImage? {
         let scale = toHeight / size.height
         let newWidth = size.width * scale
@@ -119,6 +158,28 @@ public extension UIImage {
         return newImage
     }
     
+    /// YYSwift: UIImage scaled to width with respect to aspect ratio.
+    ///
+    /// - Parameters:
+    ///   - toWidth: new width.
+    ///   - orientation: optional UIImage orientation (default is nil).
+    /// - Returns: optional scaled UIImage (if applicable).
+    public func scaled(toWidth: CGFloat, with orientation: UIImageOrientation? = nil) -> UIImage? {
+        let scale = toWidth / size.width
+        let newHeight = size.height * scale
+        UIGraphicsBeginImageContext(CGSize(width: toWidth, height: newHeight))
+        draw(in: CGRect(x: 0, y: 0, width: toWidth, height: newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
+    }
+    
+    /// YYSwift: Returns a new image which is edge inset from this image.
+    ///
+    /// - Parameters:
+    ///   - insets: Inset (positive) for each of the edges, values can be negative to 'outset'.
+    ///   - color: Extend edge's fill color, nil means clear color.
+    /// - Returns: The new image
     public func setEdge(byInsets insets: UIEdgeInsets, color: UIColor) -> UIImage? {
         var size = self.size
         size.width -= insets.left + insets.right
@@ -141,6 +202,21 @@ public extension UIImage {
         return newImage
     }
     
+    /// YYSwift: Rounds a new image with a given corner size.
+    ///
+    /// - Parameters:
+    ///   - radius: The radius of each corner oval. Values larger than half the
+    ///             rectangle's width or height are clamped appropriately to
+    ///             half the width or height.
+    ///   - corners: A bitmask value that identifies the corners that you want
+    ///              rounded. You can use this parameter to round only a subset
+    ///              of the corners of the rectangle.
+    ///   - borderWidth: The inset border line width. Values larger than half
+    ///                  the rectangle's width or height are clamped
+    ///                  appropriately to half the width or height.
+    ///   - borderColor: The border stroke color. nil means clear color.
+    ///   - borderLineJoin: The border line join.
+    /// - Returns: The new image
     public func setRoundCorner(with radius: CGFloat, corners: UIRectCorner = .allCorners, borderWidth: CGFloat = 0, borderColor: UIColor? = nil, borderLineJoin: CGLineJoin = .miter) -> UIImage {
         var corners = corners
         if corners != .allCorners && corners.contains(.allCorners) {
@@ -189,6 +265,13 @@ public extension UIImage {
         }
     }
     
+    /// YYSwift: Returns a new rotated image (relative to the center).
+    ///
+    /// - Parameters:
+    ///   - radians: Rotated radians in counterclockwise.⟲
+    ///   - fitSize: true: new image's size is extend to fit all content.
+    ///              false: image's size will not change, content may be clipped.
+    /// - Returns: The new image
     public func rotate(byRadians radians: CGFloat, fitSize: Bool) -> UIImage? {
         guard let cgImage = self.cgImage else {
             return nil
@@ -254,6 +337,10 @@ public extension UIImage {
         return UIImage(cgImage: image, scale: self.scale, orientation: self.imageOrientation)
     }
     
+    /// YYSwift: UIImage tinted with color
+    ///
+    /// - Parameter color: color to tint image with.
+    /// - Returns: UIImage tinted with given color.
     public func tint(_ color: UIColor) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
         let rect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
@@ -270,7 +357,11 @@ public extension UIImage {
         }
     }
     
-    public func applyBlur(withTintColor tintColor: UIColor) -> UIImage? {
+    /// YYSwift: Applies a blur and tint color to this image.
+    ///
+    /// - Parameter tintColor: The tint color.
+    /// - Returns: The new image
+    public func applyBlurWithTintColor(_ tintColor: UIColor) -> UIImage? {
         let effectColorAlpha: CGFloat = 0.6
         var effectColor = tintColor
         let componentCount = tintColor.cgColor.numberOfComponents
@@ -288,17 +379,41 @@ public extension UIImage {
                 effectColor = UIColor(red: r, green: g, blue: b, alpha: effectColorAlpha)
             }
         }
-        return self.applyBlur(byRadius: 20, tintColor: effectColor, tintBlendMode: .normal, saturation: -1.0, maskImage: nil)
+        return self.appliedBlur(radius: 20, tintColor: effectColor, tintBlendMode: .normal, saturation: -1.0, maskImage: nil)
     }
     
-    public func applyBlur(byRadius blurRadius: CGFloat, tintColor: UIColor? = nil, tintBlendMode: CGBlendMode, saturation: CGFloat, maskImage: UIImage? = nil) -> UIImage? {
+    /// YYSwift: Applies a blur, tint color, and saturation adjustment to this image,
+    /// optionally within the area specified by @a maskImage.
+    ///
+    /// - Parameters:
+    ///   - radius: The radius of the blur in points, 0 means no blur effect.
+    ///   - tintColor: An optional UIColor object that is uniformly blended with
+    ///                the result of the blur and saturation operations. The
+    ///                alpha channel of this color determines how strong the
+    ///                tint is. nil means no tint.
+    ///   - tintBlendMode: The @a tintColor blend mode.
+    ///                    Default is CGBlendMode.normal.
+    ///   - saturation: A value of 1.0 produces no change in the resulting image.
+    ///                 Values less than 1.0 will desaturation the resulting image
+    ///                 while values greater than 1.0 will have the opposite effect.
+    ///                 0 means gray scale.
+    ///   - maskImage: If specified, @a inputImage is only modified in the area(s)
+    ///                defined by this mask.  This must be an image mask or it
+    ///                must meet the requirements of the mask parameter of
+    ///                CGContextClipToMask.
+    /// - Returns: The blured new Image
+    public func appliedBlur(radius: CGFloat,
+                            tintColor: UIColor? = nil,
+                            tintBlendMode: CGBlendMode,
+                            saturation: CGFloat,
+                            maskImage: UIImage? = nil) -> UIImage? {
         guard  self.size.width > 1,
                self.size.height > 1,
                let cgImage = self.cgImage,
                maskImage != nil else {
                 return nil
         }
-        let hasBlur = blurRadius > CGFloat.ulpOfOne
+        let hasBlur = radius > CGFloat.ulpOfOne
         let hasSaturation = fabs(saturation - 1.0) > CGFloat.ulpOfOne
         
         let scale = self.scale
@@ -333,22 +448,22 @@ public extension UIImage {
         var output = scratch
         
         if hasBlur {
-            var inputRadius = blurRadius * scale
+            var inputRadius = radius * scale
             if inputRadius - 2.0 < CGFloat.ulpOfOne {
                 inputRadius = 2.0
             }
             let radiusFloat = floor((inputRadius * 3.0 * sqrt(2 * CGFloat.pi) / 4 + 0.5) / 2)
-            let radius = UInt32(radiusFloat) | 1
+            let radiusInt = UInt32(radiusFloat) | 1
             var iterations: Int = 0
-            if blurRadius * scale < 0.5 { iterations = 1 }
-            else if blurRadius * scale < 1.5 { iterations = 2 }
+            if radius * scale < 0.5 { iterations = 1 }
+            else if radius * scale < 1.5 { iterations = 2 }
             else { iterations = 3 }
-            let tempSize = vImageBoxConvolve_ARGB8888(&input, &output, nil, 0, 0, radius, radius, nil, vImage_Flags(kvImageGetTempBufferSize | kvImageEdgeExtend))
+            let tempSize = vImageBoxConvolve_ARGB8888(&input, &output, nil, 0, 0, radiusInt, radiusInt, nil, vImage_Flags(kvImageGetTempBufferSize | kvImageEdgeExtend))
             guard let temp = malloc(tempSize) else {
                 return nil
             }
             for _ in 0..<iterations {
-                vImageBoxConvolve_ARGB8888(&input, &output, temp, 0, 0, radius, radius, nil, vImage_Flags(kvImageEdgeExtend))
+                vImageBoxConvolve_ARGB8888(&input, &output, temp, 0, 0, radiusInt, radiusInt, nil, vImage_Flags(kvImageEdgeExtend))
                 swap(&input, &output)
             }
             free(temp)
@@ -429,8 +544,17 @@ public extension UIImage {
     }
 }
 
+// MARK: - Static Initializer Method
 public extension UIImage {
     
+    /// YYSwift: Create an animated image with GIF data. After created, you can access
+    /// the images via property '.images'. If the data is not animated gif, this
+    /// function is same as UIImage(data: data, scale: scale)
+    ///
+    /// - Parameters:
+    ///   - data: GIF data.
+    ///   - scale: The scale factor
+    /// - Returns: A new image created from GIF, or nil when an error occurs.
     public class func image(withSmallGIFData data: Data, scale: CGFloat) -> UIImage? {
         guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
             return nil
@@ -515,6 +639,10 @@ public extension UIImage {
         return UIImage.animatedImage(with: array, duration: totalTime)
     }
     
+    /// YYSwift: Whether the data is animated GIF.
+    ///
+    /// - Parameter data: Image data
+    /// - Returns: Returns true only if the data is gif and contains more than one frame, otherwise returns false.
     public class func isAnimated(withGIFData data: Data) -> Bool {
         if data.count < 16 {
             return false
@@ -525,10 +653,20 @@ public extension UIImage {
         return true
     }
     
+    /// YYSwift: Create an image from a PDF file data or path.
+    ///
+    /// - Parameter dataOrPath: PDF data in `Data`, or PDF file path in `String`.
+    /// - Returns: A new image create from PDF, or nil when an error occurs.
     public class func image(withPDF dataOrPath: Any) -> UIImage? {
         return image(withPDF: dataOrPath, resize: false, size: CGSize.zero)
     }
     
+    /// YYSwift: Create an image from a PDF file data or path.
+    ///
+    /// - Parameters:
+    ///   - dataOrPath: PDF data in `Data`, or PDF file path in `String`.
+    ///   - size: The new image's size, PDF's content will be stretched as needed.
+    /// - Returns: A new image create from PDF, or nil when an error occurs.
     public class func image(withPDF dataOrPath: Any, size: CGSize) -> UIImage? {
         return image(withPDF: dataOrPath, resize: true, size: size)
     }
@@ -571,6 +709,12 @@ public extension UIImage {
         return UIImage.init(cgImage: image, scale: scale, orientation: .up)
     }
     
+    /// YYSwift: Create a square image from apple emoji.
+    ///
+    /// - Parameters:
+    ///   - emoji: single emoji, such as "😄".
+    ///   - size: image's size.
+    /// - Returns: Image from emoji, or nil when an error occurs.
     public class func image(withEmoji emoji: String, size: CGFloat) -> UIImage? {
         if emoji.count == 0 || size < 1 {
             return nil
@@ -600,6 +744,13 @@ public extension UIImage {
         return UIImage(cgImage: cgImage, scale: scale, orientation: .up)
     }
     
+    /// YYSwift: Create and return a custom size image with the given color.
+    /// Default size is 1x1
+    ///
+    /// - Parameters:
+    ///   - color: The color.
+    ///   - size: The image size.
+    /// - Returns: New image from color.
     public class func image(withColor color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) -> UIImage? {
         if size.width <= 0 || size.height <= 0 {
             return nil
@@ -616,6 +767,12 @@ public extension UIImage {
         return image
     }
     
+    /// YYSwift: Create and return an image with custom draw code.
+    ///
+    /// - Parameters:
+    ///   - size: The image size.
+    ///   - drawBlock: The draw block.
+    /// - Returns: The new image
     public class func image(withSize size: CGSize, drawBlock: (CGContext) -> Void) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         guard let context = UIGraphicsGetCurrentContext() else {
@@ -627,6 +784,13 @@ public extension UIImage {
         return image
     }
     
+    /// YYSwift: Draws the entire image in the specified rectangle, content changed with
+    /// the contentMode.
+    ///
+    /// - Parameters:
+    ///   - rect: The rectangle in which to draw the image.
+    ///   - contentMode: Draw content mode
+    ///   - clipsToBounds: A Boolean value that determines whether content are confined to the rect.
     public func draw(inRect rect: CGRect, contentMode: UIViewContentMode, clipsToBounds: Bool) {
         let drawRect = YYCGRectFitWithContentMode(rect: rect, size: self.size, mode: contentMode)
         if drawRect.size.width == 0 || drawRect.size.height == 0 {
@@ -647,7 +811,12 @@ public extension UIImage {
         }
     }
     
-    public func resize(to size: CGSize) -> UIImage? {
+    /// YYSwift: Returns a new image which is scaled from this image.
+    /// The image will be stretched as needed.
+    ///
+    /// - Parameter size: The new size to be scaled, values should be positive.
+    /// - Returns: The new image with the given size.
+    public func resized(to size: CGSize) -> UIImage? {
         if size.width <= 0 || size.height <= 0 {
             return nil
         }
@@ -658,7 +827,14 @@ public extension UIImage {
         return image
     }
     
-    public func resize(to size: CGSize, contentMode: UIViewContentMode) -> UIImage? {
+    /// YYSwift: Returns a new image which is scaled from this image.
+    /// The image content will be changed with thencontentMode.
+    ///
+    /// - Parameters:
+    ///   - size: The new size to be scaled, values should be positive.
+    ///   - contentMode: The content mode for image content.
+    /// - Returns: The new image with the given size.
+    public func resized(to size: CGSize, contentMode: UIViewContentMode) -> UIImage? {
         if size.width <= 0 || size.height <= 0 {
             return nil
         }

@@ -8,16 +8,15 @@
 
 import UIKit
 
+// MARK: - Properties
 public extension UIDevice {
-    
-    public static func systemVersion() -> Double {
-        return Double(UIDevice.current.systemVersion)!
-    }
-    
+
+    /// YYSwift: Whether the device is iPad/iPad mini.
     public var isPad: Bool {
         return UI_USER_INTERFACE_IDIOM() == .pad
     }
     
+    /// YYSwift: Whether the device is a simulator.
     public var isSimulator: Bool {
         var isSim = false
         #if arch(i386) || arch(x86_64)
@@ -26,6 +25,7 @@ public extension UIDevice {
         return isSim
     }
     
+    /// YYSwift: Whether the device is jailbroken.
     public var isJailbroken: Bool {
         if self.isSimulator {
             return false
@@ -61,53 +61,24 @@ public extension UIDevice {
         return false
     }
     
+    /// YYSwift: Wherher the device can make phone calls.
     public var canMakePhoneCalls: Bool {
         return UIApplication.shared.canOpenURL(URL(string: "tel://")!)
     }
-    
-    // https://stackoverflow.com/questions/30748480/swift-get-devices-ip-address/30748582
-    private func ipAddress(withIfaName ifaName: String) -> String? {
-        if ifaName.count == 0 { return nil }
-        var address : String?
-        
-        var ifaddr : UnsafeMutablePointer<ifaddrs>?
-        guard getifaddrs(&ifaddr) == 0 else {
-            return nil
-        }
-        guard let firstAddr = ifaddr else {
-            return nil
-        }
-        
-        for ifptr in sequence(first: firstAddr, next: { $0.pointee.ifa_next }) {
-            let interface = ifptr.pointee
-            
-            let addrFamily = interface.ifa_addr.pointee.sa_family
-            if addrFamily == UInt8(AF_INET) || addrFamily == UInt8(AF_INET6) {
-                
-                let name = String(cString: interface.ifa_name)
-                if  name == ifaName {
-                    
-                    var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
-                    getnameinfo(interface.ifa_addr, socklen_t(interface.ifa_addr.pointee.sa_len),
-                                &hostname, socklen_t(hostname.count),
-                                nil, socklen_t(0), NI_NUMERICHOST)
-                    address = String(cString: hostname)
-                }
-            }
-        }
-        freeifaddrs(ifaddr)
-        
-        return address
-    }
-    
+
+    /// YYSwift: WIFI IP address of this device (can be nil). e.g. @"192.168.1.111"
     public var ipAddressWIFI: String? {
         return self.ipAddress(withIfaName: "en0")
     }
     
+    /// YYSwift: Cell IP address of this device (can be nil). e.g. @"10.2.2.222"
     public var ipAddressCell: String? {
         return self.ipAddress(withIfaName: "pdp_ip0")
     }
     
+    /// YYSwift: The device's machine model.  e.g. "iPhone6,1" "iPad4,6"
+    ///
+    /// [reference](http://theiphonewiki.com/wiki/Models)
     public var machineModel: String? {
         var machineSwiftString: String?
         var size: size_t = 0
@@ -118,6 +89,9 @@ public extension UIDevice {
         return machineSwiftString
     }
     
+    /// YYSwift: The device's machine model name. e.g. "iPhone 5s" "iPad mini 2"
+    ///
+    /// [reference](http://theiphonewiki.com/wiki/Models)
     public var machineModelName: String? {
         guard let model = self.machineModel else {
             return nil
@@ -223,11 +197,13 @@ public extension UIDevice {
         return nil
     }
     
+    /// YYSwift: The System's startup time.
     public var systemUptime: Date {
         let interval = ProcessInfo.processInfo.systemUptime
         return Date(timeIntervalSinceNow: interval)
     }
     
+    /// YYSwift: Total disk space in byte. (-1 when error occurs)
     public var diskSpace: Int64 {
         do {
             let attrs = try FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory())
@@ -241,6 +217,7 @@ public extension UIDevice {
         }
     }
     
+    /// YYSwift: Free disk space in byte. (-1 when error occurs)
     public var diskSpaceFree: Int64 {
         do {
             let attrs = try FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory())
@@ -254,6 +231,7 @@ public extension UIDevice {
         }
     }
     
+    /// YYSwift: Used disk space in byte. (-1 when error occurs)
     public var diskSpaceUsed: Int64 {
         let total = self.diskSpace
         let free = self.diskSpaceFree
@@ -267,6 +245,7 @@ public extension UIDevice {
         return used
     }
     
+    /// YYSwift: Total physical memory in byte. (-1 when error occurs)
     public var memoryTotal: Int64 {
         let mem = ProcessInfo.processInfo.physicalMemory
         guard mem > 0 else {
@@ -275,7 +254,9 @@ public extension UIDevice {
         return Int64(mem)
     }
     
-    //https://github.com/zixun/SystemEye/blob/master/SystemEye/Classes/Memory.swift
+    /// YYSwift: Used app memory and total memory
+    ///
+    /// [Reference](https://github.com/zixun/SystemEye/blob/master/SystemEye/Classes/Memory.swift)
     public var appMemoryUsage: (used: Int64, total: Int64) {
         var info = mach_task_basic_info()
         var count = mach_msg_type_number_t(MemoryLayout.size(ofValue: info) / MemoryLayout<integer_t>.size)
@@ -291,6 +272,7 @@ public extension UIDevice {
         return (Int64(info.resident_size), self.memoryTotal)
     }
 
+    /// YYSwift: System memory usage
     public var systemMemoryUsage: (free: Int64,
                                    active: Int64,
                                    inactive: Int64,
@@ -334,12 +316,11 @@ public extension UIDevice {
         )
     }
     
-    
-    
+    /// YYSwift: System CPU usage
     public var systemCPUUsage: (system: Double,
-                             user: Double,
-                             idle: Double,
-                             nice: Double) {
+                                user: Double,
+                                idle: Double,
+                                nice: Double) {
             let load = UIDevice.hostCPULoadInfo
             
         let userDiff = Double(load.cpu_ticks.0 - UIDevice.loadPrevious.cpu_ticks.0)
@@ -359,6 +340,7 @@ public extension UIDevice {
             return (sys, user, idle, nice)
     }
     
+    /// YYSwift: App CPU usage
     public var appCPUUsage: Double {
         let threads = UIDevice.threadBasicInfos()
         var result : Double = 0.0
@@ -372,7 +354,7 @@ public extension UIDevice {
     
     private static var loadPrevious = host_cpu_load_info()
     
-    static var hostCPULoadInfo: host_cpu_load_info {
+    private static var hostCPULoadInfo: host_cpu_load_info {
         get {
             var size     = HOST_CPU_LOAD_INFO_COUNT
             var hostInfo = host_cpu_load_info()
@@ -391,6 +373,47 @@ public extension UIDevice {
             
             return hostInfo
         }
+    }
+    
+    
+}
+
+// MARK: - Methods
+public extension UIDevice {
+    
+    // https://stackoverflow.com/questions/30748480/swift-get-devices-ip-address/30748582
+    private func ipAddress(withIfaName ifaName: String) -> String? {
+        if ifaName.count == 0 { return nil }
+        var address : String?
+        
+        var ifaddr : UnsafeMutablePointer<ifaddrs>?
+        guard getifaddrs(&ifaddr) == 0 else {
+            return nil
+        }
+        guard let firstAddr = ifaddr else {
+            return nil
+        }
+        
+        for ifptr in sequence(first: firstAddr, next: { $0.pointee.ifa_next }) {
+            let interface = ifptr.pointee
+            
+            let addrFamily = interface.ifa_addr.pointee.sa_family
+            if addrFamily == UInt8(AF_INET) || addrFamily == UInt8(AF_INET6) {
+                
+                let name = String(cString: interface.ifa_name)
+                if  name == ifaName {
+                    
+                    var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
+                    getnameinfo(interface.ifa_addr, socklen_t(interface.ifa_addr.pointee.sa_len),
+                                &hostname, socklen_t(hostname.count),
+                                nil, socklen_t(0), NI_NUMERICHOST)
+                    address = String(cString: hostname)
+                }
+            }
+        }
+        freeifaddrs(ifaddr)
+        
+        return address
     }
     
     private class func flag(_ thread:thread_basic_info) -> Bool {
@@ -417,7 +440,7 @@ public extension UIDevice {
                     return $0.pointee
                 })
             }).pointee
-
+            
             result.append(th_basic_info)
             
         }
@@ -450,6 +473,7 @@ public extension UIDevice {
         return threads_act
     }
 }
+
 
 private let HOST_VM_INFO64_COUNT: mach_msg_type_number_t =
     UInt32(MemoryLayout<vm_statistics64_data_t>.size / MemoryLayout<integer_t>.size)

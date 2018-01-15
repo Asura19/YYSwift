@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// YYSwift: Convert CALayer's gravity string to UIViewContentMode.
 public func YYCAGravityToUIViewContentMode(gravity: String) -> UIViewContentMode {
     let dict: [String: UIViewContentMode] = [
         kCAGravityCenter: .center,
@@ -26,6 +27,7 @@ public func YYCAGravityToUIViewContentMode(gravity: String) -> UIViewContentMode
     return dict[gravity] ?? .scaleToFill
 }
 
+/// YYSwift: Convert UIViewContentMode to CALayer's gravity string.
 public func YYUIViewContentModeToCAGravity(contentMode: UIViewContentMode) -> String {
     switch contentMode {
     case .scaleToFill:
@@ -57,6 +59,13 @@ public func YYUIViewContentModeToCAGravity(contentMode: UIViewContentMode) -> St
     }
 }
 
+/// YYSwift: Returns a rectangle to fit the @param rect with specified content mode.
+///
+/// - Parameters:
+///   - rect: The constrant rect
+///   - size: The content size
+///   - mode: The content mode
+/// - Returns: A rectangle for the given content mode.
 public func YYCGRectFitWithContentMode(rect: CGRect, size: CGSize, mode: UIViewContentMode) -> CGRect {
     var rect = rect.standardized
     var size = size

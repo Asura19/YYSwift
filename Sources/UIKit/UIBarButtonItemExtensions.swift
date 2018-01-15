@@ -8,8 +8,16 @@
 
 import UIKit
 
+// MARK: - Initializers
 public extension UIBarButtonItem {
     
+    /// YYSwift: Create a button item with image name, and add action
+    ///
+    /// - Parameters:
+    ///   - iconName: image name
+    ///   - highlightedIconName: highlighted image name
+    ///   - target: the object whose action method is called
+    ///   - action: A selector identifying the action method to be called
     public convenience init(iconName: String, highlightedIconName: String?, target: Any?, action: Selector) {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: iconName), for: .normal)
@@ -21,6 +29,14 @@ public extension UIBarButtonItem {
         self.init(customView: button)
     }
     
+}
+
+// MARK: - Properties
+public extension UIBarButtonItem {
+    
+    /// YYSwift: The block that invoked when the item is selected. The objects captured by block will retained by the ButtonItem.
+    /// - note: This param is conflict with `target` and `action` property.
+    /// Set this will set `target` and `action` property to some internal objects.
     public var actionBlock: ((Any) -> Void) {
         get {
             let target = objc_getAssociatedObject(self, Key.Associated) as! YYUIBarButtonItemBlockTarget

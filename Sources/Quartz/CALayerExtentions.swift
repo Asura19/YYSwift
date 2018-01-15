@@ -8,8 +8,10 @@
 
 import UIKit
 
+// MARK: - Properties
 public extension CALayer {
     
+    /// YYSwift: Take snapshot without transform, image's size equals to bounds.
     public var snapshotImage: UIImage? {
         UIGraphicsBeginImageContextWithOptions(bounds.size, isOpaque, 0)
         defer {
@@ -22,6 +24,7 @@ public extension CALayer {
         return UIGraphicsGetImageFromCurrentImageContext()
     }
     
+    /// YYSwift: Take snapshot without transform, PDF's page size equals to bounds.
     public var snapshotPDF: Data? {
         var pBounds = bounds
         let data = NSMutableData()
@@ -39,18 +42,7 @@ public extension CALayer {
         return data as Data
     }
     
-    public func addShadow(ofColor color: UIColor = UIColor(red: 0.07, green: 0.47, blue: 0.57, alpha: 1.0), radius: CGFloat = 3, offset: CGSize = .zero, opacity: Float = 0.5) {
-        shadowColor = color.cgColor
-        shadowOffset = offset
-        shadowRadius = radius
-        shadowOpacity = opacity
-        masksToBounds = true
-    }
-    
-    public func removeAllSublayers() {
-        self.sublayers?.removeAll()
-    }
-    
+    /// YYSwift: Shortcut for frame.origin.x.
     public var x: CGFloat {
         get {
             return frame.origin.x
@@ -60,6 +52,7 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: Shortcut for frame.origin.y
     public var y: CGFloat {
         get {
             return frame.origin.y
@@ -69,6 +62,7 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: Shortcut for frame.size.width.
     public var width: CGFloat {
         get {
             return frame.size.width
@@ -78,6 +72,7 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: Shortcut for frame.size.height.
     public var height: CGFloat {
         get {
             return frame.size.height
@@ -87,6 +82,7 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: Shortcut for frame.origin.x.
     public var left: CGFloat {
         get {
             return x
@@ -96,6 +92,7 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: Shortcut for frame.origin.x + frame.size.width
     public var right: CGFloat {
         get {
             return x + width
@@ -105,6 +102,7 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: Shortcut for frame.origin.y
     public var top: CGFloat {
         get {
             return y
@@ -114,6 +112,7 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: Shortcut for frame.origin.y + frame.size.height
     public var bottom: CGFloat {
         get {
             return y + height
@@ -123,6 +122,7 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: Shortcut for center.
     public var center: CGPoint {
         get {
             return CGPoint(x: self.frame.origin.x + self.frame.size.width * 0.5, y: self.frame.origin.y + self.frame.size.height * 0.5)
@@ -135,6 +135,7 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: Shortcut for center.x
     public var centerX: CGFloat {
         get {
             return center.x
@@ -144,6 +145,7 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: Shortcut for center.y
     public var centerY: CGFloat {
         get {
             return center.y
@@ -153,6 +155,7 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: Shortcut for frame.origin.
     public var origin: CGPoint {
         get {
             return frame.origin
@@ -162,6 +165,7 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: Shortcut for frame.size.
     public var frameSize: CGSize {
         get {
             return frame.size
@@ -172,6 +176,7 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: key path "tranform.rotation"
     public var transformRotation: CGFloat {
         get {
             return value(forKeyPath: "transform.rotation") as! CGFloat
@@ -181,6 +186,7 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: key path "tranform.rotation.x"
     public var transformRotationX: CGFloat {
         get {
             return value(forKeyPath: "transform.rotation.x") as! CGFloat
@@ -190,6 +196,7 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: key path "tranform.rotation.y"
     public var transformRotationY: CGFloat {
         get {
             return value(forKeyPath: "transform.rotation.y") as! CGFloat
@@ -199,6 +206,7 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: key path "tranform.rotation.z"
     public var transformRotationZ: CGFloat {
         get {
             return value(forKeyPath: "transform.rotation.z") as! CGFloat
@@ -208,6 +216,7 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: key path "tranform.scale.x"
     public var transformScaleX: CGFloat {
         get {
             return value(forKeyPath: "transform.scale.x") as! CGFloat
@@ -217,6 +226,7 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: key path "tranform.scale.y"
     public var transformScaleY: CGFloat {
         get {
             return value(forKeyPath: "transform.scale.y") as! CGFloat
@@ -226,6 +236,7 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: key path "tranform.scale.z"
     public var transformScaleZ: CGFloat {
         get {
             return value(forKeyPath: "transform.scale.z") as! CGFloat
@@ -235,6 +246,7 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: key path "tranform.scale"
     public var transformScale: CGFloat {
         get {
             return value(forKeyPath: "transform.scale") as! CGFloat
@@ -244,6 +256,17 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: key path "tranform.translation"
+    public var transformTranslation: CGFloat {
+        get {
+            return value(forKeyPath: "transform.translation") as! CGFloat
+        }
+        set {
+            setValue(newValue, forKeyPath: "transform.translation")
+        }
+    }
+    
+    /// YYSwift: key path "tranform.translation.x"
     public var transformTranslationX: CGFloat {
         get {
             return value(forKeyPath: "transform.translation.x") as! CGFloat
@@ -253,6 +276,7 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: key path "tranform.translation.y"
     public var transformTranslationY: CGFloat {
         get {
             return value(forKeyPath: "transform.translation.y") as! CGFloat
@@ -262,6 +286,7 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: key path "tranform.translation.z"
     public var transformTranslationZ: CGFloat {
         get {
             return value(forKeyPath: "transform.translation.z") as! CGFloat
@@ -271,6 +296,8 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: Shortcut for transform.m34, -1/1000 is a good value.
+    /// It should be set before other transform shortcut.
     public var transformDepth: CGFloat {
         get {
             return transform.m34
@@ -282,6 +309,7 @@ public extension CALayer {
         }
     }
     
+    /// YYSwift: Wrapper for `contentsGravity` property.
     public var contentMode: UIViewContentMode {
         get {
             return YYCAGravityToUIViewContentMode(gravity: contentsGravity)
@@ -291,6 +319,35 @@ public extension CALayer {
         }
     }
     
+}
+
+// MARK: - Method
+public extension CALayer {
+    
+    /// YYSwift: Add shadow and radius to the layer.
+    ///
+    /// - Parameters:
+    ///   - color: shadow color
+    ///   - radius: corner radius
+    ///   - offset: shadow offset
+    ///   - opacity: shadow opacity
+    public func addShadow(ofColor color: UIColor = UIColor(red: 0.07, green: 0.47, blue: 0.57, alpha: 1.0), radius: CGFloat = 3, offset: CGSize = .zero, opacity: Float = 0.5) {
+        shadowColor = color.cgColor
+        shadowOffset = offset
+        shadowRadius = radius
+        shadowOpacity = opacity
+        masksToBounds = true
+    }
+    
+    public func removeAllSublayers() {
+        self.sublayers?.removeAll()
+    }
+    
+    /// YYSwift: Add a fade animation to layer's contents when the contents is changed.
+    ///
+    /// - Parameters:
+    ///   - duration: animation duration
+    ///   - curve: animation curve
     public func addFadeAnimationWithDuration(_ duration: TimeInterval, curve: UIViewAnimationCurve) {
         if duration <= 0 {
             return
@@ -312,7 +369,8 @@ public extension CALayer {
         add(transition, forKey: "yyswift.fade")
         }
     }
-        
+    
+    /// YYSwift: Cancel fade animation which is added with "-addFadeAnimationWithDuration:curve:".
     public func removePreviousFadeAnimation() {
         removeAnimation(forKey: "yyswift.fade")
     }

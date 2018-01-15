@@ -8,8 +8,15 @@
 
 import UIKit
 
+// MARK: - Methods
 public extension UIBezierPath {
     
+    /// YYSwift: Creates and returns a new UIBezierPath object initialized with the text glyphs generated from the specified font.
+    ///
+    /// - Parameters:
+    ///   - text: The text to generate glyph path.
+    ///   - font: The font to generate glyph path.
+    /// - Returns: A new path object with the text and font, or nil if an error occurs.
     public static func bezierPathWithText(_ text: String, font: UIFont) -> UIBezierPath? {
         let ctFont = font.ctFont
         let attrString = NSAttributedString.init(string: text, attributes: [kCTFontAttributeName as NSAttributedStringKey: ctFont])

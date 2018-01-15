@@ -8,8 +8,11 @@
 
 import UIKit
 
+// MARK: - Methods
 public extension UIControl {
     
+    /// YYSwift: Removes all targets and actions for a particular event (or events)
+    /// from an internal dispatch table.
     public func removeAllTargets() {
         for object in self.allTargets {
             self.removeTarget(object, action: nil, for: UIControlEvents.allEvents)
@@ -19,6 +22,14 @@ public extension UIControl {
         allTargetsBlock = targets
     }
     
+    /// YYSwift: Adds a block for a particular event (or events) to an internal dispatch table.
+    /// It will cause a strong reference to @a block.
+    ///
+    /// - Parameters:
+    ///   - events: The block which is invoked then the action message is
+    ///             sent  (cannot be nil). The block is retained.
+    ///   - block: A bitmask specifying the control events for which the
+    ///            action message is sent.
     public func addBlock(forControlEvents events: UIControlEvents, block: @escaping (Any) -> Void) {
         let target = YYUIControlBlockTarget(block: block, events: events)
         self.addTarget(target, action: #selector(target.invoke(with:)), for: events)
@@ -27,11 +38,24 @@ public extension UIControl {
         allTargetsBlock = targets
     }
     
+    /// YYSwift: Adds or replaces a block for a particular event (or events) to an internal
+    /// dispatch table. It will cause a strong reference to @a block.
+    ///
+    /// - Parameters:
+    ///   - events: A bitmask specifying the control events for which the
+    ///             action message is sent.
+    ///   - block: The block which is invoked then the action message is
+    ///            sent (cannot be nil). The block is retained.
     public func setBlock(forControlEvents events: UIControlEvents, block: @escaping (Any) -> Void) {
         self.removeAllBlocks(forControlEvents: .allEvents)
         self.addBlock(forControlEvents: events, block: block)
     }
     
+    /// YYSwift: Removes all blocks for a particular event (or events) from an internal
+    /// dispatch table.
+    ///
+    /// - Parameter events: A bitmask specifying the control events for which the
+    ///                     action message is sent.
     public func removeAllBlocks(forControlEvents events: UIControlEvents) {
         var targets = allTargetsBlock
         for target in targets {
@@ -52,17 +76,28 @@ public extension UIControl {
         allTargetsBlock = targets
     }
     
-    public func setTarget(_ target: Any, action: Selector, forControlEvents controlEvents: UIControlEvents) {
+    /// YYSwift: Adds or replaces a target and action for a particular event (or events)
+    /// to an internal dispatch table.
+    ///
+    /// - Parameters:
+    ///   - target: The target object—that is, the object to which the
+    ///             action message is sent. If this is nil, the responder
+    ///             chain is searched for an object willing to respond to the
+    ///             action message.
+    ///   - action: A selector identifying an action message.
+    ///   - events: A bitmask specifying the control events for which the
+    ///             action message is sent.
+    public func setTarget(_ target: Any, action: Selector, forControlEvents events: UIControlEvents) {
         let targets = self.allTargets
         for currentTarget in targets {
-            guard let actions = self.actions(forTarget: currentTarget, forControlEvent: controlEvents) else {
+            guard let actions = self.actions(forTarget: currentTarget, forControlEvent: events) else {
                 return
             }
             for currentAction in actions {
-                self.removeTarget(currentTarget, action: NSSelectorFromString(currentAction), for: controlEvents)
+                self.removeTarget(currentTarget, action: NSSelectorFromString(currentAction), for: events)
             }
         }
-        self.addTarget(target, action: action, for: controlEvents)
+        self.addTarget(target, action: action, for: events)
     }
     
     private var allTargetsBlock: [YYUIControlBlockTarget] {

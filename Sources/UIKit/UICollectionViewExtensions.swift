@@ -11,19 +11,23 @@ import UIKit
 // MARK: - Properties
 public extension UICollectionView {
     
+    /// YYSwift: Index path of last item in collectionView.
     public var indexPathForLastItem: IndexPath? {
         return indexPathForLastItem(inSection: lastSection)
     }
     
+    /// YYSwift: Index of last section in collectionView.
     public var lastSection: Int {
         return numberOfSections > 0 ? numberOfSections - 1 : 0
     }
-    
 }
 
-
+// MARK: - Methods
 public extension UICollectionView {
 
+    /// YYSwift: Number of all items in all sections of collectionView.
+    ///
+    /// - Returns: The count of all rows in the collectionView.
     public func numberOfItems() -> Int {
         var section = 0
         var itemsCount = 0
@@ -34,6 +38,10 @@ public extension UICollectionView {
         return itemsCount
     }
 
+    /// YYSwift: IndexPath for last item in section.
+    ///
+    /// - Parameter section: section to get last item in.
+    /// - Returns: optional last indexPath for last item in section (if applicable).
     public func indexPathForLastItem(inSection section: Int) -> IndexPath? {
         guard section >= 0 else {
             return nil
@@ -47,6 +55,9 @@ public extension UICollectionView {
         return IndexPath(item: numberOfItems(inSection: section) - 1, section: section)
     }
     
+    /// YYSwift: Reload data with a completion handler.
+    ///
+    /// - Parameter completion: completion handler to run after reloadData finishes.
     public func reloadData(_ completion: @escaping () -> Void) {
         UIView.animate(withDuration: 0, animations: {
             self.reloadData()
@@ -55,26 +66,58 @@ public extension UICollectionView {
         })
     }
 
+    /// YYSwift: Dequeue reusable UICollectionViewCell using class name.
+    ///
+    /// - Parameters:
+    ///   - name: UICollectionViewCell type.
+    ///   - indexPath: location of cell in collectionView.
+    /// - Returns: UICollectionViewCell object with associated class name.
     public func dequeueReusableCell<T: UICollectionViewCell>(withClass name: T.Type, for indexPath: IndexPath) -> T? {
         return dequeueReusableCell(withReuseIdentifier: String(describing: name), for: indexPath) as? T
     }
     
+    /// YYSwift: Dequeue reusable UICollectionReusableView using class name.
+    ///
+    /// - Parameters:
+    ///   - kind: the kind of supplementary view to retrieve. This value is defined by the layout object.
+    ///   - name: UICollectionReusableView type.
+    ///   - indexPath: location of cell in collectionView.
+    /// - Returns: UICollectionReusableView object with associated class name.
     public func dequeueReusableSupplementaryView<T: UICollectionReusableView>(ofKind kind: String, withClass name: T.Type, for indexPath: IndexPath) -> T? {
         return dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: name), for: indexPath) as? T
     }
     
+    /// YYSwift: Register UICollectionReusableView using class name.
+    ///
+    /// - Parameters:
+    ///   - kind: the kind of supplementary view to retrieve. This value is defined by the layout object.
+    ///   - name: UICollectionReusableView type.
     public func register<T: UICollectionReusableView>(supplementaryViewOfKind kind: String, withClass name: T.Type) {
         register(T.self, forSupplementaryViewOfKind: kind, withReuseIdentifier: String(describing: name))
     }
     
+    /// YYSwift: Register UICollectionViewCell using class name.
+    ///
+    /// - Parameters:
+    ///   - nib: Nib file used to create the collectionView cell.
+    ///   - name: UICollectionViewCell type.
     public func register<T: UICollectionViewCell>(nib: UINib?, forCellWithClass name: T.Type) {
         register(nib, forCellWithReuseIdentifier: String(describing: name))
     }
     
+    /// YYSwift: Register UICollectionViewCell using class name.
+    ///
+    /// - Parameter name: UICollectionViewCell type.
     public func register<T: UICollectionViewCell>(cellWithClass name: T.Type) {
         register(T.self, forCellWithReuseIdentifier: String(describing: name))
     }
     
+    /// YYSwift: Register UICollectionReusableView using class name.
+    ///
+    /// - Parameters:
+    ///   - nib: Nib file used to create the reusable view.
+    ///   - kind: the kind of supplementary view to retrieve. This value is defined by the layout object.
+    ///   - name: UICollectionReusableView type.
     public func register<T: UICollectionReusableView>(nib: UINib?, forSupplementaryViewOfKind kind: String, withClass name: T.Type) {
         register(nib, forSupplementaryViewOfKind: kind, withReuseIdentifier: String(describing: name))
     }

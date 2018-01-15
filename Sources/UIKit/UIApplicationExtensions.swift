@@ -10,30 +10,37 @@ import UIKit
 
 public extension UIApplication {
     
+    /// YYSwift: "Documents" URL in this app's sandbox.
     public var documentsURL: URL? {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last
     }
     
+    /// YYSwift: "Documents" path in this app's sandbox.
     public var documentsPath: String? {
         return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
     }
     
+    /// YYSwift: "Caches" URL in this app's sandbox.
     public var cachesURL: URL? {
         return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).last
     }
     
+    /// YYSwift: "Caches" path in this app's sandbox.
     public var cachesPath: String? {
         return NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first
     }
     
+    /// YYSwift: "Library" URL in this app's sandbox.
     public var libraryURL: URL? {
         return FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).last
     }
     
+    /// YYSwift: "Library" path in this app's sandbox.
     public var libraryPath: String? {
         return NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first
     }
     
+    /// YYSwift: Whether this app is pirated (not install from appstore).
     public var isPirated: Bool {
         if UIDevice.current.isSimulator {
             return true
@@ -57,18 +64,22 @@ public extension UIApplication {
         return false
     }
     
+    /// YYSwift: Application's Bundle Name (show in SpringBoard).
     public var appBundleName: String? {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String
     }
     
+    /// YYSwift: Application's Bundle ID.  e.g. "com.phoenix.testApp"
     public var appBundleID: String? {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String
     }
     
+    /// YYSwift: Application's Version.  e.g. "1.2.0"
     public var appVersion: String? {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
     }
     
+    /// YYSwift: Application's Build number. e.g. "123"
     public var appBuildVersion: String? {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String
     }

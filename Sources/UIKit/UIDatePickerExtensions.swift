@@ -8,8 +8,10 @@
 
 import UIKit
 
+// MARK: - Properties
 public extension UIDatePicker {
     
+    /// YYSwift: Text color of UIDatePicker.
     public var textColor: UIColor? {
         set {
             setValue(newValue, forKeyPath: "textColor")
