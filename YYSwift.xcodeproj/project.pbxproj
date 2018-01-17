@@ -355,8 +355,8 @@
 		D06FEAC51FE13611006D7915 /* CoreGraphics */ = {
 			isa = PBXGroup;
 			children = (
-				D06FEAC61FE13628006D7915 /* CGFloatExtensions.swift */,
 				D0EC52D12005E2830054B52E /* CGColorExtensions.swift */,
+				D06FEAC61FE13628006D7915 /* CGFloatExtensions.swift */,
 				D0EC52D42005E2BF0054B52E /* CGPointExtensions.swift */,
 				D0EC52D72005E39D0054B52E /* CGSizeExtensions.swift */,
 			);

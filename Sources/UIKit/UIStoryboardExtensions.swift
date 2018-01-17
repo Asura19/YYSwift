@@ -8,8 +8,10 @@
 
 import UIKit
 
+// MARK: - Methods
 public extension UIStoryboard {
     
+    /// YYSwift: Get main storyboard for application
     public static var mainStoryboard: UIStoryboard? {
         let bundle = Bundle.main
         guard let name = bundle.object(forInfoDictionaryKey: "UIMainStoryboardFile") as? String else {
@@ -18,6 +20,10 @@ public extension UIStoryboard {
         return UIStoryboard(name: name, bundle: bundle)
     }
     
+    /// YYSwift: Instantiate a UIViewController using its class name
+    ///
+    /// - Parameter name: UIViewController type
+    /// - Returns: The view controller corresponding to specified class name
     public func instantiateViewController<T: UIViewController>(withClass name: T.Type) -> T? {
         return instantiateViewController(withIdentifier: String(describing: name)) as? T
     }

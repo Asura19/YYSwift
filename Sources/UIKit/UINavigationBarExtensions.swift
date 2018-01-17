@@ -8,8 +8,14 @@
 
 import UIKit
 
+// MARK: - Methods
 public extension UINavigationBar {
     
+    /// YYSwift: Set Navigation Bar title, title color and font.
+    ///
+    /// - Parameters:
+    ///   - font: title font
+    ///   - color: title text color (default is .black).
     public func setTitleFont(_ font: UIFont, color: UIColor = .black) {
         var attrs: [NSAttributedStringKey: Any] = [:]
         attrs[.font] = font
@@ -17,6 +23,9 @@ public extension UINavigationBar {
         titleTextAttributes = attrs
     }
     
+    /// YYSwift: Make navigation bar transparent.
+    ///
+    /// - Parameter tint: tint color (default is .white).
     public func makeTransparent(withTint tint: UIColor = .white) {
         setBackgroundImage(UIImage(), for: .default)
         shadowImage = UIImage()
@@ -25,6 +34,11 @@ public extension UINavigationBar {
         titleTextAttributes = [NSAttributedStringKey.foregroundColor: tint]
     }
     
+    /// YYSwift: Set navigationBar background and text colors
+    ///
+    /// - Parameters:
+    ///   - background: backgound color
+    ///   - text: text color
     public func setColors(background: UIColor, text: UIColor) {
         isTranslucent = false
         backgroundColor = background

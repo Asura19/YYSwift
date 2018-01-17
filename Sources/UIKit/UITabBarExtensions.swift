@@ -8,8 +8,16 @@
 
 import UIKit
 
+// MARK: - Methods
 public extension UITabBar {
     
+    /// YYSwift: Set tabBar colors.
+    ///
+    /// - Parameters:
+    ///   - background: background color.
+    ///   - selectedBackground: background color for selected tab.
+    ///   - item: icon tint color for items.
+    ///   - selectedItem: icon tint color for item.
     public func setColors(background: UIColor? = nil,
                           selectedBackground: UIColor? = nil,
                           item: UIColor? = nil,

@@ -8,17 +8,32 @@
 
 import UIKit
 
+// MARK: - enums
 
+/// YYSwift: Shake directions of a view.
+///
+/// - horizontal: Shake left and right.
+/// - vertical: Shake up and down.
 public enum ShakeDirection {
     case horizontal
     case vertical
 }
 
+/// YYSwift: Angle units.
+///
+/// - degrees: degrees.
+/// - radians: radians.
 public enum AngleUnit {
     case degrees
     case radians
 }
 
+/// YYSwift: Shake animations types.
+///
+/// - linear: linear animation.
+/// - easeIn: easeIn animation
+/// - easeOut: easeOut animation.
+/// - easeInOut: easeInOut animation.
 public enum ShakeAnimationType {
     case linear
     case easeIn
@@ -26,8 +41,10 @@ public enum ShakeAnimationType {
     case easeInOut
 }
 
+// MARK: - Properties
 public extension UIView {
     
+    /// Shortcut for frame.origin.x
     public var x: CGFloat {
         get {
             return frame.origin.x
@@ -37,6 +54,7 @@ public extension UIView {
         }
     }
     
+    /// Shortcut for frame.origin.y
     public var y: CGFloat {
         get {
             return frame.origin.y
@@ -46,6 +64,7 @@ public extension UIView {
         }
     }
     
+    /// Shortcut for frame.size.width
     public var width: CGFloat {
         get {
             return frame.size.width
@@ -55,6 +74,7 @@ public extension UIView {
         }
     }
     
+    /// Shortcut for frame.size.height
     public var height: CGFloat {
         get {
             return frame.size.height
@@ -64,6 +84,7 @@ public extension UIView {
         }
     }
     
+    /// Shortcut for frame.origin.x
     public var left: CGFloat {
         get {
             return x
@@ -73,6 +94,7 @@ public extension UIView {
         }
     }
     
+    /// Shortcut for frame.origin.x + frame.size.width
     public var right: CGFloat {
         get {
             return x + width
@@ -82,6 +104,7 @@ public extension UIView {
         }
     }
     
+    /// Shortcut for frame.origin.y
     public var top: CGFloat {
         get {
             return y
@@ -91,6 +114,7 @@ public extension UIView {
         }
     }
     
+    /// Shortcut for frame.origin.y + frame.size.height
     public var bottom: CGFloat {
         get {
             return y + height
@@ -100,6 +124,7 @@ public extension UIView {
         }
     }
     
+    /// Shortcut for center.x
     public var centerX: CGFloat {
         get {
             return center.x
@@ -109,6 +134,7 @@ public extension UIView {
         }
     }
     
+    /// Shortcut for center.y
     public var centerY: CGFloat {
         get {
             return center.y
@@ -118,6 +144,7 @@ public extension UIView {
         }
     }
     
+    /// Shortcut for frame.origin
     public var origin: CGPoint {
         get {
             return frame.origin
@@ -127,6 +154,7 @@ public extension UIView {
         }
     }
     
+    /// Shortcut for frame.size
     public var size: CGSize {
         get {
             return frame.size
@@ -137,7 +165,7 @@ public extension UIView {
         }
     }
     
-    
+    /// YYSwift: Border color of view; also inspectable from Storyboard.
     @IBInspectable
     public var borderColor: UIColor? {
         get {
@@ -155,6 +183,7 @@ public extension UIView {
         }
     }
     
+    /// YYSwift: Border width of view; also inspectable from Storyboard.
     @IBInspectable
     public var borderWidth: CGFloat {
         get {
@@ -165,6 +194,7 @@ public extension UIView {
         }
     }
     
+    /// YYSwift: Corner radius of view; also inspectable from Storyboard.
     @IBInspectable
     public var cornerRadius: CGFloat {
         get {
@@ -176,6 +206,7 @@ public extension UIView {
         }
     }
     
+    /// YYSwift: Shadow color of view; also inspectable from Storyboard.
     @IBInspectable
     public var shadowColor: UIColor? {
         get {
@@ -189,6 +220,7 @@ public extension UIView {
         }
     }
     
+    /// YYSwift: Shadow offset of view; also inspectable from Storyboard.
     @IBInspectable
     public var shadowOffset: CGSize {
         get {
@@ -199,6 +231,7 @@ public extension UIView {
         }
     }
     
+    /// YYSwift: Shadow opacity of view; also inspectable from Storyboard.
     @IBInspectable
     public var shadowOpacity: Float {
         get {
@@ -209,6 +242,7 @@ public extension UIView {
         }
     }
     
+    /// YYSwift: Shadow radius of view; also inspectable from Storyboard.
     @IBInspectable
     public var shadowRadius: CGFloat {
         get {
@@ -219,6 +253,7 @@ public extension UIView {
         }
     }
     
+    /// YYSwift: First responder.
     public var firstResponder: UIView? {
         guard !isFirstResponder else {
             return self
@@ -229,6 +264,7 @@ public extension UIView {
         return nil
     }
     
+    /// YYSwift: Check if view is in RTL format.
     public var isRightToLeft: Bool {
         if #available(iOS 10.0, *, tvOS 10.0, *) {
             return effectiveUserInterfaceLayoutDirection == .rightToLeft
@@ -237,11 +273,8 @@ public extension UIView {
             return false
         }
     }
-}
-
-
-public extension UIView {
     
+    /// YYSwift: Create a snapshot image of the complete view hierarchy.
     public var snapshotImage: UIImage? {
         UIGraphicsBeginImageContextWithOptions(bounds.size, isOpaque, 0)
         defer {
@@ -254,15 +287,7 @@ public extension UIView {
         return UIGraphicsGetImageFromCurrentImageContext()
     }
     
-    public func snapshot(afterScreenUpdates afterUpdates: Bool) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(bounds.size, isOpaque, 0)
-        defer {
-            UIGraphicsEndImageContext()
-        }
-        drawHierarchy(in: bounds, afterScreenUpdates: afterUpdates)
-        return UIGraphicsGetImageFromCurrentImageContext()
-    }
-    
+    /// Create a snapshot PDF of the complete view hierarchy.
     public var snapshotPDF: Data? {
         var pBounds = bounds
         let data = NSMutableData()
@@ -279,8 +304,36 @@ public extension UIView {
         context.endPDFPage()
         return data as Data
     }
+}
+
+
+public extension UIView {
     
-    public func addShadow(ofColor color: UIColor = UIColor(red: 0.07, green: 0.47, blue: 0.57, alpha: 1.0), radius: CGFloat = 3, offset: CGSize = .zero, opacity: Float = 0.5) {
+    /// Create a snapshot image of the complete view hierarchy.
+    /// It's faster than "snapshotImage", but may cause screen updates.
+    ///
+    /// - Parameter afterUpdates: A Boolean value that indicates whether the snapshot should be rendered after recent changes have been incorporated. Specify the value false if you want to render a snapshot in the view hierarchy’s current state, which might not include recent changes.
+    /// - Returns: a snapshot image of view
+    public func snapshot(afterScreenUpdates afterUpdates: Bool) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(bounds.size, isOpaque, 0)
+        defer {
+            UIGraphicsEndImageContext()
+        }
+        drawHierarchy(in: bounds, afterScreenUpdates: afterUpdates)
+        return UIGraphicsGetImageFromCurrentImageContext()
+    }
+    
+    /// YYSwift: Add shadow to view.
+    ///
+    /// - Parameters:
+    ///   - color: shadow color (default is #137992).
+    ///   - radius: shadow radius (default is 3).
+    ///   - offset: shadow offset (default is .zero).
+    ///   - opacity: shadow opacity (default is 0.5).
+    public func addShadow(ofColor color: UIColor = UIColor(red: 0.07, green: 0.47, blue: 0.57, alpha: 1.0),
+                          radius: CGFloat = 3,
+                          offset: CGSize = .zero,
+                          opacity: Float = 0.5) {
         layer.shadowColor = color.cgColor
         layer.shadowOffset = offset
         layer.shadowRadius = radius
@@ -288,10 +341,12 @@ public extension UIView {
         layer.masksToBounds = true
     }
     
+    /// Remove all subviews
     public func removeAllSubviews() {
         subviews.forEach({$0.removeFromSuperview()})
     }
     
+    /// YYSwift: Get view's parent view controller
     public var parentViewController: UIViewController? {
         weak var parentResponder: UIResponder? = self
         while parentResponder != nil {
@@ -303,6 +358,7 @@ public extension UIView {
         return nil
     }
     
+    /// Returns the visible alpha on screen, taking into account superview and window.
     public var visibleAlpha: CGFloat {
         if self is UIWindow {
             if isHidden {
@@ -324,6 +380,13 @@ public extension UIView {
         return alpha
     }
     
+    /// Converts a point from the receiver's coordinate system to that of the specified view or window.
+    ///
+    /// - Parameters:
+    ///   - point: A point specified in the local coordinate system (bounds) of the receiver.
+    ///   - view: The view or window into whose coordinate system point is to be converted.
+    ///           If view is nil, this method instead converts to window base coordinates.
+    /// - Returns: The point converted to the coordinate system of view.
     public func convert(point: CGPoint, toViewOrWindow view: UIView) -> CGPoint {
         var point = point
         let from = self is UIWindow ? self as? UIWindow : self.window
@@ -337,6 +400,13 @@ public extension UIView {
         return point
     }
     
+    /// Converts a point from the coordinate system of a given view or window to that of the receiver.
+    ///
+    /// - Parameters:
+    ///   - point: A point specified in the local coordinate system (bounds) of view.
+    ///   - view: The view or window with point in its coordinate system.
+    ///           If view is nil, this method instead converts from window base coordinates.
+    /// - Returns: The point converted to the local coordinate system (bounds) of the receiver.
     public func convert(point: CGPoint, fromViewOrWindow view: UIView) -> CGPoint {
         var point = point
         let from = view is UIWindow ? view as? UIWindow : view.window
@@ -350,6 +420,13 @@ public extension UIView {
         return point
     }
     
+    /// Converts a rectangle from the receiver's coordinate system to that of another view or window.
+    ///
+    /// - Parameters:
+    ///   - rect: A rectangle specified in the local coordinate system (bounds) of the receiver.
+    ///   - view: The view or window that is the target of the conversion operation.
+    ///           If view is nil, this method instead converts to window base coordinates.
+    /// - Returns: The converted rectangle.
     public func convert(rect: CGRect, toViewOrWindow view: UIView) -> CGRect {
         var rect = rect
         let from = self is UIWindow ? self as? UIWindow : self.window
@@ -363,6 +440,13 @@ public extension UIView {
         return rect
     }
     
+    /// Converts a rectangle from the coordinate system of another view or window to that of the receiver.
+    ///
+    /// - Parameters:
+    ///   - rect: A rectangle specified in the local coordinate system (bounds) of view.
+    ///   - view: The view or window with rect in its coordinate system.
+    ///           If view is nil, this method instead converts from window base coordinates.
+    /// - Returns: The converted rectangle.
     public func convert(rect: CGRect, fromViewOrWindow view: UIView) -> CGRect {
         var rect = rect
         let from = view is UIWindow ? view as? UIWindow : view.window
@@ -376,6 +460,11 @@ public extension UIView {
         return rect
     }
     
+    /// YYSwift: Set some or all corners radiuses of view.
+    ///
+    /// - Parameters:
+    ///   - corners: array of corners to change (example: [.bottomLeft, .topRight]).
+    ///   - radius: radius for selected corners.
     public func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
         let maskPath = UIBezierPath(roundedRect: bounds,
                                     byRoundingCorners: corners,
@@ -385,18 +474,33 @@ public extension UIView {
         layer.mask = shape
     }
     
+    /// YYSwift: Load view from nib.
+    ///
+    /// - Parameters:
+    ///   - name: nib name.
+    ///   - bundle: bundle of nib (default is nil).
+    /// - Returns: optional UIView (if applicable).
     public class func loadFromNib(named name: String, bundle: Bundle? = nil) -> UIView? {
         return UINib(nibName: name, bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as? UIView
     }
     
+    /// YYSwift: Remove all subviews in view.
     public func removeSubviews() {
         subviews.forEach({$0.removeFromSuperview()})
     }
     
+    /// YYSwift: Add array of subviews to view.
+    ///
+    /// - Parameter subviews: array of subviews to add to self.
     public func addSubviews(_ subviews: [UIView]) {
         subviews.forEach({self.addSubview($0)})
     }
     
+    /// YYSwift: Fade in view.
+    ///
+    /// - Parameters:
+    ///   - duration: animation duration in seconds (default is 1 second).
+    ///   - completion: optional completion handler to run with animation finishes (default is nil)
     public func fadeIn(duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
         if isHidden {
             isHidden = false
@@ -406,6 +510,11 @@ public extension UIView {
         }, completion: completion)
     }
     
+    /// YYSwift: Fade out view.
+    ///
+    /// - Parameters:
+    ///   - duration: animation duration in seconds (default is 1 second).
+    ///   - completion: optional completion handler to run with animation finishes (default is nil)
     public func fadeOut(duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
         if isHidden {
             isHidden = false
@@ -415,11 +524,24 @@ public extension UIView {
         }, completion: completion)
     }
     
+    /// YYSwift: Remove all gesture recognizers from view.
     public func removeGestureRecognizers() {
         gestureRecognizers?.forEach(removeGestureRecognizer)
     }
     
-    public func rotate(byAngle angle: CGFloat, ofType type: AngleUnit = .degrees, animated: Bool = false, duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
+    /// YYSwift: Rotate view by angle on relative axis.
+    ///
+    /// - Parameters:
+    ///   - angle: angle to rotate view by.
+    ///   - type: type of the rotation angle.
+    ///   - animated: set true to animate rotation (default is true).
+    ///   - duration: animation duration in seconds (default is 1 second).
+    ///   - completion: optional completion handler to run with animation finishes (default is nil).
+    public func rotate(byAngle angle: CGFloat,
+                       ofType type: AngleUnit = .degrees,
+                       animated: Bool = false,
+                       duration: TimeInterval = 1,
+                       completion: ((Bool) -> Void)? = nil) {
         let angleWithType = (type == .degrees) ? CGFloat.pi * angle / 180.0 : angle
         let aDuration = animated ? duration : 0
         UIView.animate(withDuration: aDuration, delay: 0, options: .curveLinear, animations: { () -> Void in
@@ -427,7 +549,19 @@ public extension UIView {
         }, completion: completion)
     }
     
-    public func rotate(toAngle angle: CGFloat, ofType type: AngleUnit = .degrees, animated: Bool = false, duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
+    /// YYSwift: Rotate view to angle on fixed axis.
+    ///
+    /// - Parameters:
+    ///   - angle: angle to rotate view to.
+    ///   - type: type of the rotation angle.
+    ///   - animated: set true to animate rotation (default is false).
+    ///   - duration: animation duration in seconds (default is 1 second).
+    ///   - completion: optional completion handler to run with animation finishes (default is nil).
+    public func rotate(toAngle angle: CGFloat,
+                       ofType type: AngleUnit = .degrees,
+                       animated: Bool = false,
+                       duration: TimeInterval = 1,
+                       completion: ((Bool) -> Void)? = nil) {
         let angleWithType = (type == .degrees) ? CGFloat.pi * angle / 180.0 : angle
         let aDuration = animated ? duration : 0
         UIView.animate(withDuration: aDuration, animations: {
@@ -435,7 +569,17 @@ public extension UIView {
         }, completion: completion)
     }
     
-    public func scale(by offset: CGPoint, animated: Bool = false, duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
+    /// YYSwift: Scale view by offset.
+    ///
+    /// - Parameters:
+    ///   - offset: scale offset
+    ///   - animated: set true to animate scaling (default is false).
+    ///   - duration: animation duration in seconds (default is 1 second).
+    ///   - completion: optional completion handler to run with animation finishes (default is nil).
+    public func scale(by offset: CGPoint,
+                      animated: Bool = false,
+                      duration: TimeInterval = 1,
+                      completion: ((Bool) -> Void)? = nil) {
         if animated {
             UIView.animate(withDuration: duration, delay: 0, options: .curveLinear, animations: { () -> Void in
                 self.transform = self.transform.scaledBy(x: offset.x, y: offset.y)
@@ -446,7 +590,17 @@ public extension UIView {
         }
     }
     
-    public func shake(direction: ShakeDirection = .horizontal, duration: TimeInterval = 1, animationType: ShakeAnimationType = .easeOut, completion:(() -> Void)? = nil) {
+    /// YYSwift: Shake view.
+    ///
+    /// - Parameters:
+    ///   - direction: shake direction (horizontal or vertical), (default is .horizontal)
+    ///   - duration: animation duration in seconds (default is 1 second).
+    ///   - animationType: shake animation type (default is .easeOut).
+    ///   - completion: optional completion handler to run with animation finishes (default is nil).
+    public func shake(direction: ShakeDirection = .horizontal,
+                      duration: TimeInterval = 1,
+                      animationType: ShakeAnimationType = .easeOut,
+                      completion:(() -> Void)? = nil) {
         
         CATransaction.begin()
         let animation: CAKeyframeAnimation
@@ -473,6 +627,11 @@ public extension UIView {
         CATransaction.commit()
     }
     
+    /// YYSwift: Add Visual Format constraints.
+    ///
+    /// - Parameters:
+    ///   - withFormat: visual Format language
+    ///   - views: array of views which will be accessed starting with index 0 (example: [v0], [v1], [v2]..)
     @available(iOS 9, *)
     public func addConstraints(withFormat: String, views: UIView...) {
         var viewsDictionary: [String: UIView] = [:]
@@ -484,6 +643,7 @@ public extension UIView {
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: withFormat, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
     }
     
+    /// YYSwift: Anchor all sides of the view into it's superview.
     @available(iOS 9, *)
     public func fillToSuperview() {
         translatesAutoresizingMaskIntoConstraints = false
@@ -495,6 +655,20 @@ public extension UIView {
         }
     }
     
+    /// YYSwift: Add anchors from any side of the current view into the specified anchors and returns the newly added constraints.
+    ///
+    /// - Parameters:
+    ///   - top: current view's top anchor will be anchored into the specified anchor
+    ///   - left: current view's left anchor will be anchored into the specified anchor
+    ///   - bottom: current view's bottom anchor will be anchored into the specified anchor
+    ///   - right: current view's right anchor will be anchored into the specified anchor
+    ///   - topConstant: current view's top anchor margin
+    ///   - leftConstant: current view's left anchor margin
+    ///   - bottomConstant: current view's bottom anchor margin
+    ///   - rightConstant: current view's right anchor margin
+    ///   - widthConstant: current view's width
+    ///   - heightConstant: current view's height
+    /// - Returns: array of newly added constraints (if applicable).
     @available(iOS 9, *)
     @discardableResult
     public func anchor(
@@ -542,6 +716,9 @@ public extension UIView {
         return anchors
     }
     
+    /// YYSwift: Anchor center X into current view's superview with a constant margin value.
+    ///
+    /// - Parameter constant: constant of the anchor constraint (default is 0).
     @available(iOS 9, *)
     public func anchorCenterXToSuperview(constant: CGFloat = 0) {
         translatesAutoresizingMaskIntoConstraints = false
@@ -550,6 +727,9 @@ public extension UIView {
         }
     }
     
+    /// YYSwift: Anchor center Y into current view's superview with a constant margin value.
+    ///
+    /// - Parameter withConstant: constant of the anchor constraint (default is 0).
     @available(iOS 9, *)
     public func anchorCenterYToSuperview(constant: CGFloat = 0) {
         translatesAutoresizingMaskIntoConstraints = false
@@ -558,7 +738,9 @@ public extension UIView {
         }
     }
     
-    @available(iOS 9, *) public func anchorCenterSuperview() {
+    /// YYSwift: Anchor center X and Y into current view's superview
+    @available(iOS 9, *)
+    public func anchorCenterSuperview() {
         anchorCenterXToSuperview()
         anchorCenterYToSuperview()
     }

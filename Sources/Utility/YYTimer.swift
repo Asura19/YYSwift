@@ -12,17 +12,32 @@ public class YYTimer {
     
     fileprivate let timer: DispatchSourceTimer
     
+    /// YYSwift: set repeatable to time (default is true)
     public private(set) var repeats: Bool
     
+    /// YYSwift: timer repeat interval
     public private(set) var timeInterval: TimeInterval
     
+    /// YYSwift: is timer valid
     public private(set) var isValid: Bool
     
     public typealias YYTimerHandler = (YYTimer) -> Void
     
     private var handler: YYTimerHandler
     
-    public init(fireTime start: TimeInterval = 0, interval: TimeInterval, repeats: Bool = true, queue: DispatchQueue = .main, handler: @escaping YYTimerHandler) {
+    /// YYSwift: A timer by DispatchSourceTimer
+    ///
+    /// - Parameters:
+    ///   - start: the duration from the code executed time to timer start
+    ///   - interval: timer repeat interval
+    ///   - repeats: true is repeatable
+    ///   - queue: the handle will execute on the queue
+    ///   - handler: event handler
+    public init(fireTime start: TimeInterval = 0,
+                interval: TimeInterval,
+                repeats: Bool = true,
+                queue: DispatchQueue = .main,
+                handler: @escaping YYTimerHandler) {
         
         self.repeats = repeats
         self.handler = handler
@@ -53,6 +68,14 @@ public class YYTimer {
         }
     }
     
+    /// YYSwift: A timer by DispatchSourceTimer
+    ///
+    /// - Parameters:
+    ///   - fireTime: the duration from the code executed time to timer start
+    ///   - interval: timer repeat interval
+    ///   - queue: the handle will execute on the queue
+    ///   - handler: event handler
+    /// - Returns: A timer
     public static func repeats(after fireTime: TimeInterval = 0,
                                withInterval interval: TimeInterval,
                                queue: DispatchQueue = .main,
@@ -65,12 +88,29 @@ public class YYTimer {
                        handler: handler)
     }
     
-    public static func countDown(interval: TimeInterval, times: Int, queue: DispatchQueue = .main , handler: @escaping (YYCountDownTimer, _ leftTimes: Int) -> Void) -> YYCountDownTimer {
+    /// YYSwift: A count down timer.
+    ///
+    /// - Parameters:
+    ///   - interval: timer repeat interval
+    ///   - times: count down times
+    ///   - queue: the handle will execute on the queue
+    ///   - handler: event handler
+    /// - Returns: a timer of YYCountDownTimer
+    public static func countDown(interval: TimeInterval,
+                                 times: Int,
+                                 queue: DispatchQueue = .main ,
+                                 handler: @escaping (YYCountDownTimer, _ leftTimes: Int) -> Void) -> YYCountDownTimer {
         let countDownTimer =  YYCountDownTimer(interval: interval, times: times, queue: queue, handler: handler)
         countDownTimer.start()
         return countDownTimer
     }
     
+    /// YYSwift: Execute the handler after a interval.
+    ///
+    /// - Parameters:
+    ///   - fireTime: the duration from the code executed time to timer start
+    ///   - queue: the handle will execute on the queue
+    ///   - handler: event handler
     public static func after(_ fireTime: TimeInterval,
                              queue: DispatchQueue = .main,
                              handler: @escaping () -> Void) {

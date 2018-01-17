@@ -8,8 +8,10 @@
 
 import UIKit
 
+// MARK: - Properties
 public extension UISegmentedControl {
     
+    /// YYSwift: Segments titles.
     public var segmentTitles: [String] {
         get {
             let range = 0..<numberOfSegments
@@ -23,6 +25,7 @@ public extension UISegmentedControl {
         }
     }
     
+    /// YYSwift: Segments images.
     public var segmentImages: [UIImage] {
         get {
             let range = 0..<numberOfSegments

@@ -8,9 +8,20 @@
 
 import UIKit
 
+// MARK: - Methods
 public extension UIImageView {
     
-    public func download(from url: URL, contentMode: UIViewContentMode = .scaleAspectFit, placehoder: UIImage? = nil, completionHandler: ((UIImage?) -> Void)? = nil) {
+    /// YYSwift: Set image from a URL.
+    ///
+    /// - Parameters:
+    ///   - url: URL of image.
+    ///   - contentMode: imageView content mode (default is .scaleAspectFit).
+    ///   - placeHolder: optional placeholder image
+    ///   - completionHandler: optional completion handler to run when download finishs (default is nil).
+    public func download(from url: URL,
+                         contentMode: UIViewContentMode = .scaleAspectFit,
+                         placehoder: UIImage? = nil,
+                         completionHandler: ((UIImage?) -> Void)? = nil) {
         image = placehoder
         self.contentMode = contentMode
         URLSession.shared.dataTask(with: url) { (data, response, _) in
@@ -31,6 +42,9 @@ public extension UIImageView {
         }.resume()
     }
     
+    /// YYSwift: Make image view blurry
+    ///
+    /// - Parameter style: UIBlurEffectStyle (default is .light).
     public func blur(withStyle style: UIBlurEffectStyle = .light) {
         let blurEffect = UIBlurEffect(style: style)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -40,6 +54,10 @@ public extension UIImageView {
         clipsToBounds = true
     }
     
+    /// YYSwift: Blurred version of an image view
+    ///
+    /// - Parameter style: UIBlurEffectStyle (default is .light).
+    /// - Returns: blurred version of self.
     public func blurred(withStyle style: UIBlurEffectStyle = .light) -> UIImageView {
         let imgView = self
         imgView.blur(withStyle: style)

@@ -15,12 +15,14 @@
 public extension CGColor {
     
     #if !os(macOS)
+    /// YYSwift: UIColor.
     public var uiColor: UIColor? {
         return UIColor(cgColor: self)
     }
     #endif
     
     #if os(macOS)
+    /// YYSwift: NSColor.
     public var nsColor: NSColor? {
         return NSColor(cgColor: self)
     }
