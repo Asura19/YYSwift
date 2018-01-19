@@ -17,6 +17,7 @@ import Swiftzlib
 // MARK: - Hash
 public extension Data {
     
+    /// YYSwift: Returns an Data for md2 hash.
     public var md2Data: Data? {
         var result = Data(count: Int(CC_MD2_DIGEST_LENGTH))
         _ = result.withUnsafeMutableBytes { digestBytes in
@@ -27,12 +28,14 @@ public extension Data {
         return result
     }
     
+    /// YYSwift: Returns a lowercase String for md2 hash.
     public var md2String: String? {
         return md2Data?.reduce("") {
             $0 + String(format:"%02x", $1)
         }
     }
     
+    /// YYSwift: Returns an Data for md4 hash.
     public var md4Data: Data? {
         var result = Data(count: Int(CC_MD4_DIGEST_LENGTH))
         _ = result.withUnsafeMutableBytes { digestBytes in
@@ -43,12 +46,14 @@ public extension Data {
         return result
     }
     
+    /// YYSwift: Returns a lowercase String for md4 hash.
     public var md4String: String? {
         return md4Data?.reduce("") {
             $0 + String(format:"%02x", $1)
         }
     }
     
+    /// YYSwift: Returns an Data for md5 hash.
     public var md5Data: Data? {
         var result = Data(count: Int(CC_MD5_DIGEST_LENGTH))
         _ = result.withUnsafeMutableBytes { digestBytes in
@@ -59,12 +64,14 @@ public extension Data {
         return result
     }
     
+    /// YYSwift: Returns a lowercase String for md5 hash.
     public var md5String: String? {
         return md5Data?.reduce("") {
             $0 + String(format:"%02x", $1)
         }
     }
     
+    /// YYSwift: Returns an Data for sha1 hash.
     public var sha1Data: Data? {
         var result = Data(count: Int(CC_SHA1_DIGEST_LENGTH))
         _ = result.withUnsafeMutableBytes { digestBytes in
@@ -75,12 +82,14 @@ public extension Data {
         return result
     }
 
+    /// YYSwift: Returns a lowercase String for sha1 hash.
     public var sha1String: String? {
         return sha1Data?.reduce("") {
             $0 + String(format:"%02x", $1)
         }
     }
     
+    /// YYSwift: Returns an Data for sha224 hash.
     public var sha224Data: Data? {
         var result = Data(count: Int(CC_SHA224_DIGEST_LENGTH))
         _ = result.withUnsafeMutableBytes { digestBytes in
@@ -91,12 +100,14 @@ public extension Data {
         return result
     }
     
+    /// YYSwift: Returns a lowercase String for sha224 hash.
     public var sha224String: String? {
         return sha224Data?.reduce("") {
             $0 + String(format:"%02x", $1)
         }
     }
     
+    /// YYSwift: Returns an Data for sha256 hash.
     public var sha256Data: Data? {
         var result = Data(count: Int(CC_SHA256_DIGEST_LENGTH))
         _ = result.withUnsafeMutableBytes { digestBytes in
@@ -107,12 +118,14 @@ public extension Data {
         return result
     }
     
+    /// YYSwift: Returns a lowercase String for sha256 hash.
     public var sha256String: String? {
         return sha256Data?.reduce("") {
             $0 + String(format:"%02x", $1)
         }
     }
     
+    /// YYSwift: Returns an Data for sha384 hash.
     public var sha384Data: Data? {
         var result = Data(count: Int(CC_SHA384_DIGEST_LENGTH))
         _ = result.withUnsafeMutableBytes { digestBytes in
@@ -123,12 +136,14 @@ public extension Data {
         return result
     }
     
+    /// YYSwift: Returns a lowercase String for sha384 hash.
     public var sha384String: String? {
         return sha384Data?.reduce("") {
             $0 + String(format:"%02x", $1)
         }
     }
     
+    /// YYSwift: Returns an Data for sha512 hash.
     public var sha512Data: Data? {
         var result = Data(count: Int(CC_SHA512_DIGEST_LENGTH))
         _ = result.withUnsafeMutableBytes { digestBytes in
@@ -139,6 +154,7 @@ public extension Data {
         return result
     }
     
+    /// YYSwift: Returns a lowercase String for sha512 hash.
     public var sha512String: String? {
         return sha512Data?.reduce("") {
             $0 + String(format:"%02x", $1)
@@ -202,50 +218,98 @@ public extension Data {
         }
     }
     
+    /// YYSwift: Returns a lowercase String for hmac using algorithm md5 with key.
+    ///
+    /// - Parameter key: The hmac key.
+    /// - Returns: a lowercase String for hmac using algorithm md5 with key.
     public func hmacMD5StringWithKey(_ key: String) -> String? {
         return hmac(UsingAlgorithm: .MD5, withKey: key)
     }
     
+    /// YYSwift: Returns a Data for hmac using algorithm md5 with key.
+    ///
+    /// - Parameter key: The hmac key.
+    /// - Returns: a Data for hmac using algorithm md5 with key.
     public func hmacMD5DataWithKey(_ key: Data) -> Data? {
         return hmac(UsingAlgorithm: .MD5, withKey: key)
     }
     
+    /// YYSwift: Returns a lowercase String for hmac using algorithm sha1 with key.
+    ///
+    /// - Parameter key: The hmac key.
+    /// - Returns: a lowercase String for hmac using algorithm sha1 with key.
     public func hmacSHA1StringWithKey(_ key: String) -> String? {
         return hmac(UsingAlgorithm: .SHA1, withKey: key)
     }
     
+    /// YYSwift: Returns a Data for hmac using algorithm sha1 with key.
+    ///
+    /// - Parameter key: The hmac key.
+    /// - Returns: a Data for hmac using algorithm sha1 with key.
     public func hmacSHA1DataWithKey(_ key: Data) -> Data? {
         return hmac(UsingAlgorithm: .SHA1, withKey: key)
     }
     
+    /// YYSwift: Returns a lowercase String for hmac using algorithm sha224 with key.
+    ///
+    /// - Parameter key: The hmac key.
+    /// - Returns: a lowercase String for hmac using algorithm sha224 with key.
     public func hmacSHA224StringWithKey(_ key: String) -> String? {
         return hmac(UsingAlgorithm: .SHA224, withKey: key)
     }
     
+    /// YYSwift: Returns a Data for hmac using algorithm sha224 with key.
+    ///
+    /// - Parameter key: The hmac key.
+    /// - Returns: a Data for hmac using algorithm sha224 with key.
     public func hmacSHA224DataWithKey(_ key: Data) -> Data? {
         return hmac(UsingAlgorithm: .SHA224, withKey: key)
     }
     
+    /// YYSwift: Returns a lowercase String for hmac using algorithm sha256 with key.
+    ///
+    /// - Parameter key: The hmac key.
+    /// - Returns: a lowercase String for hmac using algorithm sha256 with key.
     public func hmacSHA256StringWithKey(_ key: String) -> String? {
         return hmac(UsingAlgorithm: .SHA256, withKey: key)
     }
     
+    /// YYSwift: Returns a Data for hmac using algorithm sha256 with key.
+    ///
+    /// - Parameter key: The hmac key.
+    /// - Returns: a Data for hmac using algorithm sha256 with key.
     public func hmacSHA256DataWithKey(_ key: Data) -> Data? {
         return hmac(UsingAlgorithm: .SHA256, withKey: key)
     }
     
+    /// YYSwift: Returns a lowercase String for hmac using algorithm sha384 with key.
+    ///
+    /// - Parameter key: The hmac key.
+    /// - Returns: a lowercase String for hmac using algorithm sha384 with key.
     public func hmacSHA384StringWithKey(_ key: String) -> String? {
         return hmac(UsingAlgorithm: .SHA384, withKey: key)
     }
     
+    /// YYSwift: Returns a Data for hmac using algorithm sha384 with key.
+    ///
+    /// - Parameter key: The hmac key.
+    /// - Returns: a Data for hmac using algorithm sha384 with key.
     public func hmacSHA384DataWithKey(_ key: Data) -> Data? {
         return hmac(UsingAlgorithm: .SHA384, withKey: key)
     }
     
+    /// YYSwift: Returns a lowercase String for hmac using algorithm sha512 with key.
+    ///
+    /// - Parameter key: The hmac key.
+    /// - Returns: a lowercase String for hmac using algorithm sha512 with key.
     public func hmacSHA512StringWithKey(_ key: String) -> String? {
         return hmac(UsingAlgorithm: .SHA384, withKey: key)
     }
     
+    /// YYSwift: Returns a Data for hmac using algorithm sha512 with key.
+    ///
+    /// - Parameter key: The hmac key.
+    /// - Returns: a Data for hmac using algorithm sha512 with key.
     public func hmacSHA512DataWithKey(_ key: Data) -> Data? {
         return hmac(UsingAlgorithm: .SHA384, withKey: key)
     }
@@ -253,14 +317,22 @@ public extension Data {
 }
 
 
-// MARK: - Encrypt
+// MARK: - Encrypt and Decrypt
 public extension Data  {
+    
     //    public func crc32() -> UInt32 {
     //        let crc = self.withUnsafeBytes {
     //            crc32(0, $0, numericCast(self.count))
     //        }
     //    }
     
+    
+    /// YYSwift: Returns an encrypted Data using AES.
+    ///
+    /// - Parameters:
+    ///   - key: A key length of 16, 24 or 32 (128, 192 or 256bits).
+    ///   - iv: An initialization vector length of 16(128bits).
+    /// - Returns: A Data encrypted, or nil if an error occurs.
     public func aes256EncryptWithKey(_ key: Data, iv: Data) -> Data? {
         guard key.count == 16 || key.count == 24 || key.count == 32 else {
             return nil
@@ -268,7 +340,7 @@ public extension Data  {
         guard iv.count == 16 || iv.count == 0 else {
             return nil
         }
-        
+
         let cryptLength  = Int(self.count + kCCBlockSizeAES128)
         var result = Data(count:cryptLength)
         let keyLength = size_t(kCCKeySizeAES128)
@@ -304,6 +376,12 @@ public extension Data  {
         }
     }
     
+    /// YYSwift: Returns an decrypted Data using AES.
+    ///
+    /// - Parameters:
+    ///   - key: A key length of 16, 24 or 32 (128, 192 or 256bits).
+    ///   - iv: An initialization vector length of 16(128bits).
+    /// - Returns: An Data decrypted, or nil if an error occurs.
     public func aes256DecryptWithKey(_ key: Data, iv: Data) -> Data? {
         guard key.count == 16 || key.count == 24 || key.count == 32 else {
             return nil
@@ -433,6 +511,7 @@ public extension Data {
 
 public extension Data {
     
+    /// YYSwift: Returns string decoded in UTF8.
     public var utf8String: String? {
         if self.count > 0 {
             return String(data: self, encoding: .utf8)
@@ -440,12 +519,16 @@ public extension Data {
         return nil
     }
     
+    /// YYSwift: Returns a uppercase String in HEX.
     public var hexString: String? {
         return self.reduce("") {
             $0 + String(format:"%02x", $1)
         }
     }
     
+    /// YYSwift: Returns an NSDictionary or NSArray for decoded self.
+    /// Returns nil if an error occurs.
+    /// - Returns: an Dictionary or Array for decoded self.
     public func jsonValueDecoded() -> Any? {
         return try? JSONSerialization.jsonObject(with: self, options: JSONSerialization.ReadingOptions())
     }
@@ -476,6 +559,9 @@ public extension Data {
         private init() { }
     }
     
+    /// YYSwift: Decompress data from gzip data.
+    ///
+    /// - Returns: Inflated data.
     public func gzipInflate() -> Data {
         guard !self.isEmpty else {
             return Data()
@@ -517,6 +603,9 @@ public extension Data {
         return data
     }
     
+    /// YYSwift: Comperss data to gzip in default compresssion level.
+    ///
+    /// - Returns: Deflated data.
     public func gzipDeflate() -> Data {
         guard !self.isEmpty else {
             return Data()
@@ -552,6 +641,9 @@ public extension Data {
         return data
     }
     
+    /// YYSwift: Decompress data from zlib-compressed data.
+    ///
+    /// - Returns: Inflated data.
     public func zlibInflate() -> Data {
         guard !self.isEmpty else {
             return Data()
@@ -593,6 +685,9 @@ public extension Data {
         return data
     }
     
+    /// YYSwift: Comperss data to zlib-compressed in default compresssion level.
+    ///
+    /// - Returns: Deflated data.
     public func zlibDeflate() -> Data {
         guard !self.isEmpty else {
             return Data()

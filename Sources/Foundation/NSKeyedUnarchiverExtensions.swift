@@ -10,6 +10,11 @@ import Foundation
 
 public extension NSKeyedUnarchiver {
     
+    /// YYSwift: Same as unarchiveObjectWithFile:, except it returns the exception by reference.
+    ///
+    /// - Parameter file: The path of archived object file.
+    /// - Returns: The unarchived object
+    /// - Throws: Unarchived error
     public class func unarchiveObject(withFilePath file: String) throws -> Any {
         do {
             let data = try Data(contentsOf: URL(fileURLWithPath: file))
@@ -33,6 +38,11 @@ public extension NSKeyedUnarchiver {
         }
     }
     
+    /// YYSwift: Same as unarchiveObjectWithData:, except it returns the exception by reference.
+    ///
+    /// - Parameter data: The data need unarchived.
+    /// - Returns: The unarchived object
+    /// - Throws: Unarchived error
     public class func unarchiveObject(withFileData data: Data) throws -> Any {
         var object: Any?
         do {

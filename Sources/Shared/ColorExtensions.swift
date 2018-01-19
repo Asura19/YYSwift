@@ -18,8 +18,10 @@
     import CoreImage
 #endif
 
+// MARK: - Properties
 public extension Color {
     
+    /// YYSwift: Random color.
     public static var random: Color {
         let r = Int(arc4random_uniform(255)).cgFloat
         let g = Int(arc4random_uniform(255)).cgFloat
@@ -27,6 +29,12 @@ public extension Color {
         return Color(red: r, green: g, blue: b, alpha: 1)
     }
     
+    /// YYSwift: RGB components for a Color (between 0 and 255).
+    ///
+    ///     UIColor.red.rgbComponents.red -> 255
+    ///     NSColor.green.rgbComponents.green -> 255
+    ///     UIColor.blue.rgbComponents.blue -> 255
+    ///
     public var rgbIntComponents: (red: Int, green: Int, blue: Int) {
         var components: [CGFloat] {
             let c = cgColor.components!
@@ -41,6 +49,12 @@ public extension Color {
         return (red: Int(r * 255.0), green: Int(g * 255.0), blue: Int(b * 255.0))
     }
     
+    /// YYSwift: RGBA components for a Color (between 0 and 1).
+    ///
+    ///     UIColor.red.rgbaComponents.red -> 1.0
+    ///     NSColor.green.rgbaComponents.green -> 1.0
+    ///     UIColor.blue.rgbaComponents.blue -> 1.0
+    ///
     public var rgbaComponents: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
         var components: [CGFloat] {
             let c = cgColor.components!
@@ -56,6 +70,7 @@ public extension Color {
         return (red: r, green: g, blue: b, alpha: a)
     }
     
+    /// YYSwift: Get components of hue, saturation, and brightness, and alpha (read-only).
     public var hsbaComponents: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
         var h: CGFloat = 0.0
         var s: CGFloat = 0.0
@@ -66,18 +81,21 @@ public extension Color {
         return (hue: h, saturation: s, brightness: b, alpha: a)
     }
     
+    /// YYSwift: Get components of hue, saturation, and lightness, and alpha (read-only).
     public var hslaComponents: (hue: CGFloat, saturation: CGFloat, lightness: CGFloat, alpha: CGFloat) {
         let rgba = rgbaComponents
         let hsl = Color.yy.rgb2hsl(rgba.red, rgba.green, rgba.blue)
         return (hue: hsl.hue, saturation: hsl.saturation, lightness: hsl.lightness , alpha: rgba.alpha)
     }
     
+    /// YYSwift: Get components of cyan, magenta, yellow, black, and alpha (read-only).
     public var cmykaComponents: (cyan: CGFloat, magenta: CGFloat, yellow: CGFloat, black: CGFloat, alpha: CGFloat) {
         let rgba = rgbaComponents
         let cmyk = Color.yy.rgb2cmyk(rgba.red, rgba.green, rgba.blue)
         return (cyan: cmyk.cyan, magenta: cmyk.magenta, yellow: cmyk.yellow, black: cmyk.black, alpha: rgba.alpha)
     }
     
+    /// YYSwift: Hexadecimal value string (read-only).
     public var hexString: String {
         let components: [Int] = {
             let c = cgColor.components!
@@ -87,6 +105,7 @@ public extension Color {
         return String(format: "#%02X%02X%02X", components[0], components[1], components[2])
     }
     
+    /// YYSwift: Short hexadecimal value string (read-only, if applicable).
     public var shortHexString: String? {
         let string = hexString.replacingOccurrences(of: "#", with: "")
         let chrs = Array(string)
@@ -96,6 +115,7 @@ public extension Color {
         return "#\(chrs[0])\(chrs[2])\(chrs[4])"
     }
     
+    /// YYSwift: Short hexadecimal value string, or full hexadecimal string if not possible (read-only).
     public var shortHexOrHexString: String {
         let components: [Int] = {
             let c = cgColor.components!
@@ -111,16 +131,19 @@ public extension Color {
         return "#\(chrs[0])\(chrs[2])\(chrs[4])"
     }
     
+    /// YYSwift: Alpha of Color (read-only).
     public var alpha: CGFloat {
         return cgColor.alpha
     }
     
     #if !os(watchOS)
+    /// YYSwift: CoreImage.CIColor (read-only)
     public var coreImageColor: CoreImage.CIColor? {
         return CoreImage.CIColor(color: self)
     }
     #endif
     
+    /// YYSwift: Returns the rgb value in hex, such as 0x66ccff.
     public var rgbValue: UInt {
         var r: CGFloat = 0.0
         var g: CGFloat = 0.0
@@ -133,6 +156,7 @@ public extension Color {
         return UInt((red << 16) + (green << 8) + blue)
     }
     
+    /// YYSwift: Returns the rgb value in hex, such as 0x66ccffff.
     public var rgbaValue: UInt {
         var r: CGFloat = 0.0
         var g: CGFloat = 0.0
@@ -147,14 +171,30 @@ public extension Color {
         return UInt(result)
     }
     
+    /// YYSwift: Get color complementary (read-only, if applicable).
     public var complementary: Color {
         let red: CGFloat = 1.0 - self.rgbaComponents.red
         let green: CGFloat = 1.0 - self.rgbaComponents.green
         let blue: CGFloat = 1.0 - self.rgbaComponents.blue
         return Color.init(red: red, green: green, blue: blue, alpha: 1)
     }
+}
+
+// MARK: - Methods
+public extension Color {
     
-    public static func blend(_ color1: Color, intensity1: CGFloat = 0.5, with color2: Color, intensity2: CGFloat = 0.5) -> Color {
+    /// YYSwift: Blend two Colors
+    ///
+    /// - Parameters:
+    ///   - color1: first color to blend
+    ///   - intensity1: intensity of first color (default is 0.5)
+    ///   - color2: second color to blend
+    ///   - intensity2: intensity of second color (default is 0.5)
+    /// - Returns: Color created by blending first and seond colors.
+    public static func blend(_ color1: Color,
+                             intensity1: CGFloat = 0.5,
+                             with color2: Color,
+                             intensity2: CGFloat = 0.5) -> Color {
 
         let total = intensity1 + intensity2
         let ratio1 = intensity1 / total
@@ -197,10 +237,21 @@ public extension Color {
         
     }
     
+    /// YYSwift: Blend the color with a color
+    ///
+    /// - Parameter color: second color to blend
+    /// - Returns: Color created by blending self and seond colors.
     public func blend(withColor color: Color) -> Color {
         return Color.blend(self, intensity1: 0.5, with: color, intensity2: 0.5)
     }
     
+    /// YYSwift: Lighten a color
+    ///
+    ///     let color = Color(red: r, green: g, blue: b, alpha: a)
+    ///     let lighterColor: Color = color.lighten(by: 0.2)
+    ///
+    /// - Parameter percentage: Percentage by which to lighten the color
+    /// - Returns: A lightened color
     public func lighten(by percentage: CGFloat = 0.2) -> Color {
         var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
         self.getRed(&r, green: &g, blue: &b, alpha: &a)
@@ -210,6 +261,13 @@ public extension Color {
                      alpha: a)
     }
     
+    /// YYSwift: Darken a color
+    ///
+    ///     let color = Color(red: r, green: g, blue: b, alpha: a)
+    ///     let darkerColor: Color = color.darken(by: 0.2)
+    ///
+    /// - Parameter percentage: Percentage by which to darken the color
+    /// - Returns: A darkened color
     public func darken(by percentage: CGFloat = 0.2) -> Color {
         var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
         self.getRed(&r, green: &g, blue: &b, alpha: &a)
@@ -220,6 +278,7 @@ public extension Color {
     }
 }
 
+// MARK: - Transform color mode
 extension Color: NamespaceWrappable {}
 public extension TypeWrapperProtocol where WrappedType == Color {
     
@@ -514,16 +573,20 @@ public extension TypeWrapperProtocol where WrappedType == Color {
     }
 }
 
-public extension Color {
+fileprivate extension Color {
     
     fileprivate static func clampColorValue(_ value: inout CGFloat) {
         value = value < 0 ? 0 : (value > 1 ? 1 : value)
     }
 }
 
+// MARK: - Initializer
 public extension Color {
     
-    public convenience init?(red: Int, green: Int, blue: Int, transparency: CGFloat = 1) {
+    public convenience init?(red: Int,
+                             green: Int,
+                             blue: Int,
+                             transparency: CGFloat = 1) {
         guard red >= 0 && red <= 255 else {
             return nil
         }
@@ -541,12 +604,19 @@ public extension Color {
         self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: trans)
     }
     
-    public convenience init?(hue: CGFloat, saturation: CGFloat, lightness: CGFloat, alpha: CGFloat = 1) {
+    public convenience init?(hue: CGFloat,
+                             saturation: CGFloat,
+                             lightness: CGFloat,
+                             alpha: CGFloat = 1) {
         let rgb = Color.yy.hsl2rgb(hue, saturation, lightness)
         self.init(red: rgb.red, green: rgb.green, blue: rgb.blue, alpha: alpha)
     }
     
-    public convenience init?(cyan: CGFloat, magenta: CGFloat, yellow: CGFloat, black: CGFloat, alpha: CGFloat = 1) {
+    public convenience init?(cyan: CGFloat,
+                             magenta: CGFloat,
+                             yellow: CGFloat,
+                             black: CGFloat,
+                             alpha: CGFloat = 1) {
         let rgb = Color.yy.cmyk2rgb(cyan, magenta, yellow, black)
         self.init(red: rgb.red, green: rgb.green, blue: rgb.blue, alpha: alpha)
     }
