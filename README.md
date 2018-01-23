@@ -17,7 +17,7 @@ Add ```github "Asura19/YYSwift"``` to your Cartfile
 #### Swift Package Manager
 ```
 dependencies: [
-    .package(url: "https://github.com/Asura19/YYSwift.git", from: "1.0.4")
+    .package(url: "https://github.com/Asura19/YYSwift.git", from: "1.0.5")
 ]
 ```
 #### Manually
