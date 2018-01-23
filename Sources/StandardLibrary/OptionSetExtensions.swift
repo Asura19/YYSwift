@@ -9,7 +9,12 @@
 import Foundation
 
 public extension OptionSet where RawValue: FixedWidthInteger {
+    
     // https://stackoverflow.com/questions/32102936/how-do-you-enumerate-optionsettype-in-swift
+    
+    /// YYSwift: Return a sequence of OptionSet
+    ///
+    /// - Returns: a sequence of OptionSet
     func elements() -> AnySequence<Self> {
         var remainingBits = rawValue
         var bitMask: RawValue = 1

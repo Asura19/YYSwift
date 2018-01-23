@@ -8,12 +8,15 @@
 
 import Foundation
 
+// MARK: - Properties
 public extension SignedNumeric {
     
+    /// YYSwift: String.
     public var string: String {
         return String(describing: self)
     }
     
+    /// YYSwift: String with number and current locale currency.
     public var asLocaleCurrency: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency

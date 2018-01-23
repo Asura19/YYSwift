@@ -15,7 +15,7 @@
 // MARK: - Methods
 public extension CGSize {
 
-    /// SwifterSwift: Aspect fit CGSize.
+    /// YYSwift: Aspect fit CGSize.
     ///
     ///     let rect = CGSize(width: 120, height: 80)
     ///     let parentRect  = CGSize(width: 100, height: 50)
@@ -29,7 +29,7 @@ public extension CGSize {
         return CGSize(width: width * minRatio, height: height * minRatio)
     }
     
-    /// SwifterSwift: Aspect fill CGSize.
+    /// YYSwift: Aspect fill CGSize.
     ///
     ///     let rect = CGSize(width: 20, height: 120)
     ///     let parentRect  = CGSize(width: 100, height: 60)

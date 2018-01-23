@@ -10,11 +10,19 @@ import Foundation
 
 public extension Collection {
 
+    /// YYSwift: Safe protects the array from out of bounds by use of optional.
+    ///
+    ///        let arr = [1, 2, 3, 4, 5]
+    ///        arr[safeAt: 1] -> 2
+    ///        arr[safeAt: 10] -> nil
+    ///
+    /// - Parameter index: index of element to access element.
     public subscript (safeAt index: Index) -> Iterator.Element? {
         return indices.contains(index) ? self[index] : nil
     }
 }
 
+// MARK: - Methods
 public extension Collection {
     
     private func indicesArray() -> [Self.Index] {
@@ -27,6 +35,13 @@ public extension Collection {
         return indices
     }
     
+    /// YYSwift: Performs `each` closure for each element of collection in parallel.
+    ///
+    ///     array.forEachInParallel { item in
+    ///         print(item)
+    ///     }
+    ///
+    /// - Parameter each: closure to run for each element.
     public func forEachInParallel(_ each: (Self.Iterator.Element) -> Void) {
         let indices = indicesArray()
         
@@ -39,18 +54,25 @@ public extension Collection {
 
 public extension Collection where Index == Int, IndexDistance == Int {
     
+    /// YYSwift: Random item from array.
     public var random: Iterator.Element? {
         let index = Int(arc4random_uniform(UInt32(count)))
         return self[safeAt: index]
     }
 }
 
+// MARK: - Methods (Integer)
 public extension Collection where Iterator.Element == Int, Index == Int {
 
+    
+    /// YYSwift: Return sum result.
     public var total: Iterator.Element {
         return reduce(0, +)
     }
     
+    /// YYSwift: Average of all elements in array.
+    ///
+    /// - Returns: the average of the array's elements.
     public func average() -> Element {
         return isEmpty ? 0 : reduce(0, +) / Element(count)
     }

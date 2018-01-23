@@ -54,7 +54,7 @@ public extension Bundle {
         var path: String?
         let scales = self.preferredScales()
         for scale in scales {
-            let scaledName = ext.count > 0 ? name.appending(nameScale: scale) : name.appending(pathScal: scale)
+            let scaledName = ext.count > 0 ? name.appending(nameScale: scale) : name.appending(pathScale: scale)
             path = self.path(forResource: scaledName, ofType: ext, inDirectory: bundlePath)
             if path != nil { break }
         }
@@ -79,7 +79,7 @@ public extension Bundle {
         var path: String?
         let scales = Bundle.preferredScales()
         for scale in scales {
-            let scaledName = ext.count > 0 ? name.appending(nameScale: scale) : name.appending(pathScal: scale)
+            let scaledName = ext.count > 0 ? name.appending(nameScale: scale) : name.appending(pathScale: scale)
             path = self.path(forResource: scaledName, ofType: ext)!
             if path != nil { break }
         }
@@ -106,7 +106,7 @@ public extension Bundle {
         var path: String?
         let scales = Bundle.preferredScales()
         for scale in scales {
-            let scaledName = ext.count > 0 ? name.appending(nameScale: scale) : name.appending(pathScal: scale)
+            let scaledName = ext.count > 0 ? name.appending(nameScale: scale) : name.appending(pathScale: scale)
             path = self.path(forResource: scaledName, ofType: ext, inDirectory: subpath)
             if path != nil { break }
         }

@@ -11,7 +11,7 @@ import Foundation
 // MARK: - Initializers
 public extension URLRequest {
     
-    /// SwifterSwift: Create URLRequest from URL string.
+    /// YYSwift: Create URLRequest from URL string.
     ///
     /// - Parameter urlString: URL string to initialize URL request from
     public init?(urlString: String) {
