@@ -52,7 +52,7 @@ public extension Collection {
     }
 }
 
-public extension Collection where Index == Int, IndexDistance == Int {
+public extension Collection where Index == Int {
     
     /// YYSwift: Random item from array.
     public var random: Iterator.Element? {
