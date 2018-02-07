@@ -64,6 +64,29 @@ public extension Int {
         }
         return "\(sign)\(abs / 100000)kk"
     }
+    
+    /// YYSwift: Array of digits of integer value.
+    public var digits: [Int] {
+        guard self != 0 else { return [0] }
+        var digits = [Int]()
+        var number = self.abs
+        
+        while number != 0 {
+            let x = number % 10
+            digits.append(x)
+            number = number / 10
+        }
+        
+        digits.reverse()
+        return digits
+    }
+    
+    /// YYSwift: Number of digits of integer value.
+    public var digitsCount: Int {
+        guard self != 0 else { return 1 }
+        let number = Double(self.abs)
+        return Int(log10(number) + 1)
+    }
 }
 
 public extension Int {

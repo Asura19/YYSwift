@@ -49,38 +49,32 @@ public extension UIFont {
     public var cgFont: CGFont? {
         return CGFont.init(self.fontName as CFString)
     }
+    
+    /// YYSwift: Font as bold font
+    public var bold: UIFont {
+        return UIFont(descriptor: fontDescriptor.withSymbolicTraits(.traitBold)!, size: pointSize)
+    }
+    
+    /// YYSwift: Font as italic font
+    public var italic: UIFont {
+        return UIFont(descriptor: fontDescriptor.withSymbolicTraits(.traitItalic)!, size: pointSize)
+    }
+    
+    /// YYSwift: Font as bold and italic font
+    ///
+    /// - Returns: A bold and italic font
+    public var boldItalic: UIFont {
+        return UIFont(descriptor: fontDescriptor.withSymbolicTraits([.traitBold, .traitItalic])!, size: pointSize)
+    }
+    
+    /// YYSwift: Font as normal (no bold/italic/...) font.
+    public func fontWithNormal() -> UIFont {
+        return UIFont(descriptor: fontDescriptor.withSymbolicTraits([])!, size: pointSize)
+    }
 }
 
 // MARK: - Methods
 public extension UIFont {
-    
-    /// YYSwift: Create a bold font from receiver.
-    ///
-    /// - Returns: A bold font
-    public func fontWithBold() -> UIFont {
-        return UIFont(descriptor: self.fontDescriptor.withSymbolicTraits(.traitBold)!, size: self.pointSize)
-    }
-    
-    /// YYSwift: Create a italic font from receiver.
-    ///
-    /// - Returns: A italic font
-    public func fontWithItalic() -> UIFont {
-        return UIFont(descriptor: self.fontDescriptor.withSymbolicTraits(.traitItalic)!, size: self.pointSize)
-    }
-    
-    /// YYSwift: Create a bold and italic font from receiver.
-    ///
-    /// - Returns: A bold and italic font
-    public func fontWithBoldItalic() -> UIFont {
-        return UIFont(descriptor: self.fontDescriptor.withSymbolicTraits([.traitBold, .traitItalic])!, size: self.pointSize)
-    }
-    
-    /// YYSwift: Create a normal (no bold/italic/...) font from receiver.
-    ///
-    /// - Returns: A normal font without bold/italic...
-    public func fontWithNormal() -> UIFont {
-        return UIFont(descriptor: self.fontDescriptor.withSymbolicTraits([])!, size: self.pointSize)
-    }
     
     /// YYSwift: Load the font from file path. Support format:TTF,OTF.
     ///

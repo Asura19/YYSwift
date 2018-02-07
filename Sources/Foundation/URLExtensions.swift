@@ -8,6 +8,23 @@
 
 import Foundation
 
+// MARK: - Properties
+public extension URL {
+    
+    /// YYSwift: Dictionary of the URL's query parameters
+    public var queryParameters: [String: String]? {
+        guard let components = URLComponents(url: self, resolvingAgainstBaseURL: false), let queryItems = components.queryItems else { return nil }
+        
+        var items: [String: String] = [:]
+        
+        for queryItem in queryItems {
+            items[queryItem.name] = queryItem.value
+        }
+        
+        return items
+    }
+}
+
 // MARK: - Methods
 public extension URL {
     

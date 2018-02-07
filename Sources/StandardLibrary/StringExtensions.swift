@@ -414,6 +414,11 @@ public extension String {
     public var withoutSpacesAndNewLines: String {
         return replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\n", with: "")
     }
+    
+    /// YYSwift: Check if the given string contains only white spaces
+    public var isWhitespace: Bool {
+        return self.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
 
 }
 
