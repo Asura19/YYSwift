@@ -362,12 +362,12 @@ public extension CALayer {
             mediaFunction = kCAMediaTimingFunctionEaseOut
         case .linear:
             mediaFunction = kCAMediaTimingFunctionLinear
-            
+        }
+        
         let transition = CATransition()
         transition.duration = duration as CFTimeInterval
         transition.timingFunction = CAMediaTimingFunction(name: mediaFunction)
         add(transition, forKey: "yyswift.fade")
-        }
     }
     
     /// YYSwift: Cancel fade animation which is added with "-addFadeAnimationWithDuration:curve:".
