@@ -38,29 +38,5 @@ public extension Bool {
         return !self
     }
     
-    /// YYSwift: Returns a random boolean value.
-    ///
-    ///     Bool.random -> true
-    ///     Bool.random -> false
-    ///
-    public static var random: Bool {
-        return arc4random_uniform(2) == 1
-    }
 }
 
-// MARK: - Methods
-public extension Bool {
-    
-    /// YYSwift: Toggle value for bool.
-    ///
-    ///     var bool = false
-    ///     bool.toggle()
-    ///     print(bool) -> true
-    ///
-    /// - Returns: inversed value of bool.
-    @discardableResult
-    public mutating func toggle() -> Bool {
-        self = !self
-        return self
-    }
-}

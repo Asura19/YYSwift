@@ -67,18 +67,3 @@ public extension CGFloat {
     
 }
 
-// MARK: - Methods
-public extension CGFloat {
-    
-    /// YYSwift: Random CGFloat between two CGFloat values.
-    ///
-    /// - Parameters:
-    ///   - min: minimum number to start random from.
-    ///   - max: maximum number random number end before.
-    /// - Returns: random CGFloat between two CGFloat values.
-    public static func randomBetween(min: CGFloat, max: CGFloat) -> CGFloat {
-        let delta = max - min
-        return min + CGFloat(arc4random_uniform(UInt32(delta)))
-    }
-    
-}
