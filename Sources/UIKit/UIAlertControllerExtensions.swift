@@ -46,7 +46,7 @@ public extension UIAlertController {
     /// - Returns: action created by this method
     @discardableResult
     public func addAction(title: String,
-                          style: UIAlertActionStyle = .default,
+                          style: UIAlertAction.Style = .default,
                           isEnabled: Bool = true,
                           handler: ((UIAlertAction) -> Void)? = nil) -> UIAlertAction {
         let action = UIAlertAction(title: title, style: style, handler: handler)
@@ -70,7 +70,7 @@ public extension UIAlertController {
             tf.text = text
             tf.placeholder = placeholder
             if let target = editingChangedTarget, let selector = editingChangedSelector {
-                tf.addTarget(target, action: selector, for: .editingChanged)
+                tf.addTarget(target, action: selector, for: UIControl.Event.editingChanged)
             }
         }
     }
@@ -109,7 +109,7 @@ public extension UIAlertController {
     public convenience init(title: String = "Error",
                             error: Error,
                             defaultActionButtonTitle: String = "OK",
-                            preferredStyle: UIAlertControllerStyle = .alert,
+                            preferredStyle: UIAlertController.Style = .alert,
                             tintColor: UIColor? = nil) {
         self.init(title: title, message: error.localizedDescription, preferredStyle: preferredStyle)
         let defaultAction = UIAlertAction(title: defaultActionButtonTitle, style: .default, handler: nil)

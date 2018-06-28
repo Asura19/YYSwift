@@ -15,10 +15,10 @@ public extension UIButton {
     @IBInspectable
     public var imageForDisabled: UIImage? {
         get {
-            return image(for: .disabled)
+            return image(for: UIControl.State.disabled)
         }
         set {
-            setImage(newValue, for: .disabled)
+            setImage(newValue, for: UIControl.State.disabled)
         }
     }
     
@@ -26,10 +26,10 @@ public extension UIButton {
     @IBInspectable
     public var imageForHighlighted: UIImage? {
         get {
-            return image(for: .highlighted)
+            return image(for: UIControl.State.highlighted)
         }
         set {
-            setImage(newValue, for: .highlighted)
+            setImage(newValue, for: UIControl.State.highlighted)
         }
     }
     
@@ -37,10 +37,10 @@ public extension UIButton {
     @IBInspectable
     public var imageForNormal: UIImage? {
         get {
-            return image(for: .normal)
+            return image(for: UIControl.State.normal)
         }
         set {
-            setImage(newValue, for: .normal)
+            setImage(newValue, for: UIControl.State.normal)
         }
     }
     
@@ -48,20 +48,20 @@ public extension UIButton {
     @IBInspectable
     public var imageForSelected: UIImage? {
         get {
-            return image(for: .selected)
+            return image(for: UIControl.State.selected)
         }
         set {
-            setImage(newValue, for: .selected)
+            setImage(newValue, for: UIControl.State.selected)
         }
     }
     
     /// YYSwift: Title color of disabled state for button; also inspectable from Storyboard.
     @IBInspectable public var titleColorForDisabled: UIColor? {
         get {
-            return titleColor(for: .disabled)
+            return titleColor(for: UIControl.State.disabled)
         }
         set {
-            setTitleColor(newValue, for: .disabled)
+            setTitleColor(newValue, for: UIControl.State.disabled)
         }
     }
     
@@ -69,10 +69,10 @@ public extension UIButton {
     @IBInspectable
     public var titleColorForHighlighted: UIColor? {
         get {
-            return titleColor(for: .highlighted)
+            return titleColor(for: UIControl.State.highlighted)
         }
         set {
-            setTitleColor(newValue, for: .highlighted)
+            setTitleColor(newValue, for: UIControl.State.highlighted)
         }
     }
     
@@ -80,10 +80,10 @@ public extension UIButton {
     @IBInspectable
     public var titleColorForNormal: UIColor? {
         get {
-            return titleColor(for: .normal)
+            return titleColor(for: UIControl.State.normal)
         }
         set {
-            setTitleColor(newValue, for: .normal)
+            setTitleColor(newValue, for: UIControl.State.normal)
         }
     }
     
@@ -91,10 +91,10 @@ public extension UIButton {
     @IBInspectable
     public var titleColorForSelected: UIColor? {
         get {
-            return titleColor(for: .selected)
+            return titleColor(for: UIControl.State.selected)
         }
         set {
-            setTitleColor(newValue, for: .selected)
+            setTitleColor(newValue, for: UIControl.State.selected)
         }
     }
     
@@ -102,10 +102,10 @@ public extension UIButton {
     @IBInspectable
     public var titleForDisabled: String? {
         get {
-            return title(for: .disabled)
+            return title(for: UIControl.State.disabled)
         }
         set {
-            setTitle(newValue, for: .disabled)
+            setTitle(newValue, for: UIControl.State.disabled)
         }
     }
     
@@ -113,10 +113,10 @@ public extension UIButton {
     @IBInspectable
     public var titleForHighlighted: String? {
         get {
-            return title(for: .highlighted)
+            return title(for: UIControl.State.highlighted)
         }
         set {
-            setTitle(newValue, for: .highlighted)
+            setTitle(newValue, for: UIControl.State.highlighted)
         }
     }
     
@@ -124,10 +124,10 @@ public extension UIButton {
     @IBInspectable
     public var titleForNormal: String? {
         get {
-            return title(for: .normal)
+            return title(for: UIControl.State.normal)
         }
         set {
-            setTitle(newValue, for: .normal)
+            setTitle(newValue, for: UIControl.State.normal)
         }
     }
     
@@ -135,10 +135,10 @@ public extension UIButton {
     @IBInspectable
     public var titleForSelected: String? {
         get {
-            return title(for: .selected)
+            return title(for: UIControl.State.selected)
         }
         set {
-            setTitle(newValue, for: .selected)
+            setTitle(newValue, for: UIControl.State.selected)
         }
     }
 }
@@ -146,8 +146,8 @@ public extension UIButton {
 // MARK: - Methods
 public extension UIButton {
     
-    private var states: [UIControlState] {
-        return [.normal, .selected, .highlighted, .disabled]
+    private var states: [UIControl.State] {
+        return [UIControl.State.normal, UIControl.State.selected, UIControl.State.highlighted, UIControl.State.disabled]
     }
     
     /// YYSwift: Set image for all states.

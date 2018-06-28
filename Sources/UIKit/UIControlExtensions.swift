@@ -15,7 +15,7 @@ public extension UIControl {
     /// from an internal dispatch table.
     public func removeAllTargets() {
         for object in self.allTargets {
-            self.removeTarget(object, action: nil, for: UIControlEvents.allEvents)
+            self.removeTarget(object, action: nil, for: UIControl.Event.allEvents)
         }
         var targets = allTargetsBlock
         targets.removeAll()
@@ -30,7 +30,7 @@ public extension UIControl {
     ///             sent  (cannot be nil). The block is retained.
     ///   - block: A bitmask specifying the control events for which the
     ///            action message is sent.
-    public func addBlock(forControlEvents events: UIControlEvents, block: @escaping (Any) -> Void) {
+    public func addBlock(forControlEvents events: UIControl.Event, block: @escaping (Any) -> Void) {
         let target = YYUIControlBlockTarget(block: block, events: events)
         self.addTarget(target, action: #selector(target.invoke(with:)), for: events)
         var targets = allTargetsBlock
@@ -46,8 +46,8 @@ public extension UIControl {
     ///             action message is sent.
     ///   - block: The block which is invoked then the action message is
     ///            sent (cannot be nil). The block is retained.
-    public func setBlock(forControlEvents events: UIControlEvents, block: @escaping (Any) -> Void) {
-        self.removeAllBlocks(forControlEvents: .allEvents)
+    public func setBlock(forControlEvents events: UIControl.Event, block: @escaping (Any) -> Void) {
+        self.removeAllBlocks(forControlEvents: UIControl.Event.allEvents)
         self.addBlock(forControlEvents: events, block: block)
     }
     
@@ -56,7 +56,7 @@ public extension UIControl {
     ///
     /// - Parameter events: A bitmask specifying the control events for which the
     ///                     action message is sent.
-    public func removeAllBlocks(forControlEvents events: UIControlEvents) {
+    public func removeAllBlocks(forControlEvents events: UIControl.Event) {
         var targets = allTargetsBlock
         for target in targets {
             var targetEventsRawValue = target.events.rawValue
@@ -87,7 +87,7 @@ public extension UIControl {
     ///   - action: A selector identifying an action message.
     ///   - events: A bitmask specifying the control events for which the
     ///             action message is sent.
-    public func setTarget(_ target: Any, action: Selector, forControlEvents events: UIControlEvents) {
+    public func setTarget(_ target: Any, action: Selector, forControlEvents events: UIControl.Event) {
         let targets = self.allTargets
         for currentTarget in targets {
             guard let actions = self.actions(forTarget: currentTarget, forControlEvent: events) else {
@@ -122,9 +122,9 @@ private struct Key {
 private class YYUIControlBlockTarget: NSObject {
     
     var block: (Any) -> Void
-    var events: UIControlEvents
+    var events: UIControl.Event
     
-    public init(block: @escaping (Any) -> Void, events: UIControlEvents) {
+    public init(block: @escaping (Any) -> Void, events: UIControl.Event) {
         self.block = block
         self.events = events
     }

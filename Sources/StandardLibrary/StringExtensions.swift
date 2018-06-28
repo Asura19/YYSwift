@@ -1004,26 +1004,26 @@ public extension String {
         #if os(macOS)
             return NSMutableAttributedString(string: self, attributes: [.font: NSFont.boldSystemFont(ofSize: NSFont.systemFontSize)])
         #else
-            return NSMutableAttributedString(string: self, attributes: [.font: UIFont.boldSystemFont(ofSize: UIFont.systemFontSize)])
+            return NSMutableAttributedString(string: self, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: UIFont.systemFontSize)])
         #endif
     }
     #endif
     
     /// YYSwift: Underlined string
     public var underline: NSAttributedString {
-        return NSAttributedString(string: self, attributes: [.underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
+        return NSAttributedString(string: self, attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue])
     }
     
     /// YYSwift: Strikethrough string.
     
     public var strikethrough: NSAttributedString {
-        return NSAttributedString(string: self, attributes: [.strikethroughStyle: NSNumber(value: NSUnderlineStyle.styleSingle.rawValue as Int)])
+        return NSAttributedString(string: self, attributes: [NSAttributedString.Key.strikethroughStyle: NSNumber(value: NSUnderlineStyle.single.rawValue as Int)])
     }
     
     #if os(iOS)
     /// YYSwift: Italic string.
     public var italic: NSAttributedString {
-        return NSMutableAttributedString(string: self, attributes: [.font: UIFont.italicSystemFont(ofSize: UIFont.systemFontSize)])
+        return NSMutableAttributedString(string: self, attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: UIFont.systemFontSize)])
     }
     #endif
     
@@ -1042,7 +1042,7 @@ public extension String {
     /// - Parameter color: text color.
     /// - Returns: a NSAttributedString versions of string colored with given color.
     public func colored(with color: UIColor) -> NSAttributedString {
-        return NSMutableAttributedString(string: self, attributes: [.foregroundColor: color])
+        return NSMutableAttributedString(string: self, attributes: [NSAttributedString.Key.foregroundColor: color])
     }
     #endif
     
@@ -1062,12 +1062,12 @@ public extension String {
                      size: CGSize,
                      lineBreakMode: NSLineBreakMode) -> CGSize {
         var result: CGSize
-        var attr: [NSAttributedStringKey: Any] = [:]
-        attr[.font] = font
+        var attr: [NSAttributedString.Key: Any] = [:]
+        attr[NSAttributedString.Key.font] = font
         if lineBreakMode != .byWordWrapping {
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.lineBreakMode = lineBreakMode
-            attr[.paragraphStyle] = paragraphStyle
+            attr[NSAttributedString.Key.paragraphStyle] = paragraphStyle
         }
         let rect = NSString(string: self).boundingRect(with: size, options: [.usesLineFragmentOrigin, .usesFontLeading], attributes: attr, context: nil)
         result = rect.size

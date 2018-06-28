@@ -61,7 +61,7 @@ public extension UITableView {
     ///               false if it should be immediate.
     public func scrollTo(row: Int,
                          inSection section: Int,
-                         at scrollPosition: UITableViewScrollPosition,
+                         at scrollPosition: UITableView.ScrollPosition,
                          animated: Bool) {
         let indexPath = IndexPath(row: row, section: section)
         scrollToRow(at: indexPath, at: scrollPosition, animated: animated)
@@ -74,7 +74,7 @@ public extension UITableView {
     ///   - animation: A constant that either specifies the kind of animation to
     ///                perform when inserting the cell or requests no animation.
     public func insertRow(at indexPath: IndexPath,
-                          with animation: UITableViewRowAnimation) {
+                          with animation: UITableView.RowAnimation) {
         insertRows(at: [indexPath], with: animation)
     }
     
@@ -87,7 +87,7 @@ public extension UITableView {
     ///                perform when inserting the cell or requests no animation.
     public func insertRow(_ row: Int,
                           inSection section: Int,
-                          with animation: UITableViewRowAnimation) {
+                          with animation: UITableView.RowAnimation) {
         let toInsert = IndexPath(row: row, section: section)
         self.insertRow(at: toInsert, with: animation)
     }
@@ -99,7 +99,7 @@ public extension UITableView {
     ///   - animation: A constant that either specifies the kind of animation to
     ///                perform when inserting the cell or requests no animation.
     public func reloadRow(at indexPath: IndexPath,
-                          with animation: UITableViewRowAnimation) {
+                          with animation: UITableView.RowAnimation) {
         reloadRows(at: [indexPath], with: animation)
     }
     
@@ -115,7 +115,7 @@ public extension UITableView {
     ///                UITableViewRowAnimationRight, the old rows slide out to the
     ///                right and the new cells slide in from the right.
     public func reloadRow(_ row: Int,
-                          in section: Int, with animation: UITableViewRowAnimation) {
+                          in section: Int, with animation: UITableView.RowAnimation) {
         let toReload = IndexPath(row: row, section: section)
         self.reloadRow(at: toReload, with: animation)
     }
@@ -127,7 +127,7 @@ public extension UITableView {
     ///   - animation: A constant that indicates how the deletion is to be animated,
     ///                for example, fade out or slide out from the bottom.
     public func deleteRow(at indexPath: IndexPath,
-                          with animation: UITableViewRowAnimation) {
+                          with animation: UITableView.RowAnimation) {
         deleteRows(at: [indexPath], with: animation)
     }
     
@@ -140,7 +140,7 @@ public extension UITableView {
     ///                for example, fade out or slide out from the bottom.
     public func deleteRow(_ row: Int,
                           inSection section: Int,
-                          with animation: UITableViewRowAnimation) {
+                          with animation: UITableView.RowAnimation) {
         let toInsert = IndexPath(row: row, section: section)
         self.deleteRow(at: toInsert, with: animation)
     }
@@ -153,7 +153,7 @@ public extension UITableView {
     ///              index location, it is moved down one index location.
     ///   - animation: A constant that indicates how the insertion is to be animated,
     ///                for example, fade in or slide in from the left.
-    public func insertSection(_ section: Int, with animation: UITableViewRowAnimation) {
+    public func insertSection(_ section: Int, with animation: UITableView.RowAnimation) {
         let sections = IndexSet.init(integer: section)
         insertSections(sections, with: animation)
     }
@@ -166,7 +166,7 @@ public extension UITableView {
     ///              index location, it is moved up one index location.
     ///   - animation: A constant that either specifies the kind of animation to
     ///                perform when deleting the section or requests no animation.
-    public func deleteSection(_ section: Int, with animation: UITableViewRowAnimation) {
+    public func deleteSection(_ section: Int, with animation: UITableView.RowAnimation) {
         let sections = IndexSet.init(integer: section)
         deleteSections(sections, with: animation)
     }
@@ -181,7 +181,7 @@ public extension UITableView {
     ///                old and the new section rows slide. For example, if the
     ///                animation constant is UITableViewRowAnimationRight, the old
     ///                rows slide out to the right and the new cells slide in from the right.
-    public func reloadSection(_ section: Int, with animation: UITableViewRowAnimation) {
+    public func reloadSection(_ section: Int, with animation: UITableView.RowAnimation) {
         let sections = IndexSet.init(integer: section)
         reloadSections(sections, with: animation)
     }

@@ -160,7 +160,7 @@ public extension UITextField {
         guard let holder = placeholder, !holder.isEmpty else {
             return
         }
-        self.attributedPlaceholder = NSAttributedString(string: holder, attributes: [.foregroundColor: color])
+        self.attributedPlaceholder = NSAttributedString(string: holder, attributes: [NSAttributedString.Key.foregroundColor: color])
     }
     
     /// YYSwift: Add padding to the left of the textfield rect.
@@ -182,7 +182,7 @@ public extension UITextField {
         imageView.contentMode = .center
         self.leftView = imageView
         self.leftView?.frame.size = CGSize(width: image.size.width + padding, height: image.size.height)
-        self.leftViewMode = UITextFieldViewMode.always
+        self.leftViewMode = UITextField.ViewMode.always
     }
     
 }

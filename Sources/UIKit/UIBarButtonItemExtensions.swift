@@ -20,12 +20,12 @@ public extension UIBarButtonItem {
     ///   - action: A selector identifying the action method to be called
     public convenience init(iconName: String, highlightedIconName: String?, target: Any?, action: Selector) {
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: iconName), for: .normal)
+        button.setImage(UIImage(named: iconName), for: UIControl.State.normal)
         if let name = highlightedIconName {
-            button.setImage(UIImage(named: name), for: .highlighted)
+            button.setImage(UIImage(named: name), for: UIControl.State.highlighted)
         }
         button.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-        button.addTarget(target, action: action, for: .touchUpInside)
+        button.addTarget(target, action: action, for: UIControl.Event.touchUpInside)
         self.init(customView: button)
     }
     

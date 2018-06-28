@@ -546,7 +546,7 @@ public extension UIView {
                        completion: ((Bool) -> Void)? = nil) {
         let angleWithType = (type == .degrees) ? CGFloat.pi * angle / 180.0 : angle
         let aDuration = animated ? duration : 0
-        UIView.animate(withDuration: aDuration, delay: 0, options: .curveLinear, animations: { () -> Void in
+        UIView.animate(withDuration: aDuration, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: { () -> Void in
             self.transform = self.transform.rotated(by: angleWithType)
         }, completion: completion)
     }
@@ -583,7 +583,7 @@ public extension UIView {
                       duration: TimeInterval = 1,
                       completion: ((Bool) -> Void)? = nil) {
         if animated {
-            UIView.animate(withDuration: duration, delay: 0, options: .curveLinear, animations: { () -> Void in
+            UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: { () -> Void in
                 self.transform = self.transform.scaledBy(x: offset.x, y: offset.y)
             }, completion: completion)
         } else {
@@ -614,13 +614,13 @@ public extension UIView {
         }
         switch animationType {
         case .linear:
-            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+            animation.timingFunction = CAMediaTimingFunction(name: convertToCAMediaTimingFunctionName(convertFromCAMediaTimingFunctionName(CAMediaTimingFunctionName.linear)))
         case .easeIn:
-            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+            animation.timingFunction = CAMediaTimingFunction(name: convertToCAMediaTimingFunctionName(convertFromCAMediaTimingFunctionName(CAMediaTimingFunctionName.easeIn)))
         case .easeOut:
-            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+            animation.timingFunction = CAMediaTimingFunction(name: convertToCAMediaTimingFunctionName(convertFromCAMediaTimingFunctionName(CAMediaTimingFunctionName.easeOut)))
         case .easeInOut:
-            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            animation.timingFunction = CAMediaTimingFunction(name: convertToCAMediaTimingFunctionName(convertFromCAMediaTimingFunctionName(CAMediaTimingFunctionName.easeInEaseOut)))
         }
         CATransaction.setCompletionBlock(completion)
         animation.duration = duration
@@ -642,7 +642,7 @@ public extension UIView {
             view.translatesAutoresizingMaskIntoConstraints = false
             viewsDictionary[key] = view
         }
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: withFormat, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: withFormat, options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: viewsDictionary))
     }
     
     /// YYSwift: Anchor all sides of the view into it's superview.
@@ -746,4 +746,14 @@ public extension UIView {
         anchorCenterXToSuperview()
         anchorCenterYToSuperview()
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToCAMediaTimingFunctionName(_ input: String) -> CAMediaTimingFunctionName {
+	return CAMediaTimingFunctionName(rawValue: input)
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromCAMediaTimingFunctionName(_ input: CAMediaTimingFunctionName) -> String {
+	return input.rawValue
 }

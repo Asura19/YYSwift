@@ -14,7 +14,7 @@ public extension UIImage {
     
     /// YYSwift: Size in bytes of UIImage
     public var bytesSize: Int {
-        return UIImageJPEGRepresentation(self, 1)?.count ?? 0
+        return self.jpegData(compressionQuality: 1)?.count ?? 0
     }
     
     /// YYSwift: Size in kilo bytes of UIImage
@@ -119,7 +119,7 @@ public extension UIImage {
     /// - Parameter quality: The quality of the resulting JPEG image, expressed as a value from 0.0 to 1.0. The value 0.0 represents the maximum compression (or lowest quality) while the value 1.0 represents the least compression (or best quality), (default is 0.5).
     /// - Returns: optional Data (if applicable).
     public func compressedData(quality: CGFloat = 0.5) -> Data? {
-        return UIImageJPEGRepresentation(self, quality)
+        return self.jpegData(compressionQuality: quality)
     }
     
     /// YYSwift: UIImage Cropped to CGRect.
@@ -148,7 +148,7 @@ public extension UIImage {
     ///   - toHeight: new height.
     ///   - orientation: optional UIImage orientation (default is nil).
     /// - Returns: optional scaled UIImage (if applicable).
-    public func scaled(toHeight: CGFloat, with orientation: UIImageOrientation? = nil) -> UIImage? {
+    public func scaled(toHeight: CGFloat, with orientation: UIImage.Orientation? = nil) -> UIImage? {
         let scale = toHeight / size.height
         let newWidth = size.width * scale
         UIGraphicsBeginImageContext(CGSize(width: newWidth, height: toHeight))
@@ -164,7 +164,7 @@ public extension UIImage {
     ///   - toWidth: new width.
     ///   - orientation: optional UIImage orientation (default is nil).
     /// - Returns: optional scaled UIImage (if applicable).
-    public func scaled(toWidth: CGFloat, with orientation: UIImageOrientation? = nil) -> UIImage? {
+    public func scaled(toWidth: CGFloat, with orientation: UIImage.Orientation? = nil) -> UIImage? {
         let scale = toWidth / size.width
         let newHeight = size.height * scale
         UIGraphicsBeginImageContext(CGSize(width: toWidth, height: newHeight))
@@ -721,7 +721,7 @@ public extension UIImage {
         }
         let scale = UIScreen.main.scale
         let font = CTFontCreateWithName("AppleColorEmoji" as CFString, size * scale, nil)
-        let str = NSAttributedString(string: emoji, attributes: [kCTFontAttributeName as NSAttributedStringKey: font, kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.white.cgColor])
+        let str = NSAttributedString(string: emoji, attributes: [kCTFontAttributeName as NSAttributedString.Key: font, kCTForegroundColorAttributeName as NSAttributedString.Key: UIColor.white.cgColor])
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let context = CGContext.init(data: nil,
                                      width: Int(size * scale),
@@ -791,7 +791,7 @@ public extension UIImage {
     ///   - rect: The rectangle in which to draw the image.
     ///   - contentMode: Draw content mode
     ///   - clipsToBounds: A Boolean value that determines whether content are confined to the rect.
-    public func draw(inRect rect: CGRect, contentMode: UIViewContentMode, clipsToBounds: Bool) {
+    public func draw(inRect rect: CGRect, contentMode: UIView.ContentMode, clipsToBounds: Bool) {
         let drawRect = YYCGRectFitWithContentMode(rect: rect, size: self.size, mode: contentMode)
         if drawRect.size.width == 0 || drawRect.size.height == 0 {
             return
@@ -834,7 +834,7 @@ public extension UIImage {
     ///   - size: The new size to be scaled, values should be positive.
     ///   - contentMode: The content mode for image content.
     /// - Returns: The new image with the given size.
-    public func resized(to size: CGSize, contentMode: UIViewContentMode) -> UIImage? {
+    public func resized(to size: CGSize, contentMode: UIView.ContentMode) -> UIImage? {
         if size.width <= 0 || size.height <= 0 {
             return nil
         }
@@ -846,7 +846,7 @@ public extension UIImage {
     }
 }
 
-fileprivate func uiImage(with cgImage: CGImage, scale: CGFloat, orientation: UIImageOrientation) -> UIImage? {
+fileprivate func uiImage(with cgImage: CGImage, scale: CGFloat, orientation: UIImage.Orientation) -> UIImage? {
     return UIImage(cgImage: cgImage, scale: scale, orientation: orientation)
 }
 

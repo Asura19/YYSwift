@@ -19,7 +19,7 @@ public extension UIBezierPath {
     /// - Returns: A new path object with the text and font, or nil if an error occurs.
     public static func bezierPathWithText(_ text: String, font: UIFont) -> UIBezierPath? {
         let ctFont = font.ctFont
-        let attrString = NSAttributedString.init(string: text, attributes: [kCTFontAttributeName as NSAttributedStringKey: ctFont])
+        let attrString = NSAttributedString.init(string: text, attributes: [kCTFontAttributeName as NSAttributedString.Key: ctFont])
         let line = CTLineCreateWithAttributedString(attrString as CFAttributedString)
         let cgPath = CGMutablePath()
         let runs = CTLineGetGlyphRuns(line)

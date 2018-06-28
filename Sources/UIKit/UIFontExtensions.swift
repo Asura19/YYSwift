@@ -13,12 +13,12 @@ public extension UIFont {
     
     /// YYSwift: Whether the font is bold.
     public var isBold: Bool {
-        return self.fontDescriptor.symbolicTraits.contains(.traitBold)
+        return self.fontDescriptor.symbolicTraits.contains(UIFontDescriptor.SymbolicTraits.traitBold)
     }
     
     /// YYSwift: Whether the font is italic.
     public var isItalic: Bool {
-        return self.fontDescriptor.symbolicTraits.contains(.traitItalic)
+        return self.fontDescriptor.symbolicTraits.contains(UIFontDescriptor.SymbolicTraits.traitItalic)
     }
     
     /// YYSwift: YYSwift: Font as monospaced font
@@ -26,7 +26,7 @@ public extension UIFont {
     ///     UIFont.preferredFont(forTextStyle: .body).monospaced
     ///
     public var isMonoSpace: Bool {
-        return self.fontDescriptor.symbolicTraits.contains(.traitMonoSpace)
+        return self.fontDescriptor.symbolicTraits.contains(UIFontDescriptor.SymbolicTraits.traitMonoSpace)
     }
     
     /// YYSwift: Whether the font is color glyphs (such as Emoji).
@@ -52,19 +52,19 @@ public extension UIFont {
     
     /// YYSwift: Font as bold font
     public var bold: UIFont {
-        return UIFont(descriptor: fontDescriptor.withSymbolicTraits(.traitBold)!, size: pointSize)
+        return UIFont(descriptor: fontDescriptor.withSymbolicTraits(UIFontDescriptor.SymbolicTraits.traitBold)!, size: pointSize)
     }
     
     /// YYSwift: Font as italic font
     public var italic: UIFont {
-        return UIFont(descriptor: fontDescriptor.withSymbolicTraits(.traitItalic)!, size: pointSize)
+        return UIFont(descriptor: fontDescriptor.withSymbolicTraits(UIFontDescriptor.SymbolicTraits.traitItalic)!, size: pointSize)
     }
     
     /// YYSwift: Font as bold and italic font
     ///
     /// - Returns: A bold and italic font
     public var boldItalic: UIFont {
-        return UIFont(descriptor: fontDescriptor.withSymbolicTraits([.traitBold, .traitItalic])!, size: pointSize)
+        return UIFont(descriptor: fontDescriptor.withSymbolicTraits([UIFontDescriptor.SymbolicTraits.traitBold, UIFontDescriptor.SymbolicTraits.traitItalic])!, size: pointSize)
     }
     
     /// YYSwift: Font as normal (no bold/italic/...) font.

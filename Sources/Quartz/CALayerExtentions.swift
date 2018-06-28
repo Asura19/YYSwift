@@ -310,7 +310,7 @@ public extension CALayer {
     }
     
     /// YYSwift: Wrapper for `contentsGravity` property.
-    public var contentMode: UIViewContentMode {
+    public var contentMode: UIView.ContentMode {
         get {
             return YYCAGravityToUIViewContentMode(gravity: contentsGravity)
         }
@@ -348,25 +348,25 @@ public extension CALayer {
     /// - Parameters:
     ///   - duration: animation duration
     ///   - curve: animation curve
-    public func addFadeAnimationWithDuration(_ duration: TimeInterval, curve: UIViewAnimationCurve) {
+    public func addFadeAnimationWithDuration(_ duration: TimeInterval, curve: UIView.AnimationCurve) {
         if duration <= 0 {
             return
         }
         var mediaFunction = ""
         switch curve {
         case .easeInOut:
-            mediaFunction = kCAMediaTimingFunctionEaseInEaseOut
+            mediaFunction = convertFromCAMediaTimingFunctionName(CAMediaTimingFunctionName.easeInEaseOut)
         case .easeIn:
-            mediaFunction = kCAMediaTimingFunctionEaseIn
+            mediaFunction = convertFromCAMediaTimingFunctionName(CAMediaTimingFunctionName.easeIn)
         case .easeOut:
-            mediaFunction = kCAMediaTimingFunctionEaseOut
+            mediaFunction = convertFromCAMediaTimingFunctionName(CAMediaTimingFunctionName.easeOut)
         case .linear:
-            mediaFunction = kCAMediaTimingFunctionLinear
+            mediaFunction = convertFromCAMediaTimingFunctionName(CAMediaTimingFunctionName.linear)
         }
         
         let transition = CATransition()
         transition.duration = duration as CFTimeInterval
-        transition.timingFunction = CAMediaTimingFunction(name: mediaFunction)
+        transition.timingFunction = CAMediaTimingFunction(name: convertToCAMediaTimingFunctionName(mediaFunction))
         add(transition, forKey: "yyswift.fade")
     }
     
@@ -374,4 +374,24 @@ public extension CALayer {
     public func removePreviousFadeAnimation() {
         removeAnimation(forKey: "yyswift.fade")
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromCALayerContentsGravity(_ input: CALayerContentsGravity) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToCALayerContentsGravity(_ input: String) -> CALayerContentsGravity {
+	return CALayerContentsGravity(rawValue: input)
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromCAMediaTimingFunctionName(_ input: CAMediaTimingFunctionName) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToCAMediaTimingFunctionName(_ input: String) -> CAMediaTimingFunctionName {
+	return CAMediaTimingFunctionName(rawValue: input)
 }

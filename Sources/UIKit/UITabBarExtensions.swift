@@ -84,9 +84,9 @@ public extension UITabBar {
                     return newImage
                     }(image, itemColor).withRenderingMode(.alwaysOriginal)
                 
-                barItem.setTitleTextAttributes([.foregroundColor: itemColor], for: .normal)
+                barItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: itemColor], for: UIControl.State.normal)
                 if let selected = selectedItem {
-                    barItem.setTitleTextAttributes([.foregroundColor: selected], for: .selected)
+                    barItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: selected], for: UIControl.State.selected)
                 }
             }
         }

@@ -17,9 +17,9 @@ public extension UINavigationBar {
     ///   - font: title font
     ///   - color: title text color (default is .black).
     public func setTitleFont(_ font: UIFont, color: UIColor = .black) {
-        var attrs: [NSAttributedStringKey: Any] = [:]
-        attrs[.font] = font
-        attrs[.foregroundColor] = color
+        var attrs: [NSAttributedString.Key: Any] = [:]
+        attrs[NSAttributedString.Key.font] = font
+        attrs[NSAttributedString.Key.foregroundColor] = color
         titleTextAttributes = attrs
     }
     
@@ -31,7 +31,7 @@ public extension UINavigationBar {
         shadowImage = UIImage()
         isTranslucent = true
         tintColor = tint
-        titleTextAttributes = [NSAttributedStringKey.foregroundColor: tint]
+        titleTextAttributes = [NSAttributedString.Key.foregroundColor: tint]
     }
     
     /// YYSwift: Set navigationBar background and text colors
@@ -45,6 +45,6 @@ public extension UINavigationBar {
         barTintColor = background
         setBackgroundImage(UIImage(), for: .default)
         tintColor = text
-        titleTextAttributes = [.foregroundColor: text]
+        titleTextAttributes = [NSAttributedString.Key.foregroundColor: text]
     }
 }
