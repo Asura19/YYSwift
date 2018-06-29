@@ -6,8 +6,12 @@
 //  Copyright © 2017年 Phoenix. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
+
+#if canImport(AudioToolbox)
 import AudioToolbox
+#endif
 
 // MARK: - Methods
 public extension UIAlertController {
@@ -31,7 +35,9 @@ public extension UIAlertController {
                 generator.impactOccurred()
             }
             else {
+                #if canImport(AudioToolbox)
                 AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+                #endif
             }
         }
     }
@@ -120,3 +126,4 @@ public extension UIAlertController {
     }
     
 }
+#endif

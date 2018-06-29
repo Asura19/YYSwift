@@ -6,7 +6,9 @@
 //  Copyright © 2017年 Phoenix. All rights reserved.
 //
 
+#if canImport(Foundation)
 import Foundation
+#endif
 
 // MARK: - Properties
 public extension SignedInteger {

@@ -203,18 +203,6 @@ public struct YYSwift {
         #endif
     }
     
-    #if os(iOS)
-    /// YYSwift: Status bar visibility state.
-    public static var isStatusBarHidden: Bool {
-        get {
-            return UIApplication.shared.isStatusBarHidden
-        }
-        set {
-            UIApplication.shared.isStatusBarHidden = newValue
-        }
-    }
-    #endif
-    
     #if os(iOS) || os(tvOS)
     /// YYSwift: Key window (read only, if applicable).
     public static var keyWindow: UIView? {
@@ -241,19 +229,6 @@ public struct YYSwift {
     }
     #endif
     
-    #if os(iOS)
-    /// YYSwift: Current status bar style (if applicable).
-    public static var statusBarStyle: UIStatusBarStyle? {
-        get {
-            return UIApplication.shared.statusBarStyle
-        }
-        set {
-            if let style = newValue {
-                UIApplication.shared.statusBarStyle = style
-            }
-        }
-    }
-    #endif
     
     #if !os(macOS)
     /// YYSwift: System current version (read-only).

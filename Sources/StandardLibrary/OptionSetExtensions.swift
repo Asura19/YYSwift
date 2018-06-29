@@ -6,8 +6,6 @@
 //  Copyright © 2017年 Phoenix. All rights reserved.
 //
 
-import Foundation
-
 public extension OptionSet where RawValue: FixedWidthInteger {
     
     // https://stackoverflow.com/questions/32102936/how-do-you-enumerate-optionsettype-in-swift

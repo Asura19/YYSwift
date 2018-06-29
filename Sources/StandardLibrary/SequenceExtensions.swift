@@ -6,9 +6,6 @@
 //  Copyright © 2018 Phoenix. All rights reserved.
 //
 
-#if canImport(Foundation)
-import Foundation
-
 public extension Sequence {
     
     /// YYSwift: Check if all elements in collection match a conditon.
@@ -209,4 +206,3 @@ public extension Sequence where Element: Numeric {
     }
     
 }
-#endif

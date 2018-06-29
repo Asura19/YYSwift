@@ -6,8 +6,12 @@
 //  Copyright © 2017年 Phoenix. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
+
+#if canImport(Accelerate)
 import Accelerate
+#endif
 
 // MARK: - Properties
 public extension UIImage {
@@ -44,6 +48,7 @@ public extension UIImage {
         return self.rotate(byRadians: CGFloat(-90.0).degreesToRadians, fitSize: true)
     }
     
+    #if canImport(Accelerate)
     /// YYSwift: A new image rotated 180° . ↻
     public var roatate180: UIImage? {
         return self.flip(horizontal: true, vertical: true)
@@ -58,6 +63,7 @@ public extension UIImage {
     public var flipHorizontal: UIImage? {
         return self.flip(horizontal: true, vertical: false)
     }
+    #endif
     
     /// YYSwift: A grayscaled image.
     public var grayscale: UIImage? {
@@ -304,6 +310,7 @@ public extension UIImage {
         return UIImage(cgImage: image, scale: self.scale, orientation: self.imageOrientation)
     }
     
+    #if canImport(Accelerate)
     private func flip(horizontal: Bool, vertical: Bool) -> UIImage? {
         guard let cgImage = self.cgImage else {
             return nil
@@ -338,6 +345,7 @@ public extension UIImage {
         }
         return UIImage(cgImage: image, scale: self.scale, orientation: self.imageOrientation)
     }
+    #endif
     
     /// YYSwift: UIImage tinted with color
     ///
@@ -384,6 +392,7 @@ public extension UIImage {
         return self.appliedBlur(radius: 20, tintColor: effectColor, tintBlendMode: .normal, saturation: -1.0, maskImage: nil)
     }
     
+    #if canImport(Accelerate)
     /// YYSwift: Applies a blur, tint color, and saturation adjustment to this image,
     /// optionally within the area specified by @a maskImage.
     ///
@@ -498,6 +507,7 @@ public extension UIImage {
         free(&output.data)
         return self.merge(effectCGImage: effectCGImage!.takeUnretainedValue(), tintColor: tintColor, tintBlendMode: tintBlendMode, maskImage: maskImage, opaque: opaque)
     }
+    #endif
     
     private func merge(effectCGImage: CGImage, tintColor: UIColor? = nil, tintBlendMode: CGBlendMode, maskImage: UIImage? = nil, opaque: Bool) -> UIImage? {
         guard let cgImage = self.cgImage else {
@@ -912,4 +922,4 @@ fileprivate func getGIFFrameDelay(with source: CGImageSource, index: Int) -> Tim
     }
     return delay
 }
-
+#endif

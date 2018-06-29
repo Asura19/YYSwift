@@ -6,6 +6,7 @@
 //  Copyright © 2018年 Phoenix. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 // MARK: - Methods
@@ -92,3 +93,4 @@ public extension UITabBar {
         }
     }
 }
+#endif

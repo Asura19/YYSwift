@@ -6,8 +6,6 @@
 //  Copyright © 2017年 Phoenix. All rights reserved.
 //
 
-import Foundation
-
 // MARK: - Operators
 infix operator ??= : AssignmentPrecedence
 

@@ -20,6 +20,7 @@
 		D0001A4B20E604D000F99095 /* ComparableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0001A4820E604D000F99095 /* ComparableExtensions.swift */; };
 		D0001A4C20E604D000F99095 /* ComparableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0001A4820E604D000F99095 /* ComparableExtensions.swift */; };
 		D0001A4E20E617DE00F99095 /* UIWindowExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0001A4D20E617DE00F99095 /* UIWindowExtensions.swift */; };
+		D0001A5220E61C3800F99095 /* UIAlertControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE15D91FE8E6EC0034E503 /* UIAlertControllerExtensions.swift */; };
 		D05B92711FED044F006C918C /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05B92701FED044F006C918C /* UIImageExtensions.swift */; };
 		D05B92731FED044F006C918C /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05B92701FED044F006C918C /* UIImageExtensions.swift */; };
 		D05B92771FF22DBA006C918C /* YYCGUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05B92761FF22DBA006C918C /* YYCGUtilities.swift */; };
@@ -993,6 +994,7 @@
 			files = (
 				D0CE15FB1FEA3F240034E503 /* UICollectionViewExtensions.swift in Sources */,
 				D0EC52A82003635D0054B52E /* UINavigavigationItemExtensions.swift in Sources */,
+				D0001A5220E61C3800F99095 /* UIAlertControllerExtensions.swift in Sources */,
 				D0EC52B42003669B0054B52E /* UIStoryboardExtensions.swift in Sources */,
 				D0A2DD6F1FDA685500AB456C /* DataExtensions.swift in Sources */,
 				D0CE15FF1FEA46810034E503 /* UIFontExtensions.swift in Sources */,

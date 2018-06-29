@@ -6,6 +6,7 @@
 //  Copyright © 2017年 Phoenix. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 // MARK: - Properties
@@ -172,3 +173,4 @@ public extension UIButton {
     }
     
 }
+#endif

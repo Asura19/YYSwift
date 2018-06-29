@@ -8,6 +8,7 @@
 
 #if canImport(Foundation)
 import Foundation
+#endif
 
 public extension Dictionary where Key: Comparable {
     
@@ -76,6 +77,7 @@ public extension Dictionary {
         keys.forEach { removeValue(forKey: $0) }
     }
     
+    #if canImport(Foundation)
     /// YYSwift: JSON Data from dictionary.
     ///
     /// - Parameter prettify: set true to prettify data (default is false).
@@ -87,7 +89,9 @@ public extension Dictionary {
         let options = prettify ? JSONSerialization.WritingOptions.prettyPrinted : JSONSerialization.WritingOptions()
         return try? JSONSerialization.data(withJSONObject: self, options: options)
     }
+    #endif
     
+    #if canImport(Foundation)
     /// YYSwift: JSON String from dictionary.
     ///
     ///     dict.jsonString() -> "{"testKey":"testValue","testArrayKey":[1,2,3,4,5]}"
@@ -122,6 +126,7 @@ public extension Dictionary {
         }
         return String(data: jsonData, encoding: .utf8)
     }
+    #endif
     
     /// YYSwift: Count dictionary entries that where function returns true.
     ///
@@ -225,4 +230,4 @@ public extension Dictionary where Key: ExpressibleByStringLiteral {
     }
     
 }
-#endif
+

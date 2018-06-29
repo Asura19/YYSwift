@@ -6,6 +6,7 @@
 //  Copyright © 2017年 Phoenix. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 // MARK: - Methods
@@ -134,4 +135,4 @@ private class YYUIControlBlockTarget: NSObject {
     }
     
 }
-
+#endif

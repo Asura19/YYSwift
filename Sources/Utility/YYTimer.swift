@@ -6,6 +6,7 @@
 //  Copyright © 2017年 Phoenix. All rights reserved.
 //
 
+#if canImport(Foundation)
 import Foundation
 
 public class YYTimer {
@@ -189,3 +190,4 @@ public class YYCountDownTimer {
     }
 
 }
+#endif

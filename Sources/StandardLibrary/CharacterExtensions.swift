@@ -8,6 +8,7 @@
 
 #if canImport(Foundation)
 import Foundation
+#endif
 
 // MARK: - Properties
 public extension Character {
@@ -104,6 +105,7 @@ public extension Character {
 // MARK: - Methods
 public extension Character {
     
+    #if canImport(Foundation)
     /// YYSwift: Random character.
     ///
     ///    Character.random() -> k
@@ -115,6 +117,7 @@ public extension Character {
         let randomIndex = allCharacters.index(allCharacters.startIndex, offsetBy: randomNumber)
         return allCharacters[randomIndex]
     }
+    #endif
 }
 
 
@@ -147,4 +150,4 @@ public extension Character {
         return String(repeating: String(rhs), count: lhs)
     }
 }
-#endif
+

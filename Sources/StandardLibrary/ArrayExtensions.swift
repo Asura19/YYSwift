@@ -8,10 +8,12 @@
 
 #if canImport(Foundation)
 import Foundation
+#endif
 
 // MARK: - Initializer
 public extension Array {
     
+    #if canImport(Foundation)
     /// YYSwift: Creates and returns an array from a specified property list data.
     /// A property list data whose root object is an array.
     public init?(plistData: Data) {
@@ -22,8 +24,10 @@ public extension Array {
         }
         return nil
     }
+    #endif
 }
 
+#if canImport(Foundation)
 // MARK: - Properties
 public extension Array {
     
@@ -47,6 +51,7 @@ public extension Array {
         }
     }
 }
+#endif
 
 // MARK: - Methods
 public extension Array {
@@ -174,6 +179,7 @@ public extension Array {
         return (matching, nonMatching)
     }
     
+    #if canImport(Foundation)
     /// YYSwift: Shuffle array. (Using Fisher-Yates Algorithm)
     ///
     ///     [1, 2, 3, 4, 5].shuffle() // shuffles array
@@ -187,6 +193,7 @@ public extension Array {
             if index != randomIndex { swapAt(index, randomIndex) }
         }
     }
+    #endif
     
     /// YYSwift: Shuffled version of array. (Using Fisher-Yates Algorithm)
     ///
@@ -359,4 +366,3 @@ public extension Array where Element: Equatable {
     }
     
 }
-#endif

@@ -6,6 +6,7 @@
 //  Copyright © 2017年 Phoenix. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 // MARK: - Properties
@@ -482,3 +483,4 @@ private let PAGE_SIZE: Double = Double(vm_kernel_page_size)
 
 private let HOST_CPU_LOAD_INFO_COUNT: mach_msg_type_number_t =
     UInt32(MemoryLayout<host_cpu_load_info_data_t>.size / MemoryLayout<integer_t>.size)
+#endif

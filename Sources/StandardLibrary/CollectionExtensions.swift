@@ -8,10 +8,12 @@
 
 #if canImport(Foundation)
 import Foundation
+#endif
 
 // MARK: - Methods
 public extension Collection {
     
+    #if canImport(Foundation)
     /// YYSwift: Performs `each` closure for each element of collection in parallel.
     ///
     ///        array.forEachInParallel { item in
@@ -27,6 +29,7 @@ public extension Collection {
             each(self[elementIndex])
         }
     }
+    #endif
     
     /// YYSwift: Safe protects the array from out of bounds by use of optional.
     ///
@@ -44,12 +47,14 @@ public extension Collection {
 // MARK: - Methods (Int)
 public extension Collection where Index == Int {
     
+    #if canImport(Foundation)
     /// YYSwift: Random item from array.
     public var randomItem: Element? {
         guard !isEmpty else { return nil }
         let index = Int(arc4random_uniform(UInt32(count)))
         return self[index]
     }
+    #endif
     
     /// YYSwift: Get the first index where condition is met.
     ///
@@ -190,4 +195,3 @@ public extension Collection where Element: FloatingPoint {
     }
     
 }
-#endif

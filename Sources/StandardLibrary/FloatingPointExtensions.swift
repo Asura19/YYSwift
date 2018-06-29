@@ -8,6 +8,7 @@
 
 #if canImport(Foundation)
 import Foundation
+#endif
 
 // MARK: - Properties
 public extension FloatingPoint {
@@ -27,15 +28,19 @@ public extension FloatingPoint {
         return self < 0
     }
     
+    #if canImport(Foundation)
     /// YYSwift: Ceil of number.
     public var ceil: Self {
         return Foundation.ceil(self)
     }
+    #endif
     
+    #if canImport(Foundation)
     /// YYSwift: Floor of number.
     public var floor: Self {
         return Foundation.floor(self)
     }
+    #endif
     
     /// YYSwift: Radian value of degree input.
     public var degreesToRadians: Self {
@@ -57,4 +62,4 @@ prefix operator ±
 public prefix func ±<T: FloatingPoint> (number: T) -> (T, T) {
     return (0 + number, 0 - number)
 }
-#endif
+

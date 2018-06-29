@@ -6,7 +6,9 @@
 //  Copyright © 2018年 Phoenix. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
+#endif
 
 // MARK: - Properties
 public extension CALayer {

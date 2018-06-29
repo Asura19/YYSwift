@@ -6,7 +6,9 @@
 //  Copyright © 2017年 Phoenix. All rights reserved.
 //
 
+#if canImport(Foundation)
 import Foundation
+#endif
 
 // MARK: - Properties
 public extension SignedNumeric {
@@ -16,6 +18,7 @@ public extension SignedNumeric {
         return String(describing: self)
     }
     
+    #if canImport(Foundation)
     /// YYSwift: String with number and current locale currency.
     public var asLocaleCurrency: String? {
         let formatter = NumberFormatter()
@@ -24,4 +27,5 @@ public extension SignedNumeric {
         // swiftlint:disable next force_cast
         return formatter.string(from: self as! NSNumber)
     }
+    #endif
 }

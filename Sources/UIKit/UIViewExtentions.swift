@@ -6,6 +6,7 @@
 //  Copyright © 2018年 Phoenix. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 // MARK: - enums
@@ -761,3 +762,4 @@ fileprivate func convertToCAMediaTimingFunctionName(_ input: String) -> CAMediaT
 fileprivate func convertFromCAMediaTimingFunctionName(_ input: CAMediaTimingFunctionName) -> String {
 	return input.rawValue
 }
+#endif

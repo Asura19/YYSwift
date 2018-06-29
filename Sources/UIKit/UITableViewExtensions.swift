@@ -6,6 +6,7 @@
 //  Copyright © 2018年 Phoenix. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 // MARK: - Properties
@@ -311,3 +312,4 @@ public extension UITableView {
         scrollToRow(at: indexPath, at: scrollPosition, animated: animated)
     }
 }
+#endif
