@@ -6,6 +6,7 @@
 //  Copyright © 2017年 Phoenix. All rights reserved.
 //
 
+#if canImport(Foundation)
 import Foundation
 
 // MARK: - Properties
@@ -57,3 +58,4 @@ public extension URL {
         self = appendingQueryParameters(parameters)
     }
 }
+#endif

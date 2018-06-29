@@ -146,12 +146,13 @@ public extension UIImage {
     ///
     /// - Parameters:
     ///   - toHeight: new height.
+    ///   - opaque: flag indicating whether the bitmap is opaque.
     ///   - orientation: optional UIImage orientation (default is nil).
     /// - Returns: optional scaled UIImage (if applicable).
-    public func scaled(toHeight: CGFloat, with orientation: UIImage.Orientation? = nil) -> UIImage? {
+    public func scaled(toHeight: CGFloat, opaque: Bool = false, with orientation: UIImage.Orientation? = nil) -> UIImage? {
         let scale = toHeight / size.height
         let newWidth = size.width * scale
-        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: toHeight))
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: newWidth, height: toHeight), opaque, scale)
         draw(in: CGRect(x: 0, y: 0, width: newWidth, height: toHeight))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -162,12 +163,13 @@ public extension UIImage {
     ///
     /// - Parameters:
     ///   - toWidth: new width.
+    ///   - opaque: flag indicating whether the bitmap is opaque.
     ///   - orientation: optional UIImage orientation (default is nil).
     /// - Returns: optional scaled UIImage (if applicable).
-    public func scaled(toWidth: CGFloat, with orientation: UIImage.Orientation? = nil) -> UIImage? {
+    public func scaled(toWidth: CGFloat, opaque: Bool = false, with orientation: UIImage.Orientation? = nil) -> UIImage? {
         let scale = toWidth / size.width
         let newHeight = size.height * scale
-        UIGraphicsBeginImageContext(CGSize(width: toWidth, height: newHeight))
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: toWidth, height: newHeight), opaque, scale)
         draw(in: CGRect(x: 0, y: 0, width: toWidth, height: newHeight))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -765,6 +767,29 @@ public extension UIImage {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image
+    }
+    
+    /// YYSwift: Create UIImage from color and size.
+    ///
+    /// - Parameters:
+    ///   - color: image fill color.
+    ///   - size: image size.
+    public convenience init(color: UIColor, size: CGSize) {
+        UIGraphicsBeginImageContextWithOptions(size, false, 1)
+        
+        defer {
+            UIGraphicsEndImageContext()
+        }
+        
+        color.setFill()
+        UIRectFill(CGRect(origin: .zero, size: size))
+        
+        guard let aCgImage = UIGraphicsGetImageFromCurrentImageContext()?.cgImage else {
+            self.init()
+            return
+        }
+        
+        self.init(cgImage: aCgImage)
     }
     
     /// YYSwift: Create and return an image with custom draw code.

@@ -6,6 +6,7 @@
 //  Copyright © 2017年 Phoenix. All rights reserved.
 //
 
+#if canImport(Foundation)
 import Foundation
 
 public extension NSKeyedUnarchiver {
@@ -62,3 +63,4 @@ public extension NSKeyedUnarchiver {
         return object!
     }
 }
+#endif

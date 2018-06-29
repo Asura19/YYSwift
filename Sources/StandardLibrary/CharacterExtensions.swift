@@ -6,6 +6,7 @@
 //  Copyright © 2017年 Phoenix. All rights reserved.
 //
 
+#if canImport(Foundation)
 import Foundation
 
 // MARK: - Properties
@@ -100,6 +101,23 @@ public extension Character {
     
 }
 
+// MARK: - Methods
+public extension Character {
+    
+    /// YYSwift: Random character.
+    ///
+    ///    Character.random() -> k
+    ///
+    /// - Returns: A random character.
+    public static func randomAlphanumeric() -> Character {
+        let allCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let randomNumber = Int(arc4random_uniform(UInt32(allCharacters.count)))
+        let randomIndex = allCharacters.index(allCharacters.startIndex, offsetBy: randomNumber)
+        return allCharacters[randomIndex]
+    }
+}
+
+
 // MARK: - Operators
 public extension Character {
     
@@ -112,9 +130,7 @@ public extension Character {
     ///   - rhs: number of times to repeat character.
     /// - Returns: string with character repeated n times.
     public static func * (lhs: Character, rhs: Int) -> String {
-        guard rhs > 0 else {
-            return ""
-        }
+        guard rhs > 0 else { return "" }
         return String(repeating: String(lhs), count: rhs)
     }
     
@@ -127,9 +143,8 @@ public extension Character {
     ///   - rhs: character to repeat.
     /// - Returns: string with character repeated n times.
     public static func * (lhs: Int, rhs: Character) -> String {
-        guard lhs > 0 else {
-            return ""
-        }
+        guard lhs > 0 else { return "" }
         return String(repeating: String(rhs), count: lhs)
     }
 }
+#endif

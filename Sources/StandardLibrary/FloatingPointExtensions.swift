@@ -6,6 +6,7 @@
 //  Copyright © 2017年 Phoenix. All rights reserved.
 //
 
+#if canImport(Foundation)
 import Foundation
 
 // MARK: - Properties
@@ -56,3 +57,4 @@ prefix operator ±
 public prefix func ±<T: FloatingPoint> (number: T) -> (T, T) {
     return (0 + number, 0 - number)
 }
+#endif

@@ -6,6 +6,7 @@
 //  Copyright © 2017年 Phoenix. All rights reserved.
 //
 
+#if canImport(Foundation)
 import Foundation
 
 // MARK: - Initializer
@@ -63,19 +64,6 @@ public extension Array {
         return object
     }
     
-    /// YYSwift: Element at the given index if it exists.
-    ///
-    ///     [1, 2, 3, 4, 5].item(at: 2) -> 3
-    ///     [1.2, 2.3, 4.5, 3.4, 4.5].item(at: 3) -> 3.4
-    ///     ["h", "e", "l", "l", "o"].item(at: 10) -> nil
-    ///
-    /// - Parameter index: index of element.
-    /// - Returns: optional element (if exists).
-    public func item(at index: Int) -> Element? {
-        guard startIndex..<endIndex ~= index else { return nil }
-        return self[index]
-    }
-    
     /// YYSwift: Insert an element at the beginning of array.
     ///
     ///     [2, 3, 4, 5].prepend(1) -> [1, 2, 3, 4, 5]
@@ -107,7 +95,7 @@ public extension Array {
     /// - Parameters:
     ///   - index: index of first element.
     ///   - otherIndex: index of other element.
-    public mutating func safeSwap(from index: Int, to otherIndex: Int) {
+    public mutating func safeSwap(from index: Index, to otherIndex: Index) {
         guard index != otherIndex,
             startIndex..<endIndex ~= index,
             startIndex..<endIndex ~= otherIndex else {
@@ -116,124 +104,20 @@ public extension Array {
         swapAt(index, otherIndex)
     }
     
-    /// YYSwift: Get first index where condition is met.
+    /// YYSwift: Keep elements of Array while condition is true.
     ///
-    ///     [1, 7, 1, 2, 4, 1, 6].firstIndex { $0 % 2 == 0 } -> 3
-    ///
-    /// - Parameter condition: condition to evaluate each element against.
-    /// - Returns: first index where the specified condition evaluates to true. (optional)
-    public func firstIndex(where condition: (Element) throws -> Bool) rethrows -> Int? {
-        for (index, value) in lazy.enumerated() {
-            if try condition(value) {
-                return index
-            }
-        }
-        return nil
-    }
-    
-    /// YYSwift: Get last index where condition is met.
-    ///
-    ///     [1, 7, 1, 2, 4, 1, 8].lastIndex { $0 % 2 == 0 } -> 6
+    ///        [0, 2, 4, 7].keep( where: {$0 % 2 == 0}) -> [0, 2, 4]
     ///
     /// - Parameter condition: condition to evaluate each element against.
-    /// - Returns: last index where the specified condition evaluates to true. (optional)
-    public func lastIndex(where condition: (Element) throws -> Bool) rethrows -> Int? {
-        for (index, value) in lazy.enumerated().reversed() {
-            if try condition(value) {
-                return index
-            }
+    /// - Returns: self after applying provided condition.
+    /// - Throws: provided condition exception.
+    @discardableResult
+    public mutating func keep(while condition: (Element) throws -> Bool) rethrows -> [Element] {
+        for (index, element) in lazy.enumerated() where try !condition(element) {
+            self = Array(self[startIndex..<index])
+            break
         }
-        return nil
-    }
-    
-    /// YYSwift: Get all indices where condition is met.
-    ///
-    ///     [1, 7, 1, 2, 4, 1, 8].indices(where: { $0 == 1 }) -> [0, 2, 5]
-    ///
-    /// - Parameter condition: condition to evaluate each element against.
-    /// - Returns: all indices where the specified condition evaluates to true. (optional)
-    public func indices(where condition: (Element) throws -> Bool) rethrows -> [Int]? {
-        var indices: [Int] = []
-        for (index, value) in lazy.enumerated() {
-            if try condition(value) {
-                indices.append(index)
-            }
-        }
-        return indices.isEmpty ? nil : indices
-    }
-    
-    /// YYSwift: Check if all elements in array match a conditon.
-    ///
-    ///     [2, 2, 4].all(matching: {$0 % 2 == 0}) -> true
-    ///     [1,2, 2, 4].all(matching: {$0 % 2 == 0}) -> false
-    ///
-    /// - Parameter condition: condition to evaluate each element against.
-    /// - Returns: true when all elements in the array match the specified condition.
-    public func all(matching condition: (Element) throws -> Bool) rethrows -> Bool {
-        return try !contains { try !condition($0) }
-    }
-    
-    /// YYSwift: Get last element that satisfies a conditon.
-    ///
-    ///     [2, 2, 4, 7].last(where: {$0 % 2 == 0}) -> 4
-    ///
-    /// - Parameter condition: condition to evaluate each element against.
-    /// - Returns: the last element in the array matching the specified condition. (optional)
-    public func last(where condition: (Element) throws -> Bool) rethrows -> Element? {
-        for element in reversed() {
-            if try condition(element) {
-                return element
-            }
-        }
-        return nil
-    }
-    
-    /// YYSwift: Filter elements based on a rejection condition.
-    ///
-    ///     [2, 2, 4, 7].delete(where: {$0 % 2 == 0}) -> [7]
-    ///
-    /// - Parameter condition: to evaluate the exclusion of an element from the array.
-    /// - Returns: the array with rejected values filtered from it.
-    public func delete(where condition: (Element) throws -> Bool) rethrows -> [Element] {
-        return try filter { return try !condition($0) }
-    }
-    
-    /// YYSwift: Get element count based on condition.
-    ///
-    ///     [2, 2, 4, 7].count(where: {$0 % 2 == 0}) -> 3
-    ///
-    /// - Parameter condition: condition to evaluate each element against.
-    /// - Returns: number of times the condition evaluated to true.
-    public func count(where condition: (Element) throws -> Bool) rethrows -> Int {
-        var count = 0
-        for element in self {
-            if try condition(element) {
-                count += 1
-            }
-        }
-        return count
-    }
-    
-    /// YYSwift: Iterate over a collection in reverse order. (right to left)
-    ///
-    ///     [0, 2, 4, 7].forEachReversed({ print($0)}) -> //Order of print: 7,4,2,0
-    ///
-    /// - Parameter body: a closure that takes an element of the array as a parameter.
-    public func forEachReversed(_ execute: (Element) throws -> Void) rethrows {
-        try reversed().forEach { try execute($0) }
-    }
-    
-    /// YYSwift: Calls given closure with each element where condition is true.
-    ///
-    ///        [0, 2, 4, 7].forEach(where: {$0 % 2 == 0}, execute: { print($0)}) -> //print: 0, 2, 4
-    ///
-    /// - Parameters:
-    ///   - condition: condition to evaluate each element against.
-    ///   - body: a closure that takes an element of the array as a parameter.
-    public func forEach(where condition: (Element) throws -> Bool, execute: (Element) throws -> Void) rethrows {
-        for element in self where try condition(element) {
-            try execute(element)
-        }
+        return self
     }
     
     /// YYSwift: Returns an array of slices of length "size" from the array.  If array can't be split evenly, the final slice will be the remaining elements.
@@ -314,32 +198,61 @@ public extension Array {
         array.shuffle()
         return array
     }
-}
-
-public extension Array where Element: Numeric {
     
-    /// YYSwift: Sum of all elements in array.
+    /// YYSwift: Returns a sorted array based on an optional keypath.
     ///
-    ///     [1, 2, 3, 4, 5].sum() -> 15
+    /// - Parameter path: Key path to sort. The key path type must be Comparable.
+    /// - Parameter ascending: If order must be ascending.
+    /// - Returns: Sorted array based on keyPath.
+    public func sorted<T: Comparable>(by path: KeyPath<Element, T?>, ascending: Bool = true) -> [Element] {
+        return sorted(by: { (lhs, rhs) -> Bool in
+            guard let lhsValue = lhs[keyPath: path], let rhsValue = rhs[keyPath: path] else { return false }
+            if ascending {
+                return lhsValue < rhsValue
+            }
+            return lhsValue > rhsValue
+        })
+    }
+    
+    /// YYSwift: Returns a sorted array based on a keypath.
     ///
-    /// - Returns: sum of the array's elements.
-    public func sum() -> Element {
-        return reduce(0, +)
+    /// - Parameter path: Key path to sort. The key path type must be Comparable.
+    /// - Parameter ascending: If order must be ascending.
+    /// - Returns: Sorted array based on keyPath.
+    public func sorted<T: Comparable>(by path: KeyPath<Element, T>, ascending: Bool = true) -> [Element] {
+        return sorted(by: { (lhs, rhs) -> Bool in
+            if ascending {
+                return lhs[keyPath: path] < rhs[keyPath: path]
+            }
+            return lhs[keyPath: path] > rhs[keyPath: path]
+        })
+    }
+    
+    /// YYSwift: Sort the array based on an optional keypath.
+    ///
+    /// - Parameters:
+    ///   - path: Key path to sort, must be Comparable.
+    ///   - ascending: whether order is ascending or not.
+    /// - Returns: self after sorting.
+    @discardableResult
+    public mutating func sort<T: Comparable>(by path: KeyPath<Element, T?>, ascending: Bool = true) -> [Element] {
+        self = sorted(by: path, ascending: ascending)
+        return self
+    }
+    
+    /// YYSwift: Sort the array based on a keypath.
+    ///
+    /// - Parameters:
+    ///   - path: Key path to sort, must be Comparable.
+    ///   - ascending: whether order is ascending or not.
+    /// - Returns: self after sorting.
+    @discardableResult
+    public mutating func sort<T: Comparable>(by path: KeyPath<Element, T>, ascending: Bool = true) -> [Element] {
+        self = sorted(by: path, ascending: ascending)
+        return self
     }
 }
 
-public extension Array where Element: FloatingPoint {
-
-    /// YYSwift: Average of all elements in array.
-    ///
-    ///     [1.2, 2.3, 4.5, 3.4, 4.5].average() = 3.18
-    ///
-    /// - Returns: average of the array's elements.
-    public func average() -> Element {
-        return isEmpty ? 0 : reduce(0, +) / Element(count)
-    }
-    
-}
 
 public extension Array where Element: Equatable {
     
@@ -432,33 +345,18 @@ public extension Array where Element: Equatable {
         }
     }
     
-    /// YYSwift: First index of a given item in an array.
+    /// YYSwift: Removes the first element of the collection which satisfies the given predicate.
     ///
-    ///     [1, 2, 2, 3, 4, 2, 5].firstIndex(of: 2) -> 1
-    ///     [1.2, 2.3, 4.5, 3.4, 4.5].firstIndex(of: 6.5) -> nil
-    ///     ["h", "e", "l", "l", "o"].firstIndex(of: "l") -> 2
+    ///        [1, 2, 2, 3, 4, 2, 5].removeFirst { $0 % 2 == 0 } -> [1, 2, 3, 4, 2, 5]
+    ///        ["h", "e", "l", "l", "o"].removeFirst { $0 == "e" } -> ["h", "l", "l", "o"]
     ///
-    /// - Parameter item: item to check.
-    /// - Returns: first index of item in array (if exists).
-    public func firstIndex(of item: Element) -> Int? {
-        for (index, value) in lazy.enumerated() where value == item {
-            return index
-        }
-        return nil
+    /// - Parameter predicate: A closure that takes an element as its argument and returns a Boolean value that indicates whether the passed element represents a match.
+    /// - Returns: The first element for which predicate returns true, after removing it. If no elements in the collection satisfy the given predicate, returns `nil`.
+    @discardableResult
+    public mutating func removeFirst(where predicate: (Element) throws -> Bool) rethrows -> Element? {
+        guard let index = try index(where: predicate) else { return nil }
+        return remove(at: index)
     }
     
-    /// YYSwift: Last index of element in array.
-    ///
-    ///     [1, 2, 2, 3, 4, 2, 5].lastIndex(of: 2) -> 5
-    ///     [1.2, 2.3, 4.5, 3.4, 4.5].lastIndex(of: 6.5) -> nil
-    ///     ["h", "e", "l", "l", "o"].lastIndex(of: "l") -> 3
-    ///
-    /// - Parameter item: item to check.
-    /// - Returns: last index of item in array (if exists).
-    public func lastIndex(of item: Element) -> Int? {
-        for (index, value) in lazy.enumerated().reversed() where value == item {
-            return index
-        }
-        return nil
-    }
 }
+#endif

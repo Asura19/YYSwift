@@ -60,6 +60,12 @@ public extension UIGestureRecognizer {
             objc_setAssociatedObject(self, Key.Associated, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
+    
+    /// YYSwift: Remove Gesture Recognizer from its view.
+    public func removeFromView() {
+        self.view?.removeGestureRecognizer(self)
+    }
+
 }
 
 private struct Key {

@@ -230,15 +230,21 @@ public extension String {
         return hasLetters && !hasNumbers
     }
     
-    /// YYSwift: Check if string contains only numbers.
+    /// YYSwift: Check if string is a valid Swift number.
     ///
-    ///     "123".isNumeric -> true
-    ///     "abc".isNumeric -> false
+    /// Note:
+    /// In North America, "." is the decimal separator,
+    /// while in many parts of Europe "," is used,
+    ///
+    ///        "123".isNumeric -> true
+    ///     "1.3".isNumeric -> true (en_US)
+    ///     "1,3".isNumeric -> true (fr_FR)
+    ///        "abc".isNumeric -> false
     ///
     public var isNumeric: Bool {
-        let hasLetters = rangeOfCharacter(from: .letters, options: .numeric, range: nil) != nil
-        let hasNumbers = rangeOfCharacter(from: .decimalDigits, options: .literal, range: nil) != nil
-        return  !hasLetters && hasNumbers
+        let scanner = Scanner(string: self)
+        scanner.locale = NSLocale.current
+        return scanner.scanDecimal(nil) && scanner.isAtEnd
     }
     
     /// YYSwift: Check if string contains at least one letter and one number.
@@ -256,11 +262,12 @@ public extension String {
     
     /// YYSwift: Check if string is valid email format.
     ///
-    ///     "john@doe.com".isEmail -> true
+    ///        "john@doe.com".isEmail -> true
     ///
     public var isEmail: Bool {
         // http://stackoverflow.com/questions/25471114/how-to-validate-an-e-mail-address-in-swift
-        return matches(pattern: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}")
+        return range(of: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}",
+                     options: .regularExpression, range: nil, locale: nil) != nil
     }
     
     /// YYSwift: Check if string is a valid URL.
@@ -336,7 +343,7 @@ public extension String {
     ///     "Hello".bool = nil
     ///
     public var bool: Bool? {
-        let selfLowercased = trimmed.lowercased()
+        let selfLowercased = trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         if selfLowercased == "true"
             || selfLowercased == "1"
             || selfLowercased == "yes" {
@@ -355,7 +362,7 @@ public extension String {
     ///     "2007-06-29".date -> Optional(Date)
     ///
     public var date: Date? {
-        let selfLowercased = trimmed.lowercased()
+        let selfLowercased = trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone.current
         formatter.dateFormat = "yyyy-MM-dd"
@@ -367,7 +374,7 @@ public extension String {
     ///     "2007-06-29 14:23:09".dateTime -> Optional(Date)
     ///
     public var dateTime: Date? {
-        let selfLowercased = trimmed.lowercased()
+        let selfLowercased = trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone.current
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -429,10 +436,30 @@ public extension String {
     /// - Parameter pattern: Pattern to verify.
     /// - Returns: true if string matches the pattern.
     public func matches(pattern: String) -> Bool {
-        return range(of: pattern,
-                     options: String.CompareOptions.regularExpression,
-                     range: nil,
-                     locale: nil) != nil
+        return range(of: pattern, options: .regularExpression, range: nil, locale: nil) != nil
+
+    }
+    
+    /// YYSwift: Removes given prefix from the string.
+    ///
+    ///   "Hello, World!".removingPrefix("Hello, ") -> "World!"
+    ///
+    /// - Parameter prefix: Prefix to remove from the string.
+    /// - Returns: The string after prefix removing.
+    public func removingPrefix(_ prefix: String) -> String {
+        guard hasPrefix(prefix) else { return self }
+        return String(dropFirst(prefix.count))
+    }
+    
+    /// YYSwift: Removes given suffix from the string.
+    ///
+    ///   "Hello, World!".removingSuffix(", World!") -> "Hello"
+    ///
+    /// - Parameter suffix: Suffix to remove from the string.
+    /// - Returns: The string after suffix removing.
+    public func removingSuffix(_ suffix: String) -> String {
+        guard hasSuffix(suffix) else { return self }
+        return String(dropLast(suffix.count))
     }
     
     /// YYSwift: Match the regular expression, and executes a given block using each object in the matches.
@@ -500,7 +527,7 @@ public extension String {
         let formatter = NumberFormatter()
         formatter.locale = locale
         formatter.allowsFloats = true
-        return formatter.number(from: self) as? Float
+        return formatter.number(from: self)?.floatValue
     }
     
     /// YYSwift: Double value from string (if applicable).
@@ -511,7 +538,7 @@ public extension String {
         let formatter = NumberFormatter()
         formatter.locale = locale
         formatter.allowsFloats = true
-        return formatter.number(from: self) as? Double
+        return formatter.number(from: self)?.doubleValue
     }
     
     /// YYSwift: CGFloat value from string (if applicable).
@@ -560,7 +587,7 @@ public extension String {
     ///
     /// - Returns: The unicodes for all characters in a string.
     public func unicodeArray() -> [Int] {
-        return unicodeScalars.map({ $0.hashValue })
+        return unicodeScalars.map { $0.hashValue }
     }
     
     /// YYSwift: an array of all words in a string
@@ -582,7 +609,38 @@ public extension String {
     /// - Returns: The count of words contained in a string.
     public func wordCount() -> Int {
         // https://stackoverflow.com/questions/42822838
-        return words().count
+        let chararacterSet = CharacterSet.whitespacesAndNewlines.union(.punctuationCharacters)
+        let comps = components(separatedBy: chararacterSet)
+        let words = comps.filter { !$0.isEmpty }
+        return words.count
+    }
+    
+    /// YYSwift: Transforms the string into a slug string.
+    ///
+    ///        "Swift is amazing".toSlug() -> "swift-is-amazing"
+    ///
+    /// - Returns: The string in slug format.
+    public func toSlug() -> String {
+        let lowercased = self.lowercased()
+        let latinized = lowercased.latinized
+        let withDashes = latinized.replacingOccurrences(of: " ", with: "-")
+        
+        let alphanumerics = NSCharacterSet.alphanumerics
+        var filtered = withDashes.filter {
+            guard String($0) != "-" else { return true }
+            guard String($0) != "&" else { return true }
+            return String($0).rangeOfCharacter(from: alphanumerics) != nil
+        }
+        
+        while filtered.lastCharacterAsString == "-" {
+            filtered = String(filtered.dropLast())
+        }
+        
+        while filtered.firstCharacterAsString == "-" {
+            filtered = String(filtered.dropFirst())
+        }
+        
+        return filtered.replacingOccurrences(of: "--", with: "-")
     }
     
     /// YYSwift: Safely subscript string with index.
@@ -633,26 +691,37 @@ public extension String {
     #if os(iOS) || os(macOS)
     /// YYSwift: Copy string to global pasteboard.
     ///
-    ///     "SomeText".copyToPasteboard() // copies "SomeText" to pasteboard
+    ///        "SomeText".copyToPasteboard() // copies "SomeText" to pasteboard
     ///
     public func copyToPasteboard() {
         #if os(iOS)
-            UIPasteboard.general.string = self
+        UIPasteboard.general.string = self
         #elseif os(macOS)
-            NSPasteboard.general.clearContents()
-            NSPasteboard.general.setString(self, forType: .string)
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(self, forType: .string)
         #endif
     }
     #endif
     
     /// YYSwift: Converts string format to CamelCase.
     ///
-    ///     var str = "sOme vaRiabLe Name"
-    ///     str.camelize()
-    ///     print(str) // prints "someVariableName"
+    ///        var str = "sOme vaRiabLe Name"
+    ///        str.camelize()
+    ///        print(str) // prints "someVariableName"
     ///
     public mutating func camelize() {
-        self = camelCased
+        let source = lowercased()
+        let first = source[..<source.index(after: source.startIndex)]
+        if source.contains(" ") {
+            let connected = source.capitalized.replacingOccurrences(of: " ", with: "")
+            let camel = connected.replacingOccurrences(of: "\n", with: "")
+            let rest = String(camel.dropFirst())
+            self = first + rest
+            return
+        }
+        let rest = String(source.dropFirst())
+        
+        self = first + rest
     }
     
     /// YYSwift: Check if string contains only unique characters.
@@ -741,7 +810,7 @@ public extension String {
     ///     print(str) // prints "Hello World!"
     ///
     public mutating func latinize() {
-        self = latinized
+        self = folding(options: .diacriticInsensitive, locale: Locale.current)
     }
     
     /// YYSwift: Random string of given length.
@@ -948,9 +1017,7 @@ public extension String {
     ///   - rhs: number of times to repeat character.
     /// - Returns: new string with given string repeated n times.
     public static func * (lhs: String, rhs: Int) -> String {
-        guard rhs > 0 else {
-            return ""
-        }
+        guard rhs > 0 else { return "" }
         return String(repeating: lhs, count: rhs)
     }
     
@@ -963,9 +1030,7 @@ public extension String {
     ///   - rhs: string to repeat.
     /// - Returns: new string with given string repeated n times.
     public static func * (lhs: Int, rhs: String) -> String {
-        guard lhs > 0 else {
-            return ""
-        }
+        guard lhs > 0 else { return "" }
         return String(repeating: rhs, count: lhs)
     }
     
@@ -974,15 +1039,17 @@ public extension String {
 // MARK: - Iinitializer
 public extension String {
     
+    /// YYSwift: Create a new string from a base64 string (if applicable).
+    ///
+    ///        String(base64: "SGVsbG8gV29ybGQh") = "Hello World!"
+    ///        String(base64: "hello") = nil
+    ///
+    /// - Parameter base64: base64 string.
     public init?(base64: String) {
         guard let str = base64.base64Decoded else {
             return nil
         }
         self.init(str)
-    }
-    
-    public init(randomOfLength length: Int) {
-        self = String.random(ofLength: length)
     }
     
 }

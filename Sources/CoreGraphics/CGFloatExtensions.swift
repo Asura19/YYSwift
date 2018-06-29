@@ -6,10 +6,15 @@
 //  Copyright © 2017年 Phoenix. All rights reserved.
 //
 
-#if os(macOS)
-    import Cocoa
-#else
-    import UIKit
+#if canImport(CoreGraphics)
+import CoreGraphics
+
+#if canImport(UIKit)
+import UIKit
+#endif
+
+#if canImport(Cocoa)
+import Cocoa
 #endif
 
 // MARK: - Properties
@@ -27,7 +32,7 @@ public extension CGFloat {
     
     /// YYSwift: Radian value of degree input.
     public var degreesToRadians: CGFloat {
-        return CGFloat.pi * self / 180.0
+        return .pi * self / 180.0
     }
     
     /// YYSwift: Floor of CGFloat value.
@@ -67,3 +72,4 @@ public extension CGFloat {
     
 }
 
+#endif

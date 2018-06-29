@@ -12,11 +12,9 @@ import UIKit
 public extension UIStoryboard {
     
     /// YYSwift: Get main storyboard for application
-    public static var mainStoryboard: UIStoryboard? {
+    public static var main: UIStoryboard? {
         let bundle = Bundle.main
-        guard let name = bundle.object(forInfoDictionaryKey: "UIMainStoryboardFile") as? String else {
-            return nil
-        }
+        guard let name = bundle.object(forInfoDictionaryKey: "UIMainStoryboardFile") as? String else { return nil }
         return UIStoryboard(name: name, bundle: bundle)
     }
     

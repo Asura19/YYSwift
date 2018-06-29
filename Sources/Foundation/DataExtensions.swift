@@ -5,8 +5,10 @@
 //  Created by Phoenix on 2017/10/30.
 //  Copyright © 2017年 Phoenix. All rights reserved.
 //
-
+#if canImport(Foundation)
 import Foundation
+#endif
+
 #if os(iOS) || os(macOS)
 import CommonCrypto
 import Swiftzlib
@@ -510,6 +512,11 @@ public extension Data {
 
 
 public extension Data {
+    
+    /// YYSwift: Return data as an array of bytes.
+    public var bytes: [UInt8] {
+        return [UInt8](self)
+    }
     
     /// YYSwift: Returns string decoded in UTF8.
     public var utf8String: String? {

@@ -11,6 +11,25 @@ import UIKit
 // MARK: - Methods
 public extension UIScrollView {
     
+    /// YYSwift: Takes a snapshot of an entire ScrollView
+    ///
+    ///    AnySubclassOfUIScroolView().snapshot
+    ///    UITableView().snapshot
+    ///
+    /// - Returns: Snapshot as UIimage for rendered ScrollView
+    public var snapshot: UIImage? {
+        UIGraphicsBeginImageContextWithOptions(contentSize, false, 0)
+        defer {
+            UIGraphicsEndImageContext()
+        }
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        let previousFrame = frame
+        frame = CGRect(origin: frame.origin, size: contentSize)
+        layer.render(in: context)
+        frame = previousFrame
+        return UIGraphicsGetImageFromCurrentImageContext()
+    }
+    
     /// YYSwift: Scroll content to top.
     ///
     /// - Parameter animated: Use animation (default is true).
@@ -46,4 +65,5 @@ public extension UIScrollView {
         off.x = contentSize.width - bounds.size.width + contentInset.right
         setContentOffset(off, animated: animated)
     }
+    
 }

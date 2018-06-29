@@ -6,17 +6,21 @@
 //  Copyright © 2017年 Phoenix. All rights reserved.
 //
 
-#if os(macOS)
-    import Cocoa
-    public typealias Color = NSColor
-#else
-    import UIKit
-    public typealias Color = UIColor
+#if canImport(UIKit)
+import UIKit
+public typealias Color = UIColor
+#endif
+
+#if canImport(Cocoa)
+import Cocoa
+public typealias Color = NSColor
 #endif
 
 #if !os(watchOS)
     import CoreImage
 #endif
+
+#if !os(Linux)
 
 // MARK: - Properties
 public extension Color {
@@ -691,3 +695,4 @@ public extension Color {
     }
 }
 
+#endif

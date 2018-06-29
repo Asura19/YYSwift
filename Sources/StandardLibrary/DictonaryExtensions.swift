@@ -6,6 +6,7 @@
 //  Copyright © 2017年 Phoenix. All rights reserved.
 //
 
+#if canImport(Foundation)
 import Foundation
 
 public extension Dictionary where Key: Comparable {
@@ -71,8 +72,8 @@ public extension Dictionary {
     ///     dict.keys.contains("key2") -> false
     ///
     /// - Parameter keys: keys to be removed
-    public mutating func removeAll(keys: [Key]) {
-        keys.forEach({ removeValue(forKey: $0) })
+    public mutating func removeAll<S: Sequence>(keys: S) where S.Element == Key {
+        keys.forEach { removeValue(forKey: $0) }
     }
     
     /// YYSwift: JSON Data from dictionary.
@@ -172,6 +173,39 @@ public extension Dictionary {
     public static func += (lhs: inout [Key: Value], rhs: [Key: Value]) {
         rhs.forEach { lhs[$0] = $1}
     }
+    
+    /// YYSwift: Remove keys contained in the sequence from the dictionary
+    ///
+    ///        let dict : [String : String] = ["key1" : "value1", "key2" : "value2", "key3" : "value3"]
+    ///        let result = dict-["key1", "key2"]
+    ///        result.keys.contains("key3") -> true
+    ///        result.keys.contains("key1") -> false
+    ///        result.keys.contains("key2") -> false
+    ///
+    /// - Parameters:
+    ///   - lhs: dictionary
+    ///   - rhs: array with the keys to be removed.
+    /// - Returns: a new dictionary with keys removed.
+    public static func - <S: Sequence>(lhs: [Key: Value], keys: S) -> [Key: Value] where S.Element == Key {
+        var result = lhs
+        result.removeAll(keys: keys)
+        return result
+    }
+    
+    /// YYSwift: Remove keys contained in the sequence from the dictionary
+    ///
+    ///        var dict : [String : String] = ["key1" : "value1", "key2" : "value2", "key3" : "value3"]
+    ///        dict-=["key1", "key2"]
+    ///        dict.keys.contains("key3") -> true
+    ///        dict.keys.contains("key1") -> false
+    ///        dict.keys.contains("key2") -> false
+    ///
+    /// - Parameters:
+    ///   - lhs: dictionary
+    ///   - rhs: array with the keys to be removed.
+    public static func -= <S: Sequence>(lhs: inout [Key: Value], keys: S) where S.Element == Key {
+        lhs.removeAll(keys: keys)
+    }
 }
 
 public extension Dictionary where Key: ExpressibleByStringLiteral {
@@ -191,6 +225,4 @@ public extension Dictionary where Key: ExpressibleByStringLiteral {
     }
     
 }
-
-
-
+#endif

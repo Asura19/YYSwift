@@ -6,7 +6,7 @@
 //  Copyright © 2017年 Phoenix. All rights reserved.
 //
 
-import Foundation
+#if canImport(CoreGraphics)
 import CoreGraphics
 
 // MARK: - Properties
@@ -52,3 +52,4 @@ infix operator ^ : PowerPrecedence
 public func ^ (lhs: Double, rhs: Double) -> Double {
     return pow(lhs, rhs)
 }
+#endif

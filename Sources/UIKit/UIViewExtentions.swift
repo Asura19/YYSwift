@@ -255,17 +255,6 @@ public extension UIView {
         }
     }
     
-    /// YYSwift: First responder.
-    public var firstResponder: UIView? {
-        guard !isFirstResponder else {
-            return self
-        }
-        for subView in subviews where subView.isFirstResponder {
-            return subView
-        }
-        return nil
-    }
-    
     /// YYSwift: Check if view is in RTL format.
     public var isRightToLeft: Bool {
         if #available(iOS 10.0, *, tvOS 10.0, *) {
@@ -310,6 +299,21 @@ public extension UIView {
 
 
 public extension UIView {
+    
+    /// YYSwift: Recursively find the first responder.
+    public func firstResponder() -> UIView? {
+        var views = [UIView](arrayLiteral: self)
+        var i = 0
+        repeat {
+            let view = views[i]
+            if view.isFirstResponder {
+                return view
+            }
+            views.append(contentsOf: view.subviews)
+            i += 1
+        } while i < views.count
+        return nil
+    }
     
     /// Create a snapshot image of the complete view hierarchy.
     /// It's faster than "snapshotImage", but may cause screen updates.
@@ -544,7 +548,7 @@ public extension UIView {
                        animated: Bool = false,
                        duration: TimeInterval = 1,
                        completion: ((Bool) -> Void)? = nil) {
-        let angleWithType = (type == .degrees) ? CGFloat.pi * angle / 180.0 : angle
+        let angleWithType = (type == .degrees) ? .pi * angle / 180.0 : angle
         let aDuration = animated ? duration : 0
         UIView.animate(withDuration: aDuration, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: { () -> Void in
             self.transform = self.transform.rotated(by: angleWithType)
@@ -564,7 +568,7 @@ public extension UIView {
                        animated: Bool = false,
                        duration: TimeInterval = 1,
                        completion: ((Bool) -> Void)? = nil) {
-        let angleWithType = (type == .degrees) ? CGFloat.pi * angle / 180.0 : angle
+        let angleWithType = (type == .degrees) ? .pi * angle / 180.0 : angle
         let aDuration = animated ? duration : 0
         UIView.animate(withDuration: aDuration, animations: {
             self.transform = self.transform.concatenating(CGAffineTransform(rotationAngle: angleWithType))

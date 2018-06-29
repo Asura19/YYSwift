@@ -6,22 +6,28 @@
 //  Copyright © 2018年 Phoenix. All rights reserved.
 //
 
-#if os(macOS)
-    import Cocoa
-#else
-    import UIKit
+#if canImport(CoreGraphics)
+import CoreGraphics
+
+#if canImport(UIKit)
+import UIKit
 #endif
 
+#if canImport(Cocoa)
+import Cocoa
+#endif
+
+// MARK: - Properties
 public extension CGColor {
     
-    #if !os(macOS)
+    #if canImport(UIKit)
     /// YYSwift: UIColor.
     public var uiColor: UIColor? {
         return UIColor(cgColor: self)
     }
     #endif
     
-    #if os(macOS)
+    #if canImport(Cocoa)
     /// YYSwift: NSColor.
     public var nsColor: NSColor? {
         return NSColor(cgColor: self)
@@ -29,3 +35,4 @@ public extension CGColor {
     #endif
     
 }
+#endif

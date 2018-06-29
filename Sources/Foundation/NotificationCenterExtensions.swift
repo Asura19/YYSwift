@@ -6,6 +6,7 @@
 //  Copyright © 2017年 Phoenix. All rights reserved.
 //
 
+#if canImport(Foundation)
 import Foundation
 
 // MARK: - Methods
@@ -58,3 +59,4 @@ public extension NotificationCenter {
         }
     }
 }
+#endif

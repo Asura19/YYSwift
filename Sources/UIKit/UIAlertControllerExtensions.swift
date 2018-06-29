@@ -66,11 +66,11 @@ public extension UIAlertController {
                              placeholder: String? = nil,
                              editingChangedTarget: Any?,
                              editingChangedSelector: Selector?) {
-        addTextField { tf in
-            tf.text = text
-            tf.placeholder = placeholder
+        addTextField { textField in
+            textField.text = text
+            textField.placeholder = placeholder
             if let target = editingChangedTarget, let selector = editingChangedSelector {
-                tf.addTarget(target, action: selector, for: UIControl.Event.editingChanged)
+                textField.addTarget(target, action: selector, for: .editingChanged)
             }
         }
     }

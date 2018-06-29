@@ -6,6 +6,7 @@
 //  Copyright © 2017年 Phoenix. All rights reserved.
 //
 
+#if canImport(Foundation)
 import Foundation
 
 public extension Date {
@@ -242,18 +243,15 @@ public extension Date {
             return Calendar.current.component(.nanosecond, from: self) / 1000000
         }
         set {
-            let ns = newValue * 1000000
+            let nanoSeconds = newValue * 1000000
             let allowedRange = Calendar.current.range(of: .nanosecond, in: .second, for: self)!
-            guard allowedRange.contains(ns) else {
-                return
-            }
+            guard allowedRange.contains(nanoSeconds) else { return }
             
-            if let date = Calendar.current.date(bySetting: .nanosecond, value: ns, of: self) {
+            if let date = Calendar.current.date(bySetting: .nanosecond, value: nanoSeconds, of: self) {
                 self = date
             }
         }
     }
-    
     
     /// YYSwift: Weekday
     public var weekday: Int {
@@ -857,5 +855,4 @@ public extension Date {
     }
     
 }
-
-
+#endif

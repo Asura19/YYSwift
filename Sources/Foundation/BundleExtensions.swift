@@ -6,6 +6,7 @@
 //  Copyright © 2017年 Phoenix. All rights reserved.
 //
 
+#if canImport(Foundation)
 import Foundation
 import UIKit
 
@@ -113,3 +114,4 @@ public extension Bundle {
         return path!
     }
 }
+#endif
