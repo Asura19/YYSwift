@@ -13,12 +13,12 @@ import UIKit
 public extension UITableView {
     
     /// YYSwift: Index path of last row in tableView.
-    public var indexPathForLastRow: IndexPath? {
+    var indexPathForLastRow: IndexPath? {
         return indexPathForLastRow(inSection: lastSection)
     }
     
     /// YYSwift: Index of last section in tableView.
-    public var lastSection: Int {
+    var lastSection: Int {
         return numberOfSections > 0 ? numberOfSections - 1 : 0
     }
 }
@@ -29,7 +29,7 @@ public extension UITableView {
     /// YYSwift: Number of all rows in all sections of tableView.
     ///
     /// - Returns: The count of all rows in the tableView.
-    public func numberOfRows() -> Int {
+    func numberOfRows() -> Int {
         var section = 0
         var rowCount = 0
         while section < numberOfSections {
@@ -43,7 +43,7 @@ public extension UITableView {
     /// sections of the receiver.
     ///
     /// - Parameter block: A block combine a series of method calls.
-    public func update(with block: ((UITableView) -> Void)) {
+    func update(with block: ((UITableView) -> Void)) {
         beginUpdates()
         block(self)
         endUpdates()
@@ -60,7 +60,7 @@ public extension UITableView {
     ///                     scrolling concludes.
     ///   - animated: true if you want to animate the change in position,
     ///               false if it should be immediate.
-    public func scrollTo(row: Int,
+    func scrollTo(row: Int,
                          inSection section: Int,
                          at scrollPosition: UITableView.ScrollPosition,
                          animated: Bool) {
@@ -74,7 +74,7 @@ public extension UITableView {
     ///   - indexPath: A certain indexPath
     ///   - animation: A constant that either specifies the kind of animation to
     ///                perform when inserting the cell or requests no animation.
-    public func insertRow(at indexPath: IndexPath,
+    func insertRow(at indexPath: IndexPath,
                           with animation: UITableView.RowAnimation) {
         insertRows(at: [indexPath], with: animation)
     }
@@ -86,7 +86,7 @@ public extension UITableView {
     ///   - section: Section index in table.
     ///   - animation: A constant that either specifies the kind of animation to
     ///                perform when inserting the cell or requests no animation.
-    public func insertRow(_ row: Int,
+    func insertRow(_ row: Int,
                           inSection section: Int,
                           with animation: UITableView.RowAnimation) {
         let toInsert = IndexPath(row: row, section: section)
@@ -99,7 +99,7 @@ public extension UITableView {
     ///   - indexPath: A certain indexPath
     ///   - animation: A constant that either specifies the kind of animation to
     ///                perform when inserting the cell or requests no animation.
-    public func reloadRow(at indexPath: IndexPath,
+    func reloadRow(at indexPath: IndexPath,
                           with animation: UITableView.RowAnimation) {
         reloadRows(at: [indexPath], with: animation)
     }
@@ -115,7 +115,7 @@ public extension UITableView {
     ///                new rows slide. For example, if the animation constant is
     ///                UITableViewRowAnimationRight, the old rows slide out to the
     ///                right and the new cells slide in from the right.
-    public func reloadRow(_ row: Int,
+    func reloadRow(_ row: Int,
                           in section: Int, with animation: UITableView.RowAnimation) {
         let toReload = IndexPath(row: row, section: section)
         self.reloadRow(at: toReload, with: animation)
@@ -127,7 +127,7 @@ public extension UITableView {
     ///   - indexPath: The indexPath.
     ///   - animation: A constant that indicates how the deletion is to be animated,
     ///                for example, fade out or slide out from the bottom.
-    public func deleteRow(at indexPath: IndexPath,
+    func deleteRow(at indexPath: IndexPath,
                           with animation: UITableView.RowAnimation) {
         deleteRows(at: [indexPath], with: animation)
     }
@@ -139,7 +139,7 @@ public extension UITableView {
     ///   - section: Section index in table.
     ///   - animation: A constant that indicates how the deletion is to be animated,
     ///                for example, fade out or slide out from the bottom.
-    public func deleteRow(_ row: Int,
+    func deleteRow(_ row: Int,
                           inSection section: Int,
                           with animation: UITableView.RowAnimation) {
         let toInsert = IndexPath(row: row, section: section)
@@ -154,7 +154,7 @@ public extension UITableView {
     ///              index location, it is moved down one index location.
     ///   - animation: A constant that indicates how the insertion is to be animated,
     ///                for example, fade in or slide in from the left.
-    public func insertSection(_ section: Int, with animation: UITableView.RowAnimation) {
+    func insertSection(_ section: Int, with animation: UITableView.RowAnimation) {
         let sections = IndexSet.init(integer: section)
         insertSections(sections, with: animation)
     }
@@ -167,7 +167,7 @@ public extension UITableView {
     ///              index location, it is moved up one index location.
     ///   - animation: A constant that either specifies the kind of animation to
     ///                perform when deleting the section or requests no animation.
-    public func deleteSection(_ section: Int, with animation: UITableView.RowAnimation) {
+    func deleteSection(_ section: Int, with animation: UITableView.RowAnimation) {
         let sections = IndexSet.init(integer: section)
         deleteSections(sections, with: animation)
     }
@@ -182,7 +182,7 @@ public extension UITableView {
     ///                old and the new section rows slide. For example, if the
     ///                animation constant is UITableViewRowAnimationRight, the old
     ///                rows slide out to the right and the new cells slide in from the right.
-    public func reloadSection(_ section: Int, with animation: UITableView.RowAnimation) {
+    func reloadSection(_ section: Int, with animation: UITableView.RowAnimation) {
         let sections = IndexSet.init(integer: section)
         reloadSections(sections, with: animation)
     }
@@ -191,7 +191,7 @@ public extension UITableView {
     ///
     /// - Parameter section: section to get last row in.
     /// - Returns: optional last indexPath for last row in section (if applicable).
-    public func indexPathForLastRow(inSection section: Int) -> IndexPath? {
+    func indexPathForLastRow(inSection section: Int) -> IndexPath? {
         guard section >= 0 else {
             return nil
         }
@@ -204,7 +204,7 @@ public extension UITableView {
     /// YYSwift: Reload data with a completion handler.
     ///
     /// - Parameter completion: completion handler to run after reloadData finishes.
-    public func reloadData(_ completion: @escaping () -> Void) {
+    func reloadData(_ completion: @escaping () -> Void) {
         UIView.animate(withDuration: 0, animations: {
             self.reloadData()
         }, completion: { _ in
@@ -216,7 +216,7 @@ public extension UITableView {
     ///
     /// - Parameter animated: true to animate the transition,
     ///                       false to make the transition immediate.
-    public func clearSelectedRows(animated: Bool) {
+    func clearSelectedRows(animated: Bool) {
         guard let indexs = indexPathsForSelectedRows else {
             return
         }
@@ -224,12 +224,12 @@ public extension UITableView {
     }
     
     /// YYSwift: Remove TableFooterView.
-    public func removeTableFooterView() {
+    func removeTableFooterView() {
         tableFooterView = nil
     }
     
     /// YYSwift: Remove TableHeaderView.
-    public func removeTableHeaderView() {
+    func removeTableHeaderView() {
         tableHeaderView = nil
     }
     
@@ -237,7 +237,7 @@ public extension UITableView {
     ///
     /// - Parameter name: UITableViewCell type
     /// - Returns: UITableViewCell object with associated class name.
-    public func dequeueReusableCell<T: UITableViewCell>(withClass name: T.Type) -> T {
+    func dequeueReusableCell<T: UITableViewCell>(withClass name: T.Type) -> T {
         guard let cell = dequeueReusableCell(withIdentifier: String(describing: name)) as? T else {
             fatalError("Couldn't find UITableViewCell for \(String(describing: name))")
         }
@@ -250,7 +250,7 @@ public extension UITableView {
     ///   - name: UITableViewCell type.
     ///   - indexPath: location of cell in tableView.
     /// - Returns: UITableViewCell object with associated class name.
-    public func dequeueReusableCell<T: UITableViewCell>(withClass name: T.Type, for indexPath: IndexPath) -> T {
+    func dequeueReusableCell<T: UITableViewCell>(withClass name: T.Type, for indexPath: IndexPath) -> T {
         guard let cell = dequeueReusableCell(withIdentifier: String(describing: name), for: indexPath) as? T else {
             fatalError("Couldn't find UITableViewCell for \(String(describing: name))")
         }
@@ -261,7 +261,7 @@ public extension UITableView {
     ///
     /// - Parameter name: UITableViewHeaderFooterView type
     /// - Returns: UITableViewHeaderFooterView object with associated class name.
-    public func dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView>(withClass name: T.Type) -> T {
+    func dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView>(withClass name: T.Type) -> T {
         guard let headerFooterView = dequeueReusableHeaderFooterView(withIdentifier: String(describing: name)) as? T else {
             fatalError("Couldn't find UITableViewHeaderFooterView for \(String(describing: name))")
         }
@@ -273,21 +273,21 @@ public extension UITableView {
     /// - Parameters:
     ///   - nib: Nib file used to create the header or footer view.
     ///   - name: UITableViewHeaderFooterView type.
-    public func register<T: UITableViewHeaderFooterView>(nib: UINib?, withHeaderFooterViewClass name: T.Type) {
+    func register<T: UITableViewHeaderFooterView>(nib: UINib?, withHeaderFooterViewClass name: T.Type) {
         register(nib, forHeaderFooterViewReuseIdentifier: String(describing: name))
     }
     
     /// YYSwift: Register UITableViewHeaderFooterView using class name
     ///
     /// - Parameter name: UITableViewHeaderFooterView type
-    public func register<T: UITableViewHeaderFooterView>(headerFooterViewClassWith name: T.Type) {
+    func register<T: UITableViewHeaderFooterView>(headerFooterViewClassWith name: T.Type) {
         register(T.self, forHeaderFooterViewReuseIdentifier: String(describing: name))
     }
     
     /// YYSwift: Register UITableViewCell using class name
     ///
     /// - Parameter name: UITableViewCell type
-    public func register<T: UITableViewCell>(cellWithClass name: T.Type) {
+    func register<T: UITableViewCell>(cellWithClass name: T.Type) {
         register(T.self, forCellReuseIdentifier: String(describing: name))
     }
     
@@ -296,7 +296,7 @@ public extension UITableView {
     /// - Parameters:
     ///   - nib: Nib file used to create the tableView cell.
     ///   - name: UITableViewCell type.
-    public func register<T: UITableViewCell>(nib: UINib?, withCellClass name: T.Type) {
+    func register<T: UITableViewCell>(nib: UINib?, withCellClass name: T.Type) {
         register(nib, forCellReuseIdentifier: String(describing: name))
     }
     
@@ -306,7 +306,7 @@ public extension UITableView {
     ///   - indexPath: Target IndexPath to scroll to
     ///   - scrollPosition: Scroll position
     ///   - animated: Whether to animate or not
-    public func safeScrollToRow(at indexPath: IndexPath, at scrollPosition: UITableView.ScrollPosition, animated: Bool) {
+    func safeScrollToRow(at indexPath: IndexPath, at scrollPosition: UITableView.ScrollPosition, animated: Bool) {
         guard indexPath.section < numberOfSections else { return }
         guard indexPath.row < numberOfRows(inSection: indexPath.section) else { return }
         scrollToRow(at: indexPath, at: scrollPosition, animated: animated)

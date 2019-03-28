@@ -17,7 +17,7 @@ public extension UIGestureRecognizer {
     /// - Parameter actionBlock: An action block that to handle the gesture
     ///                          recognized by the receiver. nil is invalid.
     ///                          It is retained by the gesture.
-    public convenience init(actionBlock: @escaping (Any) -> Void) {
+    convenience init(actionBlock: @escaping (Any) -> Void) {
         self.init()
         self.addActionBlock(actionBlock)
     }
@@ -30,7 +30,7 @@ public extension UIGestureRecognizer {
     /// gesture.
     ///
     /// - Parameter block: A block invoked by the action message.
-    public func addActionBlock(_ block: @escaping (Any) -> Void) {
+    func addActionBlock(_ block: @escaping (Any) -> Void) {
         let target = YYUIGestureRecognizerBlockTarget(block: block)
         self.addTarget(target, action: #selector(target.invoke(with:)))
         var targets = allTargetsBlock
@@ -39,7 +39,7 @@ public extension UIGestureRecognizer {
     }
     
     /// YYSwift: Remove all action blocks.
-    public func removeAllActionBlocks() {
+    func removeAllActionBlocks() {
         var targets = allTargetsBlock
         for target in targets {
             self.removeTarget(target, action: #selector(target.invoke(with:)))
@@ -63,7 +63,7 @@ public extension UIGestureRecognizer {
     }
     
     /// YYSwift: Remove Gesture Recognizer from its view.
-    public func removeFromView() {
+    func removeFromView() {
         self.view?.removeGestureRecognizer(self)
     }
 

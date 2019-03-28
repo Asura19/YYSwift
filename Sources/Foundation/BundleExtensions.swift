@@ -14,7 +14,7 @@ public extension Bundle {
     
     /// YYSwift: An array of NSNumber objects, shows the best order for path scale search.
     /// e.g. iPhone3GS:[1,2,3] iPhone5:[2,3,1]  iPhone6 Plus:[3,2,1]
-    public class func preferredScales() -> [CGFloat] {
+    class func preferredScales() -> [CGFloat] {
         var scales: [CGFloat]
         let screenScale = UIScreen.main.scale
         if screenScale <= 1 {
@@ -45,7 +45,7 @@ public extension Bundle {
     /// - Returns: The full pathname for the resource file or nil if the file could not be
     ///            located. This method also returns nil if the bundle specified by the bundlePath
     ///            parameter does not exist or is not a readable directory.
-    public class func pathForScaledResource(withName name: String,
+    class func pathForScaledResource(withName name: String,
                                             ofType ext: String,
                                             inDirectory bundlePath: String) -> String? {
         if name.count == 0 { return nil }
@@ -72,7 +72,7 @@ public extension Bundle {
     ///   - ext: If extension is an empty string or nil, the extension is
     ///          assumed not to exist and the file is the first file encountered that exactly matches name.
     /// - Returns: The full pathname for the resource file or nil if the file could not be located.
-    public func pathForScaledResource(withName name: String, ofType ext: String) -> String? {
+    func pathForScaledResource(withName name: String, ofType ext: String) -> String? {
         if name.count == 0 { return nil }
         if name.hasSuffix("/") {
             return self.path(forResource:name, ofType: ext)
@@ -99,7 +99,7 @@ public extension Bundle {
     ///          subdirectories are not searched.
     ///   - subpath: The name of the bundle subdirectory. Can be nil.
     /// - Returns: The full pathname for the resource file or nil if the file could not be located.
-    public func pathForScaledResource(withName name: String, ofType ext: String, inDirectory subpath: String) -> String? {
+    func pathForScaledResource(withName name: String, ofType ext: String, inDirectory subpath: String) -> String? {
         if name.count == 0 { return nil }
         if name.hasSuffix("/") {
             return self.path(forResource:name, ofType: ext, inDirectory: bundlePath)

@@ -22,14 +22,14 @@ public extension CGColor {
     
     #if canImport(UIKit)
     /// YYSwift: UIColor.
-    public var uiColor: UIColor? {
+    var uiColor: UIColor? {
         return UIColor(cgColor: self)
     }
     #endif
     
     #if canImport(Cocoa)
     /// YYSwift: NSColor.
-    public var nsColor: NSColor? {
+    var nsColor: NSColor? {
         return NSColor(cgColor: self)
     }
     #endif

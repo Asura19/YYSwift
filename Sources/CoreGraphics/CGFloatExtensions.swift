@@ -21,52 +21,52 @@ import Cocoa
 public extension CGFloat {
     
     /// YYSwift: Absolute of CGFloat value.
-    public var abs: CGFloat {
+    var abs: CGFloat {
         return Swift.abs(self)
     }
 
     /// YYSwift: Ceil of CGFloat value.
-    public var ceil: CGFloat {
+    var ceil: CGFloat {
         return Foundation.ceil(self)
     }
     
     /// YYSwift: Radian value of degree input.
-    public var degreesToRadians: CGFloat {
+    var degreesToRadians: CGFloat {
         return .pi * self / 180.0
     }
     
     /// YYSwift: Floor of CGFloat value.
-    public var floor: CGFloat {
+    var floor: CGFloat {
         return Foundation.floor(self)
     }
     
     /// YYSwift: Check if CGFloat is positive.
-    public var isPositive: Bool {
+    var isPositive: Bool {
         return self > 0
     }
     
     /// YYSwift: Check if CGFloat is negative.
-    public var isNegative: Bool {
+    var isNegative: Bool {
         return self < 0
     }
     
     /// YYSwift: Int.
-    public var int: Int {
+    var int: Int {
         return Int(self)
     }
     
     /// YYSwift: Float.
-    public var float: Float {
+    var float: Float {
         return Float(self)
     }
     
     /// YYSwift: Double.
-    public var double: Double {
+    var double: Double {
         return Double(self)
     }
     
     /// YYSwift: Degree value of radian input.
-    public var radiansToDegrees: CGFloat {
+    var radiansToDegrees: CGFloat {
         return self * 180 / CGFloat.pi
     }
     

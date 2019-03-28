@@ -713,7 +713,7 @@
 				TargetAttributes = {
 					D0A2DCC11FD93F2900AB456C = {
 						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
 					D0A2DCFA1FDA4A5B00AB456C = {
@@ -750,6 +750,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = D0A2DCB81FD93F2900AB456C;
 			productRefGroup = D0A2DCC31FD93F2900AB456C /* Products */;
@@ -1216,7 +1217,7 @@
 				PRODUCT_NAME = YYSwift;
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "$(PROJECT_DIR)/Sources/ModuleMap";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1240,7 +1241,7 @@
 				PRODUCT_NAME = YYSwift;
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "$(PROJECT_DIR)/Sources/ModuleMap";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

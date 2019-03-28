@@ -13,12 +13,12 @@ import UIKit
 public extension UIFont {
     
     /// YYSwift: Whether the font is bold.
-    public var isBold: Bool {
+    var isBold: Bool {
         return self.fontDescriptor.symbolicTraits.contains(UIFontDescriptor.SymbolicTraits.traitBold)
     }
     
     /// YYSwift: Whether the font is italic.
-    public var isItalic: Bool {
+    var isItalic: Bool {
         return self.fontDescriptor.symbolicTraits.contains(UIFontDescriptor.SymbolicTraits.traitItalic)
     }
     
@@ -26,50 +26,50 @@ public extension UIFont {
     ///
     ///     UIFont.preferredFont(forTextStyle: .body).monospaced
     ///
-    public var isMonoSpace: Bool {
+    var isMonoSpace: Bool {
         return self.fontDescriptor.symbolicTraits.contains(UIFontDescriptor.SymbolicTraits.traitMonoSpace)
     }
     
     /// YYSwift: Whether the font is color glyphs (such as Emoji).
-    public var isColorGlyphs: Bool {
+    var isColorGlyphs: Bool {
         return CTFontGetSymbolicTraits(self as CTFont).contains(.traitColorGlyphs)
     }
     
     /// YYSwift: Font weight from -1.0 to 1.0. Regular weight is 0.0.
-    public var fontWeight: CGFloat {
+    var fontWeight: CGFloat {
         let attr = self.fontDescriptor.object(forKey: UIFontDescriptor.AttributeName.traits) as! [UIFontDescriptor.TraitKey : Any]
         return attr[.weight] as! CGFloat
     }
     
     /// YYSwift: Creates and returns the CTFont object.
-    public var ctFont: CTFont {
+    var ctFont: CTFont {
         return CTFontCreateWithName(self.fontName as CFString, self.pointSize, nil)
     }
     
     /// YYSwift: Creates and returns the CGFont object.
-    public var cgFont: CGFont? {
+    var cgFont: CGFont? {
         return CGFont.init(self.fontName as CFString)
     }
     
     /// YYSwift: Font as bold font
-    public var bold: UIFont {
+    var bold: UIFont {
         return UIFont(descriptor: fontDescriptor.withSymbolicTraits(UIFontDescriptor.SymbolicTraits.traitBold)!, size: pointSize)
     }
     
     /// YYSwift: Font as italic font
-    public var italic: UIFont {
+    var italic: UIFont {
         return UIFont(descriptor: fontDescriptor.withSymbolicTraits(UIFontDescriptor.SymbolicTraits.traitItalic)!, size: pointSize)
     }
     
     /// YYSwift: Font as bold and italic font
     ///
     /// - Returns: A bold and italic font
-    public var boldItalic: UIFont {
+    var boldItalic: UIFont {
         return UIFont(descriptor: fontDescriptor.withSymbolicTraits([UIFontDescriptor.SymbolicTraits.traitBold, UIFontDescriptor.SymbolicTraits.traitItalic])!, size: pointSize)
     }
     
     /// YYSwift: Font as normal (no bold/italic/...) font.
-    public func fontWithNormal() -> UIFont {
+    func fontWithNormal() -> UIFont {
         return UIFont(descriptor: fontDescriptor.withSymbolicTraits([])!, size: pointSize)
     }
 }
@@ -81,7 +81,7 @@ public extension UIFont {
     ///
     /// - Parameter path: font file's full path
     /// - Returns: true if registration of the fonts was successful, otherwise false.
-    public static func loadFont(from path: String) -> Bool {
+    static func loadFont(from path: String) -> Bool {
         let url = URL(fileURLWithPath: path)
         let success = CTFontManagerRegisterFontsForURL(url as CFURL, CTFontManagerScope.none, nil)
         return success
@@ -90,7 +90,7 @@ public extension UIFont {
     /// YYSwift: Unload font from file path.
     ///
     /// - Parameter path: font file's full path
-    public static func unloadFont(from path: String) {
+    static func unloadFont(from path: String) {
         let url = URL(fileURLWithPath: path)
         CTFontManagerUnregisterFontsForURL(url as CFURL, CTFontManagerScope.none, nil)
     }
@@ -98,7 +98,7 @@ public extension UIFont {
     /// YYSwift: Unload font
     ///
     /// - Returns: true if unregistration of the font was successful, otherwise false.
-    public func unload() -> Bool {
+    func unload() -> Bool {
         guard let cgFont = CGFont.init(self.fontName as CFString) else {
             return false
         }
@@ -109,20 +109,20 @@ public extension UIFont {
 // MARK: - Initializers
 public extension UIFont {
     
-    public convenience init?(cgFont: CGFont, size: CGFloat) {
+    convenience init?(cgFont: CGFont, size: CGFloat) {
         guard let name = cgFont.postScriptName else {
             return nil
         }
         self.init(name: name as String, size: size)
     }
     
-    public convenience init?(ctFont: CTFont) {
+    convenience init?(ctFont: CTFont) {
         let name = CTFontCopyPostScriptName(ctFont)
         self.init(name: name as String, size: CTFontGetSize(ctFont))
     }
     
     #if os(iOS)
-    public convenience init?(data: Data) {
+    convenience init?(data: Data) {
         guard let provider = CGDataProvider(data: data as CFData) else {
             return nil
         }
@@ -140,7 +140,7 @@ public extension UIFont {
     #endif
     
     #if os(tvOS) || os(watchOS)
-    public convenience init?(data: Data, size: CGFloat) {
+    convenience init?(data: Data, size: CGFloat) {
         guard let provider = CGDataProvider(data: data as CFData) else {
             return nil
         }

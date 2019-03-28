@@ -17,7 +17,7 @@ public extension UITextField {
     /// - emailAddress: UITextField is used to enter email addresses.
     /// - password: UITextField is used to enter passwords.
     /// - generic: UITextField is used to enter generic text.
-    public enum TextType {
+    enum TextType {
         case emailAddress
         case password
         case generic
@@ -27,7 +27,7 @@ public extension UITextField {
 public extension UITextField {
     
     /// YYSwift: Set textField for common text types.
-    public var textType: TextType {
+    var textType: TextType {
         get {
             if keyboardType == .emailAddress {
                 return .emailAddress
@@ -60,12 +60,12 @@ public extension UITextField {
     }
 
     /// YYSwift: Check if text field is empty.
-    public var isEmpty: Bool {
+    var isEmpty: Bool {
         return text?.isEmpty == true
     }
 
     /// YYSwift: Return text with no spaces or new lines in beginning and end.
-    public var trimmedText: String? {
+    var trimmedText: String? {
         return text?.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
@@ -77,7 +77,7 @@ public extension UITextField {
     ///     textField.text = "YYSwift"
     ///     textField.hasValidEmail -> false
     ///
-    public var hasValidEmail: Bool {
+    var hasValidEmail: Bool {
         return text!.range(of: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}",
                            options: String.CompareOptions.regularExpression,
                            range: nil, locale: nil) != nil
@@ -85,7 +85,7 @@ public extension UITextField {
     
     /// YYSwift: Left view tint color.
     @IBInspectable
-    public var leftViewTintColor: UIColor? {
+    var leftViewTintColor: UIColor? {
         get {
             guard let iconView = leftView as? UIImageView else {
                 return nil
@@ -103,7 +103,7 @@ public extension UITextField {
     
     /// YYSwift: Right view tint color.
     @IBInspectable
-    public var rightViewTintColor: UIColor? {
+    var rightViewTintColor: UIColor? {
         get {
             guard let iconView = rightView as? UIImageView else {
                 return nil
@@ -125,18 +125,18 @@ public extension UITextField {
 public extension UITextField {
     
     /// Set text trimmed
-    public func trimmed() {
+    func trimmed() {
         text = trimmedText
     }
 
     /// YYSwift: Clear text.
-    public func clear() {
+    func clear() {
         text = ""
         attributedText = NSAttributedString(string: "")
     }
     
     /// YYSwift: Set all text selected.
-    public func selectAllText() {
+    func selectAllText() {
         let range = textRange(from: beginningOfDocument, to: endOfDocument)
         selectedTextRange = range
     }
@@ -144,7 +144,7 @@ public extension UITextField {
     /// YYSwift: Set text in range selected.
     ///
     /// - Parameter range: The range of selected text in a document.
-    public func setSelectedRange(_ range: Range<Int>) {
+    func setSelectedRange(_ range: Range<Int>) {
         let beginning = beginningOfDocument
         guard let startPosition = position(from: beginning, offset: range.lowerBound),
             let endPostion = position(from: beginning, offset: min(range.upperBound, (text?.count)!)) else {
@@ -157,7 +157,7 @@ public extension UITextField {
     /// YYSwift: Set placeholder text color.
     ///
     /// - Parameter color: placeholder text color.
-    public func setPlaceHolderTextColor(_ color: UIColor) {
+    func setPlaceHolderTextColor(_ color: UIColor) {
         guard let holder = placeholder, !holder.isEmpty else {
             return
         }
@@ -167,7 +167,7 @@ public extension UITextField {
     /// YYSwift: Add padding to the left of the textfield rect.
     ///
     /// - Parameter padding: amount of padding to apply to the left of the textfield rect.
-    public func addPaddingLeft(_ padding: CGFloat) {
+    func addPaddingLeft(_ padding: CGFloat) {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: frame.height))
         leftView = paddingView
         leftViewMode = .always
@@ -178,7 +178,7 @@ public extension UITextField {
     /// - Parameters:
     ///   - image: left image
     ///   - padding: amount of padding between icon and the left of textfield
-    public func addPaddingLeftIcon(_ image: UIImage, padding: CGFloat) {
+    func addPaddingLeftIcon(_ image: UIImage, padding: CGFloat) {
         let imageView = UIImageView(image: image)
         imageView.contentMode = .center
         self.leftView = imageView

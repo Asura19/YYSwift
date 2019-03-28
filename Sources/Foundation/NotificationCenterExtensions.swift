@@ -17,7 +17,7 @@ public extension NotificationCenter {
     /// otherwise, is posted asynchronously.
     ///
     /// - Parameter notification: The notification to post.
-    public func postNotificationOnMainThread(notification: Notification) {
+    func postNotificationOnMainThread(notification: Notification) {
         if Int(pthread_main_np()).bool {
             return self.post(notification)
         }
@@ -33,7 +33,7 @@ public extension NotificationCenter {
     /// - Parameters:
     ///   - name: The name of the notification.
     ///   - object: The object posting the notification.
-    public func postNotificationOnMainThread(withName name: String, object: Any?) {
+    func postNotificationOnMainThread(withName name: String, object: Any?) {
         if Int(pthread_main_np()).bool {
             return self.post(name: NSNotification.Name(rawValue: name), object: object)
         }
@@ -50,7 +50,7 @@ public extension NotificationCenter {
     ///   - name: The name of the notification.
     ///   - object: The object posting the notification.
     ///   - userInfo: Information about the the notification. May be nil.
-    public func postNotificationOnMainThread(withName name: String, object: Any?, userInfo: [String: Any]) {
+    func postNotificationOnMainThread(withName name: String, object: Any?, userInfo: [String: Any]) {
         if Int(pthread_main_np()).bool {
             return self.post(name: NSNotification.Name(rawValue: name), object: object, userInfo: userInfo)
         }

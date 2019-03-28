@@ -14,13 +14,13 @@ import Foundation
 public extension SignedNumeric {
     
     /// YYSwift: String.
-    public var string: String {
+    var string: String {
         return String(describing: self)
     }
     
     #if canImport(Foundation)
     /// YYSwift: String with number and current locale currency.
-    public var asLocaleCurrency: String? {
+    var asLocaleCurrency: String? {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         formatter.locale = Locale.current

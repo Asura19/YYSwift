@@ -13,17 +13,17 @@ import CoreGraphics
 public extension Double {
     
     /// YYSwift: Int.
-    public var int: Int {
+    var int: Int {
         return Int(self)
     }
     
     /// YYSwift: Float.
-    public var float: Float {
+    var float: Float {
         return Float(self)
     }
     
     /// YYSwift: CGFloat.
-    public var cgFloat: CGFloat {
+    var cgFloat: CGFloat {
         return CGFloat(self)
     }
 }
@@ -49,7 +49,7 @@ infix operator ^ : PowerPrecedence
 ///   - lhs: base double.
 ///   - rhs: exponent double.
 /// - Returns: exponentiation result (example: 4.4 ^ 0.5 = 2.0976176963).
-public func ^ (lhs: Double, rhs: Double) -> Double {
+func ^ (lhs: Double, rhs: Double) -> Double {
     return pow(lhs, rhs)
 }
 #endif

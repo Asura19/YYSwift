@@ -13,17 +13,17 @@ import CoreGraphics
 public extension Float {
     
     /// YYSwift: Int.
-    public var int: Int {
+    var int: Int {
         return Int(self)
     }
     
     /// YYSwift: Double.
-    public var double: Float {
+    var double: Float {
         return Float(self)
     }
     
     /// YYSwift: CGFloat.
-    public var cgFloat: CGFloat {
+    var cgFloat: CGFloat {
         return CGFloat(self)
     }
     
@@ -48,7 +48,7 @@ infix operator ^ : PowerPrecedence
 ///   - lhs: base float.
 ///   - rhs: exponent float.
 /// - Returns: exponentiation result (4.4 ^ 0.5 = 2.0976176963).
-public func ^ (lhs: Float, rhs: Float) -> Float {
+func ^ (lhs: Float, rhs: Float) -> Float {
     return pow(lhs, rhs)
 }
 #endif

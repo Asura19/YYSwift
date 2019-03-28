@@ -26,7 +26,7 @@ public typealias Color = NSColor
 public extension Color {
     
     /// YYSwift: Random color.
-    public static var random: Color {
+    static var random: Color {
         let r = Int(arc4random_uniform(255)).cgFloat
         let g = Int(arc4random_uniform(255)).cgFloat
         let b = Int(arc4random_uniform(255)).cgFloat
@@ -39,7 +39,7 @@ public extension Color {
     ///     NSColor.green.rgbComponents.green -> 255
     ///     UIColor.blue.rgbComponents.blue -> 255
     ///
-    public var rgbIntComponents: (red: Int, green: Int, blue: Int) {
+    var rgbIntComponents: (red: Int, green: Int, blue: Int) {
         var components: [CGFloat] {
             let c = cgColor.components!
             if c.count == 4 {
@@ -59,7 +59,7 @@ public extension Color {
     ///     NSColor.green.rgbaComponents.green -> 1.0
     ///     UIColor.blue.rgbaComponents.blue -> 1.0
     ///
-    public var rgbaComponents: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+    var rgbaComponents: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
         var components: [CGFloat] {
             let c = cgColor.components!
             if c.count == 4 {
@@ -75,7 +75,7 @@ public extension Color {
     }
     
     /// YYSwift: Get components of hue, saturation, and brightness, and alpha (read-only).
-    public var hsbaComponents: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
+    var hsbaComponents: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
         var h: CGFloat = 0.0
         var s: CGFloat = 0.0
         var b: CGFloat = 0.0
@@ -86,21 +86,21 @@ public extension Color {
     }
     
     /// YYSwift: Get components of hue, saturation, and lightness, and alpha (read-only).
-    public var hslaComponents: (hue: CGFloat, saturation: CGFloat, lightness: CGFloat, alpha: CGFloat) {
+    var hslaComponents: (hue: CGFloat, saturation: CGFloat, lightness: CGFloat, alpha: CGFloat) {
         let rgba = rgbaComponents
         let hsl = Color.yy.rgb2hsl(rgba.red, rgba.green, rgba.blue)
         return (hue: hsl.hue, saturation: hsl.saturation, lightness: hsl.lightness , alpha: rgba.alpha)
     }
     
     /// YYSwift: Get components of cyan, magenta, yellow, black, and alpha (read-only).
-    public var cmykaComponents: (cyan: CGFloat, magenta: CGFloat, yellow: CGFloat, black: CGFloat, alpha: CGFloat) {
+    var cmykaComponents: (cyan: CGFloat, magenta: CGFloat, yellow: CGFloat, black: CGFloat, alpha: CGFloat) {
         let rgba = rgbaComponents
         let cmyk = Color.yy.rgb2cmyk(rgba.red, rgba.green, rgba.blue)
         return (cyan: cmyk.cyan, magenta: cmyk.magenta, yellow: cmyk.yellow, black: cmyk.black, alpha: rgba.alpha)
     }
     
     /// YYSwift: Hexadecimal value string (read-only).
-    public var hexString: String {
+    var hexString: String {
         let components: [Int] = {
             let c = cgColor.components!
             let components = c.count == 4 ? c : [c[0], c[0], c[0], c[1]]
@@ -110,7 +110,7 @@ public extension Color {
     }
     
     /// YYSwift: Short hexadecimal value string (read-only, if applicable).
-    public var shortHexString: String? {
+    var shortHexString: String? {
         let string = hexString.replacingOccurrences(of: "#", with: "")
         let chrs = Array(string)
         guard chrs[0] == chrs[1], chrs[2] == chrs[3], chrs[4] == chrs[5] else {
@@ -120,7 +120,7 @@ public extension Color {
     }
     
     /// YYSwift: Short hexadecimal value string, or full hexadecimal string if not possible (read-only).
-    public var shortHexOrHexString: String {
+    var shortHexOrHexString: String {
         let components: [Int] = {
             let c = cgColor.components!
             let components = c.count == 4 ? c : [c[0], c[0], c[0], c[1]]
@@ -136,19 +136,19 @@ public extension Color {
     }
     
     /// YYSwift: Alpha of Color (read-only).
-    public var alpha: CGFloat {
+    var alpha: CGFloat {
         return cgColor.alpha
     }
     
     #if !os(watchOS)
     /// YYSwift: CoreImage.CIColor (read-only)
-    public var coreImageColor: CoreImage.CIColor? {
+    var coreImageColor: CoreImage.CIColor? {
         return CoreImage.CIColor(color: self)
     }
     #endif
     
     /// YYSwift: Returns the rgb value in hex, such as 0x66ccff.
-    public var rgbValue: UInt {
+    var rgbValue: UInt {
         var r: CGFloat = 0.0
         var g: CGFloat = 0.0
         var b: CGFloat = 0.0
@@ -161,7 +161,7 @@ public extension Color {
     }
     
     /// YYSwift: Returns the rgb value in hex, such as 0x66ccffff.
-    public var rgbaValue: UInt {
+    var rgbaValue: UInt {
         var r: CGFloat = 0.0
         var g: CGFloat = 0.0
         var b: CGFloat = 0.0
@@ -176,7 +176,7 @@ public extension Color {
     }
     
     /// YYSwift: Get color complementary (read-only, if applicable).
-    public var complementary: Color {
+    var complementary: Color {
         let red: CGFloat = 1.0 - self.rgbaComponents.red
         let green: CGFloat = 1.0 - self.rgbaComponents.green
         let blue: CGFloat = 1.0 - self.rgbaComponents.blue
@@ -195,7 +195,7 @@ public extension Color {
     ///   - color2: second color to blend
     ///   - intensity2: intensity of second color (default is 0.5)
     /// - Returns: Color created by blending first and seond colors.
-    public static func blend(_ color1: Color,
+    static func blend(_ color1: Color,
                              intensity1: CGFloat = 0.5,
                              with color2: Color,
                              intensity2: CGFloat = 0.5) -> Color {
@@ -245,7 +245,7 @@ public extension Color {
     ///
     /// - Parameter color: second color to blend
     /// - Returns: Color created by blending self and seond colors.
-    public func blend(withColor color: Color) -> Color {
+    func blend(withColor color: Color) -> Color {
         return Color.blend(self, intensity1: 0.5, with: color, intensity2: 0.5)
     }
     
@@ -256,7 +256,7 @@ public extension Color {
     ///
     /// - Parameter percentage: Percentage by which to lighten the color
     /// - Returns: A lightened color
-    public func lighten(by percentage: CGFloat = 0.2) -> Color {
+    func lighten(by percentage: CGFloat = 0.2) -> Color {
         var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
         self.getRed(&r, green: &g, blue: &b, alpha: &a)
         return Color(red: min(r + percentage, 1.0),
@@ -272,7 +272,7 @@ public extension Color {
     ///
     /// - Parameter percentage: Percentage by which to darken the color
     /// - Returns: A darkened color
-    public func darken(by percentage: CGFloat = 0.2) -> Color {
+    func darken(by percentage: CGFloat = 0.2) -> Color {
         var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
         self.getRed(&r, green: &g, blue: &b, alpha: &a)
         return Color(red: max(r - percentage, 0),
@@ -286,7 +286,7 @@ public extension Color {
 extension Color: NamespaceWrappable {}
 public extension TypeWrapperProtocol where WrappedType == Color {
     
-    public static func rgb2hsl(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat) -> (hue: CGFloat, saturation: CGFloat, lightness: CGFloat) {
+    static func rgb2hsl(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat) -> (hue: CGFloat, saturation: CGFloat, lightness: CGFloat) {
         var h: CGFloat = 0
         var s: CGFloat = 0
         var l: CGFloat = 0
@@ -294,7 +294,7 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         return (h, s, l)
     }
     
-    public static func RGB2HSL(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ h: inout CGFloat, _ s: inout CGFloat, _ l: inout CGFloat) {
+    static func RGB2HSL(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ h: inout CGFloat, _ s: inout CGFloat, _ l: inout CGFloat) {
         var r = r
         var g = g
         var b = b
@@ -327,7 +327,7 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         }
     }
     
-    public static func hsl2rgb(_ h: CGFloat, _ s: CGFloat, _ l: CGFloat) -> (red: CGFloat, green: CGFloat, blue: CGFloat) {
+    static func hsl2rgb(_ h: CGFloat, _ s: CGFloat, _ l: CGFloat) -> (red: CGFloat, green: CGFloat, blue: CGFloat) {
         var r: CGFloat = 0
         var g: CGFloat = 0
         var b: CGFloat = 0
@@ -335,7 +335,7 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         return (r, g, b)
     }
     
-    public static func HSL2RGB(_ h: CGFloat, _ s: CGFloat, _ l: CGFloat, _ r: inout CGFloat, _ g: inout CGFloat, _ b: inout CGFloat) {
+    static func HSL2RGB(_ h: CGFloat, _ s: CGFloat, _ l: CGFloat, _ r: inout CGFloat, _ g: inout CGFloat, _ b: inout CGFloat) {
         var h = h
         var s = s
         var l = l
@@ -383,7 +383,7 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         }
     }
     
-    public static func rgb2hsb(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat) -> (hue: CGFloat, saturation: CGFloat, brightness: CGFloat) {
+    static func rgb2hsb(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat) -> (hue: CGFloat, saturation: CGFloat, brightness: CGFloat) {
         var h: CGFloat = 0
         var s: CGFloat = 0
         var v: CGFloat = 0
@@ -391,7 +391,7 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         return (h, s, v)
     }
     
-    public static func RGB2HSB(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ h: inout CGFloat, _ s: inout CGFloat, _ v: inout CGFloat) {
+    static func RGB2HSB(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ h: inout CGFloat, _ s: inout CGFloat, _ v: inout CGFloat) {
         var r = r
         var g = g
         var b = b
@@ -425,7 +425,7 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         }
     }
     
-    public static func hsb2rgb(_ h: CGFloat, _ s: CGFloat, _ v: CGFloat) -> (red: CGFloat, green: CGFloat, blue: CGFloat) {
+    static func hsb2rgb(_ h: CGFloat, _ s: CGFloat, _ v: CGFloat) -> (red: CGFloat, green: CGFloat, blue: CGFloat) {
         var r: CGFloat = 0
         var g: CGFloat = 0
         var b: CGFloat = 0
@@ -433,7 +433,7 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         return (r, g, b)
     }
     
-    public static func HSB2RGB(_ h: CGFloat, _ s: CGFloat, _ v: CGFloat, _ r: inout CGFloat, _ g: inout CGFloat, _ b: inout CGFloat) {
+    static func HSB2RGB(_ h: CGFloat, _ s: CGFloat, _ v: CGFloat, _ r: inout CGFloat, _ g: inout CGFloat, _ b: inout CGFloat) {
         var h = h
         var s = s
         var v = v
@@ -467,7 +467,7 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         }
     }
     
-    public static func rgb2cmyk(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat) -> (cyan: CGFloat, magenta: CGFloat, yellow: CGFloat, black: CGFloat) {
+    static func rgb2cmyk(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat) -> (cyan: CGFloat, magenta: CGFloat, yellow: CGFloat, black: CGFloat) {
         var c: CGFloat = 0
         var m: CGFloat = 0
         var y: CGFloat = 0
@@ -476,7 +476,7 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         return (c, m, y, k)
     }
     
-    public static func RGB2CMYK(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ c: inout CGFloat, _ m: inout CGFloat, _ y: inout CGFloat, _ k: inout CGFloat) {
+    static func RGB2CMYK(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ c: inout CGFloat, _ m: inout CGFloat, _ y: inout CGFloat, _ k: inout CGFloat) {
         var r = r
         var g = g
         var b = b
@@ -500,7 +500,7 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         }
     }
     
-    public static func cmyk2rgb(_ c: CGFloat, _ m: CGFloat, _ y: CGFloat, _ k: CGFloat) -> (red: CGFloat, green: CGFloat, blue: CGFloat) {
+    static func cmyk2rgb(_ c: CGFloat, _ m: CGFloat, _ y: CGFloat, _ k: CGFloat) -> (red: CGFloat, green: CGFloat, blue: CGFloat) {
         var r: CGFloat = 0
         var g: CGFloat = 0
         var b: CGFloat = 0
@@ -508,7 +508,7 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         return (r, g, b)
     }
     
-    public static func CMYK2RGB(_ c: CGFloat, _ m: CGFloat, _ y: CGFloat, _ k: CGFloat, _ r: inout CGFloat, _ g: inout CGFloat, _ b: inout CGFloat) {
+    static func CMYK2RGB(_ c: CGFloat, _ m: CGFloat, _ y: CGFloat, _ k: CGFloat, _ r: inout CGFloat, _ g: inout CGFloat, _ b: inout CGFloat) {
         var c = c
         var m = m
         var y = y
@@ -523,7 +523,7 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         b = (1 - y) * (1 - k)
     }
     
-    public static func hsb2hsl(_ h: CGFloat, _ s: CGFloat, _ b: CGFloat) -> (hue: CGFloat, saturation: CGFloat, lightness: CGFloat) {
+    static func hsb2hsl(_ h: CGFloat, _ s: CGFloat, _ b: CGFloat) -> (hue: CGFloat, saturation: CGFloat, lightness: CGFloat) {
         var hh: CGFloat = 0
         var ss: CGFloat = 0
         var ll: CGFloat = 0
@@ -531,7 +531,7 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         return (hh, ss, ll)
     }
     
-    public static func HSB2HSL(_ h: CGFloat, _ s: CGFloat, _ b: CGFloat, _ hh: inout CGFloat, _ ss: inout CGFloat, _ ll: inout CGFloat) {
+    static func HSB2HSL(_ h: CGFloat, _ s: CGFloat, _ b: CGFloat, _ hh: inout CGFloat, _ ss: inout CGFloat, _ ll: inout CGFloat) {
         var h = h
         var s = s
         var b = b
@@ -549,7 +549,7 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         }
     }
     
-    public static func hsl2hsb(_ h: CGFloat, _ s: CGFloat, _ l: CGFloat) -> (hue: CGFloat, saturation: CGFloat, brightness: CGFloat) {
+    static func hsl2hsb(_ h: CGFloat, _ s: CGFloat, _ l: CGFloat) -> (hue: CGFloat, saturation: CGFloat, brightness: CGFloat) {
         var hh: CGFloat = 0
         var ss: CGFloat = 0
         var bb: CGFloat = 0
@@ -557,7 +557,7 @@ public extension TypeWrapperProtocol where WrappedType == Color {
         return (hh, ss, bb)
     }
     
-    public static func HSL2HSB(_ h: CGFloat, _ s: CGFloat, _ l: CGFloat, _ hh: inout CGFloat, _ ss: inout CGFloat, _ bb: inout CGFloat) {
+    static func HSL2HSB(_ h: CGFloat, _ s: CGFloat, _ l: CGFloat, _ hh: inout CGFloat, _ ss: inout CGFloat, _ bb: inout CGFloat) {
         var h = h
         var s = s
         var l = l
@@ -579,7 +579,7 @@ public extension TypeWrapperProtocol where WrappedType == Color {
 
 fileprivate extension Color {
     
-    fileprivate static func clampColorValue(_ value: inout CGFloat) {
+    static func clampColorValue(_ value: inout CGFloat) {
         value = value < 0 ? 0 : (value > 1 ? 1 : value)
     }
 }
@@ -587,7 +587,7 @@ fileprivate extension Color {
 // MARK: - Initializer
 public extension Color {
     
-    public convenience init?(red: Int,
+    convenience init?(red: Int,
                              green: Int,
                              blue: Int,
                              transparency: CGFloat = 1) {
@@ -608,7 +608,7 @@ public extension Color {
         self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: trans)
     }
     
-    public convenience init?(hue: CGFloat,
+    convenience init?(hue: CGFloat,
                              saturation: CGFloat,
                              lightness: CGFloat,
                              alpha: CGFloat = 1) {
@@ -616,7 +616,7 @@ public extension Color {
         self.init(red: rgb.red, green: rgb.green, blue: rgb.blue, alpha: alpha)
     }
     
-    public convenience init?(cyan: CGFloat,
+    convenience init?(cyan: CGFloat,
                              magenta: CGFloat,
                              yellow: CGFloat,
                              black: CGFloat,
@@ -625,21 +625,21 @@ public extension Color {
         self.init(red: rgb.red, green: rgb.green, blue: rgb.blue, alpha: alpha)
     }
     
-    public convenience init?(rgbValue: UInt, alpha: CGFloat = 1) {
+    convenience init?(rgbValue: UInt, alpha: CGFloat = 1) {
         self.init(red: CGFloat(((rgbValue & 0xff0000) >> 16) / 255),
                   green: CGFloat(((rgbValue & 0xff00) >> 8) / 255),
                   blue: CGFloat((rgbValue & 0xff) / 255),
                   alpha: alpha)
     }
     
-    public convenience init?(rgbaValue: UInt) {
+    convenience init?(rgbaValue: UInt) {
         self.init(red: CGFloat(((rgbaValue & 0xff000000) >> 24) / 255),
                   green: CGFloat(((rgbaValue & 0xff0000) >> 16) / 255),
                   blue: CGFloat((rgbaValue & 0xff00) >> 8 / 255),
                   alpha: CGFloat((rgbaValue & 0xff) / 255))
     }
     
-    public convenience init?(hex: Int, transparency: CGFloat = 1) {
+    convenience init?(hex: Int, transparency: CGFloat = 1) {
         var trans = transparency
         if trans < 0 { trans = 0 }
         if trans > 1 { trans = 1 }
@@ -650,7 +650,7 @@ public extension Color {
         self.init(red: red, green: green, blue: blue, transparency: trans)
     }
     
-    public convenience init?(hexString: String, transparency: CGFloat = 1) {
+    convenience init?(hexString: String, transparency: CGFloat = 1) {
         let hexString = hexString.trimmed.removeAll(" ")
         var string = ""
         if hexString.lowercased().hasPrefix("0x") {
@@ -686,7 +686,7 @@ public extension Color {
         self.init(red: red, green: green, blue: blue, transparency: trans)
     }
     
-    public convenience init?(complementaryFor color: Color) {
+    convenience init?(complementaryFor color: Color) {
         
         let red: CGFloat = 1.0 - color.rgbaComponents.red
         let green: CGFloat = 1.0 - color.rgbaComponents.green

@@ -21,7 +21,7 @@ public extension Optional {
     ///
     /// - Parameter defaultValue: default value to return if self is nil.
     /// - Returns: self if not nil or default value if nil.
-    public func unwrapped(or defaultValue: Wrapped) -> Wrapped {
+    func unwrapped(or defaultValue: Wrapped) -> Wrapped {
         return self ?? defaultValue
     }
     
@@ -36,7 +36,7 @@ public extension Optional {
     /// - Parameter error: The error to throw if the optional is `nil`.
     /// - Returns: The value wrapped by the optional.
     /// - Throws: The error passed in.
-    public func unwrapped(or error: Error) throws -> Wrapped {
+    func unwrapped(or error: Error) throws -> Wrapped {
         guard let wrapped = self else { throw error }
         return wrapped
     }
@@ -56,7 +56,7 @@ public extension Optional {
     ///     }
     ///
     /// - Parameter block: a block to run if self is not nil.
-    public func run(_ block: (Wrapped) -> Void) {
+    func run(_ block: (Wrapped) -> Void) {
         _ = self.map(block)
     }
     
@@ -69,7 +69,7 @@ public extension Optional {
     /// - Parameters:
     ///   - lhs: Any?
     ///   - rhs: Any?
-    public static func ??= (lhs: inout Optional, rhs: Optional) {
+    static func ??= (lhs: inout Optional, rhs: Optional) {
         guard let rhs = rhs else {
             return
         }
@@ -81,7 +81,7 @@ public extension Optional {
 public extension Optional where Wrapped: Collection {
     
     /// Check if optional is nil or empty collection.
-    public var isNilOrEmpty: Bool {
+    var isNilOrEmpty: Bool {
         guard let collection = self else { return true }
         return collection.isEmpty
     }

@@ -13,7 +13,7 @@ import UIKit
 public extension UIScreen {
     
     /// YYSwift: Main screen's scale
-    public static func screenScale() -> CGFloat {
+    static func screenScale() -> CGFloat {
         var screenScale: CGFloat = 0
         if Thread.isMainThread {
             screenScale = UIScreen.main.scale
@@ -32,7 +32,7 @@ public extension UIScreen {
     ///
     /// - Parameter orientation: The orientation to get the screen's bounds.
     /// - Returns: A rect indicating the bounds of the screen.
-    public func boudsForOrientation(_ orientation: UIInterfaceOrientation) -> CGRect {
+    func boudsForOrientation(_ orientation: UIInterfaceOrientation) -> CGRect {
         var bounds = self.bounds
         if orientation.isLandscape {
             swap(&bounds.size.width, &bounds.size.height)
@@ -47,14 +47,14 @@ public extension UIScreen {
 public extension UIScreen {
     
     /// YYSwift: Returns the bounds of the screen for the current device orientation.
-    public var currentBounds: CGRect {
+    var currentBounds: CGRect {
         return self.boudsForOrientation(UIApplication.shared.statusBarOrientation)
     }
    
     /// YYSwift: The screen's real size in pixel (width is always smaller than height).
     /// This value may not be very accurate in an unknown device, or simulator.
     /// e.g. (768,1024)
-    public var sizeInPixel: CGSize {
+    var sizeInPixel: CGSize {
         var size = CGSize.zero
         
         if UIScreen.main.isEqual(self) {
@@ -94,7 +94,7 @@ public extension UIScreen {
     /// YYSwift: The screen's PPI.
     /// This value may not be very accurate in an unknown device, or simulator.
     /// Default value is 96.
-    public var pixelsPerInch: CGFloat {
+    var pixelsPerInch: CGFloat {
         if !UIScreen.main.isEqual(self) {
             return 326
         }

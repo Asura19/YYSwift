@@ -19,7 +19,7 @@ public extension UIImageView {
     ///   - contentMode: imageView content mode (default is .scaleAspectFit).
     ///   - placeHolder: optional placeholder image
     ///   - completionHandler: optional completion handler to run when download finishs (default is nil).
-    public func download(from url: URL,
+    func download(from url: URL,
                          contentMode: UIView.ContentMode = .scaleAspectFit,
                          placehoder: UIImage? = nil,
                          completionHandler: ((UIImage?) -> Void)? = nil) {
@@ -46,7 +46,7 @@ public extension UIImageView {
     /// YYSwift: Make image view blurry
     ///
     /// - Parameter style: UIBlurEffectStyle (default is .light).
-    public func blur(withStyle style: UIBlurEffect.Style = .light) {
+    func blur(withStyle style: UIBlurEffect.Style = .light) {
         let blurEffect = UIBlurEffect(style: style)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = bounds
@@ -59,7 +59,7 @@ public extension UIImageView {
     ///
     /// - Parameter style: UIBlurEffectStyle (default is .light).
     /// - Returns: blurred version of self.
-    public func blurred(withStyle style: UIBlurEffect.Style = .light) -> UIImageView {
+    func blurred(withStyle style: UIBlurEffect.Style = .light) -> UIImageView {
         let imgView = self
         imgView.blur(withStyle: style)
         return imgView

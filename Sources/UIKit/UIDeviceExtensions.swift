@@ -13,12 +13,12 @@ import UIKit
 public extension UIDevice {
 
     /// YYSwift: Whether the device is iPad/iPad mini.
-    public var isPad: Bool {
+    var isPad: Bool {
         return UI_USER_INTERFACE_IDIOM() == .pad
     }
     
     /// YYSwift: Whether the device is a simulator.
-    public var isSimulator: Bool {
+    var isSimulator: Bool {
         var isSim = false
         #if arch(i386) || arch(x86_64)
             isSim = true
@@ -27,7 +27,7 @@ public extension UIDevice {
     }
     
     /// YYSwift: Whether the device is jailbroken.
-    public var isJailbroken: Bool {
+    var isJailbroken: Bool {
         if self.isSimulator {
             return false
         }
@@ -63,24 +63,24 @@ public extension UIDevice {
     }
     
     /// YYSwift: Wherher the device can make phone calls.
-    public var canMakePhoneCalls: Bool {
+    var canMakePhoneCalls: Bool {
         return UIApplication.shared.canOpenURL(URL(string: "tel://")!)
     }
 
     /// YYSwift: WIFI IP address of this device (can be nil). e.g. @"192.168.1.111"
-    public var ipAddressWIFI: String? {
+    var ipAddressWIFI: String? {
         return self.ipAddress(withIfaName: "en0")
     }
     
     /// YYSwift: Cell IP address of this device (can be nil). e.g. @"10.2.2.222"
-    public var ipAddressCell: String? {
+    var ipAddressCell: String? {
         return self.ipAddress(withIfaName: "pdp_ip0")
     }
     
     /// YYSwift: The device's machine model.  e.g. "iPhone6,1" "iPad4,6"
     ///
     /// [reference](http://theiphonewiki.com/wiki/Models)
-    public var machineModel: String? {
+    var machineModel: String? {
         var machineSwiftString: String?
         var size: size_t = 0
         sysctlbyname("hw.machine", nil, &size, nil, 0)
@@ -93,7 +93,7 @@ public extension UIDevice {
     /// YYSwift: The device's machine model name. e.g. "iPhone 5s" "iPad mini 2"
     ///
     /// [reference](http://theiphonewiki.com/wiki/Models)
-    public var machineModelName: String? {
+    var machineModelName: String? {
         guard let model = self.machineModel else {
             return nil
         }
@@ -199,13 +199,13 @@ public extension UIDevice {
     }
     
     /// YYSwift: The System's startup time.
-    public var systemUptime: Date {
+    var systemUptime: Date {
         let interval = ProcessInfo.processInfo.systemUptime
         return Date(timeIntervalSinceNow: interval)
     }
     
     /// YYSwift: Total disk space in byte. (-1 when error occurs)
-    public var diskSpace: Int64 {
+    var diskSpace: Int64 {
         do {
             let attrs = try FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory())
             var space = attrs[.systemSize] as! Int64
@@ -219,7 +219,7 @@ public extension UIDevice {
     }
     
     /// YYSwift: Free disk space in byte. (-1 when error occurs)
-    public var diskSpaceFree: Int64 {
+    var diskSpaceFree: Int64 {
         do {
             let attrs = try FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory())
             var space = attrs[.systemFreeSize] as! Int64
@@ -233,7 +233,7 @@ public extension UIDevice {
     }
     
     /// YYSwift: Used disk space in byte. (-1 when error occurs)
-    public var diskSpaceUsed: Int64 {
+    var diskSpaceUsed: Int64 {
         let total = self.diskSpace
         let free = self.diskSpaceFree
         if total < 0 || free < 0 {
@@ -247,7 +247,7 @@ public extension UIDevice {
     }
     
     /// YYSwift: Total physical memory in byte. (-1 when error occurs)
-    public var memoryTotal: Int64 {
+    var memoryTotal: Int64 {
         let mem = ProcessInfo.processInfo.physicalMemory
         guard mem > 0 else {
             return -1
@@ -258,7 +258,7 @@ public extension UIDevice {
     /// YYSwift: Used app memory and total memory
     ///
     /// [Reference](https://github.com/zixun/SystemEye/blob/master/SystemEye/Classes/Memory.swift)
-    public var appMemoryUsage: (used: Int64, total: Int64) {
+    var appMemoryUsage: (used: Int64, total: Int64) {
         var info = mach_task_basic_info()
         var count = mach_msg_type_number_t(MemoryLayout.size(ofValue: info) / MemoryLayout<integer_t>.size)
         let kerr = withUnsafeMutablePointer(to: &info) {
@@ -274,7 +274,7 @@ public extension UIDevice {
     }
 
     /// YYSwift: System memory usage
-    public var systemMemoryUsage: (free: Int64,
+    var systemMemoryUsage: (free: Int64,
                                    active: Int64,
                                    inactive: Int64,
                                    wired: Int64,
@@ -318,7 +318,7 @@ public extension UIDevice {
     }
     
     /// YYSwift: System CPU usage
-    public var systemCPUUsage: (system: Double,
+    var systemCPUUsage: (system: Double,
                                 user: Double,
                                 idle: Double,
                                 nice: Double) {
@@ -342,7 +342,7 @@ public extension UIDevice {
     }
     
     /// YYSwift: App CPU usage
-    public var appCPUUsage: Double {
+    var appCPUUsage: Double {
         let threads = UIDevice.threadBasicInfos()
         var result : Double = 0.0
         threads.forEach { (thread:thread_basic_info) in

@@ -13,47 +13,47 @@ import CoreGraphics
 public extension Int {
     
     /// YYSwift: Bool
-    public var bool: Bool {
+    var bool: Bool {
         return self != 0
     }
     
     /// YYSwift: CountableRange 0..<Int.
-    public var countableRange: CountableRange<Int> {
+    var countableRange: CountableRange<Int> {
         return 0..<self
     }
     
     /// YYSwift: Radian value of degree input.
-    public var degreesToRadians: Double {
+    var degreesToRadians: Double {
         return Double.pi * Double(self) / 180.0
     }
     
     /// YYSwift: Degree value of radian input
-    public var radiansToDegrees: Double {
+    var radiansToDegrees: Double {
         return Double(self) * 180 / Double.pi
     }
     
     /// YYSwift: UInt.
-    public var uInt: UInt {
+    var uInt: UInt {
         return UInt(self)
     }
     
     /// YYSwift: Double.
-    public var double: Double {
+    var double: Double {
         return Double(self)
     }
     
     /// YYSwift: Float.
-    public var float: Float {
+    var float: Float {
         return Float(self)
     }
     
     /// YYSwift: CGFloat.
-    public var cgFloat: CGFloat {
+    var cgFloat: CGFloat {
         return CGFloat(self)
     }
     
     /// YYSwift: String formatted for values over ±1000 (example: 1k, -2k, 100k, 1kk, -5kk..)
-    public var kFormatted: String {
+    var kFormatted: String {
         let sign: String = (self >= 0) ? "" : "-"
         let abs = Swift.abs(self)
         if abs >= 0 && abs < 1000 {
@@ -66,7 +66,7 @@ public extension Int {
     }
     
     /// YYSwift: Array of digits of integer value.
-    public var digits: [Int] {
+    var digits: [Int] {
         guard self != 0 else { return [0] }
         var digits = [Int]()
         var number = self.abs
@@ -82,7 +82,7 @@ public extension Int {
     }
     
     /// YYSwift: Number of digits of integer value.
-    public var digitsCount: Int {
+    var digitsCount: Int {
         guard self != 0 else { return 1 }
         let number = Double(self.abs)
         return Int(log10(number) + 1)
@@ -94,7 +94,7 @@ public extension Int {
     /// YYSwift: check if given integer prime or not.
     /// Warning: Using big numbers can be computationally expensive!
     /// - Returns: true or false depending on prime-ness
-    public func isPrime() -> Bool {
+    func isPrime() -> Bool {
         if self == 2 {
             return true
         }
@@ -114,7 +114,7 @@ public extension Int {
     ///     10.romanNumeral() -> "X"
     ///
     /// - Returns: The roman numeral string.
-    public func romanNumeral() -> String? {
+    func romanNumeral() -> String? {
         
         guard self > 0 else { // there is no roman numerals for 0 or negative numbers
             return nil
@@ -149,7 +149,7 @@ infix operator ^ : PowerPrecedence
 ///   - lhs: base integer.
 ///   - rhs: exponent integer.
 /// - Returns: exponentiation result (example: 2 ^ 3 = 8).
-public func ^ (lhs: Int, rhs: Int) -> Double {
+func ^ (lhs: Int, rhs: Int) -> Double {
     return pow(Double(lhs), Double(rhs))
 }
 
@@ -170,7 +170,7 @@ infix operator ±
 ///   - lhs: integer number.
 ///   - rhs: integer number.
 /// - Returns: a closed range
-public func ± (lhs: Int, rhs: Int) -> ClosedRange<Int> {
+func ± (lhs: Int, rhs: Int) -> ClosedRange<Int> {
     return (lhs - rhs)...(lhs + rhs)
 }
 

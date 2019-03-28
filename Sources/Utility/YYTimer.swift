@@ -77,7 +77,7 @@ public class YYTimer {
     ///   - queue: the handle will execute on the queue
     ///   - handler: event handler
     /// - Returns: A timer
-    public static func repeats(after fireTime: TimeInterval = 0,
+    static func repeats(after fireTime: TimeInterval = 0,
                                withInterval interval: TimeInterval,
                                queue: DispatchQueue = .main,
                                handler: @escaping YYTimerHandler) -> YYTimer {
@@ -97,7 +97,7 @@ public class YYTimer {
     ///   - queue: the handle will execute on the queue
     ///   - handler: event handler
     /// - Returns: a timer of YYCountDownTimer
-    public static func countDown(interval: TimeInterval,
+    static func countDown(interval: TimeInterval,
                                  times: Int,
                                  queue: DispatchQueue = .main ,
                                  handler: @escaping (YYCountDownTimer, _ leftTimes: Int) -> Void) -> YYCountDownTimer {
@@ -112,7 +112,7 @@ public class YYTimer {
     ///   - fireTime: the duration from the code executed time to timer start
     ///   - queue: the handle will execute on the queue
     ///   - handler: event handler
-    public static func after(_ fireTime: TimeInterval,
+    static func after(_ fireTime: TimeInterval,
                              queue: DispatchQueue = .main,
                              handler: @escaping () -> Void) {
         queue.asyncAfter(deadline: .now() + fireTime) {
@@ -121,7 +121,7 @@ public class YYTimer {
     }
     
 
-    public func fire() {
+    func fire() {
      
         if repeats {
             if !isValid {
@@ -135,14 +135,14 @@ public class YYTimer {
         }
     }
     
-    public func suspend() {
+    func suspend() {
         if isValid {
             timer.suspend()
             isValid = false
         }
     }
     
-    public func invalidate() {
+    func invalidate() {
         timer.cancel()
         isValid = false
     }
@@ -177,15 +177,15 @@ public class YYCountDownTimer {
         }
     }
     
-    public func start() {
+    func start() {
         self.timer.fire()
     }
     
-    public func suspend() {
+    func suspend() {
         self.timer.suspend()
     }
     
-    public func reCountDown() {
+    func reCountDown() {
         self.leftTimes = self.originalTimes
     }
 

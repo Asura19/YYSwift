@@ -57,6 +57,8 @@ public func YYUIViewContentModeToCAGravity(contentMode: UIView.ContentMode) -> C
         return .bottomLeft
     case .bottomRight:
         return .bottomRight
+    @unknown default:
+        return .resize
     }
 }
 

@@ -14,7 +14,7 @@ public extension UIControl {
     
     /// YYSwift: Removes all targets and actions for a particular event (or events)
     /// from an internal dispatch table.
-    public func removeAllTargets() {
+    func removeAllTargets() {
         for object in self.allTargets {
             self.removeTarget(object, action: nil, for: UIControl.Event.allEvents)
         }
@@ -31,7 +31,7 @@ public extension UIControl {
     ///             sent  (cannot be nil). The block is retained.
     ///   - block: A bitmask specifying the control events for which the
     ///            action message is sent.
-    public func addBlock(forControlEvents events: UIControl.Event, block: @escaping (Any) -> Void) {
+    func addBlock(forControlEvents events: UIControl.Event, block: @escaping (Any) -> Void) {
         let target = YYUIControlBlockTarget(block: block, events: events)
         self.addTarget(target, action: #selector(target.invoke(with:)), for: events)
         var targets = allTargetsBlock
@@ -47,7 +47,7 @@ public extension UIControl {
     ///             action message is sent.
     ///   - block: The block which is invoked then the action message is
     ///            sent (cannot be nil). The block is retained.
-    public func setBlock(forControlEvents events: UIControl.Event, block: @escaping (Any) -> Void) {
+    func setBlock(forControlEvents events: UIControl.Event, block: @escaping (Any) -> Void) {
         self.removeAllBlocks(forControlEvents: UIControl.Event.allEvents)
         self.addBlock(forControlEvents: events, block: block)
     }
@@ -57,7 +57,7 @@ public extension UIControl {
     ///
     /// - Parameter events: A bitmask specifying the control events for which the
     ///                     action message is sent.
-    public func removeAllBlocks(forControlEvents events: UIControl.Event) {
+    func removeAllBlocks(forControlEvents events: UIControl.Event) {
         var targets = allTargetsBlock
         for target in targets {
             var targetEventsRawValue = target.events.rawValue
@@ -69,7 +69,7 @@ public extension UIControl {
                 
             }
             if targetEventsRawValue == 0 {
-                if let index = targets.index(where: { $0 == target }) {
+                if let index = targets.firstIndex(where: { $0 == target }) {
                     targets.remove(at: index)
                 }
             }
@@ -88,7 +88,7 @@ public extension UIControl {
     ///   - action: A selector identifying an action message.
     ///   - events: A bitmask specifying the control events for which the
     ///             action message is sent.
-    public func setTarget(_ target: Any, action: Selector, forControlEvents events: UIControl.Event) {
+    func setTarget(_ target: Any, action: Selector, forControlEvents events: UIControl.Event) {
         let targets = self.allTargets
         for currentTarget in targets {
             guard let actions = self.actions(forTarget: currentTarget, forControlEvent: events) else {
@@ -130,7 +130,7 @@ private class YYUIControlBlockTarget: NSObject {
         self.events = events
     }
     
-    @objc public func invoke(with sender: Any) {
+    @objc func invoke(with sender: Any) {
         self.block(sender)
     }
     

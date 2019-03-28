@@ -12,7 +12,7 @@ import Foundation
 
 public extension Dictionary where Key: Comparable {
     
-    public func allKeySorted() -> [Key] {
+    func allKeySorted() -> [Key] {
         return keys.sorted()
     }
     
@@ -20,7 +20,7 @@ public extension Dictionary where Key: Comparable {
     ///
     /// - Returns: A new array containing the dictionary's values sorted by keys,
     ///            or an empty array if the dictionary has no entries.
-    public func allValuesSortedByKeys() -> [Value] {
+    func allValuesSortedByKeys() -> [Value] {
         let sortedKeys = allKeySorted()
         var array: [Value] = []
         for key in sortedKeys {
@@ -33,7 +33,7 @@ public extension Dictionary where Key: Comparable {
 public extension Dictionary {
     
     /// YYSwift: Returns a Bool value tells if the dictionary has an object for key.
-    public func containsValue(forKey key: Key) -> Bool {
+    func containsValue(forKey key: Key) -> Bool {
         return self[key] != nil
     }
     
@@ -42,7 +42,7 @@ public extension Dictionary {
     ///
     /// - Parameter keys: The keys.
     /// - Returns: The entries for the keys.
-    public func entriesFor(keys: [Key]) -> [Key: Value] {
+    func entriesFor(keys: [Key]) -> [Key: Value] {
         var dic: [Key: Value] = [:]
         for key in keys {
             if let value = self[key] {
@@ -60,7 +60,7 @@ public extension Dictionary {
     ///
     /// - Parameter key: key to search for
     /// - Returns: true if key exists in dictionary.
-    public func has(key: Key) -> Bool {
+    func has(key: Key) -> Bool {
         return index(forKey: key) != nil
     }
     
@@ -73,7 +73,7 @@ public extension Dictionary {
     ///     dict.keys.contains("key2") -> false
     ///
     /// - Parameter keys: keys to be removed
-    public mutating func removeAll<S: Sequence>(keys: S) where S.Element == Key {
+    mutating func removeAll<S: Sequence>(keys: S) where S.Element == Key {
         keys.forEach { removeValue(forKey: $0) }
     }
     
@@ -82,7 +82,7 @@ public extension Dictionary {
     ///
     /// - Parameter prettify: set true to prettify data (default is false).
     /// - Returns: optional JSON Data (if applicable).
-    public func jsonData(prettify: Bool = false) -> Data? {
+    func jsonData(prettify: Bool = false) -> Data? {
         guard JSONSerialization.isValidJSONObject(self) else {
             return nil
         }
@@ -115,7 +115,7 @@ public extension Dictionary {
     ///
     /// - Parameter prettify: set true to prettify string (default is false).
     /// - Returns: optional JSON String (if applicable).
-    public func jsonString(prettify: Bool = false) -> String? {
+    func jsonString(prettify: Bool = false) -> String? {
         guard JSONSerialization.isValidJSONObject(self) else {
             return nil
         }
@@ -132,7 +132,7 @@ public extension Dictionary {
     ///
     /// - Parameter where: condition to evaluate each tuple entry against.
     /// - Returns: Count of entries that matches the where clousure.
-    public func count(where condition: @escaping ((key: Key, value: Value)) throws -> Bool) rethrows -> Int {
+    func count(where condition: @escaping ((key: Key, value: Value)) throws -> Bool) rethrows -> Int {
         var count: Int = 0
         try self.forEach {
             if try condition($0) {
@@ -157,7 +157,7 @@ public extension Dictionary {
     ///   - lhs: dictionary
     ///   - rhs: dictionary
     /// - Returns: An dictionary with keys and values from both.
-    public static func + (lhs: [Key: Value], rhs: [Key: Value]) -> [Key: Value] {
+    static func + (lhs: [Key: Value], rhs: [Key: Value]) -> [Key: Value] {
         var result = lhs
         rhs.forEach { result[$0] = $1 }
         return result
@@ -175,7 +175,7 @@ public extension Dictionary {
     /// - Parameters:
     ///   - lhs: dictionary
     ///   - rhs: dictionary
-    public static func += (lhs: inout [Key: Value], rhs: [Key: Value]) {
+    static func += (lhs: inout [Key: Value], rhs: [Key: Value]) {
         rhs.forEach { lhs[$0] = $1}
     }
     
@@ -191,7 +191,7 @@ public extension Dictionary {
     ///   - lhs: dictionary
     ///   - rhs: array with the keys to be removed.
     /// - Returns: a new dictionary with keys removed.
-    public static func - <S: Sequence>(lhs: [Key: Value], keys: S) -> [Key: Value] where S.Element == Key {
+    static func - <S: Sequence>(lhs: [Key: Value], keys: S) -> [Key: Value] where S.Element == Key {
         var result = lhs
         result.removeAll(keys: keys)
         return result
@@ -208,7 +208,7 @@ public extension Dictionary {
     /// - Parameters:
     ///   - lhs: dictionary
     ///   - rhs: array with the keys to be removed.
-    public static func -= <S: Sequence>(lhs: inout [Key: Value], keys: S) where S.Element == Key {
+    static func -= <S: Sequence>(lhs: inout [Key: Value], keys: S) where S.Element == Key {
         lhs.removeAll(keys: keys)
     }
 }
@@ -221,7 +221,7 @@ public extension Dictionary where Key: ExpressibleByStringLiteral {
     ///     dict.lowercaseAllKeys()
     ///     print(dict) // prints "["testkey": "value"]"
     ///
-    public mutating func lowercaseAllKeys() {
+    mutating func lowercaseAllKeys() {
         for key in keys {
             if let lowercaseKey = String(describing: key).lowercased() as? Key {
                 self[lowercaseKey] = removeValue(forKey: key)

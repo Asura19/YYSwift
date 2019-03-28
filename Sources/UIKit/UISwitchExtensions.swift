@@ -15,7 +15,7 @@ public extension UISwitch {
     /// YYSwift: Toggle a UISwitch
     ///
     /// - Parameter animated: set true to animate the change (default is true)
-    public func toggle(animated: Bool = true) {
+    func toggle(animated: Bool = true) {
         setOn(!isOn, animated: animated)
     }
 }

@@ -14,41 +14,41 @@ import Foundation
 public extension FloatingPoint {
     
     /// YYSwift: Absolute value of integer number.
-    public var abs: Self {
+    var abs: Self {
         return Swift.abs(self)
     }
     
     /// YYSwift: Check if integer is positive.
-    public var isPositive: Bool {
+    var isPositive: Bool {
         return self > 0
     }
     
     /// YYSwift: Check if integer is negative.
-    public var isNegative: Bool {
+    var isNegative: Bool {
         return self < 0
     }
     
     #if canImport(Foundation)
     /// YYSwift: Ceil of number.
-    public var ceil: Self {
+    var ceil: Self {
         return Foundation.ceil(self)
     }
     #endif
     
     #if canImport(Foundation)
     /// YYSwift: Floor of number.
-    public var floor: Self {
+    var floor: Self {
         return Foundation.floor(self)
     }
     #endif
     
     /// YYSwift: Radian value of degree input.
-    public var degreesToRadians: Self {
+    var degreesToRadians: Self {
         return Self.pi * self / Self(180)
     }
     
     /// YYSwift: Degree value of radian input.
-    public var radiansToDegrees: Self {
+    var radiansToDegrees: Self {
         return self * Self(180) / Self.pi
     }
 }

@@ -16,7 +16,7 @@ public extension NSKeyedUnarchiver {
     /// - Parameter file: The path of archived object file.
     /// - Returns: The unarchived object
     /// - Throws: Unarchived error
-    public class func unarchiveObject(withFilePath file: String) throws -> Any {
+    class func unarchiveObject(withFilePath file: String) throws -> Any {
         do {
             let data = try Data(contentsOf: URL(fileURLWithPath: file))
             var object: Any?
@@ -44,7 +44,7 @@ public extension NSKeyedUnarchiver {
     /// - Parameter data: The data need unarchived.
     /// - Returns: The unarchived object
     /// - Throws: Unarchived error
-    public class func unarchiveObject(withFileData data: Data) throws -> Any {
+    class func unarchiveObject(withFileData data: Data) throws -> Any {
         var object: Any?
         do {
             #if os(macOS)
