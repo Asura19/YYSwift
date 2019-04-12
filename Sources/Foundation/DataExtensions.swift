@@ -21,13 +21,11 @@ public extension Data {
     
     /// YYSwift: Returns an Data for md2 hash.
     var md2Data: Data? {
-        var result = Data(count: Int(CC_MD2_DIGEST_LENGTH))
-        _ = result.withUnsafeMutableBytes { digestBytes in
-            self.withUnsafeBytes { messageBytes in
-                CC_MD2(messageBytes, CC_LONG(self.count), digestBytes)
-            }
+        var digest = [UInt8](repeating: 0, count: Int(CC_MD2_DIGEST_LENGTH))
+        _ = self.withUnsafeBytes { messageBytes in
+            CC_MD2(messageBytes.baseAddress, CC_LONG(self.count), &digest)
         }
-        return result
+        return Data(digest)
     }
     
     /// YYSwift: Returns a lowercase String for md2 hash.
@@ -39,13 +37,11 @@ public extension Data {
     
     /// YYSwift: Returns an Data for md4 hash.
     var md4Data: Data? {
-        var result = Data(count: Int(CC_MD4_DIGEST_LENGTH))
-        _ = result.withUnsafeMutableBytes { digestBytes in
-            self.withUnsafeBytes { messageBytes in
-                CC_MD4(messageBytes, CC_LONG(self.count), digestBytes)
-            }
+        var digest = [UInt8](repeating: 0, count: Int(CC_MD4_DIGEST_LENGTH))
+        _ = self.withUnsafeBytes { messageBytes in
+            CC_MD4(messageBytes.baseAddress, CC_LONG(self.count), &digest)
         }
-        return result
+        return Data(digest)
     }
     
     /// YYSwift: Returns a lowercase String for md4 hash.
@@ -57,13 +53,11 @@ public extension Data {
     
     /// YYSwift: Returns an Data for md5 hash.
     var md5Data: Data? {
-        var result = Data(count: Int(CC_MD5_DIGEST_LENGTH))
-        _ = result.withUnsafeMutableBytes { digestBytes in
-            self.withUnsafeBytes { messageBytes in
-                CC_MD5(messageBytes, CC_LONG(self.count), digestBytes)
-            }
+        var digest = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
+        _ = self.withUnsafeBytes { messageBytes in
+            CC_MD5(messageBytes.baseAddress, CC_LONG(self.count), &digest)
         }
-        return result
+        return Data(digest)
     }
     
     /// YYSwift: Returns a lowercase String for md5 hash.
@@ -75,15 +69,13 @@ public extension Data {
     
     /// YYSwift: Returns an Data for sha1 hash.
     var sha1Data: Data? {
-        var result = Data(count: Int(CC_SHA1_DIGEST_LENGTH))
-        _ = result.withUnsafeMutableBytes { digestBytes in
-            self.withUnsafeBytes { messageBytes in
-                CC_SHA1(messageBytes, CC_LONG(self.count), digestBytes)
-            }
+        var digest = [UInt8](repeating: 0, count: Int(CC_SHA1_DIGEST_LENGTH))
+        _ = self.withUnsafeBytes { messageBytes in
+            CC_SHA1(messageBytes.baseAddress, CC_LONG(self.count), &digest)
         }
-        return result
+        return Data(digest)
     }
-
+    
     /// YYSwift: Returns a lowercase String for sha1 hash.
     var sha1String: String? {
         return sha1Data?.reduce("") {
@@ -93,13 +85,11 @@ public extension Data {
     
     /// YYSwift: Returns an Data for sha224 hash.
     var sha224Data: Data? {
-        var result = Data(count: Int(CC_SHA224_DIGEST_LENGTH))
-        _ = result.withUnsafeMutableBytes { digestBytes in
-            self.withUnsafeBytes { messageBytes in
-                CC_SHA224(messageBytes, CC_LONG(self.count), digestBytes)
-            }
+        var digest = [UInt8](repeating: 0, count: Int(CC_SHA224_DIGEST_LENGTH))
+        _ = self.withUnsafeBytes { messageBytes in
+            CC_SHA224(messageBytes.baseAddress, CC_LONG(self.count), &digest)
         }
-        return result
+        return Data(digest)
     }
     
     /// YYSwift: Returns a lowercase String for sha224 hash.
@@ -111,13 +101,11 @@ public extension Data {
     
     /// YYSwift: Returns an Data for sha256 hash.
     var sha256Data: Data? {
-        var result = Data(count: Int(CC_SHA256_DIGEST_LENGTH))
-        _ = result.withUnsafeMutableBytes { digestBytes in
-            self.withUnsafeBytes { messageBytes in
-                CC_SHA256(messageBytes, CC_LONG(self.count), digestBytes)
-            }
+        var digest = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
+        _ = self.withUnsafeBytes { messageBytes in
+            CC_SHA256(messageBytes.baseAddress, CC_LONG(self.count), &digest)
         }
-        return result
+        return Data(digest)
     }
     
     /// YYSwift: Returns a lowercase String for sha256 hash.
@@ -129,13 +117,11 @@ public extension Data {
     
     /// YYSwift: Returns an Data for sha384 hash.
     var sha384Data: Data? {
-        var result = Data(count: Int(CC_SHA384_DIGEST_LENGTH))
-        _ = result.withUnsafeMutableBytes { digestBytes in
-            self.withUnsafeBytes { messageBytes in
-                CC_SHA384(messageBytes, CC_LONG(self.count), digestBytes)
-            }
+        var digest = [UInt8](repeating: 0, count: Int(CC_SHA384_DIGEST_LENGTH))
+        _ = self.withUnsafeBytes { messageBytes in
+            CC_SHA384(messageBytes.baseAddress, CC_LONG(self.count), &digest)
         }
-        return result
+        return Data(digest)
     }
     
     /// YYSwift: Returns a lowercase String for sha384 hash.
@@ -147,13 +133,11 @@ public extension Data {
     
     /// YYSwift: Returns an Data for sha512 hash.
     var sha512Data: Data? {
-        var result = Data(count: Int(CC_SHA512_DIGEST_LENGTH))
-        _ = result.withUnsafeMutableBytes { digestBytes in
-            self.withUnsafeBytes { messageBytes in
-                CC_SHA512(messageBytes, CC_LONG(self.count), digestBytes)
-            }
+        var digest = [UInt8](repeating: 0, count: Int(CC_SHA512_DIGEST_LENGTH))
+        _ = self.withUnsafeBytes { messageBytes in
+            CC_SHA512(messageBytes.baseAddress, CC_LONG(self.count), &digest)
         }
-        return result
+        return Data(digest)
     }
     
     /// YYSwift: Returns a lowercase String for sha512 hash.
@@ -164,30 +148,26 @@ public extension Data {
     }
     
     private func hmac(UsingAlgorithm alg: HmacAlgorithm, withKey key: String) -> String? {
-        var result = Data(count: alg.digestLenght)
+        var digest = [UInt8](repeating: 0, count: alg.digestLenght)
         let cKey = key.cString(using: .utf8)
         let keyLength = key.lengthOfBytes(using: .utf8)
-        _ = result.withUnsafeMutableBytes { digestBytes in
-            self.withUnsafeBytes { messageBytes in
-                CCHmac(alg.ccHmacAlgorithm, cKey!, keyLength, messageBytes, self.count, digestBytes)
-            }
+        _ = self.withUnsafeBytes { messageBytes in
+            CCHmac(alg.ccHmacAlgorithm, cKey!, keyLength, messageBytes.baseAddress, self.count, &digest)
         }
-        return result.reduce("") {
+        return Data(digest).reduce("") {
             $0 + String(format:"%02x", $1)
         }
     }
     
     private func hmac(UsingAlgorithm alg: HmacAlgorithm, withKey key: Data) -> Data? {
         let keyString = String.init(data: key, encoding: .utf8)
-        var result = Data(count: alg.digestLenght)
+        var digest = [UInt8](repeating: 0, count: alg.digestLenght)
         let cKey = keyString?.cString(using: .utf8)
         let keyLength = keyString?.lengthOfBytes(using: .utf8)
-        _ = result.withUnsafeMutableBytes { digestBytes in
-            self.withUnsafeBytes { messageBytes in
-                CCHmac(alg.ccHmacAlgorithm, cKey!, keyLength!, messageBytes, self.count, digestBytes)
-            }
+        _ = self.withUnsafeBytes { messageBytes in
+            CCHmac(alg.ccHmacAlgorithm, cKey!, keyLength!, messageBytes.baseAddress, self.count, &digest)
         }
-        return result
+        return Data(digest)
     }
     
     private enum HmacAlgorithm {
@@ -342,7 +322,7 @@ public extension Data  {
         guard iv.count == 16 || iv.count == 0 else {
             return nil
         }
-
+        
         let cryptLength  = Int(self.count + kCCBlockSizeAES128)
         var result = Data(count:cryptLength)
         let keyLength = size_t(kCCKeySizeAES128)
@@ -355,12 +335,12 @@ public extension Data  {
                         CCCrypt(CCOperation(kCCEncrypt),
                                 CCAlgorithm(kCCAlgorithmAES128),
                                 CCOptions(kCCOptionPKCS7Padding),
-                                keyBytes,
+                                keyBytes.baseAddress!,
                                 keyLength,
-                                ivBytes,
-                                dataBytes,
+                                ivBytes.baseAddress!,
+                                dataBytes.baseAddress!,
                                 self.count,
-                                cryptBytes,
+                                cryptBytes.baseAddress!,
                                 cryptLength,
                                 &encryptedSize)
                     }
@@ -404,12 +384,12 @@ public extension Data  {
                         CCCrypt(CCOperation(kCCDecrypt),
                                 CCAlgorithm(kCCAlgorithmAES128),
                                 CCOptions(kCCOptionPKCS7Padding),
-                                keyBytes,
+                                keyBytes.baseAddress!,
                                 keyLength,
-                                ivBytes,
-                                dataBytes,
+                                ivBytes.baseAddress!,
+                                dataBytes.baseAddress!,
                                 self.count,
-                                cryptBytes,
+                                cryptBytes.baseAddress!,
                                 cryptLength,
                                 &encryptedSize)
                     }
@@ -427,58 +407,58 @@ public extension Data  {
         }
     }
     /*
-        func aes256EncryptWithKey(_ key: Data, iv: Data) -> Data? {
-            let cryptor: CCCryptorRef?
-            var status: CCCryptorStatus = CCCryptorStatus(kCCSuccess)
-            var buffer = Data()
-    
-            cryptor = key.withUnsafeBytes { (keyPtr: UnsafePointer<UInt8>) in
-                iv.withUnsafeBytes { (ivPtr: UnsafePointer<UInt8>) in
-                    var cryptorOut: CCCryptorRef?
-                    let statusResult =  CCCryptorCreate(
-                        CCOperation(kCCEncrypt),
-                        CCAlgorithm(kCCAlgorithmAES128),
-                        CCOptions(kCCOptionPKCS7Padding),
-                        keyPtr,
-                        key.count,
-                        ivPtr,
-                        &cryptorOut
-                    )
-                    assert(statusResult == CCCryptorStatus(kCCSuccess))
-                    return cryptorOut
-                }
-            }
-    
-            let bufferSize = CCCryptorGetOutputLength(cryptor, self.count, true)
-            buffer.count = bufferSize
-    
-            var dataOutMoved = 0
-            status = self.withUnsafeBytes { dataPtr in
-                buffer.withUnsafeMutableBytes { bufferPtr in
-                    return CCCryptorUpdate(
-                        cryptor,
-                        dataPtr, self.count,
-                        bufferPtr, bufferSize,
-                        &dataOutMoved)
-                }
-            }
-            assert(status == CCCryptorStatus(kCCSuccess))
-            buffer.count = dataOutMoved
-    
-            let outputLength = CCCryptorGetOutputLength(cryptor, 0, true)
-            status = buffer.withUnsafeMutableBytes { bufferPtr in
-                CCCryptorFinal(
-                    cryptor,
-                    bufferPtr,
-                    outputLength,
-                    &dataOutMoved
-                )
-            }
-            assert(status == CCCryptorStatus(kCCSuccess))
-            buffer.count = dataOutMoved
-            defer { buffer = Data() }
-            return buffer
-        }
+     func aes256EncryptWithKey(_ key: Data, iv: Data) -> Data? {
+     let cryptor: CCCryptorRef?
+     var status: CCCryptorStatus = CCCryptorStatus(kCCSuccess)
+     var buffer = Data()
+     
+     cryptor = key.withUnsafeBytes { (keyPtr: UnsafePointer<UInt8>) in
+     iv.withUnsafeBytes { (ivPtr: UnsafePointer<UInt8>) in
+     var cryptorOut: CCCryptorRef?
+     let statusResult =  CCCryptorCreate(
+     CCOperation(kCCEncrypt),
+     CCAlgorithm(kCCAlgorithmAES128),
+     CCOptions(kCCOptionPKCS7Padding),
+     keyPtr,
+     key.count,
+     ivPtr,
+     &cryptorOut
+     )
+     assert(statusResult == CCCryptorStatus(kCCSuccess))
+     return cryptorOut
+     }
+     }
+     
+     let bufferSize = CCCryptorGetOutputLength(cryptor, self.count, true)
+     buffer.count = bufferSize
+     
+     var dataOutMoved = 0
+     status = self.withUnsafeBytes { dataPtr in
+     buffer.withUnsafeMutableBytes { bufferPtr in
+     return CCCryptorUpdate(
+     cryptor,
+     dataPtr, self.count,
+     bufferPtr, bufferSize,
+     &dataOutMoved)
+     }
+     }
+     assert(status == CCCryptorStatus(kCCSuccess))
+     buffer.count = dataOutMoved
+     
+     let outputLength = CCCryptorGetOutputLength(cryptor, 0, true)
+     status = buffer.withUnsafeMutableBytes { bufferPtr in
+     CCCryptorFinal(
+     cryptor,
+     bufferPtr,
+     outputLength,
+     &dataOutMoved
+     )
+     }
+     assert(status == CCCryptorStatus(kCCSuccess))
+     buffer.count = dataOutMoved
+     defer { buffer = Data() }
+     return buffer
+     }
      */
 }
 
@@ -539,24 +519,14 @@ public extension Data {
     func jsonValueDecoded() -> Any? {
         return try? JSONSerialization.jsonObject(with: self, options: JSONSerialization.ReadingOptions())
     }
-   
+    
 }
 
 
 #if os(iOS) || os(macOS)
 public extension Data {
-
-    private func createZStream() -> z_stream {
-        
-        var stream = z_stream()
-        
-        self.withUnsafeBytes { (bytes: UnsafePointer<Bytef>) in
-            stream.next_in = UnsafeMutablePointer<Bytef>(mutating: bytes)
-        }
-        stream.avail_in = uint(self.count)
-        
-        return stream
-    }
+    
+    // Reference: https://github.com/1024jp/GzipSwift
     
     private struct DataSize {
         
@@ -566,42 +536,101 @@ public extension Data {
         private init() { }
     }
     
-    /// YYSwift: Decompress data from gzip data.
+    /// YYSwift: Comperss data to zlib-compressed in default compresssion level.
     ///
-    /// - Returns: Inflated data.
-    func gzipInflate() -> Data {
+    /// - Returns: Deflated data.
+    func zlibDeflated() -> Data? {
         guard !self.isEmpty else {
             return Data()
         }
         
-        let contiguousData = self.withUnsafeBytes { Data(bytes: $0, count: self.count) }
-        var stream = contiguousData.createZStream()
+        var stream = z_stream()
         var status: Int32
         
-        status = inflateInit2_(&stream, MAX_WBITS + 32, ZLIB_VERSION, Int32(DataSize.stream))
-        
+        status = deflateInit_(&stream, Z_DEFAULT_COMPRESSION, ZLIB_VERSION, Int32(DataSize.stream))
         guard status == Z_OK else {
-            return Data()
+            return nil
         }
         
-        var data = Data(capacity: contiguousData.count * 2)
+        var data = Data(capacity: DataSize.chunk)
         
         repeat {
             if Int(stream.total_out) >= data.count {
-                data.count += contiguousData.count / 2
+                data.count += DataSize.chunk
             }
             
-            data.withUnsafeMutableBytes { (bytes: UnsafeMutablePointer<Bytef>) in
-                stream.next_out = bytes.advanced(by: Int(stream.total_out))
-            }
-            stream.avail_out = uInt(data.count) - uInt(stream.total_out)
+            let inputCount = self.count
+            let outputCount = data.count
             
-            status = inflate(&stream, Z_SYNC_FLUSH)
+            self.withUnsafeBytes { (inputPointer: UnsafeRawBufferPointer) in
+                stream.next_in = UnsafeMutablePointer<Bytef>(mutating: inputPointer.bindMemory(to: Bytef.self).baseAddress!).advanced(by: Int(stream.total_in))
+                stream.avail_in = uint(inputCount) - uInt(stream.total_in)
+                
+                data.withUnsafeMutableBytes { (outputPointer: UnsafeMutableRawBufferPointer) in
+                    stream.next_out = outputPointer.bindMemory(to: Bytef.self).baseAddress!.advanced(by: Int(stream.total_out))
+                    stream.avail_out = uInt(outputCount) - uInt(stream.total_out)
+                    
+                    status = deflate(&stream, Z_FINISH)
+                    
+                    stream.next_out = nil
+                }
+                
+                stream.next_in = nil
+            }
+        } while stream.avail_out == 0
+        
+        guard deflateEnd(&stream) == Z_OK, status == Z_STREAM_END else {
+            return nil
+        }
+        
+        data.count = Int(stream.total_out)
+        return data
+    }
+    
+    /// YYSwift: Decompress data from zlib-compressed data.
+    ///
+    /// - Returns: Inflated data.
+    func zlibInflated() -> Data? {
+        guard !self.isEmpty else {
+            return Data()
+        }
+        
+        var stream = z_stream()
+        var status: Int32
+        
+        status = inflateInit_(&stream, ZLIB_VERSION, Int32(DataSize.stream))
+        guard status == Z_OK else {
+            return nil
+        }
+        
+        var data = Data(capacity: self.count * 2)
+        repeat {
+            if Int(stream.total_out) >= data.count {
+                data.count += self.count / 2
+            }
+            
+            let inputCount = self.count
+            let outputCount = data.count
+            
+            self.withUnsafeBytes { (inputPointer: UnsafeRawBufferPointer) in
+                stream.next_in = UnsafeMutablePointer<Bytef>(mutating: inputPointer.bindMemory(to: Bytef.self).baseAddress!).advanced(by: Int(stream.total_in))
+                stream.avail_in = uint(inputCount) - uInt(stream.total_in)
+                
+                data.withUnsafeMutableBytes { (outputPointer: UnsafeMutableRawBufferPointer) in
+                    stream.next_out = outputPointer.bindMemory(to: Bytef.self).baseAddress!.advanced(by: Int(stream.total_out))
+                    stream.avail_out = uInt(outputCount) - uInt(stream.total_out)
+                    
+                    status = inflate(&stream, Z_SYNC_FLUSH)
+                    
+                    stream.next_out = nil
+                }
+                
+                stream.next_in = nil
+            }
             
         } while status == Z_OK
         
-        guard inflateEnd(&stream) == Z_OK && status == Z_STREAM_END else {
-            
+        guard inflateEnd(&stream) == Z_OK, status == Z_STREAM_END else {
             return Data()
         }
         
@@ -613,122 +642,106 @@ public extension Data {
     /// YYSwift: Comperss data to gzip in default compresssion level.
     ///
     /// - Returns: Deflated data.
-    func gzipDeflate() -> Data {
+    func gzipDeflated() -> Data? {
         guard !self.isEmpty else {
             return Data()
         }
         
-        let contiguousData = self.withUnsafeBytes { Data(bytes: $0, count: self.count) }
-        var stream = contiguousData.createZStream()
+        var stream = z_stream()
         var status: Int32
-        
-        status = deflateInit2_(&stream, Z_NO_COMPRESSION, Z_DEFLATED, MAX_WBITS + 16, MAX_MEM_LEVEL, Z_DEFAULT_STRATEGY, ZLIB_VERSION, Int32(DataSize.stream))
+        status = deflateInit2_(&stream, Z_DEFAULT_COMPRESSION, Z_DEFLATED, MAX_WBITS + 16, MAX_MEM_LEVEL, Z_DEFAULT_STRATEGY, ZLIB_VERSION, Int32(DataSize.stream))
         
         guard status == Z_OK else {
-            return Data()
+            return nil
         }
         
         var data = Data(capacity: DataSize.chunk)
-        while stream.avail_out == 0 {
-            if Int(stream.total_out) >= data.count {
-                data.count += DataSize.chunk
-            }
-            
-            data.withUnsafeMutableBytes { (bytes: UnsafeMutablePointer<Bytef>) in
-                stream.next_out = bytes.advanced(by: Int(stream.total_out))
-            }
-            stream.avail_out = uInt(data.count) - uInt(stream.total_out)
-            
-            deflate(&stream, Z_FINISH)
-        }
-        
-        deflateEnd(&stream)
-        data.count = Int(stream.total_out)
-        
-        return data
-    }
-    
-    /// YYSwift: Decompress data from zlib-compressed data.
-    ///
-    /// - Returns: Inflated data.
-    func zlibInflate() -> Data {
-        guard !self.isEmpty else {
-            return Data()
-        }
-        
-        let contiguousData = self.withUnsafeBytes { Data(bytes: $0, count: self.count) }
-        var stream = contiguousData.createZStream()
-        var status: Int32
-        
-        status = inflateInit_(&stream, ZLIB_VERSION, Int32(DataSize.stream))
-        
-        guard status == Z_OK else {
-            return Data()
-        }
-        
-        var data = Data(capacity: contiguousData.count * 2)
         
         repeat {
             if Int(stream.total_out) >= data.count {
-                data.count += contiguousData.count / 2
+                data.count += DataSize.chunk
             }
             
-            data.withUnsafeMutableBytes { (bytes: UnsafeMutablePointer<Bytef>) in
-                stream.next_out = bytes.advanced(by: Int(stream.total_out))
+            let inputCount = self.count
+            let outputCount = data.count
+            
+            self.withUnsafeBytes { (inputPointer: UnsafeRawBufferPointer) in
+                stream.next_in = UnsafeMutablePointer<Bytef>(mutating: inputPointer.bindMemory(to: Bytef.self).baseAddress!).advanced(by: Int(stream.total_in))
+                stream.avail_in = uint(inputCount) - uInt(stream.total_in)
+                
+                data.withUnsafeMutableBytes { (outputPointer: UnsafeMutableRawBufferPointer) in
+                    stream.next_out = outputPointer.bindMemory(to: Bytef.self).baseAddress!.advanced(by: Int(stream.total_out))
+                    stream.avail_out = uInt(outputCount) - uInt(stream.total_out)
+                    
+                    status = deflate(&stream, Z_FINISH)
+                    
+                    stream.next_out = nil
+                }
+                
+                stream.next_in = nil
             }
-            stream.avail_out = uInt(data.count) - uInt(stream.total_out)
-            
-            status = inflate(&stream, Z_SYNC_FLUSH)
-            
-        } while status == Z_OK
+        } while stream.avail_out == 0
         
-        guard inflateEnd(&stream) == Z_OK && status == Z_STREAM_END else {
-            
-            return Data()
+        guard deflateEnd(&stream) == Z_OK, status == Z_STREAM_END else {
+            return nil
         }
         
         data.count = Int(stream.total_out)
-        
         return data
     }
     
-    /// YYSwift: Comperss data to zlib-compressed in default compresssion level.
+    /// YYSwift: Decompress data from gzip data.
     ///
-    /// - Returns: Deflated data.
-    func zlibDeflate() -> Data {
+    /// - Returns: Inflated data.
+    func gzipInflated() -> Data? {
         guard !self.isEmpty else {
             return Data()
         }
         
-        let contiguousData = self.withUnsafeBytes { Data(bytes: $0, count: self.count) }
-        var stream = contiguousData.createZStream()
+        var stream = z_stream()
         var status: Int32
         
-        status = deflateInit_(&stream, Z_NO_COMPRESSION, ZLIB_VERSION, Int32(DataSize.stream))
+        status = inflateInit2_(&stream, MAX_WBITS + 32, ZLIB_VERSION, Int32(DataSize.stream))
         
         guard status == Z_OK else {
-            return Data()
+            return nil
         }
         
-        var data = Data(capacity: DataSize.chunk)
-        while stream.avail_out == 0 {
+        var data = Data(capacity: self.count * 2)
+        repeat {
             if Int(stream.total_out) >= data.count {
-                data.count += DataSize.chunk
+                data.count += self.count / 2
             }
             
-            data.withUnsafeMutableBytes { (bytes: UnsafeMutablePointer<Bytef>) in
-                stream.next_out = bytes.advanced(by: Int(stream.total_out))
-            }
-            stream.avail_out = uInt(data.count) - uInt(stream.total_out)
+            let inputCount = self.count
+            let outputCount = data.count
             
-            deflate(&stream, Z_FINISH)
+            self.withUnsafeBytes { (inputPointer: UnsafeRawBufferPointer) in
+                stream.next_in = UnsafeMutablePointer<Bytef>(mutating: inputPointer.bindMemory(to: Bytef.self).baseAddress!).advanced(by: Int(stream.total_in))
+                stream.avail_in = uint(inputCount) - uInt(stream.total_in)
+                
+                data.withUnsafeMutableBytes { (outputPointer: UnsafeMutableRawBufferPointer) in
+                    stream.next_out = outputPointer.bindMemory(to: Bytef.self).baseAddress!.advanced(by: Int(stream.total_out))
+                    stream.avail_out = uInt(outputCount) - uInt(stream.total_out)
+                    
+                    status = inflate(&stream, Z_SYNC_FLUSH)
+                    
+                    stream.next_out = nil
+                }
+                
+                stream.next_in = nil
+            }
+            
+        } while status == Z_OK
+        
+        guard inflateEnd(&stream) == Z_OK, status == Z_STREAM_END else {
+            return nil
         }
         
-        deflateEnd(&stream)
         data.count = Int(stream.total_out)
         
         return data
     }
 }
-    
+
 #endif
