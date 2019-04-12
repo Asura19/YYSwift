@@ -11,7 +11,7 @@ import Foundation
 
 #if os(iOS) || os(macOS)
 import CommonCrypto
-import Swiftzlib
+import zlib
 #endif
 
 

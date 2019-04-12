@@ -58,7 +58,6 @@
 		D0708E3320E509AF00F8EC64 /* YYSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0708E3120E509AF00F8EC64 /* YYSwift.swift */; };
 		D0708E3420E509AF00F8EC64 /* YYSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0708E3120E509AF00F8EC64 /* YYSwift.swift */; };
 		D0708E3520E509AF00F8EC64 /* YYSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0708E3120E509AF00F8EC64 /* YYSwift.swift */; };
-		D0A2DCE31FD9406D00AB456C /* include.h in Headers */ = {isa = PBXBuildFile; fileRef = D0A2DCD11FD9406C00AB456C /* include.h */; };
 		D0A2DCE41FD9406D00AB456C /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DCD41FD9406C00AB456C /* DataExtensions.swift */; };
 		D0A2DCE51FD9406D00AB456C /* SignedIntegerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DCD61FD9406D00AB456C /* SignedIntegerExtensions.swift */; };
 		D0A2DCE61FD9406D00AB456C /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2DCD71FD9406D00AB456C /* ArrayExtensions.swift */; };
@@ -245,8 +244,6 @@
 		D0708E3120E509AF00F8EC64 /* YYSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YYSwift.swift; sourceTree = "<group>"; };
 		D0A2DCC21FD93F2900AB456C /* YYSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YYSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0A2DCCE1FD93FD000AB456C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D0A2DCD11FD9406C00AB456C /* include.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = include.h; sourceTree = "<group>"; };
-		D0A2DCD21FD9406C00AB456C /* module.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.map; sourceTree = "<group>"; };
 		D0A2DCD41FD9406C00AB456C /* DataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
 		D0A2DCD61FD9406D00AB456C /* SignedIntegerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignedIntegerExtensions.swift; sourceTree = "<group>"; };
 		D0A2DCD71FD9406D00AB456C /* ArrayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
@@ -417,7 +414,6 @@
 				D0CE15D21FE8E0E60034E503 /* Utility */,
 				D06FEAC51FE13611006D7915 /* CoreGraphics */,
 				D0D688411FDE792C00CB0AAD /* Shared */,
-				D0A2DCD01FD9406C00AB456C /* ModuleMap */,
 				D0A2DCD31FD9406C00AB456C /* Foundation */,
 				D0A2DCD51FD9406D00AB456C /* StandardLibrary */,
 				D0BF342C1FDFEBEA0008B900 /* Namespace.swift */,
@@ -425,15 +421,6 @@
 				D0A2DCCE1FD93FD000AB456C /* Info.plist */,
 			);
 			path = Sources;
-			sourceTree = "<group>";
-		};
-		D0A2DCD01FD9406C00AB456C /* ModuleMap */ = {
-			isa = PBXGroup;
-			children = (
-				D0A2DCD11FD9406C00AB456C /* include.h */,
-				D0A2DCD21FD9406C00AB456C /* module.map */,
-			);
-			path = ModuleMap;
 			sourceTree = "<group>";
 		};
 		D0A2DCD31FD9406C00AB456C /* Foundation */ = {
@@ -547,7 +534,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0A2DCE31FD9406D00AB456C /* include.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1216,7 +1202,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.phoenix.YYSwift;
 				PRODUCT_NAME = YYSwift;
 				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = "$(PROJECT_DIR)/Sources/ModuleMap";
+				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1240,7 +1226,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.phoenix.YYSwift;
 				PRODUCT_NAME = YYSwift;
 				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = "$(PROJECT_DIR)/Sources/ModuleMap";
+				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
