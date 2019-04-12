@@ -617,19 +617,21 @@ public extension UIView {
         case .vertical:
             animation = CAKeyframeAnimation(keyPath: "transform.translation.y")
         }
+        #if !os(tvOS)
         switch animationType {
         case .linear:
-            animation.timingFunction = CAMediaTimingFunction(name: convertToCAMediaTimingFunctionName(convertFromCAMediaTimingFunctionName(CAMediaTimingFunctionName.linear)))
+            animation.timingFunction = CAMediaTimingFunction(name: .linear)
         case .easeIn:
-            animation.timingFunction = CAMediaTimingFunction(name: convertToCAMediaTimingFunctionName(convertFromCAMediaTimingFunctionName(CAMediaTimingFunctionName.easeIn)))
+            animation.timingFunction = CAMediaTimingFunction(name: .easeIn)
         case .easeOut:
-            animation.timingFunction = CAMediaTimingFunction(name: convertToCAMediaTimingFunctionName(convertFromCAMediaTimingFunctionName(CAMediaTimingFunctionName.easeOut)))
+            animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
         case .easeInOut:
-            animation.timingFunction = CAMediaTimingFunction(name: convertToCAMediaTimingFunctionName(convertFromCAMediaTimingFunctionName(CAMediaTimingFunctionName.easeInEaseOut)))
+            animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         }
+        #endif
         CATransaction.setCompletionBlock(completion)
         animation.duration = duration
-        animation.values = [-20.0, 20.0, -20.0, 20.0, -10.0, 10.0, -5.0, 5.0, 0.0 ]
+        animation.values = [-20.0, 20.0, -20.0, 20.0, -10.0, 10.0, -5.0, 5.0, 0.0]
         layer.add(animation, forKey: "shake")
         CATransaction.commit()
     }
@@ -753,13 +755,4 @@ public extension UIView {
     }
 }
 
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToCAMediaTimingFunctionName(_ input: String) -> CAMediaTimingFunctionName {
-	return CAMediaTimingFunctionName(rawValue: input)
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromCAMediaTimingFunctionName(_ input: CAMediaTimingFunctionName) -> String {
-	return input.rawValue
-}
 #endif

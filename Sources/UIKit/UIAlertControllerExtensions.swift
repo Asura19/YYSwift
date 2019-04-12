@@ -30,9 +30,11 @@ public extension UIAlertController {
             let initial = device.machineModel?.replace(regex: ",[1-9]", options: [], with: "")
             let version = (initial?.removeAll("iPhone").int)!
             if !UIDevice.current.isPad && version > 8 {
+                #if !os(tvOS)
                 let generator = UIImpactFeedbackGenerator(style: .light)
                 generator.prepare()
                 generator.impactOccurred()
+                #endif
             }
             else {
                 #if canImport(AudioToolbox)

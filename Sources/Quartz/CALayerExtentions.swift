@@ -354,23 +354,23 @@ public extension CALayer {
         if duration <= 0 {
             return
         }
-        var mediaFunction = ""
+        var mediaFunctionName: CAMediaTimingFunctionName
         switch curve {
         case .easeInOut:
-            mediaFunction = convertFromCAMediaTimingFunctionName(CAMediaTimingFunctionName.easeInEaseOut)
+            mediaFunctionName = .easeInEaseOut
         case .easeIn:
-            mediaFunction = convertFromCAMediaTimingFunctionName(CAMediaTimingFunctionName.easeIn)
+            mediaFunctionName = .easeIn
         case .easeOut:
-            mediaFunction = convertFromCAMediaTimingFunctionName(CAMediaTimingFunctionName.easeOut)
+            mediaFunctionName = .easeOut
         case .linear:
-            mediaFunction = convertFromCAMediaTimingFunctionName(CAMediaTimingFunctionName.linear)
+            mediaFunctionName = .linear
         @unknown default:
-            mediaFunction = convertFromCAMediaTimingFunctionName(CAMediaTimingFunctionName.linear)
+            mediaFunctionName = .linear
         }
         
         let transition = CATransition()
         transition.duration = duration as CFTimeInterval
-        transition.timingFunction = CAMediaTimingFunction(name: convertToCAMediaTimingFunctionName(mediaFunction))
+        transition.timingFunction = CAMediaTimingFunction(name: mediaFunctionName)
         add(transition, forKey: "yyswift.fade")
     }
     
@@ -380,22 +380,3 @@ public extension CALayer {
     }
 }
 
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromCALayerContentsGravity(_ input: CALayerContentsGravity) -> String {
-	return input.rawValue
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToCALayerContentsGravity(_ input: String) -> CALayerContentsGravity {
-	return CALayerContentsGravity(rawValue: input)
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromCAMediaTimingFunctionName(_ input: CAMediaTimingFunctionName) -> String {
-	return input.rawValue
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToCAMediaTimingFunctionName(_ input: String) -> CAMediaTimingFunctionName {
-	return CAMediaTimingFunctionName(rawValue: input)
-}
