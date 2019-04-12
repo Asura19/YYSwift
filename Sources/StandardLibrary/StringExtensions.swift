@@ -1076,6 +1076,12 @@ public extension String {
     }
     #endif
     
+    #if os(iOS)
+    /// YYSwift: Italic string.
+    var italic: NSAttributedString {
+        return NSMutableAttributedString(string: self, attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: UIFont.systemFontSize)])
+    }
+    
     /// YYSwift: Underlined string
     var underline: NSAttributedString {
         return NSAttributedString(string: self, attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue])
@@ -1086,12 +1092,6 @@ public extension String {
     var strikethrough: NSAttributedString {
         return NSAttributedString(string: self, attributes: [NSAttributedString.Key.strikethroughStyle: NSNumber(value: NSUnderlineStyle.single.rawValue as Int)])
     }
-    
-    #if os(iOS)
-    /// YYSwift: Italic string.
-    var italic: NSAttributedString {
-        return NSMutableAttributedString(string: self, attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: UIFont.systemFontSize)])
-    }
     #endif
     
     #if os(macOS)
@@ -1101,6 +1101,17 @@ public extension String {
     /// - Returns: a NSAttributedString versions of string colored with given color.
     func colored(with color: NSColor) -> NSAttributedString {
         return NSMutableAttributedString(string: self, attributes: [.foregroundColor: color])
+    }
+    
+    /// YYSwift: Underlined string
+    var underline: NSAttributedString {
+        return NSAttributedString(string: self, attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue])
+    }
+    
+    /// YYSwift: Strikethrough string.
+    
+    var strikethrough: NSAttributedString {
+        return NSAttributedString(string: self, attributes: [NSAttributedString.Key.strikethroughStyle: NSNumber(value: NSUnderlineStyle.single.rawValue as Int)])
     }
     
     #else

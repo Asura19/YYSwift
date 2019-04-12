@@ -25,24 +25,36 @@ public extension NSAttributedString {
     var bolded: NSAttributedString {
         return applying(attributes: [.font: UIFont.boldSystemFont(ofSize: UIFont.systemFontSize)])
     }
-    #endif
     
     /// YYSwift: Underlined string.
     var underlined: NSAttributedString {
         return applying(attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
     }
     
-    #if os(iOS)
     /// YYSwift: Italicized string.
     var italicized: NSAttributedString {
         return applying(attributes: [.font: UIFont.italicSystemFont(ofSize: UIFont.systemFontSize)])
     }
-    #endif
     
     /// YYSwift: Struckthrough string.
     var struckthrough: NSAttributedString {
         return applying(attributes: [.strikethroughStyle: NSNumber(value: NSUnderlineStyle.single.rawValue as Int)])
     }
+    #endif
+    
+    
+    #if os(macOS)
+    /// YYSwift: Underlined string.
+    var underlined: NSAttributedString {
+        return applying(attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
+    }
+    
+    /// YYSwift: Struckthrough string.
+    var struckthrough: NSAttributedString {
+        return applying(attributes: [.strikethroughStyle: NSNumber(value: NSUnderlineStyle.single.rawValue as Int)])
+    }
+    #endif
+   
     
     /// YYSwift: Dictionary of the attributes applied across the whole string
     var attributes: [NSAttributedString.Key: Any] {
