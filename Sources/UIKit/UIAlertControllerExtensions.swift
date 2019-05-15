@@ -28,7 +28,9 @@ public extension UIAlertController {
         if vibrate {
             let device = UIDevice.current
             let initial = device.machineModel?.replace(regex: ",[1-9]", options: [], with: "")
-            let version = (initial?.removeAll("iPhone").int)!
+            guard let version = initial?.removeAll("iPhone").int else {
+                return
+            }
             if !UIDevice.current.isPad && version > 8 {
                 #if !os(tvOS)
                 let generator = UIImpactFeedbackGenerator(style: .light)
