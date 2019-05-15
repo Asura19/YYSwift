@@ -8,19 +8,17 @@ YYSwift is a collection of native Swift extensions, with handy methods, syntacti
 
 ## Requirements:
 - **iOS** 10.0+ / **tvOS** 10.0+ / **watchOS** 4.0+ / **macOS** 10.10+
-- Xcode 9.0+
-- Swift 4.0+
+- Xcode 10.2.1+
+- Swift 5.0+
 
 ## Installation
 
-#### CocoaPods
-Add ```pod 'YYSwift', '1.1.1'``` to your Podfile
 #### Carthage
 Add ```github "Asura19/YYSwift"``` to your Cartfile
 #### Swift Package Manager
 ```
 dependencies: [
-    .package(url: "https://github.com/Asura19/YYSwift.git", from: "1.0.5")
+    .package(url: "https://github.com/Asura19/YYSwift.git", from: "1.1.5")
 ]
 ```
 #### Manually
