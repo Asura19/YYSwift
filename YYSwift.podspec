@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "YYSwift"
-  spec.version      = "1.1.0"
+  spec.version      = "1.1.1"
   spec.summary      = "Native Swift extensions."
   spec.homepage     = "https://github.com/Asura19/YYSwift"
   spec.license      = "MIT"
@@ -9,7 +9,7 @@ Pod::Spec.new do |spec|
   spec.author             = { "Phoenix" => "yy@surax.cn" }
   spec.social_media_url   = "https://weibo.com/phoenix19"
 
-  spec.source       = { :git => "https://github.com/Asura19/YYSwift.git", :tag => "1.1.0" }
+  spec.source       = { :git => "https://github.com/Asura19/YYSwift.git", :tag => "1.1.1" }
 
   spec.ios.deployment_target = "10.0"
   spec.osx.deployment_target = "10.10"
