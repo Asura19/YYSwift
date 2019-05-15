@@ -12,6 +12,9 @@ YYSwift is a collection of native Swift extensions, with handy methods, syntacti
 - Swift 4.0+
 
 ## Installation
+
+#### CocoaPods
+Add ```pod 'YYSwift', '1.1.1'``` to your Podfile
 #### Carthage
 Add ```github "Asura19/YYSwift"``` to your Cartfile
 #### Swift Package Manager
