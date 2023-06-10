@@ -1,3 +1,5 @@
+This repository is no longer maintained, and we recommend using [ReerKit](https://github.com/reers/ReerKit).
+
 # YYSwift
 
 [![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/Asura19/YYSwift/master/LICENSE)&nbsp;
